@@ -1,10 +1,15 @@
-import UserSignup from "./pages/user/UserSignup";
+import {Route , Routes} from 'react-router-dom'
+import UserRoutes from './routes/UserRoutes';
+import AdminRoutes from './routes/AdminRoutes';
+import DoctorRoutes from './routes/DoctorRoutes';
 
 const App = () => {
   return (
-    <div>
-      <UserSignup pageName='Login' signupInputs={"hidden"} checkBox={"block"}/>
-    </div>
+    <Routes>
+      <Route path='/*'element={<UserRoutes/>} />
+      <Route path='/admin' element={<AdminRoutes/>} />
+      <Route path='/doctor' element={<DoctorRoutes/>}/>
+    </Routes>
   );
 }
 
