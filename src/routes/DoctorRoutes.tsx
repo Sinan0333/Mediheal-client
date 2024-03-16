@@ -1,8 +1,11 @@
-import React from 'react'
+import {Routes,Route} from 'react-router-dom'
+import AdminLogin from '../pages/admin/AdminLogin'
 
 function DoctorRoutes() {
   return (
-    <div>DoctorRoutes</div>
+    <Routes>
+        <Route path='/login' element={<AdminLogin/>} />
+    </Routes>
   )
 }
 

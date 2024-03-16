@@ -2,9 +2,11 @@ import authValidation from "../../validations/common/authValidation"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { success,error} from "../../constants/toast"
+import { notifySuccess,notifyError} from "../../constants/toast"
 import {AuthProps} from "../../types/commonTypes"
-import { userSignup } from "../../api/user/auth"
+import { userLogin, userSignup } from "../../api/user/auth"
+import { adminLogin } from "../../api/admin/auth"
+import { doctorLogin } from "../../api/doctor/auth"
 
 
 function Auth({pageName,signupInputs,checkBox,changePage}:AuthProps) {
@@ -12,24 +14,35 @@ function Auth({pageName,signupInputs,checkBox,changePage}:AuthProps) {
     const [phone,setPhone] = useState<string>("")
     const [email,setEmail] = useState<string>("")
     const [password,setPassword] = useState<string>("")
+    const [role,setRole] = useState<string | undefined>()
     const navigate = useNavigate()
 
     const  handleSubmit =async ()=>{
-        console.log(phone);
         
         if(pageName == 'Signup'){
             const result:string = authValidation({name,phone,email,password})
             if(result === 'Success'){
-                const number = parseInt(phone)
-                await userSignup({name,number,email,password})
-                success(result)
+                
+                await userSignup({name,phone,email,password})
+                notifySuccess(result)
             }else{
-                error(result)
+                notifyError(result)
             }
         }else{
             const result:string = authValidation({email,password})
             if(result === 'Success'){
-                toast.success(result)
+                if(!role){
+                    userLogin({email,password})
+                    notifySuccess(result)
+                }else if(role == "admin"){
+                    adminLogin({email,password})
+                    notifySuccess(result)
+                }else if(role == 'doctor'){
+                    doctorLogin({email,password})
+                    notifySuccess(result)
+                }else{
+                    notifyError("Role error")
+                }
             }else{
                 toast.error(result)
             }
@@ -46,11 +59,11 @@ function Auth({pageName,signupInputs,checkBox,changePage}:AuthProps) {
         {pageName === 'Login' ? <p className='text-blue-600 cursor-pointer'>Forgot Password</p> :""}
         <div className= {`${checkBox}`}>
             <label className="inline-flex items-center">
-                <input type="radio" className="form-radio text-blue-500" name="radio" defaultChecked/>
+                <input type="radio" className="form-radio text-blue-500" name="role" value={"admin"} defaultChecked   checked={role === 'admin' || undefined } onChange={(e)=>setRole(e.target.value)}/>
                 <span className="ml-2">Admin</span>
             </label>
             <label className="inline-flex items-center ml-6">
-                <input type="radio" className="form-radio text-blue-500" name="radio" />
+                <input type="radio" className="form-radio text-blue-500" name="role" value={"doctor"} checked={role === 'doctor'} onChange={(e)=>setRole(e.target.value)}/>
                 <span className="ml-2">Doctor</span>
             </label>
         </div>
@@ -64,7 +77,7 @@ function Auth({pageName,signupInputs,checkBox,changePage}:AuthProps) {
             <p className='pl-5 font-bold '>Signup  with Google</p>
         </div>
         <br /> 
-        <p className='float-left'>{changePage}<span onClick={()=>pageName ==='Login'? navigate('/signup'):navigate('/login') } className='text-blue-700 cursor-pointer'>{pageName === 'Signup' ? 'login' : 'signup'}</span></p>
+        {changePage !=""?<p className='float-left'>{changePage}<span onClick={()=>pageName ==='Login'? navigate('/signup'):navigate('/login') } className='text-blue-700 cursor-pointer'>{pageName === 'Signup' ? 'login' : 'signup'}</span></p>:""}
     </div>
   )
 }

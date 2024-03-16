@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { UserData } from '../../types/userTypes'
+import { LoginType, SignupData } from '../../types/userTypes'
 
 const userApi = axios.create({
     baseURL:'http://localhost:3000'
 })
 
-const userSignup = async (data:UserData)=>{
+const userSignup = async (data:SignupData)=>{
     try { 
         const result =  await userApi.post('/signup',data)  
         console.log(result);
@@ -14,6 +14,17 @@ const userSignup = async (data:UserData)=>{
     }
 }
 
+
+const userLogin = async (data:LoginType)=>{
+    try { 
+        const result =  await userApi.post('/login',data)  
+        console.log(result);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export{
-    userSignup
+    userSignup,
+    userLogin
 }

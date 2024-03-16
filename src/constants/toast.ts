@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
 // Inside your component or function
-const success = (message:string) => {
+const notifySuccess = (message:string) => {
   toast.success(message, {
     position: 'top-right', // Position of the toast
     autoClose: 2000, // Time in milliseconds before the toast auto closes
@@ -17,7 +17,7 @@ const success = (message:string) => {
 };
 
 
-const error = (message:string) => {
+const notifyError = (message:string) => {
     toast.error(message, {
       position: 'top-right', // Position of the toast
       autoClose: 2000, // Time in milliseconds before the toast auto closes
@@ -33,6 +33,6 @@ const error = (message:string) => {
   };
 
   export{
-    error,
-    success
+    notifyError,
+    notifySuccess
   }

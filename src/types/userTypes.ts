@@ -1,7 +1,19 @@
-export type UserData={
-    _id?:String
+export type SignupData={
     name:String
-    number:number
+    phone:string 
     email:String
     password:String
+}
+
+
+export type LoginType ={
+    email:string
+    password:string
+}
+
+export type UserData = {
+    _id:string
+    name:string
+    phone:number
+    email:string
 }
