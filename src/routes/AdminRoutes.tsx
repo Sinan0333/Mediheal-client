@@ -1,11 +1,15 @@
 import {Routes,Route} from 'react-router-dom'
 import AdminLogin from '../pages/admin/AdminLogin'
+import AdminDashboard from '../pages/admin/AdminDashboard'
 
 function AdminRoutes() {
   return (
-    <Routes>
-        <Route path='/login' element={<AdminLogin/>} />
-    </Routes>
+    <div className='adminLayout'>
+      <Routes>
+          <Route path='/' element={<AdminDashboard/>} />
+          <Route path='/login' element={<AdminLogin/>} />
+      </Routes>
+    </div>
   )
 }
 
