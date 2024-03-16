@@ -1,7 +1,7 @@
 export type AuthProps = {
     pageName:'Signup' | 'Login'
+    role:"user" | "admin" | "doctor"
     signupInputs:"hidden" | "block"
-    checkBox:"hidden" | "block"
     changePage:String
 }
 

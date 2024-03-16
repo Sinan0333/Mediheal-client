@@ -7,8 +7,10 @@ const userApi = axios.create({
 
 const userSignup = async (data:SignupData)=>{
     try { 
-        const result =  await userApi.post('/signup',data)  
+        const result =  await userApi.post('/signup',data) 
         console.log(result);
+         
+        return result.data 
     } catch (error) {
         console.log(error);
     }
@@ -18,7 +20,7 @@ const userSignup = async (data:SignupData)=>{
 const userLogin = async (data:LoginType)=>{
     try { 
         const result =  await userApi.post('/login',data)  
-        console.log(result);
+        return result.data
     } catch (error) {
         console.log(error);
     }

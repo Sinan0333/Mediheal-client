@@ -11,9 +11,18 @@ export type LoginType ={
     password:string
 }
 
+
 export type UserData = {
     _id:string
     name:string
     phone:number
     email:string
+}
+
+
+export type SignupResponse = {
+    userData?:UserData
+    token?:string
+    status:true | false
+    message:string
 }
