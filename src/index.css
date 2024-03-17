@@ -45,6 +45,13 @@
                5px -5px 8px #ffffff;
 }
 
+.neumorphic-form-input{
+  border-radius: 0px;
+  background: #e0e0e0;
+  box-shadow: inset 26px 26px 52px #c5c5c5,
+              inset -26px -26px 52px #fbfbfb;
+}
+
 
 .adminLayout{
   padding: 15px;

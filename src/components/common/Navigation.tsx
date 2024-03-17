@@ -1,4 +1,5 @@
 import NavButton from "./NavButton"
+import { dashboard,doctor } from "../../constants/icons"
 
 
 function Navigation() {
@@ -8,16 +9,16 @@ function Navigation() {
         {/* <h1 className="text-xl font-bold">Logo</h1> */}
         <ul className="mt-4 ">
           <li className="mb-4">
-            <NavButton/>
+            <NavButton icon={dashboard} name="Dashboard"/>
           </li>
           <li className="mb-4">
-          <NavButton/>
+          <NavButton icon={doctor} name="Doctors"/>
           </li>
           <li className="mb-4">
-          <NavButton/>
+          <NavButton icon={dashboard} name="Patients"/>
           </li>
           <li className="mb-4">
-          <NavButton/>
+          <NavButton icon={dashboard} name="Department"/>
           </li>
         </ul>
       </div>
