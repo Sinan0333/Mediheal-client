@@ -2,6 +2,7 @@ import {Routes,Route} from 'react-router-dom'
 import AdminLogin from '../pages/admin/AdminLogin'
 import AdminDashboard from '../pages/admin/AdminDashboard'
 import AdminDoctors from '../pages/admin/AdminDoctors'
+import AdminDepartment from '../pages/admin/AdminDepartment'
 
 
 function AdminRoutes() {
@@ -10,7 +11,8 @@ function AdminRoutes() {
       <Routes>
           <Route path='/' element={<AdminDashboard/>} />
           <Route path='/login' element={<AdminLogin/>} />
-          <Route path='/doctors' element={<AdminDoctors/>} />
+          <Route path='/doctors/*' element={<AdminDoctors/>} />
+          <Route path='/department/*' element={<AdminDepartment/>} />
       </Routes>
     </div>
   )

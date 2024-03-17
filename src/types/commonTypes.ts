@@ -11,3 +11,5 @@ export type authValidationProps = {
     email:string 
     password:string
 }
+
+export const days:string[] = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]

@@ -7,7 +7,7 @@ function NavButton({icon,name}:NavButtonPorps) {
   return (
     <div className="neumorphic-navBtn flex items-center py-2 px-2 rounded-lg">
     <img src={icon} className="h-6 mr-2" alt="Logo" />
-    <span className="text-black">{name}</span>
+    <span className="text-adminBlue font-bold ">{name}</span>
   </div>
   )
 }

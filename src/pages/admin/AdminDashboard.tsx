@@ -1,3 +1,4 @@
+import {Routes,Route} from 'react-router-dom'
 import AddDepartmentForm from "../../components/admin/AddDepartmentForm"
 import Header from "../../components/admin/Header"
 import Navigation from "../../components/common/Navigation"
@@ -8,7 +9,9 @@ function AdminDashboard() {
       <Header/>
         <div className="flex mt-6 bg-transparent">
           <Navigation/>
-          <AddDepartmentForm/>
+          <Routes>
+            <Route path='/add' element={<AddDepartmentForm/>} />
+          </Routes>
         </div>
     </>
   )
