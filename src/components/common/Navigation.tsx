@@ -3,7 +3,7 @@ import NavButton from "./NavButton"
 
 function Navigation() {
   return (
-    <div className="neumorphic mt-4 w-64 h-screen py-2 px-2 flex flex-col justify-between">
+    <div className="neumorphic  w-64 h-screen py-2 px-2 flex flex-col justify-between">
       <div className="p-2 ">
         {/* <h1 className="text-xl font-bold">Logo</h1> */}
         <ul className="mt-4 ">

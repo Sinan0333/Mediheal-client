@@ -1,12 +1,16 @@
 import Header from "../../components/admin/Header"
+import ContentContainer from "../../components/common/ContentContainer"
 import Navigation from "../../components/common/Navigation"
 
 function AdminDashboard() {
   return (
-    <div>
+    <>
       <Header/>
-      <Navigation/>
-    </div>
+        <div className="flex mt-6 bg-transparent">
+          <Navigation/>
+          <ContentContainer/>
+        </div>
+    </>
   )
 }
 
