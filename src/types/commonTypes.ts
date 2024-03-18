@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export type AuthProps = {
     pageName:'Signup' | 'Login'
     role:"user" | "admin" | "doctor"
@@ -10,6 +12,12 @@ export type authValidationProps = {
     phone?:string
     email:string 
     password:string
+}
+
+export type RoundedImageInputProps={
+    state:File | undefined 
+    setState:(state:any)=>void
+    name:string
 }
 
 export const days:string[] = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
