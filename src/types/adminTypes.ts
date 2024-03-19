@@ -1,7 +1,7 @@
 export type departmentVlidation = {
-    name:string
-    title:string
-    description:string
-    logo:File
-    image:File
+    name:string | undefined
+    title:string | undefined
+    description:string | undefined
+    logo:File | undefined
+    image:File | undefined
 }

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+
 
 export type AuthProps = {
     pageName:'Signup' | 'Login'
