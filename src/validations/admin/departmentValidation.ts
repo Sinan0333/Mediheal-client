@@ -1,6 +1,6 @@
-import { departmentVlidation } from "../../types/adminTypes";
+import { DepartmentValidation } from "../../types/adminTypes";
 
-export function departmentValidation({name,title,description,logo,image}:departmentVlidation):string{
+export function departmentValidation({name,title,description,logoFile,imageFile}:DepartmentValidation):string{
   if(!name){
     return "Name is required"
   }else if(name.length < 3){
@@ -13,9 +13,9 @@ export function departmentValidation({name,title,description,logo,image}:departm
     return "description is required"
   }else if(description.length < 3){
     return "description must contain 3 character"
-  }else if(!logo){
+  }else if(!logoFile){
     return "logo is required"
-  }else if(!image){
+  }else if(!imageFile){
     return "image is required"
   }else{
     return "Success"

@@ -7,7 +7,7 @@ export type AuthProps = {
     changePage:String
 }
 
-export type authValidationProps = {
+export type AuthValidationProps = {
     name?:string
     phone?:string
     email:string 
@@ -21,3 +21,9 @@ export type RoundedImageInputProps={
 }
 
 export const days:string[] = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+
+export type ResponseData ={
+    data:any
+    status:boolean
+    message:string
+}

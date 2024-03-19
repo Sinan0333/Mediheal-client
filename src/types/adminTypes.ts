@@ -1,7 +1,16 @@
-export type departmentVlidation = {
+export type DepartmentValidation = {
     name:string | undefined
     title:string | undefined
     description:string | undefined
-    logo:File | undefined
-    image:File | undefined
+    logoFile:File | undefined
+    imageFile:File | undefined
+}
+
+export type DepartmentApiType = {
+    _id?:string
+    name:string
+    title:string
+    description:string
+    logo:string
+    image:string
 }
