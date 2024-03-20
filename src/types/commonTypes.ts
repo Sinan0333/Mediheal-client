@@ -1,4 +1,4 @@
-
+export const days:string[] = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
 
 export type AuthProps = {
     pageName:'Signup' | 'Login'
@@ -20,10 +20,16 @@ export type RoundedImageInputProps={
     name:string
 }
 
-export const days:string[] = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+
 
 export type ResponseData ={
     data:any
     status:boolean
     message:string
+}
+
+export type ListProps = {
+    pageName:string
+    btnName:string
+    th:string[]
 }

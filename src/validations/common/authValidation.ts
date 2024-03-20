@@ -1,9 +1,9 @@
-import { authValidationProps } from "../../types/commonTypes";
+import { AuthValidationProps } from "../../types/commonTypes";
 
 const emailPattern : RegExp =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const phonePattern : RegExp = /^\+?\d{10}$/
  
-function authValidation({name,phone,email,password}:authValidationProps):string {
+function authValidation({name,phone,email,password}:AuthValidationProps):string {
     
     if(name !=undefined){
         if(name.trim()===""){

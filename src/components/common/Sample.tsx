@@ -1,17 +1,45 @@
+import { useNavigate } from "react-router-dom"
+import Header from "../../components/admin/Header"
+import Navigation from "../../components/common/Navigation"
+
 
 function Sample() {
+  const navigate = useNavigate()
   return (
-    <header className="flex items-center justify-between py-4 px-6 bg-gray-200 neumorphic">
-      <div className="flex items-center">
-        <img src="src/assets/images/Mediheal.png" alt="Logo" className="h-8 w-40 mr-2" />
+    <>
+    <Header/>
+      <div className="flex mt-6 bg-transparent">
+        <Navigation/>
+        <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
+          <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Department</h1>
+          <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/department/add')}>Add</button>
+          <div className="overflow-x-auto">
+            <table className="table-auto min-w-full border-collapse ">
+              <thead>
+                <tr >
+                <th className="px-4 py-2 text-left w-auto">No</th>
+                <th className="px-4 py-2 text-left w-auto">Name</th>
+                <th className="px-4 py-2 text-left w-auto">Image</th>
+                <th className="px-4 py-2 text-left w-auto">Title</th>
+                <th className="px-4 py-2 text-left w-auto">Description</th>
+                <th className="px-4 py-2 text-left w-auto">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                <td className="px-4 py-2">1</td>
+                <td className="px-4 py-2">Cardiology</td>
+                <td className="px-4 py-2">hel</td>
+                <td className="px-4 py-2">sample</td>
+                <td className="px-4 py-2">sample</td>
+                <td className="px-4 py-2">sample</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <button className="lg:hidden bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-2 px-4 rounded-lg">
-        Menu
-      </button>
-      <button className="hidden lg:block neumorphic-rounded  py-2 px-2  rounded-lg">
-      <img src="src/assets/icons/user.png" alt="Button Icon" className="h-5 w-5" />
-      </button>
-    </header>
+  </>
   )
 }
 

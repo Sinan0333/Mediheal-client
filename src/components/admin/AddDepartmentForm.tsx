@@ -30,7 +30,7 @@ function AddDepartmentForm() {
         const response:ResponseData =await addDepartment({name,title,description,logo,image})
         if(!response.status) return notifyError(response.message)
         notifySuccess(response.message)
-        navigate('/admin/department')
+        navigate('/admin/departments')
       }
 
     } catch (error) {

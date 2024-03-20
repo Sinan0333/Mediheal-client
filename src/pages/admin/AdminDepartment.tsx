@@ -2,6 +2,7 @@ import {Routes,Route} from 'react-router-dom'
 import AddDepartmentForm from '../../components/admin/AddDepartmentForm'
 import Header from '../../components/admin/Header'
 import Navigation from '../../components/common/Navigation'
+import ListDepartments from '../../components/admin/ListDepartments'
 
 function AdminDepartment() {
   return (
@@ -10,7 +11,8 @@ function AdminDepartment() {
     <div className="flex mt-6 bg-transparent">
         <Navigation/>
         <Routes>
-            <Route path='/add' element={<AddDepartmentForm/>} />
+          <Route path='/' element={<ListDepartments/>}/>
+          <Route path='/add' element={<AddDepartmentForm/>} />
         </Routes>
     </div>
     </>

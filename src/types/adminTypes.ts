@@ -14,3 +14,4 @@ export type DepartmentApiType = {
     logo:string
     image:string
 }
+

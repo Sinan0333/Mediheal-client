@@ -78,6 +78,7 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             localStorage.setItem("adminToken",response.token)
                         }
                         notifySuccess(result)
+                        navigate('/admin')
                     }else{
                         notifyError(response.message)
                     }
@@ -94,6 +95,7 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             localStorage.setItem("doctorToken",response.token)
                         }
                         notifySuccess(result)
+                        navigate('/doctor')
                     }else{
                         notifyError(response.message)
                     }
