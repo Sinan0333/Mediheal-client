@@ -18,7 +18,7 @@ const addDepartment = async (data:DepartmentApiType)=>{
 const listDepartmentApi = async ()=>{
     try {         
         const result =  await departmentApi.get('/')          
-        return result.data
+        return result.data 
     } catch (error) {
         console.log(error);
     }
