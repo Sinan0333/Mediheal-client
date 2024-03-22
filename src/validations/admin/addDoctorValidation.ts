@@ -28,6 +28,9 @@ export function addDoctorValidation(data:AddDoctorValidationType):string{
     if(!data.email) return "Email is required"
     else if(!data.email.match(emailPattern)) return 'incorrect email format'
 
+    if(!data.password) return "Password is required"
+    else if(data.password.length < 6) return "Password must contain 3 character"
+
     if(!data.department) return "Email is required"
 
     if(data.workingDays.length<2) return "Pleas add the working days"

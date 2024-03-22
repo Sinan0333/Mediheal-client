@@ -8,6 +8,7 @@ export type AddDoctorValidationType  = {
     experience:number | undefined
     phone:number | undefined
     email:string | undefined
+    password:string | undefined
     department:string | undefined
     workingDays:string[]
     image:File | undefined
@@ -24,6 +25,7 @@ export type DoctorData = {
     experience:number 
     phone:number 
     email:string 
+    password:string
     department:string 
     workingDays:string[]
     image:string 

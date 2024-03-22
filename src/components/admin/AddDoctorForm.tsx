@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import { addDoctor } from "../../api/admin/adminDoctorApi"
 import { listDepartmentApi } from "../../api/admin/departmentApi"
 import { base64 } from "../../constants/convert"
 import { notifyError, notifySuccess } from "../../constants/toast"
@@ -9,6 +8,8 @@ import { addDoctorValidation } from "../../validations/admin/addDoctorValidation
 import RoundedImageInput from "../common/RoundedImageInput"
 import Inputs from "./Inputs"
 import { useEffect, useState } from "react"
+import { addDoctor } from "../../api/doctor/doctorApi"
+
 
 function AddDoctorForm() {
   const [workingDays,setWorkingDays] = useState([""])
@@ -21,6 +22,7 @@ function AddDoctorForm() {
   const [experience,setExperience] = useState<number>()
   const [phone,setPhone] = useState<number>()
   const [email,setEmail] = useState<string>()
+  const [password,setPassword] = useState<string>()
   const [department,setDepartment] = useState<string>()
   const [imageFile,setImageFile] = useState()
   const [departmentList,setDepartmentList] = useState<DepartmentApiType[]>([])
@@ -37,15 +39,17 @@ function AddDoctorForm() {
 
   const handleSubmit = async()=>{
     try {
-      const result :string = addDoctorValidation({firstName,secondName,dob,age,gender,address,experience,phone,email,department,workingDays,image:imageFile})
+      const result :string = addDoctorValidation({firstName,secondName,dob,age,gender,address,experience,phone,email,password,department,workingDays,image:imageFile})
 
       if(result !=="Success") return notifyError(result)
 
       const image:string | undefined = await base64(imageFile)
 
-      if(firstName && secondName && dob && age && gender && address && experience && phone && email && department && workingDays && image){
-        const response:ResponseData = await addDoctor({firstName,secondName,dob,age,gender,address,experience,phone,email,department,workingDays,image})
+      if(firstName && secondName && dob && age && gender && address && experience && phone && email && password && department && workingDays && image){
+        const response:ResponseData = await addDoctor({firstName,secondName,dob,age,gender,address,experience,phone,email,password,department,workingDays,image})
         if(!response.status) return notifyError(response.message)
+        console.log(response.data);
+        
         notifySuccess(response.message)
         navigate('/admin/doctors')
       }
@@ -66,6 +70,7 @@ function AddDoctorForm() {
         <div className="mb-6 flex w-1/2 pr-4">
           <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Gender</label>
           <select className="block w-full py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e)=>setGender(e.target.value)}>
+          <option value=""></option>
             <option value='male'>Male</option>
             <option value='female'>Female</option>
             <option value='other'>other</option>
@@ -75,6 +80,7 @@ function AddDoctorForm() {
         <Inputs name="Experience" type="number" setState={setExperience} state={experience}/>
         <Inputs name="Phone" type="number" setState={setPhone} state={phone}/>
         <Inputs name="Email" type="email" setState={setEmail} state={email}/>
+        <Inputs name="Password" type="password" setState={setPassword} state={password}/>
         <div className="mb-6 flex w-1/2 pr-4">
           <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Department</label>
           <select className="block w-full py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e)=>setDepartment(e.target.value)}>
