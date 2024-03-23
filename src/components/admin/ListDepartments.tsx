@@ -40,7 +40,7 @@ function ListDepartments() {
                                     <td className="px-4 py-2">{obj.name}</td>
                                     <td className="px-4 py-2">{obj.title}</td>
                                     <td className="px-4 py-2">{obj.description}</td>
-                                    <td className="px-4 py-2"><Actions/></td>
+                                    <td className="px-4 py-2"><Actions viewNav="/admin/departments/view" editNav="/admin/departments/edit"/></td>
                                 </tr>
                             )
                         })

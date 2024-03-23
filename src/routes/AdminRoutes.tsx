@@ -9,7 +9,7 @@ import Sample from '../components/common/Sample'
 
 function AdminRoutes() {
   return (
-    // <div className='adminLayout'>
+    <div className='adminLayout'>
       <Routes>
           <Route path='/*' element={<AdminDashboard/>} />
           <Route path='/login' element={<AdminLogin/>} />
@@ -17,7 +17,7 @@ function AdminRoutes() {
           <Route path='/departments/*' element={<AdminDepartment/>} />
           <Route path='/sample/*' element={<Sample />} />
       </Routes>
-    // </div>
+    </div>
   )
 }
 

@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 
-/* *{
+*{
   background-color:#e0e0e0 ;
-} */
+}
 
 .neumorphic-input-auth{
   border-radius: 1px;

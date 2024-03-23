@@ -6,7 +6,7 @@ import { DepartmentApiType } from "../../types/adminTypes"
 import { ResponseData, days } from "../../types/commonTypes"
 import { addDoctorValidation } from "../../validations/admin/addDoctorValidation"
 import RoundedImageInput from "../common/RoundedImageInput"
-import Inputs from "./Inputs"
+import Inputs from "../admin/Inputs"
 import { useEffect, useState } from "react"
 import { addDoctor } from "../../api/doctor/doctorApi"
 

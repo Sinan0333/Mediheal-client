@@ -24,5 +24,14 @@ export const listDoctorsApi = async ()=>{
     }
 }
 
+export const viewDoctorsApi = async (_id:string | undefined)=>{
+    try {         
+        const result =  await doctorApi.get(`/view/${_id}`)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 

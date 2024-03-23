@@ -33,3 +33,13 @@ export type ListProps = {
     btnName:string
     th:string[]
 }
+
+export type ActionProps={
+    viewNav:string
+    editNav:string
+}
+
+export type LabelProps={
+    labelName:string
+    value:string | number | undefined 
+}

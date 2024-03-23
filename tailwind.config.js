@@ -10,6 +10,7 @@ export default {
       colors: {
         adminGold: '#D3C480',
         adminBlue:'#164B55',
+        adminGreen:"#5c7b70"
       },
     },
   },
