@@ -1,25 +1,38 @@
+import { DoctorCardProps } from "../../types/doctorTypes";
 
 
-function DoctorCard() {
+
+function DoctorCard({firstName,secondName,department,image,experience,age,gender}:DoctorCardProps) {
+
+  const imageUrl = `https://res.cloudinary.com/dw2cscitl/${image}`;
+
   return (
     <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72 ml-2 mb-6">
       <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-72">
         <img
-          src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
+          src={imageUrl}
           alt="card-image" className="object-cover w-full h-full" />
       </div>
       <div className="p-6">
         <div className="flex items-center justify-between mb-2">
-          <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-            Apple AirPods
+          <p className="block font-sans font-semibold text-base antialiased  leading-relaxed text-blue-gray-900">
+            {firstName+secondName}
           </p>
           <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
             $95.00
           </p>
         </div>
-        <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
-          With plenty of talk and listen time, voice-activated Siri access, and an
-          available wireless charging case.
+        <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 ">
+          <span className="text-adminGold font-bold">Department: </span>{department.name}
+        </p>
+        <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 ">
+        <span className="text-adminGold font-bold">Experience: </span>{experience} year
+        </p>
+        <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 ">
+        <span className="text-adminGold font-bold">Age: </span>{age} 
+        </p>
+        <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 ">
+        <span className="text-adminGold font-bold">Gender: </span>{gender} 
         </p>
       </div>
       <div className="p-6 pt-0">

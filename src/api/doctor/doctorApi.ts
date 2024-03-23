@@ -15,5 +15,14 @@ export const addDoctor = async (data:DoctorData)=>{
     }
 }
 
+export const listDoctorsApi = async ()=>{
+    try {         
+        const result =  await doctorApi.get('/list')  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 

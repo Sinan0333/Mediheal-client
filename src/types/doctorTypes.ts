@@ -1,3 +1,5 @@
+import { DepartmentApiType } from "./adminTypes"
+
 export type AddDoctorValidationType  = {
     firstName:string | undefined
     secondName:string | undefined
@@ -26,7 +28,18 @@ export type DoctorData = {
     phone:number 
     email:string 
     password:string
-    department:string 
+    department:DepartmentApiType 
     workingDays:string[]
     image:string 
+}
+
+
+export type DoctorCardProps ={
+    firstName:string 
+    secondName:string 
+    experience:number 
+    department:DepartmentApiType 
+    image:string
+    age:number
+    gender:string
 }
