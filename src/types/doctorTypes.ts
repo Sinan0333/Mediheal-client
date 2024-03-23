@@ -30,6 +30,25 @@ export type DoctorData = {
     password:string
     department:DepartmentApiType 
     workingDays:string[]
+    fees:number
+    image:string 
+}
+
+export type AddDoctorApi = {
+    _id?:string
+    firstName:string 
+    secondName:string 
+    dob:Date 
+    age:number 
+    gender:string 
+    address:string 
+    experience:number 
+    phone:number 
+    email:string 
+    password:string
+    department:string
+    workingDays:string[]
+    fees:number
     image:string 
 }
 
@@ -42,4 +61,5 @@ export type DoctorCardProps ={
     image:string
     age:number
     gender:string
+    fees:number
 }

@@ -2,7 +2,7 @@ import { DoctorCardProps } from "../../types/doctorTypes";
 
 
 
-function DoctorCard({firstName,secondName,department,image,experience,age,gender}:DoctorCardProps) {
+function DoctorCard({firstName,secondName,department,image,experience,age,gender,fees}:DoctorCardProps) {
 
   const imageUrl = `https://res.cloudinary.com/dw2cscitl/${image}`;
 
@@ -19,7 +19,7 @@ function DoctorCard({firstName,secondName,department,image,experience,age,gender
             {firstName+secondName}
           </p>
           <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-            $95.00
+          ₹{fees}
           </p>
         </div>
         <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 ">

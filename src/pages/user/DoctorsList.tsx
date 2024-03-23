@@ -31,8 +31,10 @@ function DoctorsList() {
             
       {
         list?.map((doc)=>{
+          console.log(doc);
+          
           return(
-            <DoctorCard key={doc._id} firstName={doc.firstName} secondName={doc.secondName} experience={doc.experience}  department={doc.department}  image={doc.image} age={doc.age} gender={doc.gender}/>
+            <DoctorCard key={doc._id} firstName={doc.firstName} secondName={doc.secondName} experience={doc.experience}  department={doc.department}  image={doc.image} age={doc.age} gender={doc.gender} fees={doc.fees}/>
           )
         })
       }
