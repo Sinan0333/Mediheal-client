@@ -24,9 +24,22 @@ export const listDoctorsApi = async ()=>{
     }
 }
 
-export const viewDoctorsApi = async (_id:string | undefined)=>{
+export const getDoctorDataApi = async (_id:string | undefined)=>{
     try {         
         const result =  await doctorApi.get(`/view/${_id}`)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const editDoctorDataApi = async (data:AddDoctorApi,_id:string | undefined)=>{
+    console.log('starting of edit api');
+    
+    try {           
+        const result =  await doctorApi.post(`/edit/${_id}`,data) 
+        console.log(result,'ending');
+        
         return result.data
     } catch (error) {
         console.log(error);

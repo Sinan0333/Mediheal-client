@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
-import { viewDoctorsApi } from "../../api/doctor/doctorApi"
+import { getDoctorDataApi } from "../../api/doctor/doctorApi"
 import { DoctorData } from "../../types/doctorTypes"
 
 function ViewDoctor() {
@@ -19,7 +19,7 @@ function ViewDoctor() {
 
   const {_id} =useParams()
   useEffect(()=>{
-    viewDoctorsApi(_id).then((data)=>{
+    getDoctorDataApi(_id).then((data)=>{
       setDoctorData(data.data)
     }).catch((err)=>{
       console.error(err);

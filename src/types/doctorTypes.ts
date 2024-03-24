@@ -3,7 +3,7 @@ import { DepartmentApiType } from "./adminTypes"
 export type AddDoctorValidationType  = {
     firstName:string | undefined
     secondName:string | undefined
-    dob:Date | undefined
+    dob:Date | undefined | string
     age:number | undefined
     gender:string | undefined
     address:string | undefined
@@ -13,7 +13,7 @@ export type AddDoctorValidationType  = {
     password:string | undefined
     department:string | undefined
     workingDays:string[]
-    image:File | undefined
+    image:File | undefined | string
 }
 
 export type DoctorData = {
@@ -38,7 +38,7 @@ export type AddDoctorApi = {
     _id?:string
     firstName:string 
     secondName:string 
-    dob:Date 
+    dob:Date | string
     age:number 
     gender:string 
     address:string 

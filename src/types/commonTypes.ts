@@ -15,7 +15,7 @@ export type AuthValidationProps = {
 }
 
 export type RoundedImageInputProps={
-    state:File | undefined 
+    state:File | undefined | string
     setState:(state:any)=>void
     name:string
 }
