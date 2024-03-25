@@ -1,8 +1,7 @@
-import NavButton from "./NavButton"
+import NavButton from "../common/NavButton"
 import { dashboard,doctor,department } from "../../constants/icons"
 
-
-function Navigation() {
+function DoctorNavigationBar() {
   return (
     <div className="neumorphic  w-64 h-screen py-2 px-2 flex flex-col justify-between">
       <div className="p-2">
@@ -26,4 +25,4 @@ function Navigation() {
   )
 }
 
-export default Navigation
+export default DoctorNavigationBar

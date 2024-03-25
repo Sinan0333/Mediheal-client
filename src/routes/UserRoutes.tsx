@@ -2,6 +2,7 @@ import {Route,Routes} from 'react-router-dom'
 import UserSignup from '../pages/user/UserSignup'
 import UserLogin from '../pages/user/UserLogin.tsx'
 import DoctorsList from '../pages/user/DoctorsList.tsx'
+import OtpVerification from '../pages/user/OtpVerification.tsx'
 
 function UserRoutes() {
   return (
@@ -9,6 +10,7 @@ function UserRoutes() {
           <Route path='/signup' element={<UserSignup/>} />
           <Route path='/login' element={<UserLogin/>} />
           <Route path='/doctors' element={<DoctorsList/>} />
+          <Route path='/otp/:_id' element={<OtpVerification/>} />
       </Routes>
 
   )

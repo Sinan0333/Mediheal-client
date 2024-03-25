@@ -11,6 +11,7 @@ import { setUserDetails } from "../../store/slice/userSlice"
 import { useDispatch } from "react-redux"
 import { setAdminDetails } from "../../store/slice/adminSlice"
 import { setDoctorDetails } from "../../store/slice/doctorSlice"
+import { DoctorAuthResponse } from "../../types/doctorTypes"
 
 
 function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
@@ -28,17 +29,7 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
             if(result === 'Success'){
                 const response:SignupResponse = await userSignup({name,phone,email,password})
                 if(response.status){
-                    dispatch(setUserDetails({
-                        _id:response.userData?._id,
-                        name:response.userData?.name,
-                        phone:response.userData?.phone,
-                        email:response.userData?.email
-                    }))
-                    if(response.token){
-                        localStorage.setItem("userToke",response.token)
-                    }
-                    notifySuccess(result)
-                    navigate('/')
+                    navigate(`/otp/${response.userData?._id}`)
                 }else{
                     notifyError(response.message)
                 }   
@@ -83,11 +74,14 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                         notifyError(response.message)
                     }
                 }else if(role == 'doctor'){
-                    const response:SignupResponse = await doctorLogin({email,password})
+                    
+                    const response:DoctorAuthResponse = await doctorLogin({email,password})
                     if(response.status){
+                        console.log(response.userData);
+                        
                         dispatch(setDoctorDetails({
                             _id:response.userData?._id,
-                            name:response.userData?.name,
+                            name:response.userData?.firstName,
                             phone:response.userData?.phone,
                             email:response.userData?.email
                         }))

@@ -1,23 +1,24 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
 import { getDoctorDataApi } from "../../api/doctor/doctorApi"
-import { DoctorData } from "../../types/doctorTypes"
+import { DoctorData, ViewDoctorProps,  } from "../../types/doctorTypes"
 
-function ViewDoctor() {
+function ViewDoctor({upBtn}:ViewDoctorProps) {
   const [doctorData,setDoctorData] = useState<DoctorData>()
   const imageUrl = `https://res.cloudinary.com/dw2cscitl/${doctorData?.image}`
   const [dob,setDob] = useState("")
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (doctorData && typeof doctorData.dob === 'string') {
       const dobString = new Date(doctorData.dob).toLocaleDateString('en-US');
       setDob(dobString);
     }
-  }, [doctorData]);
+  },[doctorData]);
   
 
-  const {_id} =useParams()
+  const {_id} = useParams()
   useEffect(()=>{
     getDoctorDataApi(_id).then((data)=>{
       setDoctorData(data.data)
@@ -49,6 +50,11 @@ function ViewDoctor() {
         <Label labelName="Department" value={doctorData?.department.name}/>
         <Label labelName="Fees" value={doctorData?.fees}/>
       </div>
+      {
+        upBtn? <div className="flex justify-center">
+        <button className="neumorphic-navBtn w-24 h-8 font-semibold text-adminBlue" onClick={()=>navigate(`/doctor/patients/profile/edit/${_id}`)}>Update</button>
+    </div> : ""
+      }
     </div>
   )
 }

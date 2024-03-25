@@ -1,18 +1,18 @@
-import DoctorCard from "../user/DoctorCard"
+// import DoctorCard from "../user/DoctorCard"
 
-function Sample() {
+// function Sample() {
 
-  return (
-   <div className="m-32 flex flex-wrap justify-center md:justify-start overflow-x-auto p-4">
-      <DoctorCard />
-      <DoctorCard />
-      <DoctorCard />
-      <DoctorCard />
-      <DoctorCard />
-      <DoctorCard />
-      <DoctorCard />
-    </div>
-  )
-}
+//   return (
+//    <div className="m-32 flex flex-wrap justify-center md:justify-start overflow-x-auto p-4">
+//       <DoctorCard />
+//       <DoctorCard />
+//       <DoctorCard />
+//       <DoctorCard />
+//       <DoctorCard />
+//       <DoctorCard />
+//       <DoctorCard />
+//     </div>
+//   )
+// }
 
-export default Sample
+// export default Sample

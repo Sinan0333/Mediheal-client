@@ -63,3 +63,14 @@ export type DoctorCardProps ={
     gender:string
     fees:number
 }
+
+export type DoctorAuthResponse = {
+    userData?:DoctorData
+    token?:string
+    status:true | false
+    message:string
+}
+
+export type ViewDoctorProps ={
+    upBtn:boolean
+}

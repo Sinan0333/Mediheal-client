@@ -43,3 +43,8 @@ export type LabelProps={
     labelName:string
     value:string | number | undefined 
 }
+
+export type AdminHeaderNavigation={
+    navigation:string
+    _id?:string
+}
