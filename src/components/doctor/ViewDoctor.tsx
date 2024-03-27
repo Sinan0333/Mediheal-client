@@ -52,7 +52,7 @@ function ViewDoctor({upBtn}:ViewDoctorProps) {
       </div>
       {
         upBtn? <div className="flex justify-center">
-        <button className="neumorphic-navBtn w-24 h-8 font-semibold text-adminBlue" onClick={()=>navigate(`/doctor/patients/profile/edit/${_id}`)}>Update</button>
+        <button className="neumorphic-navBtn w-24 h-8 font-semibold text-adminBlue" onClick={()=>navigate(`/doctor/profile/edit/${_id}`)}>Update</button>
     </div> : ""
       }
     </div>

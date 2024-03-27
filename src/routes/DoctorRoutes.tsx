@@ -1,12 +1,24 @@
 import {Routes,Route} from 'react-router-dom'
-import DoctorPatients from '../pages/doctor/DoctorPatients'
 import DoctorLogin from '../pages/doctor/DoctorLogin'
+import { DoctorIsLoggedIn, DoctorIsLoggedOut } from '../components/common/ProductRoutes'
+import ViewDoctorProfilePage from '../pages/doctor/ViewDoctorProfilePage'
+import EditDoctorProfilePage from '../pages/doctor/EditDoctorProfilePage'
+import DoctorPatientsPage from '../pages/doctor/DoctorPatientsPage'
 
 function DoctorRoutes() {
   return (
     <Routes>
+
+      <Route path='' element={<DoctorIsLoggedOut/>}>
         <Route path='/login' element={<DoctorLogin/>} />
-        <Route path='/patients/*' element={<DoctorPatients/>} />
+      </Route>
+    
+      <Route path='' element={<DoctorIsLoggedIn/>}>
+        <Route path='/patients' element={<DoctorPatientsPage/>} />
+        <Route path='/profile/:_id' element={<ViewDoctorProfilePage/>}/>
+        <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>
+      </Route>
+
     </Routes>
   )
 }

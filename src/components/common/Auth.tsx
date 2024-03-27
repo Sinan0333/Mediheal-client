@@ -11,7 +11,7 @@ import { setUserDetails } from "../../store/slice/userSlice"
 import { useDispatch } from "react-redux"
 import { setAdminDetails } from "../../store/slice/adminSlice"
 import { setDoctorDetails } from "../../store/slice/doctorSlice"
-import { DoctorAuthResponse } from "../../types/doctorTypes"
+import { DoctorAuthResponse } from "../../types/doctorTypes"                             
 
 
 function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
@@ -64,7 +64,8 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             _id:response.userData?._id,
                             name:response.userData?.name,
                             phone:response.userData?.phone,
-                            email:response.userData?.email
+                            email:response.userData?.email,
+                            image:response.userData?.image
                         }))
                         if(response.token){
                             localStorage.setItem("adminToken",response.token)

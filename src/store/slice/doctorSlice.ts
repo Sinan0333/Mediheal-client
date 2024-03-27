@@ -5,8 +5,9 @@ import { UserData } from '../../types/userTypes'
 const initialState:UserData={
     _id:"",
     name:"",
-    phone:0,
-    email:""
+    phone:"",
+    email:"",
+    image:""
 }
 
 
@@ -26,7 +27,8 @@ const doctorSlice = createSlice({
             state._id = "";
             state.name = "";
             state.email = "";
-            state.phone = 0
+            state.phone = "",
+            state.image = ""
 
         }
     }

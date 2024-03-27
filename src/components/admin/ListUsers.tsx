@@ -19,7 +19,6 @@ function ListUsers() {
   return (
     <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
         <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Users</h1>
-        <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/departments/add')}>Add</button>
         <div className="overflow-x-auto">
             <table className="table-auto min-w-full border-collapse ">
                 <thead>
