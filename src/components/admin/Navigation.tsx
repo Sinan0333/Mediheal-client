@@ -1,5 +1,5 @@
 import NavButton from "../common/NavButton"
-import { dashboard,doctor,department } from "../../constants/icons"
+import { dashboard,doctor,department,users } from "../../constants/icons"
 
 
 function Navigation() {
@@ -15,7 +15,7 @@ function Navigation() {
           <NavButton icon={doctor} name="Doctors" navigation="/doctors"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={department} name="Patients" navigation="/patients"/>
+          <NavButton icon={users} name="Users" navigation="/users"/>
           </li>
           <li className="mb-4">
           <NavButton icon={department} name="Department" navigation="/departments"/>

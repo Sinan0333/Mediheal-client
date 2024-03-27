@@ -46,7 +46,8 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             _id:response.userData?._id,
                             name:response.userData?.name,
                             phone:response.userData?.phone,
-                            email:response.userData?.email
+                            email:response.userData?.email,
+                            image:response.userData?.image
                         }))
                         if(response.token){
                             localStorage.setItem("userToken",response.token)

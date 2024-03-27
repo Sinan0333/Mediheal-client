@@ -15,8 +15,9 @@ export type LoginType ={
 export type UserData = {
     _id:string
     name:string
-    phone:number
+    phone:string
     email:string
+    image:string
 }
 
 
@@ -28,3 +29,20 @@ export type SignupResponse = {
     message:string
 }
 
+export type ProfileValidationProps = {
+    name:string
+    email:string
+    phone:string 
+    password?:string
+    newPassword?:string
+}
+
+export type EditUserDataProps = {
+    _id:string
+    name:string
+    phone:string
+    email:string
+    password?:string
+    newPassword:string
+    image:string | undefined
+} 

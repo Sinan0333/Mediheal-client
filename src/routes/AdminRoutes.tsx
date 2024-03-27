@@ -3,6 +3,7 @@ import AdminLogin from '../pages/admin/AdminLogin'
 import AdminDashboard from '../pages/admin/AdminDashboard'
 import AdminDoctors from '../pages/admin/AdminDoctors'
 import AdminDepartment from '../pages/admin/AdminDepartment'
+import AdminUser from '../pages/admin/AdminUser'
 // import Sample from '../components/common/Sample'
 
 
@@ -15,6 +16,7 @@ function AdminRoutes() {
           <Route path='/login' element={<AdminLogin/>} />
           <Route path='/doctors/*' element={<AdminDoctors/>} />
           <Route path='/departments/*' element={<AdminDepartment/>} />
+          <Route path='/users/*' element={<AdminUser/>} />
           {/* <Route path='/sample/*' element={<Sample />} /> */}
       </Routes>
     </div>
