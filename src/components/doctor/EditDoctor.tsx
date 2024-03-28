@@ -88,7 +88,7 @@ function EditDoctor() {
         console.log(response.data);
         
         notifySuccess(response.message)
-        navigate('/admin/doctors')
+        navigate(-1)
       }
 
     } catch (error) {

@@ -24,6 +24,15 @@ export const listDoctorsApi = async ()=>{
     }
 }
 
+export const unblockedDoctors = async ()=>{
+    try {         
+        const result =  await doctorApi.get('/list/unblocked')          
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getDoctorDataApi = async (_id:string | undefined)=>{
     try {         
         const result =  await doctorApi.get(`/view/${_id}`)  

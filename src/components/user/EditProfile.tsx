@@ -50,7 +50,8 @@ function EditProfile() {
             name:response.userData?.name,
             phone:response.userData?.phone,
             email:response.userData?.email,
-            image:response.userData?.image
+            image:response.userData?.image,
+            is_blocked:response.userData?.is_blocked
         }))
         
         notifySuccess(response.message)

@@ -7,7 +7,8 @@ const initialState:UserData={
     name:"",
     phone:"",
     email:"",
-    image:""
+    image:"",
+    is_blocked:true
 }
 
 
@@ -15,13 +16,12 @@ const doctorSlice = createSlice({
     name:"doctor",
     initialState,
     reducers:{
-        setDoctorDetails: (state,action)=>{
-            console.log(action);
-            
+        setDoctorDetails: (state,action)=>{     
             state._id = action.payload._id;
             state.name = action.payload.name;
             state.email = action.payload.email;
             state.phone = action.payload.phone;
+            state.is_blocked = action.payload.is_blocked
         },
         logoutDoctor:(state)=>{
             state._id = "";
@@ -29,7 +29,7 @@ const doctorSlice = createSlice({
             state.email = "";
             state.phone = "",
             state.image = ""
-
+            state.is_blocked=true
         }
     }
 })

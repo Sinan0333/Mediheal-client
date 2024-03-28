@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react"
 import DoctorCard from "../../components/user/DoctorCard"
 import Nav from "../../components/user/Nav"
-import { listDoctorsApi } from "../../api/doctor/doctorApi"
+import {  unblockedDoctors } from "../../api/doctor/doctorApi"
 import { DoctorData } from "../../types/doctorTypes"
 
 
@@ -12,7 +12,7 @@ function DoctorsList() {
   const [list,setList] = useState<DoctorData[] >()
 
   useEffect(()=>{
-      listDoctorsApi().then((data)=>{
+      unblockedDoctors().then((data)=>{
           setList(data.data)
       }).catch((err)=>{
           console.log(err.message);

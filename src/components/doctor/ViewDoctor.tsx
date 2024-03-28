@@ -34,7 +34,7 @@ function ViewDoctor({upBtn}:ViewDoctorProps) {
         <h1 className="text-2xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">{doctorData?.firstName+""+doctorData?.secondName}</h1>
       </div>
       <div className="flex justify-center">
-        <div className="neumorphic-rounded w-56 h-56 flex justify-center items-center overflow-hidden">
+        <div className="neumorphic-rounded w-56 h-56 flex  items-center overflow-hidden  rounded-full ">
           <img src={imageUrl} alt="Your Image" className="rounded-full object-cover" />
         </div>
       </div>

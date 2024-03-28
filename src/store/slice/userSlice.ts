@@ -7,7 +7,8 @@ const initialState:UserData={
     name:"",
     phone:"",
     email:"",
-    image:""
+    image:"",
+    is_blocked:true
 }
 
 
@@ -20,13 +21,15 @@ const userSlice = createSlice({
             state.name = action.payload.name;
             state.email = action.payload.email;
             state.phone = action.payload.phone;
-            state.image = action.payload.image
+            state.image = action.payload.image;
+            state.is_blocked = action.payload.is_blocked
         },
         logoutDetails :(state)=>{
             state._id = "";
             state.name = "";
             state.email = "";
-            state.phone = ""
+            state.phone = "",
+            state.is_blocked = true
 
         }
     }

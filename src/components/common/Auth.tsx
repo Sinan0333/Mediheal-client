@@ -47,7 +47,8 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             name:response.userData?.name,
                             phone:response.userData?.phone,
                             email:response.userData?.email,
-                            image:response.userData?.image
+                            image:response.userData?.image,
+                            is_blocked:response.userData?.is_blocked
                         }))
                         if(response.token){
                             localStorage.setItem("userToken",response.token)
@@ -65,7 +66,8 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             name:response.userData?.name,
                             phone:response.userData?.phone,
                             email:response.userData?.email,
-                            image:response.userData?.image
+                            image:response.userData?.image,
+                            is_blocked:response.userData?.is_blocked
                         }))
                         if(response.token){
                             localStorage.setItem("adminToken",response.token)
@@ -85,7 +87,8 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             _id:response.userData?._id,
                             name:response.userData?.firstName,
                             phone:response.userData?.phone,
-                            email:response.userData?.email
+                            email:response.userData?.email,
+                            is_blocked:response.userData?.is_blocked
                         }))
                         if(response.token){
                             localStorage.setItem("doctorToken",response.token)

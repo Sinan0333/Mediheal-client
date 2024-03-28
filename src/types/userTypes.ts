@@ -1,3 +1,5 @@
+import { DepartmentDataType } from "./adminTypes"
+
 export type SignupData={
     name:String
     phone:string 
@@ -47,3 +49,9 @@ export type EditUserDataProps = {
     newPassword:string
     image:string | undefined
 } 
+
+
+export type DepartmentLogoProps = {
+    data:DepartmentDataType
+    setState:(data:DepartmentDataType)=>void
+}
