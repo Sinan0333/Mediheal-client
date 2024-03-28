@@ -4,6 +4,7 @@ import { DoctorIsLoggedIn, DoctorIsLoggedOut } from '../components/common/Produc
 import ViewDoctorProfilePage from '../pages/doctor/ViewDoctorProfilePage'
 import EditDoctorProfilePage from '../pages/doctor/EditDoctorProfilePage'
 import DoctorPatientsPage from '../pages/doctor/DoctorPatientsPage'
+import Error404 from '../pages/common/Error404'
 
 function DoctorRoutes() {
   return (
@@ -14,9 +15,13 @@ function DoctorRoutes() {
       </Route>
     
       <Route path='' element={<DoctorIsLoggedIn/>}>
+        
         <Route path='/patients' element={<DoctorPatientsPage/>} />
         <Route path='/profile/:_id' element={<ViewDoctorProfilePage/>}/>
         <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>
+
+        <Route path='*' element={<Error404/>} />
+
       </Route>
 
     </Routes>

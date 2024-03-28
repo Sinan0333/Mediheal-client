@@ -1,6 +1,7 @@
+import AddDepartmentForm from "../../components/admin/AddDepartmentForm"
 import Header from "../../components/admin/Header"
 import Navigation from "../../components/admin/Navigation"
-import AddDoctorForm from "../../components/doctor/AddDoctorForm"
+
 
 function AddDepartmentPage() {
   return (
@@ -8,7 +9,7 @@ function AddDepartmentPage() {
     <Header navigation='/profile'/>
       <div className="flex mt-6 bg-transparent">
         <Navigation/>
-        <AddDoctorForm/>
+        <AddDepartmentForm/>
       </div>
     </>
   )

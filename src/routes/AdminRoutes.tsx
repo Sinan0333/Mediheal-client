@@ -10,6 +10,7 @@ import AddDepartmentPage from '../pages/admin/AddDepartmentPage'
 import ListUsersPage from '../pages/admin/ListUsersPage'
 import ViewUserPage from '../pages/admin/ViewUserPage'
 import { AdminIsLoggedIn, AdminIsLoggedOut } from '../components/common/ProductRoutes'
+import Error404 from '../pages/common/Error404'
 
 
 
@@ -37,6 +38,9 @@ function AdminRoutes() {
 
           <Route path='/users' element={<ListUsersPage/>} />
           <Route path='/users/view/:_id' element={<ViewUserPage/>} />
+
+          <Route path='*' element={<Error404/>} />
+
         </Route>
 
       </Routes>

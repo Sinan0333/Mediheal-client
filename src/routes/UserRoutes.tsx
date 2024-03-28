@@ -6,6 +6,7 @@ import OtpVerification from '../pages/user/OtpVerification.tsx'
 import Home from '../pages/user/Home.tsx'
 import Account from '../pages/user/Account.tsx'
 import { UserIsLoggedIn, UserIsLoggedOut } from '../components/common/ProductRoutes.tsx'
+import Error404 from '../pages/common/Error404.tsx'
 
 function UserRoutes() {
   return (
@@ -18,10 +19,14 @@ function UserRoutes() {
         </Route>
 
         <Route path='/' element={<UserIsLoggedIn/>}>
+          
           <Route path='/' element={<Home/>} />
           <Route path='/home' element={<Home/>} />
           <Route path='/account' element={<Account/>} />
           <Route path='/doctors' element={<DoctorsList/>} />
+
+          <Route path='*' element={<Error404/>} />
+
         </Route>
 
       </Routes>
