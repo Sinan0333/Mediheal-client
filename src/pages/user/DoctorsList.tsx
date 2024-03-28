@@ -30,9 +30,7 @@ function DoctorsList() {
     <div className="ml-20 mr-20 flex flex-wrap overflow-x-auto justify-evenly">
             
       {
-        list?.map((doc)=>{
-          console.log(doc);
-          
+        list?.map((doc)=>{ 
           return(
             <DoctorCard key={doc._id} firstName={doc.firstName} secondName={doc.secondName} experience={doc.experience}  department={doc.department}  image={doc.image} age={doc.age} gender={doc.gender} fees={doc.fees}/>
           )

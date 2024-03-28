@@ -13,7 +13,7 @@ const App = () => {
           <Route path='/*'element={<UserRoutes/>} />
           <Route path='/admin/*' element={<AdminRoutes/>} />
           <Route path='/doctor/*' element={<DoctorRoutes/>}/>
-          <Route path='*' element={<Error404/>}/>
+          <Route path='/error' element={<Error404/>}/>
         </Routes>
       </CloudinaryProvider>
     </>

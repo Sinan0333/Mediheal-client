@@ -2,14 +2,17 @@ import { AddDoctorValidationType } from "../../types/doctorTypes";
 
 const emailPattern : RegExp =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const phonePattern : RegExp = /^\+?\d{10}$/
+const textPattern : RegExp = /^[a-zA-Z ]+$/
 
 export function addDoctorValidation(data:AddDoctorValidationType):string{
 
     if(!data.firstName) return "Firs name is required"
     else if(data.firstName.length < 3) return "First Name must contain 3 character"
+    else if(!textPattern.test(data.firstName)) return "Please provide a valid first name"
 
     if(!data.secondName) return  "Second name is required"
     else if(data.secondName.length < 3)  return "Second Name must contain 3 character"
+    else if(!textPattern.test(data.secondName)) return "Please provide a valid second name"
 
     if(!data.dob) return "DOB is required"
     

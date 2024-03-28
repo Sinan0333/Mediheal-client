@@ -2,7 +2,7 @@ import { AuthValidationProps } from "../../types/commonTypes";
 
 const emailPattern : RegExp =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const phonePattern : RegExp = /^\+?\d{10}$/
-const namePattern : RegExp = /^[a-zA-Z ]+$/
+const textPattern : RegExp = /^[a-zA-Z ]+$/
  
 function authValidation({name,phone,email,password}:AuthValidationProps):string {
     
@@ -11,7 +11,7 @@ function authValidation({name,phone,email,password}:AuthValidationProps):string 
             return 'Name is required'
         }else if(name.length < 3){
             return "Name must contain 3 letters"
-        }else if(!namePattern.test(name)){
+        }else if(!textPattern.test(name)){
             return "Please provide a valid name"
         }
     }
