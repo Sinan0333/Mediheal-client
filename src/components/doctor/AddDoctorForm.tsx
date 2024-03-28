@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { listDepartmentApi } from "../../api/admin/departmentApi"
+import {unblockedDepartments } from "../../api/admin/departmentApi"
 import { base64 } from "../../constants/convert"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { DepartmentApiType } from "../../types/adminTypes"
@@ -30,7 +30,7 @@ function AddDoctorForm() {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    listDepartmentApi().then((data:ResponseData)=>{
+    unblockedDepartments().then((data:ResponseData)=>{
       if(data.status) setDepartmentList(data.data)
       else notifyError(data.message)
     }).catch((err)=>{

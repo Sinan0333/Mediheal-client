@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { listDepartmentApi } from "../../api/admin/departmentApi"
-import { DepartmentApiType } from "../../types/adminTypes"
+import { changeDepartmentBlock, listDepartmentApi } from "../../api/admin/departmentApi"
+import { DepartmentDataType } from "../../types/adminTypes"
 import Actions from "./Actions"
+import { notifyError, notifySuccess } from "../../constants/toast"
 
 function ListDepartments() {
     const navigate = useNavigate()
-    const [list,setList] = useState<DepartmentApiType[] >()
+    const [list,setList] = useState<DepartmentDataType[] >([])
+    const [reload,setReload] = useState<Boolean>(false)
 
     useEffect(()=>{
         listDepartmentApi().then((data)=>{
@@ -14,7 +16,14 @@ function ListDepartments() {
         }).catch((err)=>{
             console.log(err.message);
         })
-    },[])
+    },[reload])
+
+    const handleBlocking = async(is_blocked:boolean,_id:string)=>{
+        const response = await changeDepartmentBlock(_id,is_blocked) 
+        if(!response.status) notifyError(response.message) 
+        notifySuccess(response.message)
+        setReload(!reload)
+    }
 
   return (
     <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
@@ -33,14 +42,14 @@ function ListDepartments() {
                 </thead>
                 <tbody>
                     {
-                        list?.map((obj,i)=>{
+                        list.map((obj,i)=>{
                             return(
                                 <tr key={i}>
                                     <td className="px-4 py-2">{i+1}</td>
                                     <td className="px-4 py-2">{obj.name}</td>
                                     <td className="px-4 py-2">{obj.title}</td>
                                     <td className="px-4 py-2">{obj.description}</td>
-                                    <td className="px-4 py-2"><Actions viewNav="/admin/departments/view" editNav="/admin/departments/edit"/></td>
+                                    <td className="px-4 py-2"><Actions viewNav="/admin/departments/view" editNav="/admin/departments/edit" _id={obj._id} handleBlock={handleBlocking} is_blocked={obj.is_blocked}/></td>
                                 </tr>
                             )
                         })

@@ -37,6 +37,9 @@ export type ListProps = {
 export type ActionProps={
     viewNav:string
     editNav:string
+    _id:string 
+    is_blocked:boolean
+    handleBlock: (is_blocked: boolean,_id:string) => void
 }
 
 export type LabelProps={

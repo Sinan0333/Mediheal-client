@@ -6,7 +6,7 @@ const departmentApi= axios.create({
 })
 
 
-const addDepartment = async (data:DepartmentApiType)=>{
+export const addDepartment = async (data:DepartmentApiType)=>{
     try {         
         const result =  await departmentApi.post('/add',data)  
         return result.data
@@ -15,16 +15,31 @@ const addDepartment = async (data:DepartmentApiType)=>{
     }
 }
 
-const listDepartmentApi = async ()=>{
+export const listDepartmentApi = async ()=>{
     try {         
-        const result =  await departmentApi.get('/')          
+        const result =  await departmentApi.get(`/`)          
         return result.data 
     } catch (error) {
         console.log(error);
     }
 }
 
-export{
-    addDepartment,
-    listDepartmentApi,
+export const unblockedDepartments = async ()=>{
+    try {         
+        const result =  await departmentApi.get('/unblocked')          
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
 }
+
+export const changeDepartmentBlock = async (_id:string | undefined,is_blocked:boolean | undefined)=>{
+    
+    try {           
+        const result =  await departmentApi.post(`/block/${_id}`,{is_blocked:is_blocked})         
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+

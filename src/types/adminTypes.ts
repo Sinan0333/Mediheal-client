@@ -15,3 +15,13 @@ export type DepartmentApiType = {
     image:string
 }
 
+export type DepartmentDataType = {
+    _id:string
+    name:string
+    title:string
+    description:string
+    logo:string
+    image:string
+    is_blocked:boolean
+}
+

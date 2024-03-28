@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 
-/* *{
+*{
   background-color:#e0e0e0 ;
-} */
+}
 
 .neumorphic-input-auth{
   border-radius: 1px;
@@ -50,6 +50,13 @@
   background: #e0e0e0;
   box-shadow: inset 26px 26px 52px #c5c5c5,
               inset -26px -26px 52px #fbfbfb;
+}
+
+.neumorphic-clicked{
+  border-radius: 50%;
+  background: #e0e0e0;
+  box-shadow: inset -5px 5px 11px #a1a1a1,
+              inset 5px -5px 11px #ffffff;
 }
 
 

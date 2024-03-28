@@ -39,3 +39,12 @@ export const editUserData = async (data:EditUserDataProps)=>{
 }
 
 
+export const changeUserBlock = async (_id:string | undefined,is_blocked:boolean | undefined)=>{
+    
+    try {           
+        const result =  await userManagementApi.post(`/block/${_id}`,{is_blocked:is_blocked})         
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}

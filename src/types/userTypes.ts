@@ -18,6 +18,7 @@ export type UserData = {
     phone:string
     email:string
     image:string
+    is_blocked:Boolean
 }
 
 

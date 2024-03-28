@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { listUsers } from "../../api/user/UserManagment"
+import { changeUserBlock, listUsers } from "../../api/user/UserManagment"
 import { UserData } from "../../types/userTypes"
+import { notifyError, notifySuccess } from "../../constants/toast"
 
 function ListUsers() {
 
     const navigate = useNavigate()
     const [list,setList] = useState<UserData[] >()
+    const [reload,setReload] = useState<Boolean>(false)
 
     useEffect(()=>{
         listUsers().then((data)=>{
@@ -14,7 +16,14 @@ function ListUsers() {
         }).catch((err)=>{
             console.log(err.message);
         })
-    },[])
+    },[reload])
+
+    const handleBlocking = async(is_blocked:boolean,_id:string)=>{
+        const response = await changeUserBlock(_id,is_blocked) 
+        if(!response.status) notifyError(response.message) 
+        notifySuccess(response.message)
+        setReload(!reload)
+    }
 
   return (
     <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
@@ -46,6 +55,9 @@ function ListUsers() {
                                             </button>
                                             <button className="neumorphic-navBtn  py-2 px-2 ml-1 w-8 h-8 rounded-lg">
                                                 <img src="/src/assets/icons/delete.png" alt="Button Icon"  />
+                                            </button>
+                                            <button className={`${obj.is_blocked ? "neumorphic-clicked" : "neumorphic-navBtn"}  py-2 px-2 ml-1 w-8 h-8 rounded-lg`} onClick={() =>handleBlocking(!obj.is_blocked,obj._id)}>
+                                            {/*  <img src="/src/assets/icons/delete.pn" alt="Button Icon"  /> */}
                                             </button>
                                         </div>
                                     </td>

@@ -17,7 +17,7 @@ export type AddDoctorValidationType  = {
 }
 
 export type DoctorData = {
-    _id?:string
+    _id:string
     firstName:string 
     secondName:string 
     dob:Date 
@@ -32,6 +32,7 @@ export type DoctorData = {
     workingDays:string[]
     fees:number
     image:string 
+    is_blocked:boolean
 }
 
 export type AddDoctorApi = {

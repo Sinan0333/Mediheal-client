@@ -33,18 +33,24 @@ export const getDoctorDataApi = async (_id:string | undefined)=>{
     }
 }
 
-export const editDoctorDataApi = async (data:AddDoctorApi,_id:string | undefined)=>{
-    console.log('starting of edit api');
-    
+export const editDoctorDataApi = async (data:AddDoctorApi,_id:string | undefined)=>{    
     try {           
         const result =  await doctorApi.post(`/edit/${_id}`,data) 
-        console.log(result,'ending');
-        
         return result.data
     } catch (error) {
         console.log(error);
     }
 }
 
+
+export const changeBlockStatus = async (_id:string | undefined,is_blocked:boolean | undefined)=>{
+    
+    try {           
+        const result =  await doctorApi.post(`/block/${_id}`,{is_blocked:is_blocked})         
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 

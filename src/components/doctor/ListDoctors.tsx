@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import  Actions from '../admin/Actions'
-import { listDoctorsApi } from "../../api/doctor/doctorApi"
+import { changeBlockStatus, listDoctorsApi } from "../../api/doctor/doctorApi"
 import { DoctorData } from "../../types/doctorTypes"
+import { notifyError, notifySuccess } from "../../constants/toast"
 
 function ListDoctors() {
     const navigate = useNavigate()
-    const [list,setList] = useState<DoctorData[] >()
+    const [list,setList] = useState<DoctorData[] >([])
+    const [reload,setReload] = useState<Boolean>(false)
 
     useEffect(()=>{
         listDoctorsApi().then((data)=>{
@@ -14,7 +16,14 @@ function ListDoctors() {
         }).catch((err)=>{
             console.log(err.message);
         })
-    },[])
+    },[reload])
+
+    const handleBlocking = async(is_blocked:boolean,_id:string)=>{
+        const response = await changeBlockStatus(_id,is_blocked) 
+        if(!response.status) notifyError(response.message) 
+        notifySuccess(response.message)
+        setReload(!reload)
+    }
 
   return (
     <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
@@ -34,7 +43,7 @@ function ListDoctors() {
                 </thead>
                 <tbody>
                     {
-                        list?.map((doc,i)=>{
+                        list.map((doc,i)=>{
                             return(
                                 <tr key={i}>
                                     <td className="px-4 py-2">{i+1}</td>
@@ -42,7 +51,7 @@ function ListDoctors() {
                                     <td className="px-4 py-2">{doc.department.name}</td>
                                     <td className="px-4 py-2">{doc.phone}</td>
                                     <td className="px-4 py-2">{doc.email}</td>
-                                    <td className="px-4 py-2"><Actions viewNav={`/admin/doctors/view/${doc._id}`} editNav={`/admin/doctors/edit/${doc._id}`}/></td>
+                                    <td className="px-4 py-2"><Actions viewNav={`/admin/doctors/view/${doc._id}`} editNav={`/admin/doctors/edit/${doc._id}`} _id={doc._id} is_blocked={doc.is_blocked} handleBlock={handleBlocking}/></td>
                                 </tr>
                             )
                         })
