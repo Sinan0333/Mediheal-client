@@ -49,7 +49,7 @@ function ListDepartments() {
                                     <td className="px-4 py-2">{obj.name}</td>
                                     <td className="px-4 py-2">{obj.title}</td>
                                     <td className="px-4 py-2">{obj.description}</td>
-                                    <td className="px-4 py-2"><Actions viewNav="/admin/departments/view" editNav="/admin/departments/edit" _id={obj._id} handleBlock={handleBlocking} is_blocked={obj.is_blocked}/></td>
+                                    <td className="px-4 py-2"><Actions viewNav={`/admin/departments/view/${obj._id}`} editNav={`/admin/departments/edit/${obj._id}`}  _id={obj._id} handleBlock={handleBlocking} is_blocked={obj.is_blocked}/></td>
                                 </tr>
                             )
                         })

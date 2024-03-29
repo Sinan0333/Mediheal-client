@@ -43,3 +43,21 @@ export const changeDepartmentBlock = async (_id:string | undefined,is_blocked:bo
     }
 }
 
+export const getDepartmentDataById = async (_id:string|undefined )=>{
+    
+    try {           
+        const result =  await departmentApi.get(`/view/${_id}`)         
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateDepartment = async (_id:string,data:DepartmentApiType)=>{
+    try {           
+        const result =  await departmentApi.post(`/edit/${_id}`,data)         
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}

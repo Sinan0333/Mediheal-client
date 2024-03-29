@@ -11,6 +11,7 @@ import ListUsersPage from '../pages/admin/ListUsersPage'
 import ViewUserPage from '../pages/admin/ViewUserPage'
 import { AdminIsLoggedIn, AdminIsLoggedOut } from '../components/common/ProductRoutes'
 import Error404 from '../pages/common/Error404'
+import EditDepartmentPage from '../pages/admin/EditDepartmentPage'
 
 
 
@@ -35,6 +36,7 @@ function AdminRoutes() {
 
           <Route path='/departments' element={<DepartmentListPage/>} />
           <Route path='/departments/add' element={<AddDepartmentPage/>} />
+          <Route path='/departments/edit/:_id' element={<EditDepartmentPage/>} />
 
           <Route path='/users' element={<ListUsersPage/>} />
           <Route path='/users/view/:_id' element={<ViewUserPage/>} />

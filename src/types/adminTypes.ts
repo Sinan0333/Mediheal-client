@@ -2,8 +2,8 @@ export type DepartmentValidation = {
     name:string | undefined
     title:string | undefined
     description:string | undefined
-    logoFile:File | undefined
-    imageFile:File | undefined
+    logoFile:File | undefined | string
+    imageFile:File | undefined | string
 }
 
 export type DepartmentApiType = {
