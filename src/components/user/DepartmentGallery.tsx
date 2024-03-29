@@ -6,12 +6,12 @@ import { DepartmentDataType } from "../../types/adminTypes"
 
 function DepartmentGallery() {
     const [list,setList] = useState([])
-    const [depDetails,setDepDetails] = useState<DepartmentDataType>()
-console.log(depDetails);
+    const [depDetails,setDepDetails] = useState<DepartmentDataType >()
 
     useEffect(()=>{
         unblockedDepartments().then((data)=>{
             setList(data.data)
+            setDepDetails(data.data[0])
         }).catch((err)=>{
             console.log(err.message);
         })
@@ -19,7 +19,7 @@ console.log(depDetails);
 
 
   return (
-    <div className=" pt-28   bg-userBlue">
+    <div className="pt-28  bg-blue-50">
         <div className="flex justify-center ">
             <p className="text-l font-semibold text-blue-600">OUR DEPARTMENTS</p>
         </div>
@@ -27,7 +27,7 @@ console.log(depDetails);
             <h1 className="text-4xl font-semibold text-adminBlue">Our Medical Services</h1>
         </div>
       <div className="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
-            <div className="-m-1 flex flex-wrap md:-m-2">
+            <div className="-m-1 flex justify-center flex-wrap md:-m-2">
                {
                 list.map((dep,i)=>{
                     return(
@@ -37,8 +37,8 @@ console.log(depDetails);
                }
             </div>
         </div>
-        <div className="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
-            <DepartmentDetailed/>
+        <div className="container flex justify-center mx-auto px-5 py-2 lg:px-32 lg:pt-12">
+            <DepartmentDetailed data={depDetails}/>
         </div>
     </div>
   )

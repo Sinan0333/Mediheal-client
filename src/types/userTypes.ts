@@ -55,3 +55,7 @@ export type DepartmentLogoProps = {
     data:DepartmentDataType
     setState:(data:DepartmentDataType)=>void
 }
+
+export type DepartmentDetailedProps = {
+    data:DepartmentDataType | undefined
+}

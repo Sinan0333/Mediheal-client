@@ -18,7 +18,7 @@ function RoundedImageInput({state,setState,name}:RoundedImageInputProps) {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center mb-4">
          <label className="font-semibold text-lg w-32 mr-4 text-adminBlue">{name}</label>
       <div className="relative rounded-full overflow-hidden w-20 h-20 bg-gray-200">
         {state && (
