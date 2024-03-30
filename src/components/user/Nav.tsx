@@ -1,10 +1,13 @@
 import {useState} from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { logoutUser } from '../../store/slice/userSlice'
 
 function Nav() {
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 ">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -52,6 +55,9 @@ function Nav() {
           </li>
           <li onClick={()=>navigate('/account')}>
             <p className="block py-2 px-3 cursor-pointer text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Account</p>
+          </li>
+          <li onClick={()=>dispatch(logoutUser())}>
+            <p className="block py-2 px-3 cursor-pointer text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Logout</p>
           </li>
         </ul>
       </div>

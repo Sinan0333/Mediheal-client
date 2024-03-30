@@ -12,8 +12,16 @@ export type AddDoctorValidationType  = {
     email:string | undefined
     password:string | undefined
     department:string | undefined
-    workingDays:string[]
+    workingDays:number[]
+    schedule:ScheduleType
+    fees:number
     image:File | undefined | string
+}
+
+export type ScheduleType = {
+    startTime:number
+    endTime:number
+    interval:number
 }
 
 export type DoctorData = {
@@ -29,7 +37,9 @@ export type DoctorData = {
     email:string 
     password:string
     department:DepartmentApiType 
-    workingDays:string[]
+    workingDays:number[]
+    slots:string
+    schedule:ScheduleType
     fees:number
     image:string 
     is_blocked:boolean
@@ -48,7 +58,8 @@ export type AddDoctorApi = {
     email:string 
     password:string
     department:string
-    workingDays:string[]
+    workingDays:number[]
+    schedule:ScheduleType
     fees:number
     image:string 
 }

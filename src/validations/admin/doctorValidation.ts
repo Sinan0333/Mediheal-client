@@ -36,18 +36,32 @@ export function addDoctorValidation(data:AddDoctorValidationType):string{
 
     if(!data.department) return "Email is required"
 
-    if(data.workingDays.length<2) return "Pleas add the working days"
+    if(!data.workingDays.length) return "Pleas add the working days"
+
+    if(!data.schedule.startTime) return "Start time is required"
+    else if(data.schedule.startTime<0) return "Start time must be positive"
+    else if(data.schedule.startTime>24) return "start time must br less than 24"
+    else if(data.schedule.startTime >= data.schedule.endTime) return "Start time must be less than end time"
+
+    if(!data.schedule.endTime) return "End time is required"
+    else if(data.schedule.startTime<0) return "Start time must be positive"
+    else if(data.schedule.startTime>24) return "start time must br less than 24"
+    else if(data.schedule.startTime >= data.schedule.endTime) return "Start time must be less than end time"
+
+    if(!data.schedule.interval) return "Interval time is required"
+    if(data.schedule.interval<0) return "Interval time must be positive"
+    else if(data.schedule.interval>60) return "Interval time must br less than 60"
+
+    if(!data.fees) return "Fees is required"
+    else if(data.fees<0) return "Fees is must be greater than 0" 
 
     if(!data.image) return "Image is required"
-
-    data.workingDays.splice(0,1)
 
     return 'Success'
 }
 
 
 export function editDoctorValidation(data:AddDoctorValidationType):string{
-    console.log("in validation",data.workingDays);
     
 
     if(!data.firstName) return "Firs name is required"
@@ -77,6 +91,22 @@ export function editDoctorValidation(data:AddDoctorValidationType):string{
 
     if(!data.workingDays.length) return "Pleas add the working days"
 
+    if(!data.schedule.startTime) return "Start time is required"
+    else if(data.schedule.startTime<0) return "Start time must be positive"
+    else if(data.schedule.startTime>24) return "start time must br less than 24"
+    else if(data.schedule.startTime >= data.schedule.endTime) return "Start time must be less than end time"
+
+    if(!data.schedule.endTime) return "End time is required"
+    else if(data.schedule.startTime<0) return "Start time must be positive"
+    else if(data.schedule.startTime>24) return "start time must br less than 24"
+    else if(data.schedule.startTime >= data.schedule.endTime) return "Start time must be less than end time"
+
+    if(!data.schedule.interval) return "Interval time is required"
+    if(data.schedule.interval<0) return "Interval time must be positive"
+    else if(data.schedule.interval>60) return "Interval time must br less than 60"
+
+    if(!data.fees) return "Fees is required"
+    else if(data.fees<0) return "Fees is must be greater than 0" 
     if(!data.image) return "Image is required"
 
     return 'Success'

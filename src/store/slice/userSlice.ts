@@ -24,7 +24,7 @@ const userSlice = createSlice({
             state.image = action.payload.image;
             state.is_blocked = action.payload.is_blocked
         },
-        logoutDetails :(state)=>{
+        logoutUser :(state)=>{
             state._id = "";
             state.name = "";
             state.email = "";
@@ -36,5 +36,5 @@ const userSlice = createSlice({
 })
 
 
-export const{setUserDetails,logoutDetails} = userSlice.actions
+export const{setUserDetails,logoutUser} = userSlice.actions
 export default userSlice.reducer

@@ -7,27 +7,38 @@ import { ResponseData, days } from "../../types/commonTypes"
 import { addDoctorValidation } from "../../validations/admin/doctorValidation"
 import RoundedImageInput from "../common/RoundedImageInput"
 import Inputs from "../admin/Inputs"
-import { useEffect, useState } from "react"
+import { useEffect, useReducer, useState } from "react"
 import { addDoctor } from "../../api/doctor/doctorApi"
+import { initSchedule, scheduleReducer } from "../../reducers/scheduleReducer"
+
 
 
 function AddDoctorForm() {
-  const [workingDays,setWorkingDays] = useState([""])
+  const [workingDays,setWorkingDays] = useState<number[]>([])
   const [firstName,setFirstName] = useState<string>("")
   const [secondName,setSecondName] = useState<string>("")
   const [dob,setDob] = useState<Date | string>("")
-  const [age,setAge] = useState<number>()
+  const [age,setAge] = useState<number>(0)
   const [gender,setGender] = useState<string>("")
   const [address,setAddress] = useState<string>("")
-  const [experience,setExperience] = useState<number>()
-  const [phone,setPhone] = useState<number>()
+  const [experience,setExperience] = useState<number>(0)
+  const [phone,setPhone] = useState<number>(0)
   const [email,setEmail] = useState<string>("")
   const [password,setPassword] = useState<string>("")
   const [department,setDepartment] = useState<string>("")
-  const [imageFile,setImageFile] = useState()
-  const [fees,setFees] = useState<number>()
+  const [imageFile,setImageFile] = useState<File>()
+  const [fees,setFees] = useState<number>(0)
+  const [schedule,setSchedule] = useReducer(scheduleReducer,initSchedule)
   const [departmentList,setDepartmentList] = useState<DepartmentApiType[]>([])
   const navigate = useNavigate()
+  let selectedDays: string[] = []
+
+  for (let i = 0; i < workingDays.length; i++) {
+    const index = workingDays[i];
+    if (index >= 0 && index < days.length) {
+      selectedDays.push(days[index]);
+    }
+  }
 
   useEffect(()=>{
     unblockedDepartments().then((data:ResponseData)=>{
@@ -40,14 +51,14 @@ function AddDoctorForm() {
 
   const handleSubmit = async()=>{
     try {
-      const result :string = addDoctorValidation({firstName,secondName,dob,age,gender,address,experience,phone,email,password,department,workingDays,image:imageFile})
+      const result :string = addDoctorValidation({firstName,secondName,dob,age,gender,address,experience,phone,email,password,department,workingDays,schedule,fees,image:imageFile})
 
       if(result !=="Success") return notifyError(result)
 
       const image:string | undefined = await base64(imageFile)
       if(firstName && secondName && dob && age && gender && address && experience && phone && email && password && department && workingDays && fees && image ){
         
-        const response:ResponseData = await addDoctor({firstName,secondName,dob,age,gender,address,experience,phone,email,password,department,workingDays,fees,image})
+        const response:ResponseData = await addDoctor({firstName,secondName,dob,age,gender,address,experience,phone,email,password,department,workingDays,schedule,fees,image})
         if(!response.status) return notifyError(response.message)
         
         notifySuccess(response.message)
@@ -96,18 +107,30 @@ function AddDoctorForm() {
         </div>
         <div className="mb-6 flex w-1/2 pr-4">
           <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Working Days</label>
-          <select className="block w-full py-2 px-4 bg-transparent border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e)=>setWorkingDays([...workingDays,e.target.value])}>
-          <option value=''>{workingDays.join(',')}</option>
+          <select className="block w-full py-2 px-4 bg-transparent border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e)=>setWorkingDays([...workingDays,parseInt(e.target.value)])}>
+          <option value=''>{selectedDays.join(',')}</option>
             {
-              days.map((day)=>{
-                if(!workingDays.includes(day)){
+              days.map((day,i)=>{
+                if(!workingDays.includes(days.indexOf(day))){
                   return(
-                    <option key={day} value={day}>{day}</option>
+                    <option key={day} value={i}>{day}</option>
                   )
                 }
               })
             }
           </select>
+        </div>
+        <div className="mb-6 flex w-1/2 pr-4">
+          <label className="font-semibold text-lg w-32 mr-4 text-adminBlue">Starting Time</label>
+          <input className=" flex-grow h-8 py-2 px-4 bg-transparent border-transparent focus:outline-none" type="number"  value={schedule.startTime} placeholder={`Enter Starting time`} onChange={(e)=> setSchedule({type:"SET_START_TIME",payload:parseInt(e.target.value)})}/>
+        </div>
+        <div className="mb-6 flex w-1/2 pr-4">
+          <label className="font-semibold text-lg w-32 mr-4 text-adminBlue">Ending Time</label>
+          <input className=" flex-grow h-8 py-2 px-4 bg-transparent border-transparent focus:outline-none" type="number"  value={schedule.endTime} placeholder={`Enter Ending time`} onChange={(e)=> setSchedule({type:"SET_END_TIME",payload:parseInt(e.target.value)})}/>
+        </div>
+        <div className="mb-6 flex w-1/2 pr-4">
+          <label className="font-semibold text-lg w-32 mr-4 text-adminBlue">Interval</label>
+          <input className=" flex-grow h-8 py-2 px-4 bg-transparent border-transparent focus:outline-none" type="number"  value={schedule.interval} placeholder={`Enter Ending interval`} onChange={(e)=> setSchedule({type:"SET_INTERVAL",payload:parseInt(e.target.value)})}/>
         </div>
         <Inputs name="Fees" type="number" setState={setFees} state={fees}/>
         <RoundedImageInput state={imageFile} setState={setImageFile} name="image"/>

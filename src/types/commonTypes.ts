@@ -1,4 +1,4 @@
-export const days:string[] = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
+export const days:string[] = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"]
 
 export type AuthProps = {
     pageName:'Signup' | 'Login'
