@@ -59,3 +59,16 @@ export type DepartmentLogoProps = {
 export type DepartmentDetailedProps = {
     data:DepartmentDataType | undefined
 }
+
+export type PatientData ={
+    _id?:string
+    userId?:string
+    firstName:string
+    secondName:string
+    bloodGroup:string
+    gender:string
+    dob:Date | string
+    age:number
+    image:string | File | undefined
+}
+
