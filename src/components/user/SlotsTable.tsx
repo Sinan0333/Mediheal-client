@@ -7,8 +7,6 @@ function SlotsTable({slots}:SlotsTableProps) {
 
     slotsArray.shift()
     slotsArray.pop()
-    console.log(slotsArray);
-    
     
   return (
     <div className="mt-10 border-2 border-gray-500 p-1">

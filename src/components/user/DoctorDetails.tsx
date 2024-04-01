@@ -5,6 +5,7 @@ import { DoctorData, initialDoctorData } from "../../types/doctorTypes"
 import { days } from "../../types/commonTypes"
 import SlotsTable from "./SlotsTable"
 import AddPatientForm from "./AddPatientForm"
+import ExistingPatient from "./ExistingPatient"
 
 
 function DoctorDetails() {
@@ -86,6 +87,7 @@ function DoctorDetails() {
         </div>
         <SlotsTable slots={data.slots}/>
         <AddPatientForm/>
+        <ExistingPatient/>
       </div>
     </div>
   )

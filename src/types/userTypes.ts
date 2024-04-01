@@ -72,3 +72,6 @@ export type PatientData ={
     image:string | File | undefined
 }
 
+export type ExistingPatientCardProps = {
+    data:PatientData
+}

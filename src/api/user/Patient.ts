@@ -15,3 +15,12 @@ export const addPatient = async (data:PatientData)=>{
     }
 }
 
+export const getUserPatientsApi = async (userId:string)=>{
+    try { 
+        const result =  await patientApi.get(`/${userId}`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
