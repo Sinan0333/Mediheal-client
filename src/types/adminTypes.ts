@@ -15,6 +15,15 @@ export type DepartmentApiType = {
     image:string
 }
 
+export const initialDepartmentApiType:DepartmentApiType={
+    _id:"",
+    name:"",
+    title:"",
+    description:"",
+    logo:"",
+    image:""
+}
+
 export type DepartmentDataType = {
     _id:string
     name:string

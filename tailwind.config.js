@@ -13,6 +13,11 @@ export default {
         adminGreen:"#5c7b70",
         userBlue:"#F5F8FF"
       },
+      spacing: {
+        '72': '18rem',
+        '84': '21rem', 
+        '98': '27rem', 
+      },
     },
   },
   plugins: [

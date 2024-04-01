@@ -7,6 +7,7 @@ import Home from '../pages/user/Home.tsx'
 import Account from '../pages/user/Account.tsx'
 import { UserIsLoggedIn, UserIsLoggedOut } from '../components/common/ProductRoutes.tsx'
 import Error404 from '../pages/common/Error404.tsx'
+import DoctorDetailsPage from '../pages/user/DoctorDetailsPage.tsx'
 
 function UserRoutes() {
   return (
@@ -24,6 +25,7 @@ function UserRoutes() {
           <Route path='/home' element={<Home/>} />
           <Route path='/account' element={<Account/>} />
           <Route path='/doctors' element={<DoctorsList/>} />
+          <Route path='/doctors/details/:_id' element={<DoctorDetailsPage/>} />
 
           <Route path='*' element={<Error404/>} />
 

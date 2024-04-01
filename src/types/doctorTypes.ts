@@ -1,4 +1,4 @@
-import { DepartmentApiType } from "./adminTypes"
+import { DepartmentApiType,initialDepartmentApiType } from "./adminTypes"
 
 export type AddDoctorValidationType  = {
     firstName:string | undefined
@@ -24,6 +24,38 @@ export type ScheduleType = {
     interval:number
 }
 
+export type SlotsType={
+    monday:ScheduleType[]
+    tuesday:ScheduleType[]
+    wednesday:ScheduleType[]
+    thursday:ScheduleType[]
+    friday:ScheduleType[]
+    saturday:ScheduleType[]
+    sunday:ScheduleType[]
+}
+
+
+
+export type SlotsTableProps = {
+    slots:SlotsType
+}
+
+export const initialScheduleType:ScheduleType={
+    startTime:0,
+    endTime:0,
+    interval:0
+}
+
+export const initialSlotsType = {
+    monday:[initialScheduleType],
+    tuesday:[initialScheduleType],
+    wednesday:[initialScheduleType],
+    thursday:[initialScheduleType],
+    friday:[initialScheduleType],
+    saturday:[initialScheduleType],
+    sunday:[initialScheduleType],
+}
+
 export type DoctorData = {
     _id:string
     firstName:string 
@@ -38,12 +70,33 @@ export type DoctorData = {
     password:string
     department:DepartmentApiType 
     workingDays:number[]
-    slots:string
+    slots:SlotsType
     schedule:ScheduleType
     fees:number
     image:string 
     is_blocked:boolean
 }
+
+export const initialDoctorData: DoctorData = {
+    _id: '',
+    firstName: '',
+    secondName: '',
+    dob: new Date(),
+    age: 0,
+    gender: '',
+    address: '',
+    experience: 0,
+    phone: 0,
+    email: '',
+    password: '',
+    department: initialDepartmentApiType, // Assuming you have a default value for DepartmentApiType
+    workingDays: [],
+    slots:initialSlotsType,
+    schedule: initialScheduleType, // Assuming you have a default value for ScheduleType
+    fees: 0,
+    image: '',
+    is_blocked: false,
+};
 
 export type AddDoctorApi = {
     _id?:string
@@ -66,6 +119,7 @@ export type AddDoctorApi = {
 
 
 export type DoctorCardProps ={
+    _id:string
     firstName:string 
     secondName:string 
     experience:number 
