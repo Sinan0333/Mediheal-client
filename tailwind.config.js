@@ -11,7 +11,8 @@ export default {
         adminGold: '#D3C480',
         adminBlue:'#164B55',
         adminGreen:"#5c7b70",
-        userBlue:"#F5F8FF"
+        userBlue:"#F5F8FF",
+        customColor:"#328775"
       },
       spacing: {
         '72': '18rem',

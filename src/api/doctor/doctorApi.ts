@@ -62,4 +62,17 @@ export const changeBlockStatus = async (_id:string | undefined,is_blocked:boolea
     }
 }
 
+export const getBestDoctors = async ()=>{
+    
+    try { 
+        console.log('juhjuh');
+                  
+        const result =  await doctorApi.get("/list/best")         
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 

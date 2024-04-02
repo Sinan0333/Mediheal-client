@@ -34,3 +34,7 @@ export type DepartmentDataType = {
     is_blocked:boolean
 }
 
+export type AddBedValidation = {
+    type:string
+    charge:number
+}
