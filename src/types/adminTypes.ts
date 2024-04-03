@@ -53,5 +53,13 @@ export type BedDataType = {
     available:boolean
     total?:number
     is_blocked:boolean
+}
 
+export type AssignPatientType = {
+    type:string
+    assignDate:Date
+    dischargeDate:Date
+    assignBy:string
+    patient:string 
+    description:string
 }

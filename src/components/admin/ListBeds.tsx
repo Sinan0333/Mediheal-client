@@ -50,11 +50,11 @@ function ListBeds() {
                             return(
                                 <tr key={i}>
                                     <td className="px-4 py-2">{i+1}</td>
-                                    {isObject(obj.patient) ? <td className="px-4 py-2">{obj.patient._id}</td> : <td className="px-4 py-2">{obj.patient || 'New'}</td>}
+                                    {isObject(obj.patient) ? <td className="px-4 py-2">{obj.patient._id}</td> : <td className="px-4 py-2">{obj.patient || ''}</td>}
                                     <td className="px-4 py-2">{obj.type}</td>
-                                    {obj.assignDate ? <td className="px-4 py-2">{new Date(obj.assignDate).toDateString()}</td> : <td className="px-4 py-2">New</td>}
-                                    {obj.dischargeDate ? <td className="px-4 py-2">{new Date(obj.dischargeDate).toDateString()}</td> : <td className="px-4 py-2">New</td>}
-                                    {obj.assignBy ? <td className="px-4 py-2">{obj.assignBy}</td> : <td className="px-4 py-2">New</td>}
+                                    {obj.assignDate ? <td className="px-4 py-2">{new Date(obj.assignDate).toDateString()}</td> : <td className="px-4 py-2"></td>}
+                                    {obj.dischargeDate ? <td className="px-4 py-2">{new Date(obj.dischargeDate).toDateString()}</td> : <td className="px-4 py-2"></td>}
+                                    {obj.assignBy ? <td className="px-4 py-2">{obj.assignBy}</td> : <td className="px-4 py-2"></td>}
                                     <td className="px-4 py-2"><Actions viewNav={`/admin/bed/view/${obj._id}`} editNav={`/admin/bed/edit/${obj._id}`}  _id={obj._id} handleBlock={handleBlocking} is_blocked={obj.is_blocked}/></td>
                                 </tr>
                             )
