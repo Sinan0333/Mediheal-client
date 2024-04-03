@@ -14,6 +14,7 @@ import Error404 from '../pages/common/Error404'
 import EditDepartmentPage from '../pages/admin/EditDepartmentPage'
 import ViewDepartmentPage from '../pages/admin/ViewDepartmentPage'
 import AddBedPage from '../pages/admin/AddBedPage'
+import BedListPage from '../pages/admin/BedListPage'
 
 
 
@@ -44,6 +45,7 @@ function AdminRoutes() {
           <Route path='/users' element={<ListUsersPage/>} />
           <Route path='/users/view/:_id' element={<ViewUserPage/>} />
 
+          <Route path='/bed' element={<BedListPage/>} />
           <Route path='/bed/add' element={<AddBedPage/>} />
 
           <Route path='*' element={<Error404/>} />

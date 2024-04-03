@@ -15,3 +15,20 @@ export const addBedApi = async (data:AddBedValidation)=>{
     }
 }
 
+export const getAllBeds = async ()=>{
+    try { 
+        const result =  await adminApi.get('/')  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const changeBedBlock = async (_id:string ,is_blocked:boolean)=>{
+    try { 
+        const result =  await adminApi.post(`/block/${_id}`,{is_blocked})  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}

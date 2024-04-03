@@ -1,3 +1,5 @@
+import { PatientData } from "./userTypes"
+
 export type DepartmentValidation = {
     name:string | undefined
     title:string | undefined
@@ -37,4 +39,19 @@ export type DepartmentDataType = {
 export type AddBedValidation = {
     type:string
     charge:number
+}
+
+export type BedDataType = {
+    _id:string
+    type:string
+    charge:number
+    assignDate?:Date
+    dischargeDate?:Date
+    assignBy?:string
+    patient?:string | PatientData
+    description?:string
+    available:boolean
+    total?:number
+    is_blocked:boolean
+
 }
