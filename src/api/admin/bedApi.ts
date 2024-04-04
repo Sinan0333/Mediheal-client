@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AddBedValidation, AssignPatientType} from '../../types/adminTypes'
+import { AddBedValidation, AssignPatientType, BedEditData} from '../../types/adminTypes'
 
 const adminApi= axios.create({
     baseURL:'http://localhost:3000/admin/bed'
@@ -45,6 +45,15 @@ export const changeBedBlock = async (_id:string ,is_blocked:boolean)=>{
 export const assignPatientApi = async (data:AssignPatientType)=>{
     try { 
         const result =  await adminApi.post("/assign",data)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateBedApi = async (_id:string | undefined,data:BedEditData)=>{
+    try { 
+        const result =  await adminApi.post(`/edit/${_id}`,data)  
         return result.data
     } catch (error) {
         console.log(error);

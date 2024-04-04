@@ -17,6 +17,7 @@ function AssignPatientForm() {
     const [dischargeDate,setDischargeDate] = useState<Date>(new Date())
     const [description,setDescription] = useState<string>("")
     const [assignBy,setAssignBy] = useState<string>("")
+    const [charge,setCharge] = useState<number>(0)
     const navigate = useNavigate()
 
     useEffect(()=>{
@@ -29,12 +30,12 @@ function AssignPatientForm() {
   
     async function handleSubmit() {
   
-      const validation: string = assignPatientValidation({assignBy,assignDate,description,dischargeDate,patient,type});
+      const validation: string = assignPatientValidation({assignBy,assignDate,description,dischargeDate,patient,type,charge});
       if (validation !== "Success") return notifyError(validation);
   
       try {
         
-          const response:ResponseData =await assignPatientApi({assignBy,assignDate,description,dischargeDate,patient,type})
+          const response:ResponseData =await assignPatientApi({assignBy,assignDate,description,dischargeDate,patient,type,charge})
           if(!response.status) return notifyError(response.message)
           notifySuccess(response.message)
           navigate('/admin/bed')
@@ -55,7 +56,7 @@ function AssignPatientForm() {
                 <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Bed Type</label>
                 <select className="block w-full py-2 px-4 bg-transparent border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e)=>setType(e.target.value)}>
                     <option value="">Select Bed Type</option>
-                    <option value='ICUr'>ICU</option>
+                    <option value='ICU'>ICU</option>
                     <option value='wart'>Ward</option>
                     <option value='Ac'>Ac</option>
                     <option value='Non Ac'>Non Ac</option>
@@ -67,18 +68,19 @@ function AssignPatientForm() {
             <Inputs name="Discharge Date" type="date" setState={setDischargeDate} state={dischargeDate}/>
             <Inputs name="Description" type="text" setState={setDescription} state={description}/>
             <div className="mb-6 flex w-1/2 pr-4">
-            <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Assign By</label>
-            <select className="block w-full py-2 px-4 bg-transparent border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e)=>setAssignBy(e.target.value)}>
-                <option value="">Select Doctor</option>\
-               {
-                doctors?.map((doc)=>{
-                    return(
-                        <option value={doc._id}>{doc.firstName} {doc.secondName}</option>
-                    )
-                })
-               }
-            </select>
+                <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Assign By</label>
+                <select className="block w-full py-2 px-4 bg-transparent border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e)=>setAssignBy(e.target.value)}>
+                    <option value="">Select Doctor</option>\
+                    {
+                        doctors?.map((doc)=>{
+                            return(
+                                <option value={doc._id}>{doc.firstName} {doc.secondName}</option>
+                            )
+                        })
+                    }
+                </select>
             </div>
+            <Inputs name="Charge" type="number" setState={setCharge} state={charge}/>
         </div>
         <div className="flex justify-center">
           <button className="neumorphic-navBtn w-24 h-8 font-semibold text-adminBlue" onClick={handleSubmit}>Submit</button>

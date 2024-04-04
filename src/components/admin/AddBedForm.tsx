@@ -35,7 +35,7 @@ function AddBedForm() {
         <h1 className="text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Add Bed</h1>
         <div className="mb-6 ">
         <div className="mb-6 flex w-1/2 pr-4">
-          <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Gender</label>
+          <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Bed Type </label>
           <select className="block w-full py-2 px-4 bg-transparent border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e)=>setType(e.target.value)}>
           <option value="">Select Bed Type</option>\
             <option value='ICU'>ICU</option>

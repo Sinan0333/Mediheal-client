@@ -58,9 +58,21 @@ export type BedDataType = {
 
 export type AssignPatientType = {
     type:string
+    charge:number
     assignDate:Date
     dischargeDate:Date
     assignBy:string
     patient:string 
     description:string
+}
+
+export type BedEditData = {
+    type:string
+    charge:number
+    assignDate:Date | string
+    dischargeDate:Date | string
+    assignBy:string 
+    patient:string 
+    description:string
+    available?:boolean
 }
