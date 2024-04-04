@@ -16,6 +16,7 @@ import ViewDepartmentPage from '../pages/admin/ViewDepartmentPage'
 import AddBedPage from '../pages/admin/AddBedPage'
 import BedListPage from '../pages/admin/BedListPage'
 import AssignPatientPage from '../pages/admin/AssignPatientPage'
+import ViewBedPage from '../pages/admin/ViewBedPage'
 
 
 
@@ -48,6 +49,7 @@ function AdminRoutes() {
 
           <Route path='/bed' element={<BedListPage/>} />
           <Route path='/bed/add' element={<AddBedPage/>} />
+          <Route path='/bed/view/:_id' element={<ViewBedPage/>} />
           <Route path='/bed/assign' element={<AssignPatientPage/>} />
 
           <Route path='*' element={<Error404/>} />

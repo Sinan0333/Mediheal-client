@@ -15,6 +15,15 @@ export const addBedApi = async (data:AddBedValidation)=>{
     }
 }
 
+export const getBedDetailsApi = async (_id:string | undefined)=>{
+    try { 
+        const result =  await adminApi.get(`/view/${_id}`)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getAllBeds = async ()=>{
     try { 
         const result =  await adminApi.get('/')  

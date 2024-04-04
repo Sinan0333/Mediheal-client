@@ -10,8 +10,6 @@ function ViewUser() {
     const imageUrl:string = `https://res.cloudinary.com/dw2cscitl/${userData?.image}`
     const defaultProfile:string = '/src/assets/images/default_profile.jpg'
     const {_id} = useParams()
-
-    console.log(userData);
     
     useEffect(()=>{
       getUserDataApi(_id).then((data)=>{

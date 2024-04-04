@@ -1,3 +1,4 @@
+import { DoctorData } from "./doctorTypes"
 import { PatientData } from "./userTypes"
 
 export type DepartmentValidation = {
@@ -47,7 +48,7 @@ export type BedDataType = {
     charge:number
     assignDate?:Date
     dischargeDate?:Date
-    assignBy?:string
+    assignBy?:string | DoctorData
     patient?:string | PatientData
     description?:string
     available:boolean
