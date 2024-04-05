@@ -10,13 +10,16 @@ import ExistingPatient from "./ExistingPatient"
 
 function DoctorDetails() {
   const [data,setData] = useState<DoctorData>(initialDoctorData)
+  const [selectedSlot,setSelectedSlot] = useState<string>("")
+  const [selectedPatient,setSelectedPatient] = useState<string>("")
   const {_id}= useParams()
   const imageUrl = `https://res.cloudinary.com/dw2cscitl/${data?.image}`;
   let selectedDays: string[] = []
   const currentDate = new Date()
   const currentDayOfWeek = currentDate.getDay()
+  console.log(selectedPatient);
   
-
+  
   for (let i = 0; i < data?.workingDays.length; i++) {
     const index = data.workingDays[i];
     if (index >= 0 && index < days.length) {
@@ -68,15 +71,15 @@ function DoctorDetails() {
             <label className="font-bold text-lg w-36  text-adminGreen">{selectedDays.join(",")}</label>
           </div>
           <div className="mb-5 flex  pr-4">
-            <label className="font-bold text-xl mr-4  text-adminBlue">Working Time</label>
+            <label className="font-bold text-xl mr-4  text-adminBlue">Working Time:</label>
             <label className="font-bold text-lg w-36  text-adminGreen">{data.schedule.startTime}-{data.schedule.endTime}</label>
           </div>
           <div className="mb-5 flex  pr-4">
-            <label className="font-bold text-xl mr-4  text-adminBlue">Fees</label>
+            <label className="font-bold text-xl mr-4  text-adminBlue">Fees:</label>
             <label className="font-bold text-lg w-36  text-adminGreen">{data.fees}</label>
           </div>
           <div className="mb-5 flex  pr-4">
-            <label className="font-bold text-xl mr-4  text-adminBlue">Status</label>
+            <label className="font-bold text-xl mr-4  text-adminBlue">Status:</label>
             <label className="font-bold text-lg w-36  text-adminGreen">{data.workingDays.includes(currentDayOfWeek) ? "Available" : "Unavailable"}</label>
           </div>
         </div>
@@ -85,9 +88,9 @@ function DoctorDetails() {
         <div className="flex justify-center">
           <h1 className="font-bold text-3xl text-adminBlue" >Make An Appointment</h1>
         </div>
-        <SlotsTable slots={data.slots}/>
+        <SlotsTable slots={data.slots} state={selectedSlot} setState={setSelectedSlot}/>
         <AddPatientForm/>
-        <ExistingPatient/>
+        <ExistingPatient state={selectedPatient} setState={setSelectedPatient}/>
       </div>
     </div>
   )

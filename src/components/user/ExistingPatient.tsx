@@ -4,8 +4,9 @@ import { PatientData } from "../../types/userTypes"
 import { getUserPatientsApi } from "../../api/user/Patient"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
+import { ExistingPatientProps } from "../../types/doctorTypes"
 
-function ExistingPatient() {
+function ExistingPatient({state,setState}:ExistingPatientProps) {
     const [list ,setList] = useState<PatientData[]>()
     const userId = useSelector((state:RootState)=>state.user._id)
 
@@ -27,10 +28,9 @@ function ExistingPatient() {
     <div className="flex flex-wrap  justify-evenly pt-8 pl-4">  
     {
         list?.map((patient)=>{
-            console.log(patient);
             
             return(
-                <ExistingPatientCard data={patient}/>
+                <ExistingPatientCard state={state} setState={setState} key={patient._id} data={patient}/>
             )
         }) 
     }

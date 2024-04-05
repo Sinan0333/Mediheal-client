@@ -19,6 +19,7 @@ export type AddDoctorValidationType  = {
 }
 
 export type ScheduleType = {
+    _id?:string
     startTime:number
     endTime:number
     interval:number
@@ -38,6 +39,13 @@ export type SlotsType={
 
 export type SlotsTableProps = {
     slots:SlotsType
+    state:File | string
+    setState:(state:any)=>void
+}
+
+export type ExistingPatientProps = {
+    state:File | string
+    setState:(state:any)=>void
 }
 
 export const initialScheduleType:ScheduleType={

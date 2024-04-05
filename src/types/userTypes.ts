@@ -74,4 +74,6 @@ export type PatientData ={
 
 export type ExistingPatientCardProps = {
     data:PatientData
+    state:File | string
+    setState:(state:any)=>void
 }
