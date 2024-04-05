@@ -26,12 +26,13 @@ function ViewBed() {
         <div className="flex flex-wrap mt-10">
           <Label labelName="PatientID" value={PatientID}/>
           <Label labelName="Bed Type" value={bedData?.type}/>
+          <Label labelName="Charge" value={bedData?.charge}/>
           <Label labelName="Description" value={bedData?.description}/>
           <Label labelName="Assign Date" value={assignDate}/>
           <Label labelName="Discharge Date" value={dischargeDate}/>
           <Label labelName="Total" value={bedData?.total || ""}/>
           <Label labelName="Assign By" value={assignBy}/>
-          <Label labelName="Available" value={bedData?.available ? "Discharged" : "Admit"}/>
+          <Label labelName="Status" value={bedData?.available ? "Discharged" : "Admit"}/>
         </div>
       </div>
     )

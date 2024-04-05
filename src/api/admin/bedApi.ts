@@ -59,3 +59,12 @@ export const updateBedApi = async (_id:string | undefined,data:BedEditData)=>{
         console.log(error);
     }
 }
+
+export const dischargePatientApi = async (_id:string | undefined)=>{
+    try { 
+        const result =  await adminApi.put(`/discharge/${_id}`)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
