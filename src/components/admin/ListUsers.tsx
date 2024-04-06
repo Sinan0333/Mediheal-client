@@ -57,7 +57,6 @@ function ListUsers() {
                                                 <img src="/src/assets/icons/delete.png" alt="Button Icon"  />
                                             </button>
                                             <button className={`${obj.is_blocked ? "neumorphic-clicked" : "neumorphic-navBtn"}  py-2 px-2 ml-1 w-8 h-8 rounded-lg`} onClick={() =>handleBlocking(!obj.is_blocked,obj._id)}>
-                                            {/*  <img src="/src/assets/icons/delete.pn" alt="Button Icon"  /> */}
                                             </button>
                                         </div>
                                     </td>

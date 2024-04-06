@@ -43,7 +43,7 @@ function DoctorDetails() {
     const result:string = bookNowValidation({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type})
     if(result != "Success") return notifyError(result)
 
-    const response:ResponseData = await bookNowApi({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type})
+   const response:ResponseData = await bookNowApi({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type})
    if(!response.status) notifyError(response.message)
    notifySuccess(response.message)
     

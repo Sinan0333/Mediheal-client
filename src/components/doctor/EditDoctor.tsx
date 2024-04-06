@@ -93,15 +93,14 @@ function EditDoctor() {
       }else{
         image = await base64(imageFile)
       }
-
-      if(firstName && secondName && dateOfBirth && age && gender && address && experience && phone && email && password && department && workingDays && fees && image ){
+        if(!image) return notifyError("Couldn't convert the image")
         const response:ResponseData = await editDoctorDataApi({firstName,secondName,dob:dateOfBirth,age,gender,address,experience,phone,email,password,department,workingDays,schedule,fees,image},_id)
         if(!response.status) return notifyError(response.message)
         console.log(response.data);
         
         notifySuccess(response.message)
         navigate(-1)
-      }
+  
 
     } catch (error) {
       console.log(error);

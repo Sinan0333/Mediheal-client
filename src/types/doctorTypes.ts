@@ -54,7 +54,7 @@ export type SlotsType={
 export type SlotsTableProps = {
     slots:SlotsType
     selectedDay:string
-    setSelectedDay:(state:any)=>void
+    setSelectedDay:(state:string)=>void
     state:OneSlotType
     setState:(state:any)=>void
 }

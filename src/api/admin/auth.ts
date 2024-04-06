@@ -6,7 +6,7 @@ const adminApi= axios.create({
 })
 
 
-const adminLogin = async (data:LoginType)=>{
+export const adminLogin = async (data:LoginType)=>{
     try { 
         const result =  await adminApi.post('/login',data)  
         return result.data
@@ -15,6 +15,3 @@ const adminLogin = async (data:LoginType)=>{
     }
 }
 
-export{
-    adminLogin
-}

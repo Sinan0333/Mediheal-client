@@ -2,11 +2,11 @@ import { DoctorData } from "./doctorTypes"
 import { PatientData } from "./userTypes"
 
 export type DepartmentValidation = {
-    name:string | undefined
-    title:string | undefined
-    description:string | undefined
-    logoFile:File | undefined | string
-    imageFile:File | undefined | string
+    name:string
+    title:string
+    description:string
+    logoFile:File | string
+    imageFile:File | string
 }
 
 export type DepartmentApiType = {

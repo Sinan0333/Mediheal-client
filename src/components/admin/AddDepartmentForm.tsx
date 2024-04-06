@@ -10,11 +10,11 @@ import { useNavigate } from "react-router-dom"
 
 
 function AddDepartmentForm() {
-  const [name ,setName] = useState()
-  const [title,setTitle] = useState()
-  const [description,setDescription] = useState()
-  const [logoFile,setLogoFile] = useState()
-  const [imageFile,setImageFile] = useState()
+  const [name ,setName] = useState<string>("")
+  const [title,setTitle] = useState<string>("")
+  const [description,setDescription] = useState<string>("")
+  const [logoFile,setLogoFile] = useState<File | string>("")
+  const [imageFile,setImageFile] = useState<File | string>("")
   const navigate = useNavigate()
 
   async function handleSubmit() {
@@ -23,15 +23,17 @@ function AddDepartmentForm() {
     if (validation !== "Success") return notifyError(validation);
 
     try {
+
+      if(!(logoFile instanceof File) || !(imageFile instanceof File) ) return notifyError("Please Select the image")
       const logo = await base64(logoFile);
       const image = await base64(imageFile);
-      
-      if(name && title && description && logo && image){
+      if(!logo || !image)return notifyError("Couldn't convert image")
+
         const response:ResponseData =await addDepartment({name,title,description,logo,image})
         if(!response.status) return notifyError(response.message)
         notifySuccess(response.message)
         navigate('/admin/departments')
-      }
+
 
     } catch (error) {
       console.error(error);

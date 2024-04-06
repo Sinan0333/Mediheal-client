@@ -51,13 +51,13 @@ function EditDepartmentForm() {
         }else{
           image = await base64(imageFile)
         }
-      
-      if(name && title && description && logo && image){
+
+        if(!image || !logo) return notifyError("Couldn't convert the image")
+        
         const response:ResponseData =await updateDepartment(departmentId,{name,title,description,logo,image})
         if(!response.status) return notifyError(response.message)
         notifySuccess(response.message)
         navigate('/admin/departments')
-      }
 
     } catch (error) {
       console.error(error);

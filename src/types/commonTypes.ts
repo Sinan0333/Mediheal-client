@@ -49,7 +49,7 @@ export type LabelProps={
 
 export type AdminHeaderNavigation={
     navigation:string
-    _id?:string
+    _id:string
 }
 
 export type AppointmentData ={

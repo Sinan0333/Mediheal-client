@@ -56,14 +56,13 @@ function AddDoctorForm() {
       if(result !=="Success") return notifyError(result)
 
       const image:string | undefined = await base64(imageFile)
-      if(firstName && secondName && dob && age && gender && address && experience && phone && email && password && department && workingDays && fees && image ){
-        
+      if(!image) return notifyError("Couldn't convert the image")
+
         const response:ResponseData = await addDoctor({firstName,secondName,dob,age,gender,address,experience,phone,email,password,department,workingDays,schedule,fees,image})
         if(!response.status) return notifyError(response.message)
         
         notifySuccess(response.message)
         navigate('/admin/doctors')
-      }
 
     } catch (error) {
       console.log(error);
