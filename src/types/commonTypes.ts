@@ -51,3 +51,14 @@ export type AdminHeaderNavigation={
     navigation:string
     _id?:string
 }
+
+export type AppointmentData ={
+    _id?:string
+    startTime:string
+    endTime:string
+    day:string
+    doctor:string | undefined
+    patient:string
+    status:"Pending" | "Checked" | "Cancelled"
+    type:"Online" | 'Offline'
+}

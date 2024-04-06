@@ -1,9 +1,8 @@
 import { useState } from "react"
 import { ScheduleType, SlotsTableProps } from "../../types/doctorTypes"
 
-function SlotsTable({slots,state,setState}:SlotsTableProps) {
+function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTableProps) {
     const [daySlots,setDaySlots] = useState<ScheduleType[]>()
-    const [selectedDay,setSelectedDay] = useState<string>("")
     const slotsArray = Object.entries(slots)
 
     slotsArray.shift()
@@ -23,7 +22,7 @@ function SlotsTable({slots,state,setState}:SlotsTableProps) {
                 {
                     slotsArray?.map((day)=>{
                         return(
-                            <div key={day[0]}  className={`${selectedDay === day[0] ? "bg-adminBlue text-white" : "text-black" } border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium`} onClick={()=>{setDaySlots(day[1]) ,setSelectedDay(day[0])}}>{day[0]}</div>
+                            <div key={day[0]}  className={`${ selectedDay=== day[0] ? "bg-adminBlue text-white" : "text-black" } border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium`} onClick={()=>{setDaySlots(day[1]) ,setSelectedDay(day[0])}}>{day[0]}</div>
                         )
                     })
                 }
@@ -35,7 +34,7 @@ function SlotsTable({slots,state,setState}:SlotsTableProps) {
                 {
                     daySlots?.map((slot)=>{
                         return(
-                            <div key={slot._id} style={state == slot._id ? {backgroundColor:'#164B55' ,color:'white', borderColor:"white"} :{}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium " onClick={()=>setState(slot._id)}>{slot.startTime} - {slot.endTime}</div>
+                            <div key={slot._id} style={state._id == slot._id ? {backgroundColor:'#164B55' ,color:'white', borderColor:"white"} :{}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium " onClick={()=>setState(slot)}>{slot.startTime} - {slot.endTime}</div>
                         )
                     })
                 }

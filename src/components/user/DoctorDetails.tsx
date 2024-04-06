@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getDoctorDataApi } from "../../api/doctor/doctorApi"
-import { DoctorData, initialDoctorData } from "../../types/doctorTypes"
-import { days } from "../../types/commonTypes"
+import { DoctorData, OneSlotType, initialDoctorData, initialOneSlotsType,} from "../../types/doctorTypes"
+import { ResponseData, days } from "../../types/commonTypes"
 import SlotsTable from "./SlotsTable"
 import AddPatientForm from "./AddPatientForm"
 import ExistingPatient from "./ExistingPatient"
+import { bookNowApi } from "../../api/user/Patient"
+import { bookNowValidation } from "../../validations/user/appointmentValidation"
+import { notifyError, notifySuccess } from "../../constants/toast"
 
 
 function DoctorDetails() {
   const [data,setData] = useState<DoctorData>(initialDoctorData)
-  const [selectedSlot,setSelectedSlot] = useState<string>("")
+  const [selectedSlot,setSelectedSlot] = useState<OneSlotType>(initialOneSlotsType)
   const [selectedPatient,setSelectedPatient] = useState<string>("")
+  const [selectedDay,setSelectedDay] = useState<string>("")
+  const [imageUrl,setImageUrl] = useState<string>("")
   const {_id}= useParams()
-  const imageUrl = `https://res.cloudinary.com/dw2cscitl/${data?.image}`;
   let selectedDays: string[] = []
   const currentDate = new Date()
   const currentDayOfWeek = currentDate.getDay()
-  console.log(selectedPatient);
-  
   
   for (let i = 0; i < data?.workingDays.length; i++) {
     const index = data.workingDays[i];
@@ -30,10 +32,22 @@ function DoctorDetails() {
   useEffect(()=>{
     getDoctorDataApi(_id).then((res)=>{
       setData(res.data)
+      setImageUrl(`https://res.cloudinary.com/dw2cscitl/${res.data.image}`)
     }).catch((err)=>{
       console.log(err.message)
     })
   },[])
+
+  async function handleSubmit(type:"Online" | "Offline"){
+
+    const result:string = bookNowValidation({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type})
+    if(result != "Success") return notifyError(result)
+
+    const response:ResponseData = await bookNowApi({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type})
+   if(!response.status) notifyError(response.message)
+   notifySuccess(response.message)
+    
+  }
 
   
   return (
@@ -88,9 +102,13 @@ function DoctorDetails() {
         <div className="flex justify-center">
           <h1 className="font-bold text-3xl text-adminBlue" >Make An Appointment</h1>
         </div>
-        <SlotsTable slots={data.slots} state={selectedSlot} setState={setSelectedSlot}/>
+        <SlotsTable slots={data.slots} state={selectedSlot} setState={setSelectedSlot} selectedDay={selectedDay} setSelectedDay={setSelectedDay}/>
         <AddPatientForm/>
         <ExistingPatient state={selectedPatient} setState={setSelectedPatient}/>
+      </div>
+      <div className="flex justify-center mt-8 mb-8 gap-6">
+        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={()=>handleSubmit("Online")}>Book For Online</button>
+        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={()=>handleSubmit("Offline")}>Book For Offline</button>
       </div>
     </div>
   )

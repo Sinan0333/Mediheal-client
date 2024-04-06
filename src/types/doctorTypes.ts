@@ -25,6 +25,21 @@ export type ScheduleType = {
     interval:number
 }
 
+export type OneSlotType = {
+    _id?:string
+    startTime:string
+    endTime:string
+    isReserved:boolean
+    break:boolean
+}
+
+export const initialOneSlotsType:OneSlotType = {
+    startTime:"",
+    endTime:"",
+    isReserved:false,
+    break:false
+}
+
 export type SlotsType={
     monday:ScheduleType[]
     tuesday:ScheduleType[]
@@ -36,10 +51,11 @@ export type SlotsType={
 }
 
 
-
 export type SlotsTableProps = {
     slots:SlotsType
-    state:File | string
+    selectedDay:string
+    setSelectedDay:(state:any)=>void
+    state:OneSlotType
     setState:(state:any)=>void
 }
 
