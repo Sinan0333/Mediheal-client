@@ -24,5 +24,13 @@ export const getUserPatientsApi = async (userId:string)=>{
     }
 }
 
+export const getPatients = async ()=>{
+    try { 
+        const result =  await patientApi.get('/') 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
