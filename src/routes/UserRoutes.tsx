@@ -8,6 +8,8 @@ import Account from '../pages/user/Account.tsx'
 import { UserIsLoggedIn, UserIsLoggedOut } from '../components/common/ProductRoutes.tsx'
 import Error404 from '../pages/common/Error404.tsx'
 import DoctorDetailsPage from '../pages/user/DoctorDetailsPage.tsx'
+import PaymentSuccess from '../components/user/PaymentSuccess.tsx'
+import CancelPage from '../components/user/CancelPage.tsx'
 
 function UserRoutes() {
   return (
@@ -26,6 +28,8 @@ function UserRoutes() {
           <Route path='/account' element={<Account/>} />
           <Route path='/doctors' element={<DoctorsList/>} />
           <Route path='/doctors/details/:_id' element={<DoctorDetailsPage/>} />
+          <Route path='/payment_success' element={<PaymentSuccess/>}/>
+          <Route path='/payment_cancel' element={<CancelPage/>}/>
 
           <Route path='*' element={<Error404/>} />
 

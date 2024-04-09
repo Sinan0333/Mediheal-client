@@ -84,6 +84,7 @@ function EditDoctor() {
       if(typeof(dob)==='object') dateOfBirth = dob
       else dateOfBirth = convertHumanReadableToDate(dob)
         
+      if(!imageFile) return notifyError("Please Select add image")
       const result :string = editDoctorValidation({firstName,secondName,dob:dateOfBirth,age,gender,address,experience,phone,email,password,department,workingDays,schedule,fees,image:imageFile})
       if(result !=="Success") return notifyError(result)
 

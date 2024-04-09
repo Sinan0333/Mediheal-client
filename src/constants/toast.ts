@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
 // Inside your component or function
-const notifySuccess = (message:string) => {
+export const notifySuccess = (message:string) => {
   toast.success(message, {
     position: 'top-right', // Position of the toast
     autoClose: 2000, // Time in milliseconds before the toast auto closes
@@ -17,7 +17,7 @@ const notifySuccess = (message:string) => {
 };
 
 
-const notifyError = (message:string) => {
+export const notifyError = (message:string) => {
     toast.error(message, {
       position: 'top-right', // Position of the toast
       autoClose: 2000, // Time in milliseconds before the toast auto closes
@@ -31,8 +31,3 @@ const notifyError = (message:string) => {
       progressClassName: 'custom-toast-progress', // Custom CSS class for the progress bar
     });
   };
-
-  export{
-    notifyError,
-    notifySuccess
-  }

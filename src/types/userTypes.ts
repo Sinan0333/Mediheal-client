@@ -77,3 +77,12 @@ export type ExistingPatientCardProps = {
     state:File | string
     setState:(state:any)=>void
 }
+
+export type AddPatientFormProps = {
+    state:boolean
+    setState:(reload:boolean)=>void
+}
+
+export type PaymentFormProps = {
+    clientSecret:string
+}

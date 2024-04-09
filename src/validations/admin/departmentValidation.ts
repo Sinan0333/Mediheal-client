@@ -12,14 +12,10 @@ export function departmentValidation({name,title,description,logoFile,imageFile}
     return "Title is required"
   }else if(title.length < 3){
     return "title must contain 3 character"
-  }else if(!textPattern.test(title)){
-    return "Please provide a valid title"
   }else if(!description){
     return "description is required"
   }else if(description.length < 3){
     return "description must contain 3 character"
-  }else if(!textPattern.test(description)){
-    return "Please provide a valid description"
   }else if(!logoFile){
     return "logo is required"
   }else if(!imageFile){

@@ -51,6 +51,8 @@ function AddDoctorForm() {
 
   const handleSubmit = async()=>{
     try {
+      
+      if(!imageFile) return notifyError("Please select add image")
       const result :string = addDoctorValidation({firstName,secondName,dob,age,gender,address,experience,phone,email,password,department,workingDays,schedule,fees,image:imageFile})
 
       if(result !=="Success") return notifyError(result)

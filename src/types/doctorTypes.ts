@@ -1,21 +1,21 @@
 import { DepartmentApiType,initialDepartmentApiType } from "./adminTypes"
 
 export type AddDoctorValidationType  = {
-    firstName:string | undefined
-    secondName:string | undefined
-    dob:Date | undefined | string
-    age:number | undefined
-    gender:string | undefined
-    address:string | undefined
-    experience:number | undefined
-    phone:number | undefined
-    email:string | undefined
-    password:string | undefined
-    department:string | undefined
+    firstName:string
+    secondName:string
+    dob:Date | string
+    age:number
+    gender:string
+    address:string
+    experience:number
+    phone:number
+    email:string
+    password:string
+    department:string
     workingDays:number[]
     schedule:ScheduleType
     fees:number
-    image:File | undefined | string
+    image:File | string
 }
 
 export type ScheduleType = {
@@ -41,13 +41,14 @@ export const initialOneSlotsType:OneSlotType = {
 }
 
 export type SlotsType={
-    monday:ScheduleType[]
-    tuesday:ScheduleType[]
-    wednesday:ScheduleType[]
-    thursday:ScheduleType[]
-    friday:ScheduleType[]
-    saturday:ScheduleType[]
-    sunday:ScheduleType[]
+    _id?:string
+    monday:OneSlotType[]
+    tuesday:OneSlotType[]
+    wednesday:OneSlotType[]
+    thursday:OneSlotType[]
+    friday:OneSlotType[]
+    saturday:OneSlotType[]
+    sunday:OneSlotType[]
 }
 
 
@@ -62,6 +63,7 @@ export type SlotsTableProps = {
 export type ExistingPatientProps = {
     state:File | string
     setState:(state:any)=>void
+    reload:boolean
 }
 
 export const initialScheduleType:ScheduleType={
@@ -71,13 +73,13 @@ export const initialScheduleType:ScheduleType={
 }
 
 export const initialSlotsType = {
-    monday:[initialScheduleType],
-    tuesday:[initialScheduleType],
-    wednesday:[initialScheduleType],
-    thursday:[initialScheduleType],
-    friday:[initialScheduleType],
-    saturday:[initialScheduleType],
-    sunday:[initialScheduleType],
+    monday:[initialOneSlotsType],
+    tuesday:[initialOneSlotsType],
+    wednesday:[initialOneSlotsType],
+    thursday:[initialOneSlotsType],
+    friday:[initialOneSlotsType],
+    saturday:[initialOneSlotsType],
+    sunday:[initialOneSlotsType],
 }
 
 export type DoctorData = {

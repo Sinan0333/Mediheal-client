@@ -6,10 +6,10 @@ import { ResponseData, days } from "../../types/commonTypes"
 import SlotsTable from "./SlotsTable"
 import AddPatientForm from "./AddPatientForm"
 import ExistingPatient from "./ExistingPatient"
-import { bookNowApi } from "../../api/user/Patient"
+import { loadStripe } from '@stripe/stripe-js';
 import { bookNowValidation } from "../../validations/user/appointmentValidation"
-import { notifyError, notifySuccess } from "../../constants/toast"
-
+import { notifyError } from "../../constants/toast"
+import { confirmBooking, createCheckoutSession } from "../../api/user/appointment"
 
 function DoctorDetails() {
   const [data,setData] = useState<DoctorData>(initialDoctorData)
@@ -17,6 +17,8 @@ function DoctorDetails() {
   const [selectedPatient,setSelectedPatient] = useState<string>("")
   const [selectedDay,setSelectedDay] = useState<string>("")
   const [imageUrl,setImageUrl] = useState<string>("")
+  const [reload,setReload] = useState(false)
+
   const {_id}= useParams()
   let selectedDays: string[] = []
   const currentDate = new Date()
@@ -38,16 +40,26 @@ function DoctorDetails() {
     })
   },[])
 
-  async function handleSubmit(type:"Online" | "Offline"){
+  const handleSubmit = async (type:"Online"|"Offline") => {
+    try {
 
-    const result:string = bookNowValidation({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type})
-    if(result != "Success") return notifyError(result)
+      const result:string = bookNowValidation({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type})
+      if(result != "Success") return notifyError(result)
 
-   const response:ResponseData = await bookNowApi({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type})
-   if(!response.status) notifyError(response.message)
-   notifySuccess(response.message)
-    
-  }
+      
+      const stripe = await loadStripe("pk_test_51P3GiN06Grjj2WCt0UFIaIMjxEDOFxFeJJxHj4hLeSoYA7ODIxKjlx27FDy6hVivVvsSknYrusPJ97L2il09JMaH00Z9QI9GJt")
+      const response2:ResponseData = await createCheckoutSession(data.fees)
+      stripe?.redirectToCheckout({
+        sessionId:response2.data
+      }) 
+
+      const response3:ResponseData = await confirmBooking(data.slots._id,{_id:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type})
+      if(!response3.status) notifyError(response3.message)
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   
   return (
@@ -62,39 +74,39 @@ function DoctorDetails() {
         <div className="flex-wrap mt-10 ml-10">
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Full Name:</label>
-            <label className="font-bold text-lg w-36  text-adminGreen">{data.firstName} {data.secondName}</label>
+            <label className="font-bold text-lg w-48  text-adminGreen">{data.firstName} {data.secondName}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Department:</label>
-            <label className="font-bold text-lg w-36  text-adminGreen">{data.department.name}</label>
+            <label className="font-bold text-lg w-48  text-adminGreen">{data.department.name}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Gender:</label>
-            <label className="font-bold text-lg w-36  text-adminGreen">{data.gender}</label>
+            <label className="font-bold text-lg w-48  text-adminGreen">{data.gender}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Age:</label>
-            <label className="font-bold text-lg w-36  text-adminGreen">{data.age}</label>
+            <label className="font-bold text-lg w-48  text-adminGreen">{data.age}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Experience:</label>
-            <label className="font-bold text-lg w-36  text-adminGreen">{data.experience}</label>
+            <label className="font-bold text-lg w-48  text-adminGreen">{data.experience} year</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Working Days:</label>
-            <label className="font-bold text-lg w-36  text-adminGreen">{selectedDays.join(",")}</label>
+            <label className="font-bold text-lg w-48  text-adminGreen">{selectedDays.join(",")}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Working Time:</label>
-            <label className="font-bold text-lg w-36  text-adminGreen">{data.schedule.startTime}-{data.schedule.endTime}</label>
+            <label className="font-bold text-lg w-48  text-adminGreen">{data.schedule.startTime} - {data.schedule.endTime}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Fees:</label>
-            <label className="font-bold text-lg w-36  text-adminGreen">{data.fees}</label>
+            <label className="font-bold text-lg w-48  text-adminGreen">{data.fees}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Status:</label>
-            <label className="font-bold text-lg w-36  text-adminGreen">{data.workingDays.includes(currentDayOfWeek) ? "Available" : "Unavailable"}</label>
+            <label className="font-bold text-lg w-48  text-adminGreen">{data.workingDays.includes(currentDayOfWeek) ? "Available" : "Unavailable"}</label>
           </div>
         </div>
       </div>
@@ -103,8 +115,8 @@ function DoctorDetails() {
           <h1 className="font-bold text-3xl text-adminBlue" >Make An Appointment</h1>
         </div>
         <SlotsTable slots={data.slots} state={selectedSlot} setState={setSelectedSlot} selectedDay={selectedDay} setSelectedDay={setSelectedDay}/>
-        <AddPatientForm/>
-        <ExistingPatient state={selectedPatient} setState={setSelectedPatient}/>
+        <AddPatientForm state={reload} setState={setReload}/>
+        <ExistingPatient state={selectedPatient} setState={setSelectedPatient} reload={reload}/>
       </div>
       <div className="flex justify-center mt-8 mb-8 gap-6">
         <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={()=>handleSubmit("Online")}>Book For Online</button>

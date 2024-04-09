@@ -27,6 +27,7 @@ function AddDepartmentForm() {
       if(!(logoFile instanceof File) || !(imageFile instanceof File) ) return notifyError("Please Select the image")
       const logo = await base64(logoFile);
       const image = await base64(imageFile);
+      
       if(!logo || !image)return notifyError("Couldn't convert image")
 
         const response:ResponseData =await addDepartment({name,title,description,logo,image})

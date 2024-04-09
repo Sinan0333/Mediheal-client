@@ -8,8 +8,9 @@ import { ResponseData } from "../../types/commonTypes"
 import { addPatient } from "../../api/user/Patient"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
+import { AddPatientFormProps } from "../../types/userTypes"
 
-function AddPatientForm() {
+function AddPatientForm({state,setState}:AddPatientFormProps) {
     const [firstName ,setFirstName] = useState("")
     const [secondName,setSecondName] =useState("") 
     const [bloodGroup,setBloodGroup] = useState("")
@@ -31,6 +32,7 @@ function AddPatientForm() {
             if(!response.status) notifyError(response.message)
 
             notifySuccess(response.message)
+            setState(!state)
         } catch (error) {
             
         }    }

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { ExistingPatientProps } from "../../types/doctorTypes"
 
-function ExistingPatient({state,setState}:ExistingPatientProps) {
+function ExistingPatient({state,setState,reload}:ExistingPatientProps) {
     const [list ,setList] = useState<PatientData[]>()
     const userId = useSelector((state:RootState)=>state.user._id)
 
@@ -16,7 +16,7 @@ function ExistingPatient({state,setState}:ExistingPatientProps) {
         }).catch((err)=>{
             console.log(err.message);
         })
-    },[])
+    },[reload])
 
 
   return (

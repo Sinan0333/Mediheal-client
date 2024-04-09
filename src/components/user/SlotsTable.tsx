@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { ScheduleType, SlotsTableProps } from "../../types/doctorTypes"
+import { OneSlotType, SlotsTableProps } from "../../types/doctorTypes"
 
 function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTableProps) {
-    const [daySlots,setDaySlots] = useState<ScheduleType[]>()
+    const [daySlots,setDaySlots] = useState<OneSlotType[]>()
     const slotsArray = Object.entries(slots)
-
+    
     slotsArray.shift()
     slotsArray.pop()
 
@@ -22,7 +22,7 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
                 {
                     slotsArray?.map((day)=>{
                         return(
-                            <div key={day[0]}  className={`${ selectedDay=== day[0] ? "bg-adminBlue text-white" : "text-black" } border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium`} onClick={()=>{setDaySlots(day[1]) ,setSelectedDay(day[0])}}>{day[0]}</div>
+                            <div key={day[0]}  className={`${ selectedDay=== day[0] ? "bg-adminBlue text-white" : "text-black" } border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium`} onClick={()=>{ if(Array.isArray(day[1])){setDaySlots(day[1])} setSelectedDay(day[0])}}>{day[0]}</div>
                         )
                     })
                 }
@@ -34,7 +34,7 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
                 {
                     daySlots?.map((slot)=>{
                         return(
-                            <div key={slot._id} style={state._id == slot._id ? {backgroundColor:'#164B55' ,color:'white', borderColor:"white"} :{}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium " onClick={()=>setState(slot)}>{slot.startTime} - {slot.endTime}</div>
+                            !slot.isReserved&&!slot.break ?(<div key={slot._id} style={state._id == slot._id ? {backgroundColor:'#164B55' ,color:'white', borderColor:"white"} :{}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium " onClick={()=>setState(slot)}>{slot.startTime} - {slot.endTime}</div>) : ""
                         )
                     })
                 }
