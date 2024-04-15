@@ -21,6 +21,7 @@ export function assignPatientValidation({patient,type,assignDate,dischargeDate,d
     else if(assignDate > dischargeDate) return "Please Provide a Valid Assign Date"
 
     if(!dischargeDate) return "Discharge date is required"
+    else if(dischargeDate > new Date()) return "Please Provide a Valid Discharge Date"
     else if(dischargeDate < assignDate) return "Please Provide a Valid Discharge Date"
 
     if(!description) return "Description is required"

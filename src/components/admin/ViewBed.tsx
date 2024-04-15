@@ -10,7 +10,8 @@ function ViewBed() {
     const assignDate = bedData?.assignDate ? new Date(bedData.assignDate).toLocaleDateString() : '';
     const dischargeDate = bedData?.dischargeDate ? new Date(bedData.dischargeDate).toLocaleDateString() : '';
     const assignBy = typeof(bedData?.assignBy) === 'object' ? bedData.assignBy.firstName+bedData.assignBy.secondName : ""
-    const PatientID = typeof(bedData?.patient) === 'object' ? bedData.patient._id : ""
+    const patientID = typeof(bedData?.patient) === 'object' ? bedData.patient._id : ""
+    const patientName = typeof(bedData?.patient) === 'object' ? bedData.patient.firstName +""+bedData.patient.secondName : ""
     
     useEffect(()=>{
       getBedDetailsApi(_id).then((res)=>{
@@ -23,16 +24,32 @@ function ViewBed() {
     
     return (
       <div className="neumorphic py-2 px-2 ml-6 w-screen ">
+        <div className="flex justify-center">
+          <h1 className="text-3xl sm:text-3xl md:text-4xl mb-4 font-bold text-adminGold">{patientID ? patientName : bedData?.type }</h1>
+        </div>
         <div className="flex flex-wrap mt-10">
-          <Label labelName="PatientID" value={PatientID}/>
-          <Label labelName="Bed Type" value={bedData?.type}/>
-          <Label labelName="Charge" value={bedData?.charge}/>
-          <Label labelName="Description" value={bedData?.description}/>
-          <Label labelName="Assign Date" value={assignDate}/>
-          <Label labelName="Discharge Date" value={dischargeDate}/>
-          <Label labelName="Total" value={bedData?.total || ""}/>
-          <Label labelName="Assign By" value={assignBy}/>
-          <Label labelName="Status" value={bedData?.available ? "Discharged" : "Admit"}/>
+          {
+            patientID ? (
+              <>
+              <Label labelName="PatientID" value={patientID}/>
+              <Label labelName="Patient Name" value={patientName}/>
+              <Label labelName="Bed Type" value={bedData?.type}/>
+              <Label labelName="Charge" value={bedData?.charge}/>
+              <Label labelName="Assign Date" value={assignDate}/>
+              <Label labelName="Discharge Date" value={dischargeDate}/>
+              <Label labelName="Total" value={bedData?.total || ""}/>
+              <Label labelName="Assign By" value={assignBy}/>
+              <Label labelName="Status" value={bedData?.available ? "Discharged" : "Admit"}/>
+              <Label labelName="Description" value={bedData?.description}/>
+              </>
+            ) : (
+              <>
+               <Label labelName="Bed Type" value={bedData?.type}/>
+               <Label labelName="Charge" value={bedData?.charge}/>
+              </>
+            )
+          }
+         
         </div>
       </div>
     )
