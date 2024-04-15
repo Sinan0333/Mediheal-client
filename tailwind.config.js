@@ -12,12 +12,13 @@ export default {
         adminBlue:'#164B55',
         adminGreen:"#5c7b70",
         userBlue:"#F5F8FF",
+        footer:"#11141B",
         customColor:"#328775"
       },
       spacing: {
         '72': '18rem',
         '84': '21rem', 
-        '98': '27rem', 
+        '98': '36rem', 
       },
     },
   },

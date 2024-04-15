@@ -33,6 +33,15 @@ function AddPatientForm({state,setState}:AddPatientFormProps) {
 
             notifySuccess(response.message)
             setState(!state)
+
+            setFirstName("")
+            setSecondName("")
+            setBloodGroup("")
+            setGender("")
+            setDob("")
+            setAge(0)
+            setImageFile(undefined)
+            
         } catch (error) {
             
         }    }
