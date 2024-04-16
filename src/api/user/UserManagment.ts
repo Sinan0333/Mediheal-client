@@ -27,12 +27,10 @@ export const getUserDataApi = async (_id:string | undefined)=>{
 
 export const editUserData = async (data:EditUserDataProps)=>{
     try { 
-        console.log('in starting of edituser');
         
         const result =  await userManagementApi.post('/edit',data) 
-        console.log('in ending of edit user',result);
-        
         return result.data 
+        
     } catch (error) {
         console.log(error);
     }

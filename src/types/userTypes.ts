@@ -86,3 +86,9 @@ export type AddPatientFormProps = {
 export type PaymentFormProps = {
     clientSecret:string
 }
+
+export type WalletHistoryData={
+    date:Date
+    description:string
+    amount:number
+}

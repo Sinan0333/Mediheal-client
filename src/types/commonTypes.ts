@@ -1,3 +1,6 @@
+import { DoctorData } from "./doctorTypes"
+import { PatientData } from "./userTypes"
+
 export const days:string[] = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"]
 
 export type AuthProps = {
@@ -54,11 +57,26 @@ export type AdminHeaderNavigation={
 
 export type AppointmentData ={
     _id?:string
+    userId:string
     startTime:string
     endTime:string
     day:string
     doctor:string | undefined
     patient:string
+    bookedDate:Date
     status:"Pending" | "Checked" | "Cancelled"
     type:"Online" | 'Offline'
+}
+
+export type AppointmentPopulateData ={
+    _id?:string
+    userId:string
+    startTime:string
+    endTime:string
+    day:string
+    doctor:DoctorData
+    patient:PatientData
+    bookedDate:Date
+    status:string
+    type:string
 }

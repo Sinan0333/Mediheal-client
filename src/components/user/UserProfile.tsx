@@ -19,7 +19,7 @@ function UserProfile() {
             <button className="bg-red-500 text-white px-4 py-2 rounded-lg mr-2" onClick={()=>dispatch(logoutUser())}>Logout</button>
           </div>
         </div>
-        <div className="w-full h-72 flex flex-col  items-center">
+        {/* <div className="w-full h-72 flex flex-col  items-center">
           <div className="flex justify-between w-full mb-4">
             <h1 className="font-bold">Transaction History</h1>
             <h1 className="font-bold">Balance:500</h1>
@@ -67,7 +67,7 @@ function UserProfile() {
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
     </div>
   )
 }

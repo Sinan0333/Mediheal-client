@@ -10,6 +10,8 @@ import { loadStripe } from '@stripe/stripe-js';
 import { bookNowValidation } from "../../validations/user/appointmentValidation"
 import { notifyError } from "../../constants/toast"
 import { confirmBooking, createCheckoutSession } from "../../api/user/appointment"
+import { useSelector } from "react-redux"
+import { RootState } from "../../store/store"
 
 function DoctorDetails() {
   const [data,setData] = useState<DoctorData>(initialDoctorData)
@@ -23,6 +25,7 @@ function DoctorDetails() {
   let selectedDays: string[] = []
   const currentDate = new Date()
   const currentDayOfWeek = currentDate.getDay()
+  const userId = useSelector((state:RootState)=>state.user._id)
   
   for (let i = 0; i < data?.workingDays.length; i++) {
     const index = data.workingDays[i];
@@ -43,7 +46,7 @@ function DoctorDetails() {
   const handleSubmit = async (type:"Online"|"Offline") => {
     try {
 
-      const result:string = bookNowValidation({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type})
+      const result:string = bookNowValidation({startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),userId})
       if(result != "Success") return notifyError(result)
 
       
@@ -53,7 +56,7 @@ function DoctorDetails() {
         sessionId:response2.data
       }) 
 
-      const response3:ResponseData = await confirmBooking(data.slots._id,{_id:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type})
+      const response3:ResponseData = await confirmBooking(data.slots._id,{_id:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type,bookedDate:new Date(),userId})
       if(!response3.status) notifyError(response3.message)
 
     } catch (error) {
