@@ -8,6 +8,8 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
     slotsArray.shift()
     slotsArray.pop()
 
+    const currentDate = new Date();
+    const currentDay = currentDate.getDay()
     
   return (
     <div className="mt-10 border-2 border-gray-500 p-1">
@@ -20,9 +22,9 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
             <h1 className="text-lg  font-semibold mb-4">Choose Day</h1>
             <div className="grid grid-cols-7 grid-rows-1 gap-8">
                 {
-                    slotsArray?.map((day)=>{
+                    slotsArray?.map((day,i)=>{
                         return(
-                            <div key={day[0]}  className={`${ selectedDay=== day[0] ? "bg-adminBlue text-white" : "text-black" } border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium`} onClick={()=>{ if(Array.isArray(day[1])){setDaySlots(day[1])} setSelectedDay(day[0])}}>{day[0]}</div>
+                            i+1 >= currentDay ? <div key={day[0]}  className={`${ selectedDay=== day[0] ? "bg-adminBlue text-white" : "text-black" } border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium`} onClick={()=>{ if(Array.isArray(day[1])){setDaySlots(day[1])} setSelectedDay(day[0])}}>{day[0]}</div> : ""
                         )
                     })
                 }

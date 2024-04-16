@@ -19,9 +19,54 @@ function UserProfile() {
             <button className="bg-red-500 text-white px-4 py-2 rounded-lg mr-2" onClick={()=>dispatch(logoutUser())}>Logout</button>
           </div>
         </div>
-        <div className="w-full h-72 flex flex-col  items-center p-">
-            {/* <h1 className="text-3xl font-bold">Wallet</h1>
-            <h1 className="text-3xl">500</h1> */}
+        <div className="w-full h-72 flex flex-col  items-center">
+          <div className="flex justify-between w-full mb-4">
+            <h1 className="font-bold">Transaction History</h1>
+            <h1 className="font-bold">Balance:500</h1>
+          </div>
+          <div className="overflow-x-auto " style={{scrollbarWidth:"none"}}>
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                <tr className="bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap">2024-04-17</td>
+                  <td className="px-6 py-4 whitespace-nowrap">Payment foXZ r Product A</td>
+                  <td className="px-6 py-4 whitespace-nowrap">$50.00</td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="px-6 py-4 whitespace-nowrap">2024-04-16</td>
+                  <td className="px-6 py-4 whitespace-nowrap">Payment for Product B</td>
+                  <td className="px-6 py-4 whitespace-nowrap">$30.00</td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="px-6 py-4 whitespace-nowrap">2024-04-16</td>
+                  <td className="px-6 py-4 whitespace-nowrap">Payment for Product B</td>
+                  <td className="px-6 py-4 whitespace-nowrap">$30.00</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap">2024-04-17</td>
+                  <td className="px-6 py-4 whitespace-nowrap">Payment for Product A</td>
+                  <td className="px-6 py-4 whitespace-nowrap">$50.00</td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="px-6 py-4 whitespace-nowrap">2024-04-16</td>
+                  <td className="px-6 py-4 whitespace-nowrap">Payment for Product B</td>
+                  <td className="px-6 py-4 whitespace-nowrap">$30.00</td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="px-6 py-4 whitespace-nowrap">2024-04-16</td>
+                  <td className="px-6 py-4 whitespace-nowrap">Payment for Product B</td>
+                  <td className="px-6 py-4 whitespace-nowrap">$30.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
     </div>
   )
