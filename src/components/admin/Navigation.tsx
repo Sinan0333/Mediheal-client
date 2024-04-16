@@ -12,19 +12,19 @@ function Navigation() {
             <NavButton icon={dashboard} name="Dashboard" navigation=""/>
           </li>
           <li className="mb-4">
-          <NavButton icon={doctor} name="Doctors" navigation="/doctors"/>
+          <NavButton icon={doctor} name="Doctors" navigation="/admin/doctors"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={users} name="Users" navigation="/users"/>
+          <NavButton icon={users} name="Users" navigation="/admin/users"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={department} name="Department" navigation="/departments"/>
+          <NavButton icon={department} name="Department" navigation="/admin/departments"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={bed} name="Bed Space" navigation="/bed"/>
+          <NavButton icon={bed} name="Bed Space" navigation="/admin/bed"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={patient} name="Patients" navigation="/patient"/>
+          <NavButton icon={patient} name="Patients" navigation="/admin/patient"/>
           </li>
         </ul>
       </div>
