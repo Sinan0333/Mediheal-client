@@ -4,14 +4,16 @@ import { getDoctorAppointments } from "../../api/doctor/doctorAppointmentApi"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { AppointmentPopulateData, ResponseData } from "../../types/commonTypes"
-import { cancel } from "../../constants/icons"
+import { cancel,eye} from "../../constants/icons"
 import { cancelBooking } from "../../api/user/appointment"
+import { useNavigate } from "react-router-dom"
 
 function ListAppointments() {
 
     const [list,setList] = useState<AppointmentPopulateData[] >([])
     const [reload,setReload] = useState<Boolean>(false)
     const doctorId = useSelector((state:RootState)=>state.doctor._id)
+    const navigate = useNavigate()
 
 
     useEffect(()=>{
@@ -72,6 +74,9 @@ function ListAppointments() {
                                             {obj.status !="Cancelled" ?<button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleCancel(obj._id,obj.doctor.fees)}>
                                                 <img className="w-full" src={cancel} alt="Button Icon"  />
                                             </button> : ""}
+                                            <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/appointment/view/${obj.patient._id}`)}>
+                                                <img className="w-full" src={eye} alt="Button Icon"  />
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>

@@ -34,3 +34,12 @@ export const getPatients = async ()=>{
 }
 
 
+export const getPatient = async (_id:string | undefined)=>{
+    try { 
+        const result =  await patientApi.get(`/view/${_id}`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+

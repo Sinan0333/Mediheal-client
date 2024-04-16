@@ -22,7 +22,7 @@ function VIewDepartment() {
     
     return (
       <div className="neumorphic py-2 px-2 ml-6 w-screen ">
-        <div className="flex justify-center">
+         <div className="flex justify-center">
           <h1 className="text-3xl sm:text-3xl md:text-4xl mb-4 font-bold text-adminGold">{departmentData?.name}</h1>
         </div>
         <div className="flex">
