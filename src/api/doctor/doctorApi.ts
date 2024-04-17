@@ -64,10 +64,19 @@ export const changeBlockStatus = async (_id:string | undefined,is_blocked:boolea
 
 export const getBestDoctors = async ()=>{
     
-    try { 
-        console.log('juhjuh');
-                  
+    try {       
         const result =  await doctorApi.get("/list/best")         
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const takeABreakApi = async (scheduleId:string,day:string,_id:string)=>{
+    
+    try { 
+                  
+        const result =  await doctorApi.post(`/take_break/${scheduleId}`,{day,_id})         
         return result.data
     } catch (error) {
         console.log(error);

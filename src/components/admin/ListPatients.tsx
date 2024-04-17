@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import { PatientData } from "../../types/userTypes"
 import { getPatients } from "../../api/user/Patient"
+import { useNavigate } from "react-router-dom"
+import { eye } from "../../constants/icons"
 
 function ListPatients() {
     const [list,setList] = useState<PatientData[] >([])
+    const navigate = useNavigate()
 
     useEffect(()=>{
         getPatients().then((data)=>{
@@ -26,6 +29,7 @@ function ListPatients() {
                         <th className="px-4 py-2 text-left w-auto">Age</th>
                         <th className="px-4 py-2 text-left w-auto">Gender</th>
                         <th className="px-4 py-2 text-left w-auto">Date Of Birth</th>
+                        <th className="px-4 py-2 text-left w-auto">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +43,12 @@ function ListPatients() {
                                     <td className="px-4 py-2">{obj.age}</td>
                                     <td className="px-4 py-2">{obj.gender}</td>
                                     <td className="px-4 py-2">{new Date(obj.dob).toLocaleDateString()}</td>
-                                </tr>
+                                    <td className="px-4 py-2">
+                                    <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/patients/view/${obj._id}`)}>
+                                                <img className="w-full" src={eye} alt="Button Icon"  />
+                                    </button>
+                                    </td>
+                                </tr> 
                             )
                         })
                     }

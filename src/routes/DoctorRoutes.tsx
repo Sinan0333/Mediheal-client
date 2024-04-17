@@ -7,6 +7,7 @@ import Error404 from '../pages/common/Error404'
 import ListPatientsPage from '../pages/doctor/ListPatientsPage'
 import ListAppointmentsPage from '../pages/doctor/ListAppointmentsPage'
 import ViewPatientPage from '../pages/doctor/ViewPatientPage'
+import ViewSchedulePage from '../pages/doctor/ViewSchedulePage'
 
 function DoctorRoutes() {
   return (
@@ -19,10 +20,11 @@ function DoctorRoutes() {
       <Route path='' element={<DoctorIsLoggedIn/>}>
         
         <Route path='/patients' element={<ListPatientsPage/>} />
-        <Route path='/appointment/view/:_id' element={<ViewPatientPage/>} />
+        <Route path='/patients/view/:_id' element={<ViewPatientPage/>} />
         <Route path='/appointments' element={<ListAppointmentsPage/>} />
         <Route path='/profile/:_id' element={<ViewDoctorProfilePage/>}/>
         <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>
+        <Route path='/schedule' element={<ViewSchedulePage/>}/>
 
         <Route path='*' element={<Error404/>} />
 

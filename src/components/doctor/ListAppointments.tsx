@@ -74,7 +74,7 @@ function ListAppointments() {
                                             {obj.status !="Cancelled" ?<button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleCancel(obj._id,obj.doctor.fees)}>
                                                 <img className="w-full" src={cancel} alt="Button Icon"  />
                                             </button> : ""}
-                                            <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/appointment/view/${obj.patient._id}`)}>
+                                            <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/patients/view/${obj.patient._id}`)}>
                                                 <img className="w-full" src={eye} alt="Button Icon"  />
                                             </button>
                                         </div>

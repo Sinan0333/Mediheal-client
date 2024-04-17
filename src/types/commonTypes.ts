@@ -58,6 +58,7 @@ export type AdminHeaderNavigation={
 export type AppointmentData ={
     _id?:string
     userId:string
+    slotId:string
     startTime:string
     endTime:string
     day:string
@@ -71,6 +72,7 @@ export type AppointmentData ={
 export type AppointmentPopulateData ={
     _id?:string
     userId:string
+    slotId:string
     startTime:string
     endTime:string
     day:string
