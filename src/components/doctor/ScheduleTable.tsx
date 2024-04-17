@@ -36,7 +36,7 @@ function ScheduleTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTa
                 {
                     daySlots?.map((slot)=>{
                         return(
-                            !slot.isReserved&&!slot.break ?(<div key={slot._id} style={state._id == slot._id ? {backgroundColor:'#164B55' ,color:'white', borderColor:"white"} :{}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium " onClick={()=>setState(slot)}>{slot.startTime} - {slot.endTime}</div>) : ""
+                            <div key={slot._id} style={state._id == slot._id ? {backgroundColor:'#164B55' ,color:'white', borderColor:"white"} :{}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium " onClick={()=>setState(slot)}>{slot.startTime} - {slot.endTime}</div> 
                         )
                     })
                 }

@@ -41,3 +41,12 @@ export const cancelBooking = async (_id:string,data:WalletHistoryData)=>{
         console.log(error);
     }
 }
+
+export const cancelBookingWhenBreak = async (slotId:string)=>{
+    try { 
+        const result =  await appointmentApi.get(`/cancel_when_break/${slotId}`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}

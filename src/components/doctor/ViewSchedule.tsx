@@ -6,6 +6,7 @@ import { RootState } from "../../store/store"
 import { getDoctorDataApi, takeABreakApi } from "../../api/doctor/doctorApi"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { ResponseData } from "../../types/commonTypes"
+import { cancelBookingWhenBreak } from "../../api/user/appointment"
 
 function ViewSchedule() {
     const [data,setData] = useState<DoctorData>(initialDoctorData)
@@ -33,6 +34,8 @@ function ViewSchedule() {
         if(!data.slots._id || !selectedSlot._id) return notifyError("Missing Required fields")
         const response:ResponseData = await takeABreakApi(data.slots._id,selectedDay,selectedSlot._id)
         if(!response.status) notifyError(response.message)
+
+        await cancelBookingWhenBreak(response.data)        
         notifySuccess("Successful")
 
     }
