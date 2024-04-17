@@ -16,12 +16,22 @@ export const userSignup = async (data:SignupData)=>{
 
 export const getOtp = async (_id:string | undefined)=>{
     try { 
-        const result =  await userApi.post('/get_otp',{_id}) 
+        const result =  await userApi.get(`/get_otp/${_id}`) 
         return result.data 
     } catch (error) {
         console.log(error);
     }
 }
+
+export const resendOtp = async (_id:string | undefined)=>{
+    try { 
+        const result =  await userApi.get(`/resend_otp/${_id}`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 
 export const verifyOtp = async (_id:string | undefined,otp:string)=>{

@@ -45,11 +45,24 @@ function ViewSchedule() {
     <div className="flex justify-center">
       <h1 className="text-2xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Schedule Management</h1>
     </div>
+    <div className="flex mt-10">
+       <div className="flex items-center mr-4">
+            <div className="rounded-full w-2 h-2 bg-yellow-400 mr-2"></div>
+            <p>Your taken a break</p>
+       </div>
+       <div className="flex items-center mr-4">
+            <div className="rounded-full w-2 h-2 bg-green-500 mr-2"></div>
+            <p>Slot Is Reserved</p>
+       </div>
+       <div className="flex items-center">
+            <div className="rounded-full w-2 h-2 bg-black mr-2"></div>
+            <p>Free</p>
+       </div>
+    </div>
+    
     <ScheduleTable slots={data.slots} state={selectedSlot} setState={setSelectedSlot} selectedDay={selectedDay} setSelectedDay={setSelectedDay}/>
     <div className="flex justify-center mt-8 mb-8 gap-6">
-        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={handleTakeBreak}>Take A Break</button>
-        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" >Take A Leave</button>
-      </div>
+        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={handleTakeBreak}>Take A Break</button>      </div>
   </div>
   )
 }

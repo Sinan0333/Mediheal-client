@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { notifyError, notifySuccess } from "../../constants/toast"
-import { getOtp, verifyOtp } from "../../api/user/auth"
+import { getOtp, resendOtp, verifyOtp } from "../../api/user/auth"
 import { useDispatch } from "react-redux"
 import { setUserDetails } from "../../store/slice/userSlice"
+import { ResponseData } from "../../types/commonTypes"
 
 function OtpVerification() {
 
@@ -12,17 +13,27 @@ function OtpVerification() {
     const [third,setThird] = useState<string>("")
     const [fourth,setFourth] = useState<string>("")
     const [otp,setOtp] = useState<string>("")
+    const [email,setEmail]=useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const{_id} = useParams()
 
+
     useEffect(()=>{
         getOtp(_id).then((res)=>{
-            setOtp(res.data)
+            setOtp(res.data.otp)
+            setEmail(res.data.email)
         }).catch((err)=>{
             console.log(err.message);
         })
     },[])
+
+    const handleResendOtp = async()=>{
+      const response:ResponseData = await resendOtp(_id)
+
+      setOtp(response.data.otp)
+      setEmail(response.data.email)
+    }
 
     const handleSubmit = async( ) =>{
         if(!first || !second || !third || !fourth) return notifyError("Missing required fields")
@@ -54,7 +65,7 @@ function OtpVerification() {
           <p>Email Verification</p>
         </div>
         <div className="flex flex-row text-sm font-medium text-gray-400">
-          <p>We have sent a code to your email ba**@dipainhouse.com</p>
+          <p>We have sent a code to your email {email}</p>
         </div>
       </div>
 
@@ -62,16 +73,16 @@ function OtpVerification() {
           <div className="flex flex-col space-y-16">
             <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
               <div className="w-16 h-16 ">
-                <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="number" value={first} onChange={(e)=>setFirst(e.target.value)}/>
+                <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"  maxLength={1} type="text" value={first} onChange={(e)=>setFirst(e.target.value)}/>
               </div>
               <div className="w-16 h-16 ">
-                <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="number" value={second} onChange={(e)=>setSecond(e.target.value)}/>
+                <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"  maxLength={1} type="text" value={second} onChange={(e)=>setSecond(e.target.value)}/>
               </div>
               <div className="w-16 h-16 ">
-                <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="number"  value={third} onChange={(e)=>setThird(e.target.value)}/>
+                <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" maxLength={1} type="text"  value={third} onChange={(e)=>setThird(e.target.value)}/>
               </div>
               <div className="w-16 h-16 ">
-                <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" type="number"  value={fourth} onChange={(e)=>setFourth(e.target.value)}/>
+                <input className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700" maxLength={1} type="text"  value={fourth} onChange={(e)=>setFourth(e.target.value)}/>
               </div>
             </div>
 
@@ -83,7 +94,7 @@ function OtpVerification() {
               </div>
 
               <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                <p>Didn't recieve code?</p> <a className="flex flex-row items-center text-blue-600" href="http://" target="_blank" rel="noopener noreferrer">Resend</a>
+                <p>Didn't recieve code?</p> <button className="flex flex-row items-center text-blue-600"  onClick={handleResendOtp}>Resend</button>
               </div>
             </div>
           </div>
