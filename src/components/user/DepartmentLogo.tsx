@@ -5,8 +5,8 @@ function DepartmentLogo({data,setState}:DepartmentLogoProps) {
     const imageUrl = `https://res.cloudinary.com/dw2cscitl/${data.logo}`
 
   return (
-    <div className="flex w-1/5 flex-wrap" onClick={()=>setState(data)}>
-      <div className="max-w-24 min-w-24 p-1 md:p-2 bg-white rounded-full">
+    <div className="flex w-1/5 flex-wrap ml-2" onClick={()=>setState(data)}>
+      <div className="max-w-20 min-w-10 p-3 md:p-2 bg-white rounded-full">
         <img
           alt="gallery"
           className="block h-full w-full rounded-lg object-cover object-center"

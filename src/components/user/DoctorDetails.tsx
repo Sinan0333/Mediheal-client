@@ -71,8 +71,8 @@ function DoctorDetails() {
       <div >
         <h1 className="text-4xl  font-semibold text-adminBlue">{data.firstName} {data.secondName}</h1>
       </div>
-      <div className="flex ">
-        <div className="mt-8 w-72 h-96 flex  justify-center overflow-hidden   ">
+      <div className="flex">
+        <div className="mt-8 w- h-98 flex  justify-center overflow-hidden   ">
           <img src={imageUrl} alt="Your Image" className="object-cover" />
         </div>
         <div className="flex-wrap mt-10 ml-10">

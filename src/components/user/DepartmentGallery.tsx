@@ -19,7 +19,7 @@ function DepartmentGallery() {
 
 
   return (
-    <div className="pt-28  bg-blue-50">
+    <div className="pt-28 bg-blue-100">
         <div className="flex justify-center ">
             <p className="text-l font-semibold text-blue-600">OUR DEPARTMENTS</p>
         </div>
