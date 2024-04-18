@@ -24,7 +24,7 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
                 {
                     slotsArray?.map((day,i)=>{
                         return(
-                            i+2 >= currentDay ? <div key={day[0]}  className={`${ selectedDay=== day[0] ? "bg-adminBlue text-white" : "text-black" } border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium`} onClick={()=>{ if(Array.isArray(day[1])){setDaySlots(day[1])} setSelectedDay(day[0])}}>{day[0]}</div> : ""
+                            i+1 >= currentDay ? <div key={day[0]}  className={`${ selectedDay=== day[0] ? "bg-adminBlue text-white" : "text-black" } border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium`} onClick={()=>{ if(Array.isArray(day[1])){setDaySlots(day[1])} setSelectedDay(day[0])}}>{day[0]}</div> : ""
                         )
                     })
                 }

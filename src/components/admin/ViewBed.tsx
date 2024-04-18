@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
 import { BedDataType } from "../../types/adminTypes"
 import { getBedDetailsApi } from "../../api/admin/bedApi"
+import { eye } from "../../constants/icons"
 
 function ViewBed() {
     const [bedData,setBedData] = useState<BedDataType>()
     const {_id} = useParams()
+    const navigate = useNavigate()
     const assignDate = bedData?.assignDate ? new Date(bedData.assignDate).toLocaleDateString() : '';
     const dischargeDate = bedData?.dischargeDate ? new Date(bedData.dischargeDate).toLocaleDateString() : '';
     const assignBy = typeof(bedData?.assignBy) === 'object' ? bedData.assignBy.firstName+bedData.assignBy.secondName : ""
@@ -32,6 +34,9 @@ function ViewBed() {
             patientID ? (
               <>
               <Label labelName="PatientID" value={patientID}/>
+              <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/admin/patients/view/${patientID}`)}>
+                <img src={eye} alt="Button Icon"  />
+              </button>
               <Label labelName="Patient Name" value={patientName}/>
               <Label labelName="Bed Type" value={bedData?.type}/>
               <Label labelName="Charge" value={bedData?.charge}/>

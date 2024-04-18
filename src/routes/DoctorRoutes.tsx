@@ -21,9 +21,12 @@ function DoctorRoutes() {
         
         <Route path='/patients' element={<ListPatientsPage/>} />
         <Route path='/patients/view/:_id' element={<ViewPatientPage/>} />
+
         <Route path='/appointments' element={<ListAppointmentsPage/>} />
+
         <Route path='/profile/:_id' element={<ViewDoctorProfilePage/>}/>
         <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>
+        
         <Route path='/schedule' element={<ViewSchedulePage/>}/>
 
         <Route path='*' element={<Error404/>} />

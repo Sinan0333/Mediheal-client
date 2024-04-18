@@ -8,7 +8,7 @@ import { PatientData } from "../../types/userTypes"
 function ViewPatient() {
 
     const [patientData,setPatientData] = useState<PatientData>()
-    const imageUrl = `https://res.cloudinary.com/dw2cscitl/${patientData?.image}`
+    const imageUrl =patientData?.image ? `https://res.cloudinary.com/dw2cscitl/${patientData?.image}` : "/src/assets/images/default_profile.jpg"
     const dob = patientData?.dob ? new Date(patientData.dob).toLocaleDateString() : ""
     
   

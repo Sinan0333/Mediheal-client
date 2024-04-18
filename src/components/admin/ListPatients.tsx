@@ -44,7 +44,7 @@ function ListPatients() {
                                     <td className="px-4 py-2">{obj.gender}</td>
                                     <td className="px-4 py-2">{new Date(obj.dob).toLocaleDateString()}</td>
                                     <td className="px-4 py-2">
-                                    <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/patients/view/${obj._id}`)}>
+                                    <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/admin/patients/view/${obj._id}`)}>
                                                 <img className="w-full" src={eye} alt="Button Icon"  />
                                     </button>
                                     </td>

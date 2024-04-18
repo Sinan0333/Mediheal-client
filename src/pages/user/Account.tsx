@@ -1,3 +1,5 @@
+import { useState } from "react"
+import AddPatientForm from "../../components/user/AddPatientForm"
 import BookingHistory from "../../components/user/BookingHIstory"
 import EditProfile from "../../components/user/EditProfile"
 import Nav from "../../components/user/Nav"
@@ -5,6 +7,7 @@ import TransactionHistory from "../../components/user/TransactionHistory"
 import UserProfile from "../../components/user/UserProfile"
 
 function Account() {
+  const [reload,setReload] = useState(false)
   return (
     <>
     <Nav/>
@@ -13,13 +16,16 @@ function Account() {
       <EditProfile/>
       <TransactionHistory/>
     </div>
-    <hr className="border-t border-gray-500" />
     <div className="p-6">
-      <div className="flex justify-center">
-          <h1 className="font-bold text-adminBlue text-2xl">Booking History</h1>
+      <div className=" border-2 border-gray-400">
+        <div className="flex justify-center mt-2">
+            <h1 className="font-bold text-adminBlue text-2xl">Booking History</h1>
+        </div>
+        <BookingHistory/>
       </div>
-      <BookingHistory/>
+      <AddPatientForm state={reload} setState={setReload}/>
     </div>
+    
     </>
    
   )

@@ -38,7 +38,7 @@ function EditBed() {
             setAssignDate(convertDateToHumanReadable(res.data.assignDate))
             setDischargeDate(convertDateToHumanReadable(res.data.dischargeDate))
             setDescription(res.data.description)
-            setDoctorName(res.data.assignBy.firstName)
+            setDoctorName(res.data.assignBy.firstName + res.data.assignBy.secondName)
             setAssignBy(res.data.assignBy._id)
             setAvailable(res.data.available)
         }).catch((err)=>{

@@ -78,39 +78,39 @@ function DoctorDetails() {
         <div className="flex-wrap mt-10 ml-10">
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Full Name:</label>
-            <label className="font-bold text-lg w-48  text-adminGreen">{data.firstName} {data.secondName}</label>
+            <label className="font-bold text-lg w-56 text-adminGreen">{data.firstName} {data.secondName}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Department:</label>
-            <label className="font-bold text-lg w-48  text-adminGreen">{data.department.name}</label>
+            <label className="font-bold text-lg w-56 text-adminGreen">{data.department.name}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Gender:</label>
-            <label className="font-bold text-lg w-48  text-adminGreen">{data.gender}</label>
+            <label className="font-bold text-lg w-56 text-adminGreen">{data.gender}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Age:</label>
-            <label className="font-bold text-lg w-48  text-adminGreen">{data.age}</label>
+            <label className="font-bold text-lg w-56 text-adminGreen">{data.age}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Experience:</label>
-            <label className="font-bold text-lg w-48  text-adminGreen">{data.experience} year</label>
+            <label className="font-bold text-lg w-56 text-adminGreen">{data.experience} year</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Working Days:</label>
-            <label className="font-bold text-lg w-48  text-adminGreen">{selectedDays.join(",")}</label>
+            <label className="font-bold text-lg w-56 text-adminGreen">{selectedDays.join(",")}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Working Time:</label>
-            <label className="font-bold text-lg w-48  text-adminGreen">{data.schedule.startTime} - {data.schedule.endTime}</label>
+            <label className="font-bold text-lg w-56 text-adminGreen">{data.schedule.startTime} - {data.schedule.endTime}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Fees:</label>
-            <label className="font-bold text-lg w-48  text-adminGreen">{data.fees}</label>
+            <label className="font-bold text-lg w-56 text-adminGreen">{data.fees}</label>
           </div>
           <div className="mb-5 flex  pr-4">
             <label className="font-bold text-xl mr-4  text-adminBlue">Status:</label>
-            <label className="font-bold text-lg w-48  text-adminGreen">{data.workingDays.includes(currentDayOfWeek) ? "Available" : "Unavailable"}</label>
+            <label className="font-bold text-lg w-56 text-adminGreen">{data.workingDays.includes(currentDayOfWeek) ? "Available" : "Unavailable"}</label>
           </div>
         </div>
       </div>
