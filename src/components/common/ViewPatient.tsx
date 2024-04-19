@@ -38,6 +38,7 @@ function ViewPatient() {
         <Label labelName="DOB" value={dob}/>
         <Label labelName="Age" value={patientData?.age}/>
         <Label labelName="Gender" value={patientData?.gender}/>
+        <Label labelName="PatientId" value={patientData?.id}/>
       </div>
     </div>
   )

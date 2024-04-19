@@ -11,7 +11,7 @@ export function addBedValidation({type,charge}:AddBedValidation):string{
 
 export function assignPatientValidation({patient,type,assignDate,dischargeDate,description,assignBy,charge}:AssignPatientType):string{
     if(!patient) return "PatientId is required"
-    else if(patient.length < 24) return "PatientId must contain 24 characters"
+    else if(patient.length < 5) return "PatientId must contain 5 characters"
     
     if(!type) return "Bed Type is required"
     if(!charge) return "Charge is required"
@@ -34,7 +34,7 @@ export function assignPatientValidation({patient,type,assignDate,dischargeDate,d
 
 export function editBedValidation({patient,type,assignDate,dischargeDate,description,assignBy,charge}:BedEditData):string{
     if(!patient) return "PatientId is required"
-    else if(patient.length < 24) return "PatientId must contain 24 characters"
+    else if(patient.length < 5) return "PatientId must contain 5 characters"
     
     if(!type) return "Bed Type is required"
 

@@ -38,7 +38,7 @@ function ListPatients() {
                             return(
                                 <tr key={i}>
                                     <td className="px-4 py-2">{i+1}</td>
-                                    <td className="px-4 py-2">{obj._id}</td>
+                                    <td className="px-4 py-2">{obj.id}</td>
                                     <td className="px-4 py-2">{obj.firstName} {obj.secondName}</td>
                                     <td className="px-4 py-2">{obj.age}</td>
                                     <td className="px-4 py-2">{obj.gender}</td>

@@ -50,7 +50,7 @@ function ListBeds() {
                             return(
                                 <tr key={i}>
                                     <td className="px-4 py-2">{i+1}</td>
-                                    {isObject(obj.patient) ? <td className="px-4 py-2">{obj.patient._id}</td> : <td className="px-4 py-2">{obj.patient || ''}</td>}
+                                    {isObject(obj.patient) ? <td className="px-4 py-2">{obj.patient.id  }</td> : <td className="px-4 py-2">{obj.patient || ''}</td>}
                                     <td className="px-4 py-2">{obj.type}</td>
                                     {obj.assignDate ? <td className="px-4 py-2">{new Date(obj.assignDate).toDateString()}</td> : <td className="px-4 py-2"></td>}
                                     {obj.dischargeDate ? <td className="px-4 py-2">{new Date(obj.dischargeDate).toDateString()}</td> : <td className="px-4 py-2"></td>}

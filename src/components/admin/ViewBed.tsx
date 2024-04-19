@@ -12,7 +12,7 @@ function ViewBed() {
     const assignDate = bedData?.assignDate ? new Date(bedData.assignDate).toLocaleDateString() : '';
     const dischargeDate = bedData?.dischargeDate ? new Date(bedData.dischargeDate).toLocaleDateString() : '';
     const assignBy = typeof(bedData?.assignBy) === 'object' ? bedData.assignBy.firstName+bedData.assignBy.secondName : ""
-    const patientID = typeof(bedData?.patient) === 'object' ? bedData.patient._id : ""
+    const patientID = typeof(bedData?.patient) === 'object' ? bedData.patient.id : ""
     const patientName = typeof(bedData?.patient) === 'object' ? bedData.patient.firstName +""+bedData.patient.secondName : ""
     
     useEffect(()=>{

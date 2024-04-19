@@ -34,7 +34,7 @@ function EditBed() {
         getBedDetailsApi(_id).then((res)=>{
             setType(res.data.type)
             setCharge(res.data.charge)
-            setPatient(res.data.patient._id)
+            setPatient(res.data.patient.id)
             setAssignDate(convertDateToHumanReadable(res.data.assignDate))
             setDischargeDate(convertDateToHumanReadable(res.data.dischargeDate))
             setDescription(res.data.description)

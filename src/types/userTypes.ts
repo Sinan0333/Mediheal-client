@@ -62,6 +62,7 @@ export type DepartmentDetailedProps = {
 
 export type PatientData ={
     _id?:string
+    id?:string
     userId?:string
     firstName:string
     secondName:string

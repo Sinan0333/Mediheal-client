@@ -14,9 +14,6 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
     const currentDay = currentDate.getDay()
     const ISTTime = currentDate.toLocaleTimeString('en-US', timeFormateOption);
     const splitISTTime = ISTTime.split(':')
-    console.log(currentDay);
-    
-
     
   return (
     <div className="mt-10 border-2 border-gray-500 p-1">

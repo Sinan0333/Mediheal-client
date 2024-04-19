@@ -13,15 +13,18 @@ function ViewSchedule() {
     const [selectedSlot,setSelectedSlot] = useState<OneSlotType>(initialOneSlotsType)
     const [selectedDay,setSelectedDay] = useState<string>("")
     const doctorId = useSelector((state:RootState)=>state.doctor._id)
+    const [reload,setReload] = useState(false)
 
 
     useEffect(()=>{
+      console.log('hello');
+      
         getDoctorDataApi(doctorId).then((res)=>{
           setData(res.data)
         }).catch((err)=>{
           console.log(err.message)
         })
-      },[])
+      },[reload])
 
     const handleTakeBreak = async()=>{
 
@@ -37,6 +40,7 @@ function ViewSchedule() {
 
         await cancelBookingWhenBreak(response.data)        
         notifySuccess("Successful")
+        setReload(!reload)
 
     }
 
@@ -60,7 +64,7 @@ function ViewSchedule() {
        </div>
     </div>
     
-    <ScheduleTable slots={data.slots} state={selectedSlot} setState={setSelectedSlot} selectedDay={selectedDay} setSelectedDay={setSelectedDay}/>
+    <ScheduleTable slots={data.slots} state={selectedSlot} setState={setSelectedSlot} selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
     <div className="flex justify-center mt-8 mb-8 gap-6">
         <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={handleTakeBreak}>Take A Break</button>      </div>
   </div>
