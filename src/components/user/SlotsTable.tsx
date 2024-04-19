@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { OneSlotType, SlotsTableProps } from "../../types/doctorTypes"
+import { days } from "../../types/commonTypes"
 
 function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTableProps) {
     const [daySlots,setDaySlots] = useState<OneSlotType[]>()
@@ -8,8 +9,14 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
     slotsArray.shift()
     slotsArray.pop()
 
+    const timeFormateOption : Intl.DateTimeFormatOptions  =  { timeZone: 'Asia/Kolkata', hour12: false, hour: '2-digit', minute: '2-digit' }
     const currentDate = new Date();
     const currentDay = currentDate.getDay()
+    const ISTTime = currentDate.toLocaleTimeString('en-US', timeFormateOption);
+    const splitISTTime = ISTTime.split(':')
+    console.log(currentDay);
+    
+
     
   return (
     <div className="mt-10 border-2 border-gray-500 p-1">
@@ -35,19 +42,49 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
             <div className="grid grid-cols-7 grid-rows-1 gap-8">
             {
                 daySlots?.map((slot) => {
-                    return slot.isReserved ? (
-                    <div key={slot._id} className=" border-2 border-red-600 text-red-600  flex justify-center items-center p-2 cursor-not-allowed font-medium">
-                        Booked
-                    </div>
-                    ) : slot.break ? (
-                    <div key={slot._id} className=" border-2 border-gray-400 text-gray-400 flex justify-center items-center p-2 cursor-not-allowed font-medium">
-                        Unavailable
-                    </div>
-                    ) : (
-                    <div key={slot._id} style={state._id === slot._id ? { backgroundColor: '#164B55', color: 'white', borderColor: 'white' } : {}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium" onClick={() => setState(slot)}>
-                        {slot.startTime} - {slot.endTime}
-                    </div>
-                    );
+                    const startTime = slot.startTime.split(":");
+                    const currentHour = parseInt(splitISTTime[0]);
+                    const currentMinute = parseInt(splitISTTime[1]);
+                    const slotStartHour = parseInt(startTime[0]);
+                    const slotStartMinute = parseInt(startTime[1]);
+
+                    if(days[currentDay] === selectedDay){
+                        if (currentHour < slotStartHour || (currentHour === slotStartHour && currentMinute < slotStartMinute)) {
+                            return (
+                                slot.isReserved ? (
+                                    <div key={slot._id} className=" border-2 border-red-600 text-red-600  flex justify-center items-center p-2 cursor-not-allowed font-medium">
+                                        Booked
+                                    </div>
+                                ) : slot.break ? (
+                                    <div key={slot._id} className=" border-2 border-gray-400 text-gray-400 flex justify-center items-center p-2 cursor-not-allowed font-medium">
+                                        Unavailable
+                                    </div>
+                                ) : (
+                                    <div key={slot._id} style={state._id === slot._id ? { backgroundColor: '#164B55', color: 'white', borderColor: 'white' } : {}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium" onClick={() => setState(slot)}>
+                                        {slot.startTime} - {slot.endTime}
+                                    </div>
+                                )
+                            );
+                        } else {
+                            return null;
+                        }
+                    }else{
+                        return (
+                            slot.isReserved ? (
+                                <div key={slot._id} className=" border-2 border-red-600 text-red-600  flex justify-center items-center p-2 cursor-not-allowed font-medium">
+                                    Booked
+                                </div>
+                            ) : slot.break ? (
+                                <div key={slot._id} className=" border-2 border-gray-400 text-gray-400 flex justify-center items-center p-2 cursor-not-allowed font-medium">
+                                    Unavailable
+                                </div>
+                            ) : (
+                                <div key={slot._id} style={state._id === slot._id ? { backgroundColor: '#164B55', color: 'white', borderColor: 'white' } : {}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium" onClick={() => setState(slot)}>
+                                    {slot.startTime} - {slot.endTime}
+                                </div>
+                            )
+                        );
+                    }
                 })
             }
             </div>
