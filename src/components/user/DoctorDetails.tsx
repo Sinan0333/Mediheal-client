@@ -67,7 +67,7 @@ function DoctorDetails() {
 
   
   return (
-    <div className="pl-32 pt-20 pr-32">
+    <div className="px-1 sm:px-12 md:px-22 lg:px-32">
       <div >
         <h1 className="text-4xl  font-semibold text-adminBlue">{data.firstName} {data.secondName}</h1>
       </div>

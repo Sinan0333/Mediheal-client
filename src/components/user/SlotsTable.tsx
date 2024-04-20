@@ -24,7 +24,7 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
       <div className="p-4">
         <div>
             <h1 className="text-lg  font-semibold mb-4">Choose Day</h1>
-            <div className="grid grid-cols-7 grid-rows-1 gap-8">
+            <div className="grid grid-cols-3  grid-rows-1 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 md:gap-6 lg:grid-cols-7 lg:gap-8 xl:grid-cols-6 xl:gap-10 2xl:grid-cols-7 2xl:gap-12">
                 {
                     slotsArray?.map((day,i)=>{
                         return(
@@ -36,7 +36,7 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
         </div>
         <div className="mt-8">
             <h1 className="text-lg font-semibold mb-4">Choose Time</h1>
-            <div className="grid grid-cols-7 grid-rows-1 gap-8">
+            <div className="grid grid-cols-3  grid-rows-1 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-4 md:gap-6 lg:grid-cols-5 lg:gap-8 xl:grid-cols-6 xl:gap-10 2xl:grid-cols-7 2xl:gap-12">
             {
                 daySlots?.map((slot) => {
                     const startTime = slot.startTime.split(":");
@@ -49,15 +49,15 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
                         if (currentHour < slotStartHour || (currentHour === slotStartHour && currentMinute < slotStartMinute)) {
                             return (
                                 slot.isReserved ? (
-                                    <div key={slot._id} className=" border-2 border-red-600 text-red-600  flex justify-center items-center p-2 cursor-not-allowed font-medium">
+                                    <div key={slot._id} className=" border-2 border-red-600 text-red-600  flex justify-center items-center  cursor-not-allowed font-medium">
                                         Booked
                                     </div>
                                 ) : slot.break ? (
-                                    <div key={slot._id} className=" border-2 border-gray-400 text-gray-400 flex justify-center items-center p-2 cursor-not-allowed font-medium">
+                                    <div key={slot._id} className=" border-2 border-gray-400 text-gray-400 flex justify-center items-center  cursor-not-allowed font-medium">
                                         Unavailable
                                     </div>
                                 ) : (
-                                    <div key={slot._id} style={state._id === slot._id ? { backgroundColor: '#164B55', color: 'white', borderColor: 'white' } : {}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium" onClick={() => setState(slot)}>
+                                    <div key={slot._id} style={state._id === slot._id ? { backgroundColor: '#164B55', color: 'white', borderColor: 'white' } : {}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center cursor-pointer font-medium" onClick={() => setState(slot)}>
                                         {slot.startTime} - {slot.endTime}
                                     </div>
                                 )
