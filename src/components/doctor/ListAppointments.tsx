@@ -7,22 +7,42 @@ import { AppointmentPopulateData, ResponseData } from "../../types/commonTypes"
 import { cancel,eye} from "../../constants/icons"
 import { cancelBooking } from "../../api/user/appointment"
 import { useNavigate } from "react-router-dom"
+import { createInitialPages, handlePagination } from "../../constants/constFunctions"
 
 function ListAppointments() {
 
     const [list,setList] = useState<AppointmentPopulateData[] >([])
     const [reload,setReload] = useState<Boolean>(false)
     const doctorId = useSelector((state:RootState)=>state.doctor._id)
+    const [pageData,setPageData] = useState<AppointmentPopulateData[]>([])
+    const [pages,setPages] = useState<number[]>([])
+    const [currentPage,setCurrentPage] = useState<number>(1)
+    const limit = 13
+    const pageCount = Math.ceil(list.length/limit)   
     const navigate = useNavigate()
 
 
     useEffect(()=>{
-        getDoctorAppointments(doctorId).then((data)=>{
-            setList(data.data)
+        getDoctorAppointments(doctorId).then((res)=>{
+            setList(res.data)
+            setPageData(res.data.slice(0,limit))
+            setPages(createInitialPages(res.data.length/limit))
         }).catch((err)=>{
             console.log(err.message);
         })
     },[reload])
+
+    const handleClick = async (i:number)=>{
+
+        if(i<4){
+            setPageData(list.slice((i-1)*limit,i*limit))
+            setPages(createInitialPages(list.length/limit))
+        }else{
+            handlePagination(i,currentPage,pages,pageCount)
+            setPageData(list.slice((i-1)*limit,i*limit))
+        }
+        setCurrentPage(i)
+    }
 
     const handleCancel = async(_id:string | undefined,amount:number)=>{
         try {
@@ -59,10 +79,10 @@ function ListAppointments() {
                 </thead>
                 <tbody>
                     {
-                        list.map((obj,i)=>{
+                        pageData.map((obj,i)=>{
                             return(
                                 <tr key={i}>
-                                    <td className="px-4 py-2">{i+1}</td>
+                                    <td className="px-4 py-2">{(currentPage-1)*limit+(i+1)}</td>
                                     <td className="px-4 py-2">{obj.patient._id}</td>
                                     <td className="px-4 py-2">{obj.patient.firstName} {obj.patient.secondName}</td>
                                     <td className="px-4 py-2">{obj.day}</td>
@@ -85,6 +105,35 @@ function ListAppointments() {
                     }
                 </tbody>
             </table>
+        </div>
+        <div className="flex justify-center items-center mt-8">
+            <nav className="flex">
+                {
+                    currentPage === 1 ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 rounded-lg hover:bg-gray-300"onClick={()=>handleClick(currentPage-1)}>Previous</p>
+                }
+                {
+                    pages.map((page)=>{
+                        return(
+                            <p key={page} className={`${currentPage === page ?"neumorphic-pagination-clicked":"neumorphic-pagination"} flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300`} onClick={()=>handleClick(page)}>{page}</p>
+
+                        )
+                    })
+                }    
+                    
+                {
+                    pageCount > 4 && pageCount-1 > currentPage? (
+                        <>
+                            <span className="px-3 py-1">...</span>
+                            <p className="neumorphic-pagination flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300" onClick={()=>handleClick(pageCount)}>{pageCount}</p>
+                        </>
+                    ) : null
+                }
+                
+                {
+                    currentPage === pageCount ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 ml-2  rounded-lg hover:bg-gray-300" onClick={()=>handleClick(currentPage+1)}>Next</p>
+                }
+                
+            </nav>
         </div>
     </div>
   )

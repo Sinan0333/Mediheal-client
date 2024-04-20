@@ -67,6 +67,19 @@
               inset 5px -5px 11px #ffffff;
 }
 
+.neumorphic-pagination{
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow:  5px 5px 8px #afafaf,
+               -5px -5px 8px #ffffff;
+}
+
+.neumorphic-pagination-clicked{
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow: inset 5px 5px 8px #afafaf,
+              inset -5px -5px 8px #ffffff;
+}
 
 .adminLayout{
   padding: 15px;
