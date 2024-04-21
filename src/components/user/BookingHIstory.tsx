@@ -4,16 +4,24 @@ import { bookingHistory, cancelBooking } from "../../api/user/appointment"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { notifyError } from "../../constants/toast"
+import { createInitialPages, handlePagination } from "../../constants/constFunctions"
 
 function BookingHistory() {
-    const [list,setList] =useState<AppointmentPopulateData[]>()
+    const [list,setList] =useState<AppointmentPopulateData[]>([])
     const [reload,setReload] = useState<boolean>(false)
     const userId = useSelector((state:RootState)=>state.user._id)
+    const [pageData,setPageData] = useState<AppointmentPopulateData[]>([])
+    const [pages,setPages] = useState<number[]>([])
+    const [currentPage,setCurrentPage] = useState<number>(1)
+    const limit = 13
+    const pageCount = Math.ceil(list.length/limit)   
 
 
     useEffect(()=>{
         bookingHistory(userId).then((res)=>{
             setList(res.data)
+            setPageData(res.data.slice(0,limit))
+            setPages(createInitialPages(res.data.length/limit))
         }).catch((err:any)=>{
             console.log(err.message)
         })
@@ -31,6 +39,18 @@ function BookingHistory() {
         } catch (error) {
             
         }
+    }
+
+    const handleClick = async (i:number)=>{
+
+        if(i<4){
+            setPageData(list.slice((i-1)*limit,i*limit))
+            setPages(createInitialPages(list.length/limit))
+        }else{
+            handlePagination(i,currentPage,pages,pageCount)
+            setPageData(list.slice((i-1)*limit,i*limit))
+        }
+        setCurrentPage(i)
     }
 
   return (
@@ -66,7 +86,7 @@ function BookingHistory() {
         </thead>
         <tbody>
             {
-                list?.map((obj)=>{
+                pageData.map((obj)=>{
                     return(
                         <tr key={obj._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -99,6 +119,35 @@ function BookingHistory() {
             }
         </tbody>
     </table>
+    <div className="flex justify-center items-center mt-8">
+            <nav className="flex">
+                {
+                    currentPage === 1 ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 rounded-lg hover:bg-gray-300"onClick={()=>handleClick(currentPage-1)}>Previous</p>
+                }
+                {
+                    pages.map((page)=>{
+                        return(
+                            <p key={page} className={`${currentPage === page ?"neumorphic-pagination-clicked":"neumorphic-pagination"} flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300`} onClick={()=>handleClick(page)}>{page}</p>
+
+                        )
+                    })
+                }    
+                    
+                {
+                    pageCount > 4 && pageCount-1 > currentPage? (
+                        <>
+                            <span className="px-3 py-1">...</span>
+                            <p className="neumorphic-pagination flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300" onClick={()=>handleClick(pageCount)}>{pageCount}</p>
+                        </>
+                    ) : null
+                }
+                
+                {
+                    currentPage === pageCount ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 ml-2  rounded-lg hover:bg-gray-300" onClick={()=>handleClick(currentPage+1)}>Next</p>
+                }
+                
+            </nav>
+        </div>
 </div>
   )
 }
