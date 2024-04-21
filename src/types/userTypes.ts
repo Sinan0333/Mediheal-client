@@ -93,3 +93,13 @@ export type WalletHistoryData={
     description:string
     amount:number
 }
+
+export type PatientCardProps = {
+    _id?:string
+    firstName:string 
+    secondName:string 
+    image:string | File | undefined
+    age:number
+    gender:string
+    dob:Date | string
+}

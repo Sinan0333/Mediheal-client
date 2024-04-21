@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import EditProfile from "../../components/user/EditProfile"
 import Nav from "../../components/user/Nav"
+import LIstUserPatients from "../../components/user/LIstUserPatients"
 
 function PatientsPage() {
     const navigate = useNavigate()
@@ -32,7 +32,7 @@ function PatientsPage() {
         </aside>
         <main className="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
             <div className="p-2 md:p-4">
-                <EditProfile/>
+                <LIstUserPatients/>
             </div>
         </main>
       </div>
