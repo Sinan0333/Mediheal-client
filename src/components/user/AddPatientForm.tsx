@@ -9,6 +9,7 @@ import { addPatient } from "../../api/user/Patient"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { AddPatientFormProps } from "../../types/userTypes"
+import OldDateInput from "../common/OldDateInput"
 
 function AddPatientForm({state,setState}:AddPatientFormProps) {
     const [firstName ,setFirstName] = useState("")
@@ -36,8 +37,6 @@ function AddPatientForm({state,setState}:AddPatientFormProps) {
 
             setFirstName("")
             setSecondName("")
-            setBloodGroup("")
-            setGender("")
             setDob("")
             setAge(0)
             setImageFile(undefined)
@@ -58,15 +57,15 @@ function AddPatientForm({state,setState}:AddPatientFormProps) {
         <div className="mb-6 flex w-1/2 pr-4">
           <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Blood Group</label>
           <select className="block w-full py-2 px-4 bg-transparent border-transparent  rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e)=>setBloodGroup(e.target.value)}>
-          <option value=''>Select your blood group</option>
-          <option value='A+'>A+</option>
-          <option value='B+'>B+</option>
-          <option value='O+'>O+</option>
-          <option value='AB+'>AB+</option>
-          <option value='A-'>A-</option>
-          <option value='B-'>B-</option>
-          <option value='O-'>O-</option>
-          <option value='AB-'>AB-</option>
+            <option value=''>Select your blood group</option>
+            <option value='A+'>A+</option>
+            <option value='B+'>B+</option>
+            <option value='O+'>O+</option>
+            <option value='AB+'>AB+</option>
+            <option value='A-'>A-</option>
+            <option value='B-'>B-</option>
+            <option value='O-'>O-</option>
+            <option value='AB-'>AB-</option>
           </select>
         </div>
 
@@ -79,7 +78,7 @@ function AddPatientForm({state,setState}:AddPatientFormProps) {
             <option value='other'>other</option>
           </select>
         </div>
-        <Inputs name="Date Of Birth" type="date" state={dob} setState={setDob}/>
+        <OldDateInput name="Date of Birth" state={dob} setState={setDob}/>
         <Inputs name="Age" type="number" state={age} setState={setAge}/>
         <RoundedImageInput name="Image" state={imageFile} setState={setImageFile}/>
       </div>

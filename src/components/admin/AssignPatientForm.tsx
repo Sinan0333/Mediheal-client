@@ -7,6 +7,7 @@ import { assignPatientValidation } from "../../validations/admin/bedValidation"
 import { assignPatientApi } from "../../api/admin/bedApi"
 import { unblockedDoctors } from "../../api/doctor/doctorApi"
 import { DoctorData } from "../../types/doctorTypes"
+import NewDateInput from "../common/NewDateInput"
 
 
 function AssignPatientForm() {
@@ -64,8 +65,8 @@ function AssignPatientForm() {
                     <option value='Cabin'>Cabin</option>
                 </select>
             </div>
-            <Inputs name="Assign Date" type="date" setState={setAssignDate} state={assignDate}/>
-            <Inputs name="Discharge Date" type="date" setState={setDischargeDate} state={dischargeDate}/>
+            <NewDateInput name="Assign Date" setState={setAssignDate} state={assignDate}/>
+            <NewDateInput name="Discharge Date" setState={setDischargeDate} state={dischargeDate}/>
             <Inputs name="Description" type="text" setState={setDescription} state={description}/>
             <div className="mb-6 flex w-1/2 pr-4">
                 <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Assign By</label>

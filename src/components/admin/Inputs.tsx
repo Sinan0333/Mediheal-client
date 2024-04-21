@@ -1,5 +1,3 @@
-
-
 type InputsProps ={
     name:string
     type:'text' | 'password' | 'email' | 'number' | 'date' | 'time' | 'tel' | 'url' | 'file'

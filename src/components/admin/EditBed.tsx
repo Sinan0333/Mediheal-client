@@ -8,6 +8,7 @@ import { dischargePatientApi, getBedDetailsApi, updateBedApi } from "../../api/a
 import { unblockedDoctors } from "../../api/doctor/doctorApi"
 import { DoctorCardProps } from "../../types/doctorTypes"
 import { convertDateToHumanReadable, convertHumanReadableToDate } from "../../constants/convert"
+import NewDateInput from "../common/NewDateInput"
 
 function EditBed() {
     const [type ,setType] = useState<string>("")
@@ -88,8 +89,8 @@ function EditBed() {
         <h1 className="text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Edit Bed</h1>
         <div className="mb-6 flex flex-wrap">
             {patient && <Inputs name="PatientId" type="text" setState={setPatient} state={patient}/>}
-            {assignDate && <Inputs name="Assign Date" type="date" setState={setAssignDate} state={assignDate}/>}
-            {dischargeDate && <Inputs name="Discharge Date" type="date" setState={setDischargeDate} state={dischargeDate}/>}
+            {assignDate && <NewDateInput name="Assign Date" setState={setAssignDate} state={assignDate}/>}
+            {dischargeDate && <NewDateInput name="Discharge Date" setState={setDischargeDate} state={dischargeDate}/>}
             {description && <Inputs name="Description" type="text" setState={setDescription} state={description}/>}
             {assignBy && <div className="mb-6 flex w-1/2 pr-4">
             <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Assign By</label>

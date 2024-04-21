@@ -10,6 +10,7 @@ import Inputs from "../admin/Inputs"
 import { useEffect, useReducer, useState } from "react"
 import { editDoctorDataApi, getDoctorDataApi } from "../../api/doctor/doctorApi"
 import { initSchedule, scheduleReducer } from "../../reducers/scheduleReducer"
+import OldDateInput from "../common/OldDateInput"
 
 
 function EditDoctor() {
@@ -114,7 +115,7 @@ function EditDoctor() {
     <div className=" flex flex-wrap">
         <Inputs name="First Name" type="text" setState={setFirstName} state={firstName}/>
         <Inputs name="Second Name" type="text"  setState={setSecondName} state={secondName}/>
-        <Inputs name="DOB" type="date" setState={setDob} state={"2024-03-06"}/>
+        <OldDateInput name="Date of Birth" setState={setDob} state={dob}/>
         <Inputs name="Age" type="number" setState={setAge} state={age}/>
         <div className="mb-6 flex w-1/2 pr-4">
           <label className="font-semibold text-lg w-44 mr-4 text-adminBlue">Gender</label>
