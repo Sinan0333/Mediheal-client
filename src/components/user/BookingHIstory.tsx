@@ -34,7 +34,7 @@ function BookingHistory() {
     }
 
   return (
-    <div className="relative overflow-x-auto mt-10 ">
+    <div className="relative  mt-10 ">
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -42,10 +42,7 @@ function BookingHistory() {
                     Booked Date
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Start Time
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    End Time
+                    Time
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Fees
@@ -76,10 +73,7 @@ function BookingHistory() {
                                 {new Date(obj.bookedDate).toLocaleDateString()}
                             </th>
                             <td className="px-6 py-4">
-                                {obj.startTime}
-                            </td>
-                            <td className="px-6 py-4">
-                                {obj.endTime}
+                                {obj.startTime} - {obj.endTime}
                             </td>
                             <td className="px-6 py-4">
                                 {obj.doctor.fees}
@@ -99,7 +93,7 @@ function BookingHistory() {
                             <td className="px-6 py-4">
                                {obj.status != "Cancelled" ? <button type="button" className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onClick={()=>handleCancel(obj._id,obj.doctor.fees)}>Cancel</button> : ""} 
                             </td>
-                        </tr>
+                        </tr> 
                     )
                 })
             }
