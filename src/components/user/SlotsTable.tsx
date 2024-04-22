@@ -57,7 +57,7 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
                                         Unavailable
                                     </div>
                                 ) : (
-                                    <div key={slot._id} style={state._id === slot._id ? { backgroundColor: '#164B55', color: 'white', borderColor: 'white' } : {}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center cursor-pointer font-medium" onClick={() => setState(slot)}>
+                                    <div key={slot._id} style={state._id === slot._id ? { backgroundColor: '#164B55', color: 'white', borderColor: 'white' } : {}} className="border-2 border-gray-500 hover:border-blue-600 hover: flex justify-center items-center p-2 cursor-pointer font-medium" onClick={() => setState(slot)}>
                                         {slot.startTime} - {slot.endTime}
                                     </div>
                                 )
