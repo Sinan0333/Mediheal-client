@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { editProfileValidation } from "../../validations/user/profileValidation"
 import { notifyError, notifySuccess } from "../../constants/toast"
-import { editUserData } from "../../api/user/UserManagment"
 import { base64 } from "../../constants/convert"
 import { useNavigate } from "react-router-dom"
 import { setUserDetails } from "../../store/slice/userSlice"
 import UserImageInput from "./UserImageInput"
+import { editUserData } from "../../api/user/userApi"
 
 function EditProfile() {
     const [imageFile,setImageFile] = useState<string | File>()

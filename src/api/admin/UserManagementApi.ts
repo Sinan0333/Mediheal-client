@@ -1,11 +1,27 @@
 import axios from 'axios'
-import { EditUserDataProps } from '../../types/userTypes'
-
 
 const userManagementApi = axios.create({
-    baseURL:'http://localhost:3000/list'
+    baseURL:'http://localhost:3000/admin/user'
 })
 
+userManagementApi.interceptors.request.use(
+
+    (config)=>{
+        
+    const adminToken = localStorage.getItem('adminToken')
+
+    if(adminToken){
+        config.headers['Authorization'] = `Bearer ${adminToken}`;
+    }
+
+    return config
+
+    },
+
+    (error)=>{
+        return Promise.reject(error)
+    }
+)
 
 export const listUsers = async ()=>{
     try { 
@@ -25,16 +41,6 @@ export const getUserDataApi = async (_id:string | undefined)=>{
     }
 }
 
-export const editUserData = async (data:EditUserDataProps)=>{
-    try { 
-        
-        const result =  await userManagementApi.post('/edit',data) 
-        return result.data 
-        
-    } catch (error) {
-        console.log(error);
-    }
-}
 
 
 export const changeUserBlock = async (_id:string | undefined,is_blocked:boolean | undefined)=>{

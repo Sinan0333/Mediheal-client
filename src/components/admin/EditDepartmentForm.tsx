@@ -4,7 +4,7 @@ import RoundedImageInput from "../common/RoundedImageInput"
 import { departmentValidation } from "../../validations/admin/departmentValidation"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { base64 } from "../../constants/convert"
-import { getDepartmentDataById, updateDepartment } from "../../api/admin/departmentApi"
+import { getDepartmentDataById, updateDepartment } from "../../api/admin/departmentManagementApi"
 import { ResponseData } from "../../types/commonTypes"
 import { useNavigate, useParams } from "react-router-dom"
 

@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
-import { getDoctorDataApi } from "../../api/doctor/doctorApi"
 import { DoctorData, ViewDoctorProps,  } from "../../types/doctorTypes"
+import { getDoctorDataApi } from "../../api/admin/doctorManagementApi"
 
 function ViewDoctor({upBtn}:ViewDoctorProps) {
   const [doctorData,setDoctorData] = useState<DoctorData>()

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import  Actions from '../admin/Actions'
-import { changeBlockStatus, listDoctorsApi } from "../../api/doctor/doctorApi"
 import { DoctorData } from "../../types/doctorTypes"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
 import { ResponseData } from "../../types/commonTypes"
+import { changeBlockStatus, listDoctorsApi } from "../../api/admin/doctorManagementApi"
 
 function ListDoctors() {
     const navigate = useNavigate()

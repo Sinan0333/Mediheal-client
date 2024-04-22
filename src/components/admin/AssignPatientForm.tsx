@@ -4,10 +4,10 @@ import { notifyError, notifySuccess } from "../../constants/toast"
 import { ResponseData } from "../../types/commonTypes"
 import { useNavigate } from "react-router-dom"
 import { assignPatientValidation } from "../../validations/admin/bedValidation"
-import { assignPatientApi } from "../../api/admin/bedApi"
-import { unblockedDoctors } from "../../api/doctor/doctorApi"
+import { assignPatientApi } from "../../api/admin/bedManagementApi"
 import { DoctorData } from "../../types/doctorTypes"
 import NewDateInput from "../common/NewDateInput"
+import { unblockedDoctors } from "../../api/admin/doctorManagementApi"
 
 
 function AssignPatientForm() {

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { LoginType } from '../../types/userTypes'
 
 const adminApi= axios.create({
-    baseURL:'http://localhost:3000/admin'
+    baseURL:'http://localhost:3000/auth/admin'
 })
 
 

@@ -5,11 +5,11 @@ import { addPatientValidation } from "../../validations/user/PatientValidation"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { base64 } from "../../constants/convert"
 import { ResponseData } from "../../types/commonTypes"
-import { addPatient } from "../../api/user/Patient"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { AddPatientFormProps } from "../../types/userTypes"
 import OldDateInput from "../common/OldDateInput"
+import { addPatient } from "../../api/user/patient"
 
 function AddPatientForm({state,setState}:AddPatientFormProps) {
     const [firstName ,setFirstName] = useState("")

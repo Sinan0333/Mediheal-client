@@ -4,11 +4,11 @@ import { notifyError, notifySuccess } from "../../constants/toast"
 import { ResponseData } from "../../types/commonTypes"
 import { useNavigate, useParams } from "react-router-dom"
 import { editBedValidation } from "../../validations/admin/bedValidation"
-import { dischargePatientApi, getBedDetailsApi, updateBedApi } from "../../api/admin/bedApi"
-import { unblockedDoctors } from "../../api/doctor/doctorApi"
+import { dischargePatientApi, getBedDetailsApi, updateBedApi } from "../../api/admin/bedManagementApi"
 import { DoctorCardProps } from "../../types/doctorTypes"
 import { convertDateToHumanReadable, convertHumanReadableToDate } from "../../constants/convert"
 import NewDateInput from "../common/NewDateInput"
+import { unblockedDoctors } from "../../api/admin/doctorManagementApi"
 
 function EditBed() {
     const [type ,setType] = useState<string>("")
@@ -35,13 +35,15 @@ function EditBed() {
         getBedDetailsApi(_id).then((res)=>{
             setType(res.data.type)
             setCharge(res.data.charge)
-            setPatient(res.data.patient.id)
-            setAssignDate(convertDateToHumanReadable(res.data.assignDate))
-            setDischargeDate(convertDateToHumanReadable(res.data.dischargeDate))
-            setDescription(res.data.description)
-            setDoctorName(res.data.assignBy.firstName + res.data.assignBy.secondName)
-            setAssignBy(res.data.assignBy._id)
             setAvailable(res.data.available)
+            if(res.data.patient){
+                setPatient(res.data.patient._id)
+                setAssignDate(convertDateToHumanReadable(res.data.assignDate))
+                setDischargeDate(convertDateToHumanReadable(res.data.dischargeDate))
+                setDescription(res.data.description)
+                setDoctorName(res.data.assignBy.firstName + res.data.assignBy.secondName)
+                setAssignBy(res.data.assignBy._id)
+            }
         }).catch((err)=>{
             console.log(err.message);
         })

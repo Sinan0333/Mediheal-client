@@ -2,14 +2,14 @@ import { useState } from "react"
 import Inputs from "./Inputs"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { ResponseData } from "../../types/commonTypes"
-// import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { addBedValidation } from "../../validations/admin/bedValidation"
-import { addBedApi } from "../../api/admin/bedApi"
+import { addBedApi } from "../../api/admin/bedManagementApi"
 
 function AddBedForm() {
     const [type ,setType] = useState<string>("")
     const [charge,setCharge] = useState<number>(0)
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
   
     async function handleSubmit() {
   
@@ -21,7 +21,7 @@ function AddBedForm() {
           const response:ResponseData =await addBedApi({type,charge})
           if(!response.status) return notifyError(response.message)
           notifySuccess(response.message)
-          // navigate('/admin/bed')
+          navigate('/admin/bed')
   
       } catch (error) {
         console.error(error);

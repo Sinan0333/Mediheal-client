@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { PatientData } from "../../types/userTypes"
-import { getPatients } from "../../api/user/Patient"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { eye } from "../../constants/icons"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
+import { getPatients } from "../../api/admin/patientManagementApit"
+import { getDoctorPatients } from "../../api/doctor/doctorPatient"
+import { notifyError } from "../../constants/toast"
 
 function ListPatients() {
     const [list,setList] = useState<PatientData[] >([])
@@ -13,16 +15,37 @@ function ListPatients() {
     const limit = 13
     const pageCount = Math.ceil(list.length/limit)   
     const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(()=>{
-        getPatients().then((res)=>{
-            setList(res.data)
-            setPageData(res.data.slice(0,limit))
-            setPages(createInitialPages(res.data.length/limit))
-        }).catch((err)=>{
-            console.log(err.message);
-        })
+        if(location.pathname.split("/").includes("admin")){
+            getPatients().then((res)=>{
+                setList(res.data)
+                setPageData(res.data.slice(0,limit))
+                setPages(createInitialPages(res.data.length/limit))
+            }).catch((err)=>{
+                console.log(err.message);
+            })
+        }else{
+            getDoctorPatients().then((res)=>{
+                setList(res.data)
+                setPageData(res.data.slice(0,limit))
+                setPages(createInitialPages(res.data.length/limit))
+            }).catch((err)=>{
+                console.log(err.message);
+                
+            })
+        }
     },[])
+
+    const handleNavigation = (_id:string | undefined)=>{
+        if(!_id) notifyError("Something wrong")
+        if(location.pathname.split("/").includes("admin")){
+            navigate(`/admin/patients/view/${_id}`)
+        }else{
+            navigate(`/doctor/patients/view/${_id}`)
+        }
+    }
 
     const handleClick = async (i:number)=>{
 
@@ -64,8 +87,8 @@ function ListPatients() {
                                     <td className="px-4 py-2">{obj.gender}</td>
                                     <td className="px-4 py-2">{new Date(obj.dob).toLocaleDateString()}</td>
                                     <td className="px-4 py-2">
-                                    <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/admin/patients/view/${obj._id}`)}>
-                                                <img className="w-full" src={eye} alt="Button Icon"  />
+                                    <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleNavigation(obj._id)}>
+                                        <img className="w-full" src={eye} alt="Button Icon"  />
                                     </button>
                                     </td>
                                 </tr> 

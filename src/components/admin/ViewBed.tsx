@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
 import { BedDataType } from "../../types/adminTypes"
-import { getBedDetailsApi } from "../../api/admin/bedApi"
+import { getBedDetailsApi } from "../../api/admin/bedManagementApi"
 import { eye } from "../../constants/icons"
 
 function ViewBed() {

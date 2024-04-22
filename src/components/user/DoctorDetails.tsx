@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getDoctorDataApi } from "../../api/doctor/doctorApi"
 import { DoctorData, OneSlotType, initialDoctorData, initialOneSlotsType,} from "../../types/doctorTypes"
 import { ResponseData, days } from "../../types/commonTypes"
 import SlotsTable from "./SlotsTable"
@@ -12,6 +11,7 @@ import { notifyError } from "../../constants/toast"
 import { confirmBooking, createCheckoutSession } from "../../api/user/appointment"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
+import { getDoctorDataApi } from "../../api/user/doctorApi"
 
 function DoctorDetails() {
   const [data,setData] = useState<DoctorData>(initialDoctorData)

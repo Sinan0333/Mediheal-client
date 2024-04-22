@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { changeDepartmentBlock, listDepartmentApi } from "../../api/admin/departmentApi"
+import { changeDepartmentBlock, listDepartmentApi } from "../../api/admin/departmentManagementApi"
 import { DepartmentDataType } from "../../types/adminTypes"
 import Actions from "./Actions"
 import { notifyError, notifySuccess } from "../../constants/toast"

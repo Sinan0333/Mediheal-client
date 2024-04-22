@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { WalletHistoryData } from "../../types/userTypes"
-import { getUserDataApi } from "../../api/user/UserManagment"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
+import { getUserData } from "../../api/user/userApi"
 
 function TransactionHistory() {
   const [list,setList] = useState<WalletHistoryData[]>([])
@@ -16,7 +16,7 @@ function TransactionHistory() {
   const pageCount = Math.ceil(list.length/limit)   
 
   useEffect(()=>{
-    getUserDataApi(userId).then((res)=>{
+    getUserData(userId).then((res)=>{
       setList(res.data.history)
       setWallet(res.data.wallet)
       setPageData(res.data.history.slice(0,limit))
@@ -56,9 +56,9 @@ function TransactionHistory() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 ">
           {
-            pageData.map((obj)=>{
+            pageData.map((obj,i)=>{
               return(
-                <tr className="bg-gray-50">
+                <tr key={i} className="bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">{new Date(obj.date).toLocaleDateString()}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{obj.description}</td>
                   <td className={`px-6 py-4 whitespace-nowrap ${obj.amount < 0 ? "text-red-600" : "text-green-600"}`}>₹ {obj.amount}</td>

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { LoginType, SignupData } from '../../types/userTypes'
 
 const userApi = axios.create({
-    baseURL:'http://localhost:3000'
+    baseURL:'http://localhost:3000/auth/user'
 })
 
 export const userSignup = async (data:SignupData)=>{
@@ -51,4 +51,5 @@ export const userLogin = async (data:LoginType)=>{
         console.log(error);
     }
 }
+
 

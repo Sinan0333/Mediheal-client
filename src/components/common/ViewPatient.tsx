@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
-import { getPatient } from "../../api/user/Patient"
 import { PatientData } from "../../types/userTypes"
+import { getPatient } from "../../api/admin/patientManagementApit"
+import { getPatientApi } from "../../api/doctor/doctorPatient"
 
 
 function ViewPatient() {
@@ -10,15 +11,27 @@ function ViewPatient() {
     const [patientData,setPatientData] = useState<PatientData>()
     const imageUrl =patientData?.image ? `https://res.cloudinary.com/dw2cscitl/${patientData?.image}` : "/src/assets/images/default_profile.jpg"
     const dob = patientData?.dob ? new Date(patientData.dob).toLocaleDateString() : ""
+    const location = useLocation()
+    
     
   
     const {_id} = useParams()
     useEffect(()=>{
-      getPatient(_id).then((data)=>{
-        setPatientData(data.data)
-      }).catch((err)=>{
-        console.error(err);
-      })
+
+      if(location.pathname.split('/').includes('admin')){
+        getPatient(_id).then((data)=>{
+          setPatientData(data.data)
+        }).catch((err)=>{
+          console.error(err);
+        })
+      }else{
+        getPatientApi(_id).then((data)=>{
+          setPatientData(data.data)
+        }).catch((err)=>{
+          console.error(err);
+        })
+      }
+    
     },[])
 
 

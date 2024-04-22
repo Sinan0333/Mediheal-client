@@ -1,5 +1,5 @@
 import {useParams } from "react-router-dom"
-import { getDepartmentDataById } from "../../api/admin/departmentApi"
+import { getDepartmentDataById } from "../../api/admin/departmentManagementApi"
 import { useEffect, useState } from "react"
 import { DepartmentDataType } from "../../types/adminTypes"
 

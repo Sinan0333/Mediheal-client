@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
-import { getUserDataApi } from "../../api/user/UserManagment"
+import { getUserDataApi } from "../../api/admin/UserManagementApi"
 import { UserData } from "../../types/userTypes"
 
 
@@ -27,7 +27,7 @@ function ViewUser() {
         </div>
         <div className="flex justify-center">
           <div className="neumorphic-rounded w-56 h-56 flex justify-center items-center overflow-hidden">
-            <img src={userData?.image ? imageUrl :defaultProfile} alt="Your Image" className="rounded-full object-cover" />
+            <img src={userData?.image ? imageUrl :defaultProfile} alt="Your Image" className="rounded-full object-cover w-full h-full" />
           </div>
         </div>
         <div className="flex flex-wrap mt-10">

@@ -3,10 +3,11 @@ import ScheduleTable from "./ScheduleTable"
 import { DoctorData, OneSlotType, initialDoctorData, initialOneSlotsType } from "../../types/doctorTypes"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
-import { getDoctorDataApi, takeABreakApi } from "../../api/doctor/doctorApi"
+import {  takeABreakApi } from "../../api/doctor/doctorApi"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { ResponseData } from "../../types/commonTypes"
-import { cancelBookingWhenBreak } from "../../api/user/appointment"
+import { getDoctorDataApi } from "../../api/admin/doctorManagementApi"
+import { cancelBookingWhenBreak } from "../../api/doctor/doctorAppointmentApi"
 
 function ViewSchedule() {
     const [data,setData] = useState<DoctorData>(initialDoctorData)

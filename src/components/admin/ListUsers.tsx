@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { changeUserBlock, listUsers } from "../../api/user/UserManagment"
+import { changeUserBlock, listUsers } from "../../api/admin/UserManagementApi"
 import { UserData } from "../../types/userTypes"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { blockGreen, blockRed } from "../../constants/icons"

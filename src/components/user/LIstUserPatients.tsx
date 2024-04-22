@@ -2,7 +2,7 @@ import { useEffect,useState } from "react"
 import { PatientData } from "../../types/userTypes"
 import { RootState } from "../../store/store"
 import { useSelector } from "react-redux"
-import { getUserPatientsApi } from "../../api/user/Patient"
+import { getUserPatientsApi } from "../../api/user/patient"
 import PatientCard from "./PatientCard"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
 function LIstUserPatients() {
@@ -11,7 +11,7 @@ function LIstUserPatients() {
     const [pageData,setPageData] = useState<PatientData[]>([])
     const [pages,setPages] = useState<number[]>([])
     const [currentPage,setCurrentPage] = useState<number>(1)
-    const limit = 6
+    const limit = 4
     const pageCount = Math.ceil(list.length/limit)   
 
     useEffect(()=>{

@@ -1,5 +1,5 @@
 import { useNavigate,useParams } from "react-router-dom"
-import { unblockedDepartments } from "../../api/admin/departmentApi"
+import { unblockedDepartments } from "../../api/admin/departmentManagementApi"
 import { base64, convertDateToHumanReadable, convertHumanReadableToDate } from "../../constants/convert"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { DepartmentApiType } from "../../types/adminTypes"
@@ -8,9 +8,9 @@ import { editDoctorValidation } from "../../validations/admin/doctorValidation"
 import RoundedImageInput from "../common/RoundedImageInput"
 import Inputs from "../admin/Inputs"
 import { useEffect, useReducer, useState } from "react"
-import { editDoctorDataApi, getDoctorDataApi } from "../../api/doctor/doctorApi"
 import { initSchedule, scheduleReducer } from "../../reducers/scheduleReducer"
 import OldDateInput from "../common/OldDateInput"
+import { editDoctorDataApi, getDoctorDataApi } from "../../api/admin/doctorManagementApi"
 
 
 function EditDoctor() {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import ExistingPatientCard from "./ExistingPatientCard"
 import { PatientData } from "../../types/userTypes"
-import { getUserPatientsApi } from "../../api/user/Patient"
+import { getUserPatientsApi } from "../../api/user/patient"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { ExistingPatientProps } from "../../types/doctorTypes"

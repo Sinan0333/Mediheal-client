@@ -5,6 +5,24 @@ const appointmentApi = axios.create({
     baseURL:'http://localhost:3000/appointment'
 })
 
+appointmentApi.interceptors.request.use(
+
+    (config)=>{
+        
+    const userToken = localStorage.getItem('userToken')
+
+    if(userToken){
+        config.headers['Authorization'] = `Bearer ${userToken}`;
+    }
+
+    return config
+
+    },
+
+    (error)=>{
+        return Promise.reject(error)
+    }
+)
 
 export const createCheckoutSession = async (amount:number)=>{
     try { 
@@ -36,15 +54,6 @@ export const bookingHistory = async (userId:string)=>{
 export const cancelBooking = async (_id:string,data:WalletHistoryData)=>{
     try { 
         const result =  await appointmentApi.post(`/cancel/${_id}`,data) 
-        return result.data 
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export const cancelBookingWhenBreak = async (slotId:string)=>{
-    try { 
-        const result =  await appointmentApi.get(`/cancel_when_break/${slotId}`) 
         return result.data 
     } catch (error) {
         console.log(error);

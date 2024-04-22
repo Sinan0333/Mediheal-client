@@ -1,9 +1,9 @@
 import { useEffect,useState } from "react"
 import DoctorCard from "../../components/user/DoctorCard"
 import Nav from "../../components/user/Nav"
-import {  unblockedDoctors } from "../../api/doctor/doctorApi"
 import { DoctorData } from "../../types/doctorTypes"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
+import { unblockedDoctors } from "../../api/user/doctorApi"
 
 
 

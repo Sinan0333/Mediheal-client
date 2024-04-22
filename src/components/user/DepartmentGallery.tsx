@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import DepartmentDetailed from "./DepartmentDetailed"
 import DepartmentLogo from "./DepartmentLogo"
-import { unblockedDepartments } from "../../api/admin/departmentApi"
 import { DepartmentDataType } from "../../types/adminTypes"
+import { unblockedDepartments } from "../../api/user/departmentApi"
 
 function DepartmentGallery() {
     const [list,setList] = useState([])
