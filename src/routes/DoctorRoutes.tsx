@@ -8,6 +8,7 @@ import ListPatientsPage from '../pages/doctor/ListPatientsPage'
 import ListAppointmentsPage from '../pages/doctor/ListAppointmentsPage'
 import ViewPatientPage from '../pages/doctor/ViewPatientPage'
 import ViewSchedulePage from '../pages/doctor/ViewSchedulePage'
+import AddPrescriptionPage from '../pages/doctor/AddPrescriptionPage'
 
 function DoctorRoutes() {
   return (
@@ -23,6 +24,7 @@ function DoctorRoutes() {
         <Route path='/patients/view/:_id' element={<ViewPatientPage/>} />
 
         <Route path='/appointments' element={<ListAppointmentsPage/>} />
+        <Route path='/appointments/prescription/add/:_id' element={<AddPrescriptionPage/>} />
 
         <Route path='/profile/:_id' element={<ViewDoctorProfilePage/>}/>
         <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>

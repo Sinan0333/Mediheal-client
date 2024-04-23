@@ -16,11 +16,12 @@ function ListDoctors() {
     const limit = 13
     const pageCount = Math.ceil(list.length/limit)   
 
+
     useEffect(()=>{
         listDoctorsApi().then((res)=>{
             setList(res.data)
             setPageData(res.data.slice(0,limit))
-            setPages(createInitialPages(res.data.length/limit))
+            setPages(createInitialPages(res.data.length/limit))  
         }).catch((err)=>{
             console.log(err.message);
         })

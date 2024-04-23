@@ -4,7 +4,7 @@ import { getDoctorAppointments } from "../../api/doctor/doctorAppointmentApi"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { AppointmentPopulateData, ResponseData } from "../../types/commonTypes"
-import { cancel,eye} from "../../constants/icons"
+import { cancel,eye, plus} from "../../constants/icons"
 import { cancelBooking } from "../../api/user/appointment"
 import { useNavigate } from "react-router-dom"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
@@ -94,8 +94,11 @@ function ListAppointments() {
                                             {obj.status !="Cancelled" ?<button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleCancel(obj._id,obj.doctor.fees)}>
                                                 <img className="w-full" src={cancel} alt="Button Icon"  />
                                             </button> : ""}
-                                            <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/patients/view/${obj.patient._id}`)}>
+                                            <button className="neumorphic-navBtn mr-1 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/patients/view/${obj.patient._id}`)}>
                                                 <img className="w-full" src={eye} alt="Button Icon"  />
+                                            </button>
+                                            <button className="neumorphic-navBtn mr-1 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/appointments/prescription/add/${obj.patient._id}`)}>
+                                                <img className="w-full" src={plus} alt="Button Icon"  />
                                             </button>
                                         </div>
                                     </td>

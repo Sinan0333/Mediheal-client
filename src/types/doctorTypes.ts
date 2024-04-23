@@ -1,4 +1,6 @@
 import { DepartmentApiType,initialDepartmentApiType } from "./adminTypes"
+import { AppointmentData } from "./commonTypes"
+import { PatientData } from "./userTypes"
 
 export type AddDoctorValidationType  = {
     firstName:string
@@ -165,4 +167,47 @@ export type DoctorAuthResponse = {
 
 export type ViewDoctorProps ={
     upBtn:boolean
+}
+
+export type PrescriptionData = {
+    patient:string 
+    appointment:string 
+    doctor:string
+    weight:number
+    height:number
+    bloodPressure:number
+    bodyTemperature:number
+    diagnosis:Diagnosis[]
+    medicines:Medicines[]
+}
+
+export type PrescriptionPopulateData = {
+    patient:PatientData
+    appointment:AppointmentData
+    doctor:DoctorData
+    weight:number
+    height:number
+    bloodPressure:number
+    bodyTemperature:number
+    diagnosis:Diagnosis[]
+    medicines:Medicines[]
+}
+
+export type Diagnosis ={
+    name:string
+    instruction:string
+}
+
+export type Medicines ={
+    name:string
+    type:string
+    instruction:string
+    days:number
+}
+
+export type AddPrescriptionValidationType={
+    weight:number
+    height:number
+    bloodPressure:number
+    bodyTemperature:number
 }

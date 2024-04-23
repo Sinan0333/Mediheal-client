@@ -5,6 +5,8 @@ const doctorManagementApi= axios.create({
     baseURL:'http://localhost:3000/admin/doctor'
 })
 
+const cancelTokenSource = axios.CancelToken.source();
+
 doctorManagementApi.interceptors.request.use(
 
     (config)=>{
@@ -36,10 +38,16 @@ export const addDoctor = async (data:AddDoctorApi)=>{
 
 export const listDoctorsApi = async ()=>{
     try {         
-        const result =  await doctorManagementApi.get('/list')  
+        const result =  await doctorManagementApi.get('/list',{  cancelToken: cancelTokenSource.token })  
         return result.data
-    } catch (error) {
-        console.log(error);
+    } catch (error:any) {
+
+        if (axios.isCancel(error)) {
+            console.log('Request canceled', error.message); 
+        } else {
+            console.log('Error:', error.message); 
+        }
+
     }
 }
 
@@ -83,3 +91,6 @@ export const changeBlockStatus = async (_id:string | undefined,is_blocked:boolea
 
 
 
+export const cancelRequest = () => {
+    cancelTokenSource.cancel('Request canceled by user'); 
+};
