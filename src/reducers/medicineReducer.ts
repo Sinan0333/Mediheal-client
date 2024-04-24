@@ -7,6 +7,7 @@ export const initialMedicine:Medicines={
     days:0
 }
 
+
 export type medicineAction = 
  | {type:"SET_NAME",payload:string}
  | {type:"SET_TYPE",payload:string}
@@ -26,6 +27,8 @@ export const medicineReducer=(state:Medicines,action:medicineAction):Medicines=>
         case "SET_DAYS":
             return {...state,days:action.payload}
         case "RESET_MEDICINE":
+            console.log('jkdsifj');
+            
             return initialMedicine
         default:
             return state

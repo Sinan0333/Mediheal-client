@@ -12,7 +12,7 @@ function TransactionHistory() {
   const [pageData,setPageData] = useState<WalletHistoryData[]>([])
   const [pages,setPages] = useState<number[]>([])
   const [currentPage,setCurrentPage] = useState<number>(1)
-  const limit = 13
+  const limit = 9
   const pageCount = Math.ceil(list.length/limit)   
 
   useEffect(()=>{
@@ -39,13 +39,13 @@ function TransactionHistory() {
 }
 
   return (
-  <div className="flex-1 h-98   mx-auto md:mx-0  md:mb-0  dark:bg-zinc-700 p-4 rounded-lg " >
-    <div className="w-full h-98 flex flex-col  items-center">
+  <div className="flex-1 mx-auto md:mx-0  md:mb-0  dark:bg-zinc-700 p-4 rounded-lg " >
+    <div className="w-full  flex flex-col  items-center">
       <div className="flex justify-between w-full mb-4">
         <h1 className="font-bold">Transaction History</h1>
         <h1 className="font-bold">Balance: {wallet}</h1>
       </div>
-      <div className="overflow-x-auto w-full" style={{scrollbarWidth:"none"}}>
+      <div className=" w-full" style={{scrollbarWidth:"none"}}>
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr >
@@ -71,34 +71,34 @@ function TransactionHistory() {
       </div>
     </div>
     <div className="flex justify-center items-center mt-8">
-            <nav className="flex">
-                {
-                    currentPage === 1 ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 rounded-lg hover:bg-gray-300"onClick={()=>handleClick(currentPage-1)}>Previous</p>
-                }
-                {
-                    pages.map((page)=>{
-                        return(
-                            <p key={page} className={`${currentPage === page ?"neumorphic-pagination-clicked":"neumorphic-pagination"} flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300`} onClick={()=>handleClick(page)}>{page}</p>
+      <nav className="flex">
+          {
+              currentPage === 1 ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 rounded-lg hover:bg-gray-300"onClick={()=>handleClick(currentPage-1)}>Previous</p>
+          }
+          {
+              pages.map((page)=>{
+                  return(
+                      <p key={page} className={`${currentPage === page ?"neumorphic-pagination-clicked":"neumorphic-pagination"} flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300`} onClick={()=>handleClick(page)}>{page}</p>
 
-                        )
-                    })
-                }    
-                    
-                {
-                    pageCount > 4 && pageCount-1 > currentPage? (
-                        <>
-                            <span className="px-3 py-1">...</span>
-                            <p className="neumorphic-pagination flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300" onClick={()=>handleClick(pageCount)}>{pageCount}</p>
-                        </>
-                    ) : null
-                }
-                
-                {
-                    currentPage === pageCount ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 ml-2  rounded-lg hover:bg-gray-300" onClick={()=>handleClick(currentPage+1)}>Next</p>
-                }
-                
-            </nav>
-        </div>
+                  )
+              })
+          }    
+              
+          {
+              pageCount > 4 && pageCount-1 > currentPage? (
+                  <>
+                      <span className="px-3 py-1">...</span>
+                      <p className="neumorphic-pagination flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300" onClick={()=>handleClick(pageCount)}>{pageCount}</p>
+                  </>
+              ) : null
+          }
+          
+          {
+              currentPage === pageCount ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 ml-2  rounded-lg hover:bg-gray-300" onClick={()=>handleClick(currentPage+1)}>Next</p>
+          }
+          
+      </nav>
+    </div>
   </div>
   )
 }

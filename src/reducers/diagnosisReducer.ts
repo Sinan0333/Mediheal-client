@@ -5,6 +5,7 @@ export const initialDiagnosis:Diagnosis={
     instruction:""
 }
 
+
 export type diagnosisAction =
  | {type:"SET_NAME",payload:string}
  | {type:"SET_INSTRUCTION",payload:string}

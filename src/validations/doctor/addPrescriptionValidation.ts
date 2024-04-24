@@ -5,6 +5,7 @@ export const addMedicineValidation = ({days,instruction,name,type}:Medicines):st
     if(!type) return "Type is required"
     if(!instruction) return "Instruction is required"
     if(days === 0) return "Days is required"
+    if(days < 0) return "Days must be greater than 0"
     return "Success"
 }
 
@@ -15,9 +16,9 @@ export const addDiagnosisValidation = ({name,instruction}:Diagnosis):string => {
 }
 
 export const addPrescriptionValidation = ({bloodPressure,height,weight,bodyTemperature}:AddPrescriptionValidationType):string => {
-    if(weight === 0) return "Weight is required"
-    if(height === 0) return "Height is required"
-    if(bloodPressure === 0) return "Blood Pressure is required"
-    if(bodyTemperature === 0) return "Body Temperature is required"
+    if(weight < 0) return "Weight must be greater than 0"
+    if(height < 0) return "Height must be greater than 0"
+    if(bloodPressure < 0) return "Blood Pressure must be greater than 0"
+    if(bodyTemperature < 0) return "Body must be greater than 0"
     return "Success"
 }

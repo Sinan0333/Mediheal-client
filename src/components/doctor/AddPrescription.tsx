@@ -22,7 +22,7 @@ function AddPrescription() {
   const [diagnosis,setDiagnosis] = useReducer(diagnosisReducer,initialDiagnosis)
   const [listDiagnosis,setListDiagnosis] = useState<Diagnosis[]>([]);
   const doctorId = useSelector((state:RootState)=>state.doctor._id)
-  const {_id} = useParams()
+  const {patId,_id} = useParams()
   const navigate = useNavigate()
 
   const addMedicine = ()=>{
@@ -44,8 +44,10 @@ function AddPrescription() {
   const handleSubmit = async()=>{
     const result = addPrescriptionValidation({weight,height,bloodPressure,bodyTemperature})
     if(result !== 'Success') return notifyError(result)
-    if(!_id) return notifyError("Id is missing")
-    const response:ResponseData = await addPrescription({patient:_id,appointment:"662041a5c5dcd95d9ba1f349",doctor:doctorId,bloodPressure,height,weight,bodyTemperature,medicines:listMedicines,diagnosis:listDiagnosis})
+
+    if(!_id || !patId) return notifyError("Id is missing")
+    const response:ResponseData = await addPrescription({patient:patId,appointment:_id,doctor:doctorId,bloodPressure,height,weight,bodyTemperature,medicines:listMedicines,diagnosis:listDiagnosis})
+  
     if(!response.status) notifyError(response.message)
     navigate("/doctor/patients")
   }
@@ -85,16 +87,16 @@ function AddPrescription() {
               <tr><td><td><td><td><td></td></td></td></td></td></tr>
                 <tr>
                     <td>
-                        <input className="flex-grow h-8 py-2 w-full bg-transparent border-transparent focus:outline-none" type="text"  placeholder="Medicine Name" onChange={(e)=>setMedicine({type:'SET_NAME',payload:e.target.value})}/>
+                        <input className="flex-grow h-8 py-2 w-full bg-transparent border-transparent focus:outline-none" type="text" value={medicine.name}  placeholder="Medicine Name" onChange={(e)=>setMedicine({type:'SET_NAME',payload:e.target.value})}/>
                     </td>
                     <td>
-                        <input className="flex-grow h-8 py-2  w-full bg-transparent border-transparent focus:outline-none" type="text"  placeholder="Medicine Type" onChange={(e)=>setMedicine({type:'SET_TYPE',payload:e.target.value})}/>
+                        <input className="flex-grow h-8 py-2  w-full bg-transparent border-transparent focus:outline-none" type="text" value={medicine.type}  placeholder="Medicine Type" onChange={(e)=>setMedicine({type:'SET_TYPE',payload:e.target.value})}/>
                     </td>
                     <td>
-                        <input className="flex-grow h-8 py-2  w-full bg-transparent border-transparent focus:outline-none" type="text"  placeholder="Instruction" onChange={(e)=>setMedicine({type:'SET_INSTRUCTION',payload:e.target.value})}/>
+                        <input className="flex-grow h-8 py-2  w-full bg-transparent border-transparent focus:outline-none" type="text" value={medicine.instruction}  placeholder="Instruction" onChange={(e)=>setMedicine({type:'SET_INSTRUCTION',payload:e.target.value})}/>
                     </td>
                     <td>
-                        <input className="flex-grow h-8 py-2  bg-transparent border-transparent focus:outline-none" type="number"  placeholder="Days" onChange={(e)=>setMedicine({type:'SET_DAYS',payload:parseInt(e.target.value)})}/>
+                        <input className="flex-grow h-8 py-2  bg-transparent border-transparent focus:outline-none" type="number" value={medicine.days}  placeholder="Days" onChange={(e)=>setMedicine({type:'SET_DAYS',payload:parseInt(e.target.value)})}/>
                     </td>
                     <td>
                       <button className="neumorphic-navBtn  py-1 px-1 w-7 h-7 rounded-lg" onClick={addMedicine}>
@@ -134,11 +136,11 @@ function AddPrescription() {
               <tr><td><td><td><td><td></td></td></td></td></td></tr>
                 <tr>
                     <td>
-                        <input className="flex-grow h-8 py-2 w-full bg-transparent border-transparent focus:outline-none" type="text"  placeholder="Diagnosis Name" onChange={(e)=>setDiagnosis({type:'SET_NAME',payload:e.target.value})}/>
+                        <input className="flex-grow h-8 py-2 w-full bg-transparent border-transparent focus:outline-none" type="text" value={diagnosis.name}  placeholder="Diagnosis Name" onChange={(e)=>setDiagnosis({type:'SET_NAME',payload:e.target.value})}/>
                     </td>
                     
                     <td>
-                        <input className="flex-grow h-8 py-2  w-full bg-transparent border-transparent focus:outline-none" type="text"  placeholder="Instruction" onChange={(e)=>setDiagnosis({type:'SET_INSTRUCTION',payload:e.target.value})}/>
+                        <input className="flex-grow h-8 py-2  w-full bg-transparent border-transparent focus:outline-none" type="text" value={diagnosis.instruction}  placeholder="Instruction" onChange={(e)=>setDiagnosis({type:'SET_INSTRUCTION',payload:e.target.value})}/>
                     </td>
                     <td>
                       <button className="neumorphic-navBtn  py-1 px-1 w-7 h-7 rounded-lg" onClick={addDiagnosis}>
