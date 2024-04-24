@@ -37,7 +37,7 @@ function EditBed() {
             setCharge(res.data.charge)
             setAvailable(res.data.available)
             if(res.data.patient){
-                setPatient(res.data.patient._id)
+                setPatient(res.data.patient.id)
                 setAssignDate(convertDateToHumanReadable(res.data.assignDate))
                 setDischargeDate(convertDateToHumanReadable(res.data.dischargeDate))
                 setDescription(res.data.description)
