@@ -9,6 +9,7 @@ import ListAppointmentsPage from '../pages/doctor/ListAppointmentsPage'
 import ViewPatientPage from '../pages/doctor/ViewPatientPage'
 import ViewSchedulePage from '../pages/doctor/ViewSchedulePage'
 import AddPrescriptionPage from '../pages/doctor/AddPrescriptionPage'
+import DoctorSideChat from '../components/doctor/DoctorSideChat'
 
 function DoctorRoutes() {
   return (
@@ -30,6 +31,7 @@ function DoctorRoutes() {
         <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>
         
         <Route path='/schedule' element={<ViewSchedulePage/>}/>
+        <Route path='/chat' element={<DoctorSideChat/>}/>
 
         <Route path='*' element={<Error404/>} />
 

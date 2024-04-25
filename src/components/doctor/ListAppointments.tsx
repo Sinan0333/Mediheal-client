@@ -4,7 +4,7 @@ import { getDoctorAppointments } from "../../api/doctor/doctorAppointmentApi"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { AppointmentPopulateData, ResponseData } from "../../types/commonTypes"
-import { cancel,eye, plus} from "../../constants/icons"
+import { cancel,chat,eye, plus} from "../../constants/icons"
 import { cancelBooking } from "../../api/user/appointment"
 import { useNavigate } from "react-router-dom"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
@@ -77,7 +77,7 @@ function ListAppointments() {
                         <th className="px-4 py-2 text-left w-auto">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     {
                         pageData.map((obj,i)=>{
                             return(
@@ -102,6 +102,11 @@ function ListAppointments() {
                                            {
                                             obj.status === "Pending" ?  <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/appointments/prescription/add/${obj.patient._id}/${obj._id}`)}>
                                             <img className="w-full" src={plus} alt="Button Icon"  />
+                                            </button> : ""
+                                           }
+                                           {
+                                            obj.status === "Pending" && obj.type === "Online" ? <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/chat`)}>
+                                            <img className="w-full" src={chat} alt="Button Icon"  />
                                             </button> : ""
                                            }
                                         </div>
