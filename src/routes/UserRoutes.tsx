@@ -14,7 +14,7 @@ import Sample from '../components/common/Sample.tsx'
 import BookingHistoryPage from '../pages/user/BookingHistoryPage.tsx'
 import TransactionHistoryPage from '../pages/user/TransactionHistoryPage.tsx'
 import PatientsPage from '../pages/user/PatientsPage.tsx'
-import Chat from '../components/common/Chat.tsx'
+import UserSideChat from '../components/user/UserSideChat.tsx'
 
 function UserRoutes() {
   return (
@@ -43,7 +43,7 @@ function UserRoutes() {
           <Route path='/payment_cancel' element={<CancelPage/>}/>
 
           <Route path='/sample' element={<Sample/>}/>
-          <Route path='/chat' element={<Chat/>}/>
+          <Route path='/chat/:_id' element={<UserSideChat/>}/>
 
           <Route path='*' element={<Error404/>} />
 

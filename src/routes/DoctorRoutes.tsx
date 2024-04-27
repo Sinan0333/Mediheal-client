@@ -31,7 +31,7 @@ function DoctorRoutes() {
         <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>
         
         <Route path='/schedule' element={<ViewSchedulePage/>}/>
-        <Route path='/chat' element={<DoctorSideChat/>}/>
+        <Route path='/chat/:_id' element={<DoctorSideChat/>}/>
 
         <Route path='*' element={<Error404/>} />
 

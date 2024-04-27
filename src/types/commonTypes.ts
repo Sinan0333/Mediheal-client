@@ -82,3 +82,14 @@ export type AppointmentPopulateData ={
     status:string
     type:string
 }
+
+export type MessageType = {
+    sender:string
+    receiver:string
+    text:string
+}
+
+export type GetChatDataApiType = {
+    sender:string
+    receiver:string
+}

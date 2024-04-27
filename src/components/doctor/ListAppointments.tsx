@@ -105,7 +105,7 @@ function ListAppointments() {
                                             </button> : ""
                                            }
                                            {
-                                            obj.status === "Pending" && obj.type === "Online" ? <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/chat`)}>
+                                            obj.status === "Pending" && obj.type === "Online" ? <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/chat/${obj.userId}`)}>
                                             <img className="w-full" src={chat} alt="Button Icon"  />
                                             </button> : ""
                                            }
