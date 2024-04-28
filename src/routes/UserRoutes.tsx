@@ -43,7 +43,7 @@ function UserRoutes() {
           <Route path='/payment_cancel' element={<CancelPage/>}/>
 
           <Route path='/sample' element={<Sample/>}/>
-          <Route path='/chat/:_id' element={<UserSideChat/>}/>
+          <Route path='/chat/:chatId/:patId' element={<UserSideChat/>}/>
 
           <Route path='*' element={<Error404/>} />
 

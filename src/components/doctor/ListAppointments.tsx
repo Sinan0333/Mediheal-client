@@ -60,10 +60,13 @@ function ListAppointments() {
     }
 
     const handleChatClick = async (_id:string | undefined)=>{
+
         if(!_id) return notifyError("Something wrong")
         const response:ResponseData = await addChatId(_id,doctorId)
+
         if(!response.status) return notifyError(response.message)
-        navigate(`/doctor/chat/${response.data.userId}`)
+        navigate(`/doctor/chat/${response.data.patient._id}`)
+    
     }
 
 
