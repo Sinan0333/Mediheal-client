@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { notifyError } from "../../constants/toast"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
+import { useNavigate } from "react-router-dom"
 
 function BookingHistory() {
     const [list,setList] =useState<AppointmentPopulateData[]>([])
@@ -13,6 +14,7 @@ function BookingHistory() {
     const [pageData,setPageData] = useState<AppointmentPopulateData[]>([])
     const [pages,setPages] = useState<number[]>([])
     const [currentPage,setCurrentPage] = useState<number>(1)
+    const navigate = useNavigate()
     const limit = 13
     const pageCount = Math.ceil(list.length/limit)   
 
@@ -80,7 +82,7 @@ function BookingHistory() {
                     Status
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Cancel
+                    Action
                 </th>
             </tr>
         </thead>
@@ -111,7 +113,27 @@ function BookingHistory() {
                                 {obj.status}
                             </td>
                             <td className="px-6 py-4">
-                               {obj.status == "Pending" ? <button type="button" className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onClick={()=>handleCancel(obj._id,obj.doctor.fees)}>Cancel</button> : ""} 
+                                {obj.status === "Cancelled" || obj.status === "Checked" ? (
+                                    ""
+                                ) : (
+                                    obj.status === "Pending" && obj.chatId ? (
+                                        <button
+                                            type="button"
+                                            className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900"
+                                            onClick={() => navigate(`/chat/${obj.chatId}`)}
+                                        >
+                                            Join Now
+                                        </button>
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                                            onClick={() => handleCancel(obj._id, obj.doctor.fees)}
+                                        >
+                                            Cancel
+                                        </button>
+                                    )
+                                )}
                             </td>
                         </tr> 
                     )

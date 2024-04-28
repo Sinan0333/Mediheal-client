@@ -65,6 +65,7 @@ export type AppointmentData ={
     doctor:string | undefined
     patient:string
     bookedDate:Date
+    chatId:string
     status:"Pending" | "Checked" | "Cancelled"
     type:"Online" | 'Offline'
 }
@@ -79,6 +80,7 @@ export type AppointmentPopulateData ={
     doctor:DoctorData
     patient:PatientData
     bookedDate:Date
+    chatId:string
     status:string
     type:string
 }

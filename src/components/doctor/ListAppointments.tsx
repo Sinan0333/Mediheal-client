@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { notifyError, notifySuccess } from "../../constants/toast"
-import { getDoctorAppointments } from "../../api/doctor/doctorAppointmentApi"
+import { addChatId, getDoctorAppointments } from "../../api/doctor/doctorAppointmentApi"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { AppointmentPopulateData, ResponseData } from "../../types/commonTypes"
@@ -59,6 +59,13 @@ function ListAppointments() {
         }
     }
 
+    const handleChatClick = async (_id:string | undefined)=>{
+        if(!_id) return notifyError("Something wrong")
+        const response:ResponseData = await addChatId(_id,doctorId)
+        if(!response.status) return notifyError(response.message)
+        navigate(`/doctor/chat/${response.data.userId}`)
+    }
+
 
   return (
     <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
@@ -105,7 +112,7 @@ function ListAppointments() {
                                             </button> : ""
                                            }
                                            {
-                                            obj.status === "Pending" && obj.type === "Online" ? <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/chat/${obj.userId}`)}>
+                                            obj.status === "Pending" && obj.type === "Online" ? <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleChatClick(obj._id)}>
                                             <img className="w-full" src={chat} alt="Button Icon"  />
                                             </button> : ""
                                            }

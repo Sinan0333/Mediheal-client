@@ -47,7 +47,7 @@ function DoctorDetails() {
     try {
 
       if(!selectedSlot._id) return notifyError("Id is missing")
-      const result:string = bookNowValidation({slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),userId})
+      const result:string = bookNowValidation({slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),userId,chatId:""})
       if(result != "Success") return notifyError(result)
 
       
@@ -57,7 +57,7 @@ function DoctorDetails() {
         sessionId:response2.data
       }) 
 
-      const response3:ResponseData = await confirmBooking(data.slots._id,{slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type,bookedDate:new Date(),userId})
+      const response3:ResponseData = await confirmBooking(data.slots._id,{slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type,bookedDate:new Date(),userId,chatId:""})
       if(!response3.status) notifyError(response3.message)
 
     } catch (error) {
