@@ -61,3 +61,12 @@ export const addChatId = async (_id:string,chatId:string)=>{
         console.log(error);
     }
 }
+
+export const removeChatId = async (_id:string)=>{
+    try { 
+        const result =  await doctorAppointmentApi.post(`/remove_chatId/${_id}`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
