@@ -12,7 +12,7 @@ import { MessageType, ResponseData } from '../../types/commonTypes';
 import DoctorChatHeader from './DoctorChatHeader';
 import { getPatientApi } from '../../api/doctor/doctorPatient';
 import { PatientData } from '../../types/userTypes';
-import { removeChatId } from '../../api/doctor/doctorAppointmentApi';
+import { changeAChatStatus } from '../../api/doctor/doctorAppointmentApi';
 
 const socket = io('http://localhost:3000');
 
@@ -22,7 +22,7 @@ function DoctorSideChat() {
     const [messageText, setMessageText] = useState('');
     const [patientData ,setPatientData] = useState<PatientData>({} as PatientData)  
     const doctorId = useSelector((state:RootState)=>state.doctor._id)
-    const {_id} = useParams()
+    const {_id,patId} = useParams()
     const navigate = useNavigate()
 
     useEffect(()=>{
@@ -57,9 +57,9 @@ function DoctorSideChat() {
 
     const endSession = async() => {
 
-        if(!_id) return notifyError("Something wrong please try again later")
-        const response:ResponseData = await removeChatId(_id) 
-    
+        if(!_id || !patId) return notifyError("Something wrong please try again later")
+        const response:ResponseData = await changeAChatStatus(patId,false) 
+
         if(!response.status) return notifyError(response.message)
         socket.emit('end_session',_id)
         navigate(-1)

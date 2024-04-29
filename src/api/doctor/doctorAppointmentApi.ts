@@ -53,18 +53,9 @@ export const cancelBookingWhenBreak = async (slotId:string)=>{
     }
 }
 
-export const addChatId = async (_id:string,chatId:string)=>{
+export const changeAChatStatus = async (_id:string,chat:boolean)=>{
     try { 
-        const result =  await doctorAppointmentApi.post("/add_chatId",{_id,chatId}) 
-        return result.data 
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export const removeChatId = async (_id:string)=>{
-    try { 
-        const result =  await doctorAppointmentApi.post(`/remove_chatId/${_id}`) 
+        const result =  await doctorAppointmentApi.post("/change_chat_status",{_id,chat}) 
         return result.data 
     } catch (error) {
         console.log(error);
