@@ -87,7 +87,7 @@ function ListAppointments() {
                         <th className="px-4 py-2 text-left w-auto">Actions</th>
                     </tr>
                 </thead>
-                <tbody >
+                <tbody>
                     {
                         pageData.map((obj,i)=>{
                             return(
@@ -100,24 +100,24 @@ function ListAppointments() {
                                     <td className="px-4 py-2">{obj.type}</td>
                                     <td className="px-4 py-2">{obj.status}</td>
                                     <td className="px-4 py-2">
-                                        <div className="flex">
-                                            {
-                                            obj.status ==="Pending" ?<button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleCancel(obj._id,obj.doctor.fees)}>
-                                                <img className="w-full" src={cancel} alt="Button Icon"  />
-                                            </button> : ""
-                                            }
+                                        <div className="flex ">
                                             <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/patients/view/${obj.patient._id}`)}>
                                                 <img className="w-full" src={eye} alt="Button Icon"  />
                                             </button>
                                            {
-                                            obj.status === "Pending" ?  <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/appointments/prescription/add/${obj.patient._id}/${obj._id}`)}>
+                                               obj.status === "Pending" && obj.type === "Online" ? <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleChatClick(obj._id)}>
+                                            <img className="w-full" src={chat} alt="Button Icon"  />
+                                            </button> : ""
+                                           }
+                                           {
+                                               obj.status === "Pending" ?  <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/appointments/prescription/add/${obj.patient._id}/${obj._id}`)}>
                                             <img className="w-full" src={plus} alt="Button Icon"  />
                                             </button> : ""
                                            }
                                            {
-                                            obj.status === "Pending" && obj.type === "Online" ? <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleChatClick(obj._id)}>
-                                            <img className="w-full" src={chat} alt="Button Icon"  />
-                                            </button> : ""
+                                           obj.status ==="Pending" ?<button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleCancel(obj._id,obj.doctor.fees)}>
+                                               <img className="w-full" src={cancel} alt="Button Icon"  />
+                                           </button> : ""
                                            }
                                         </div>
                                     </td>

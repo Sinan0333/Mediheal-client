@@ -78,6 +78,15 @@ export const updateBedApi = async (_id:string | undefined,data:BedEditData)=>{
     }
 }
 
+export const updateBedTypeAndCharge = async (_id:string,type:string,charge:number,is_blocked:boolean)=>{
+    try { 
+        const result =  await bedManagementApi.post(`/update/${_id}`,{type,charge,is_blocked})  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const dischargePatientApi = async (_id:string | undefined)=>{
     try { 
         const result =  await bedManagementApi.put(`/discharge/${_id}`)  

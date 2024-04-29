@@ -4,7 +4,7 @@ import { notifyError, notifySuccess } from "../../constants/toast"
 import { ResponseData } from "../../types/commonTypes"
 import { useNavigate, useParams } from "react-router-dom"
 import { editBedValidation } from "../../validations/admin/bedValidation"
-import { dischargePatientApi, getBedDetailsApi, updateBedApi } from "../../api/admin/bedManagementApi"
+import { dischargePatientApi, getBedDetailsApi, updateBedApi, updateBedTypeAndCharge } from "../../api/admin/bedManagementApi"
 import { DoctorCardProps } from "../../types/doctorTypes"
 import { convertDateToHumanReadable, convertHumanReadableToDate } from "../../constants/convert"
 import NewDateInput from "../common/NewDateInput"
@@ -18,6 +18,7 @@ function EditBed() {
     const [dischargeDate,setDischargeDate] = useState<Date | string>("")
     const [description,setDescription] = useState<string>("")
     const [assignBy,setAssignBy] = useState<string>("")
+    const [isBlocked,setIsBlocked] = useState<boolean>(false)
     const [available,setAvailable] = useState<boolean>(true)
     const [doctors,setDoctors] = useState<DoctorCardProps[]>()
     const [doctorName,setDoctorName] = useState<string>("")
@@ -36,6 +37,7 @@ function EditBed() {
             setType(res.data.type)
             setCharge(res.data.charge)
             setAvailable(res.data.available)
+            setIsBlocked(res.data.is_Blocked)
             if(res.data.patient){
                 setPatient(res.data.patient.id)
                 setAssignDate(convertDateToHumanReadable(res.data.assignDate))
@@ -57,27 +59,32 @@ function EditBed() {
     }
 
     async function handleSubmit() {
-  
-      let newAssignDate;
-      if(typeof(assignDate)==='object') newAssignDate = assignDate
-      else newAssignDate = convertHumanReadableToDate(assignDate)
+     try{  
+        if(!_id) return notifyError("Something wrong") 
+        if(patient){
+            let newAssignDate;
+            if(typeof(assignDate)==='object') newAssignDate = assignDate
+            else newAssignDate = convertHumanReadableToDate(assignDate)
+      
+            let newDischargeDate;
+            if(typeof(dischargeDate)==='object') newDischargeDate = dischargeDate
+            else newDischargeDate = convertHumanReadableToDate(dischargeDate)
+      
+            const validation: string = editBedValidation({ type,charge,patient,assignBy,assignDate:newAssignDate,dischargeDate:newDischargeDate,description});
+            if (validation !== "Success") return notifyError(validation);
 
-      let newDischargeDate;
-      if(typeof(dischargeDate)==='object') newDischargeDate = dischargeDate
-      else newDischargeDate = convertHumanReadableToDate(dischargeDate)
+            const response:ResponseData = await updateBedApi(_id,{type,charge,patient,assignBy,assignDate:newAssignDate,dischargeDate,available,description})
+            if(!response.status) return notifyError(response.message)
+            notifySuccess(response.message)
+            navigate('/admin/bed')
 
-      const validation: string = editBedValidation({ type,charge,patient,assignBy,assignDate:newAssignDate,dischargeDate:newDischargeDate,description,});
-      if (validation !== "Success") return notifyError(validation);
-  
-      try {
-        
-        if(_id){
-            const response:ResponseData =await updateBedApi(_id,{type,charge,patient,assignBy,assignDate:newAssignDate,dischargeDate,available,description})
+        }else{
+            const response:ResponseData = await updateBedTypeAndCharge(_id,type,charge,isBlocked)
             if(!response.status) return notifyError(response.message)
             notifySuccess(response.message)
             navigate('/admin/bed')
         }
-        
+  
   
       } catch (error) {
         console.error(error);
