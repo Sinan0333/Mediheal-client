@@ -61,3 +61,13 @@ export const changeAChatStatus = async (_id:string,chat:boolean)=>{
         console.log(error);
     }
 }
+
+export const changeStatus = async (_id:string)=>{
+    try { 
+        const result =  await doctorAppointmentApi.get(`/change_status?_id=${_id}&status=Checked`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+

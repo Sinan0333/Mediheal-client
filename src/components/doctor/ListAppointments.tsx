@@ -63,7 +63,6 @@ function ListAppointments() {
 
         if(!_id) return notifyError("Something wrong")
         const response:ResponseData = await changeAChatStatus(_id,true)
-console.log(response);
 
         if(!response.status) return notifyError(response.message)
         navigate(`/doctor/chat/${response.data.patient._id}/${response.data._id}`)

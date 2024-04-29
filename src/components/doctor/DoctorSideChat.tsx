@@ -12,7 +12,7 @@ import { MessageType, ResponseData } from '../../types/commonTypes';
 import DoctorChatHeader from './DoctorChatHeader';
 import { getPatientApi } from '../../api/doctor/doctorPatient';
 import { PatientData } from '../../types/userTypes';
-import { changeAChatStatus } from '../../api/doctor/doctorAppointmentApi';
+import { changeAChatStatus, changeStatus } from '../../api/doctor/doctorAppointmentApi';
 
 const socket = io('http://localhost:3000');
 
@@ -27,14 +27,14 @@ function DoctorSideChat() {
 
     useEffect(()=>{
 
-        if(!_id)return notifyError("something wrong pleas try again later") 
+        if(!_id || !patId)return notifyError("something wrong pleas try again later") 
         socket.emit('add_user',doctorId);
 
-        getChatData({sender:doctorId,receiver:_id}).then((res)=>{
+        getChatData({sender:doctorId,receiver:patId}).then((res)=>{
             setMessages(res.data)
         }).catch((err)=>console.log(err))
 
-        getPatientApi(_id).then((res)=>{
+        getPatientApi(patId).then((res)=>{
             setPatientData(res.data)
         }).catch((err)=>console.log(err))
 
@@ -48,20 +48,24 @@ function DoctorSideChat() {
     
     const sendMessage =async () => {
 
-        if(!_id) return notifyError("Something wrong please try again later") 
-        socket.emit('sendMessage', {sender:doctorId,receiver:_id, text: messageText });
+        if(!_id || !patId) return notifyError("Something wrong please try again later") 
+        socket.emit('sendMessage', {sender:doctorId,receiver:patId, text: messageText });
 
-        await createMessage({sender:doctorId,receiver:_id, text: messageText })
+        await createMessage({sender:doctorId,receiver:patId, text: messageText })
         setMessageText('');
     };
 
     const endSession = async() => {
 
         if(!_id || !patId) return notifyError("Something wrong please try again later")
-        const response:ResponseData = await changeAChatStatus(patId,false) 
+        const response:ResponseData = await changeAChatStatus(_id,false) 
 
         if(!response.status) return notifyError(response.message)
-        socket.emit('end_session',_id)
+        socket.emit('end_session',patId)
+        
+        const response2:ResponseData = await changeStatus(_id)
+        if(!response2.status) return notifyError(response2.message)
+        
         navigate(-1)
     }
 
