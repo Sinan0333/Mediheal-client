@@ -8,17 +8,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import {Provider} from "react-redux"
 import store,{persistor} from './store/store.ts'
 import { PersistGate } from 'redux-persist/integration/react'
+import { SocketProvider } from './store/context/socketContext.tsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-        <ToastContainer />
-        <App />
-        </PersistGate>
-      </Provider>
+      <SocketProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+          <ToastContainer />
+          <App />
+          </PersistGate>
+        </Provider>
+      </SocketProvider>
     </Router>
   </React.StrictMode>,
 )

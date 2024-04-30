@@ -1,5 +1,4 @@
 import  { useState, useEffect } from 'react';
-import io from 'socket.io-client';
 import DoctorChatInput from "./DoctorChatInput"
 import DoctorMessage from "./DoctorMessage"
 import UserResponse from "./UserResponse"
@@ -13,9 +12,8 @@ import DoctorChatHeader from './DoctorChatHeader';
 import { getPatientApi } from '../../api/doctor/doctorPatient';
 import { PatientData } from '../../types/userTypes';
 import { changeAChatStatus, changeStatus } from '../../api/doctor/doctorAppointmentApi';
-
-const socket = io('http://localhost:3000');
-
+import { useSocket } from '../../store/context/socketContext';
+import { Socket } from 'socket.io-client';
 
 function DoctorSideChat() {
     const [messages, setMessages] = useState<MessageType[]>([])
@@ -24,6 +22,7 @@ function DoctorSideChat() {
     const doctorId = useSelector((state:RootState)=>state.doctor._id)
     const {_id,patId} = useParams()
     const navigate = useNavigate()
+    const socket:Socket = useSocket()
 
     useEffect(()=>{
 
@@ -41,7 +40,7 @@ function DoctorSideChat() {
     },[])
 
     useEffect(() => {
-        socket.on('message', (message) => {
+        socket.on('message', (message:MessageType) => {
           setMessages([...messages, {sender: message.sender,receiver:message.receiver, text: message.text}]);
         });
     }, [messages]);
