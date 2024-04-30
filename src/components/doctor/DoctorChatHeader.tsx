@@ -5,9 +5,10 @@ type DoctorChatHeaderProps = {
     image?:string | File
     id:string | undefined
     endSession:() => void
+    handleCall:() => void
 }
 
-function DoctorChatHeader({image,name,id,endSession}:DoctorChatHeaderProps) {
+function DoctorChatHeader({image,name,id,endSession,handleCall}:DoctorChatHeaderProps) {
     const imageUrl = `https://res.cloudinary.com/dw2cscitl/${image}`
 
   return (
@@ -27,7 +28,7 @@ function DoctorChatHeader({image,name,id,endSession}:DoctorChatHeaderProps) {
         </div>
 
         <div className="flex">
-            <div className="w-6 h-6 cursor-pointer">
+            <div className="w-6 h-6 cursor-pointer" onClick={handleCall}>
                 <img src={video} alt="" />
             </div>
             <div className="w-6 h-6 cursor-pointer ml-6" onClick={endSession}>

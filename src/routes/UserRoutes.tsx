@@ -15,6 +15,7 @@ import BookingHistoryPage from '../pages/user/BookingHistoryPage.tsx'
 import TransactionHistoryPage from '../pages/user/TransactionHistoryPage.tsx'
 import PatientsPage from '../pages/user/PatientsPage.tsx'
 import UserSideChat from '../components/user/UserSideChat.tsx'
+import VideoCall from '../components/common/VideoCall.tsx'
 
 function UserRoutes() {
   return (
@@ -44,6 +45,7 @@ function UserRoutes() {
 
           <Route path='/sample' element={<Sample/>}/>
           <Route path='/chat/:chatId/:patId' element={<UserSideChat/>}/>
+          <Route path='/call' element={<VideoCall/>}/>
 
           <Route path='*' element={<Error404/>} />
 
