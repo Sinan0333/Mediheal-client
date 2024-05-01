@@ -7,11 +7,10 @@ import { RootState } from '../../store/store';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createMessage, getChatData } from '../../api/doctor/doctorChat';
 import { notifyError } from '../../constants/toast';
-import { MessageType, ResponseData } from '../../types/commonTypes';
+import { MessageType } from '../../types/commonTypes';
 import DoctorChatHeader from './DoctorChatHeader';
 import { getPatientApi } from '../../api/doctor/doctorPatient';
 import { PatientData } from '../../types/userTypes';
-import { changeAChatStatus, changeStatus } from '../../api/doctor/doctorAppointmentApi';
 import { useSocket } from '../../store/context/socketContext';
 import { Socket } from 'socket.io-client';
 
@@ -57,14 +56,7 @@ function DoctorSideChat() {
     const endSession = async() => {
 
         if(!_id || !patId) return notifyError("Something wrong please try again later")
-        const response:ResponseData = await changeAChatStatus(_id,false) 
-
-        if(!response.status) return notifyError(response.message)
         socket.emit('end_session',patId)
-        
-        const response2:ResponseData = await changeStatus(_id)
-        if(!response2.status) return notifyError(response2.message)
-        
         navigate(-1)
     }
 

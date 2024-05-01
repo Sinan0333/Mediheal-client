@@ -8,6 +8,8 @@ import { cancel,chat,eye, plus} from "../../constants/icons"
 import { cancelBooking } from "../../api/user/appointment"
 import { useNavigate } from "react-router-dom"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
+import { useSocket } from "../../store/context/socketContext"
+import { Socket } from "socket.io-client"
 
 function ListAppointments() {
 
@@ -20,6 +22,7 @@ function ListAppointments() {
     const limit = 13
     const pageCount = Math.ceil(list.length/limit)   
     const navigate = useNavigate()
+    const socket:Socket = useSocket()
 
 
     useEffect(()=>{
@@ -65,6 +68,8 @@ function ListAppointments() {
         const response:ResponseData = await changeAChatStatus(_id,true)
 
         if(!response.status) return notifyError(response.message)
+            
+        socket.emit("chat:started",{to:response.data.userId})
         navigate(`/doctor/chat/${response.data.patient._id}/${response.data._id}`)
     
     }

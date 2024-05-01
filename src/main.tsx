@@ -14,14 +14,14 @@ import { SocketProvider } from './store/context/socketContext.tsx'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
-      <SocketProvider>
-        <Provider store={store}>
+      <Provider store={store}>
+        <SocketProvider>
           <PersistGate loading={null} persistor={persistor}>
           <ToastContainer />
           <App />
           </PersistGate>
-        </Provider>
-      </SocketProvider>
+        </SocketProvider>
+      </Provider>
     </Router>
   </React.StrictMode>,
 )

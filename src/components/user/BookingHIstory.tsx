@@ -6,6 +6,8 @@ import { RootState } from "../../store/store"
 import { notifyError } from "../../constants/toast"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
 import { useNavigate } from "react-router-dom"
+import { Socket } from "socket.io-client"
+import { useSocket } from "../../store/context/socketContext"
 
 function BookingHistory() {
     const [list,setList] =useState<AppointmentPopulateData[]>([])
@@ -17,6 +19,7 @@ function BookingHistory() {
     const navigate = useNavigate()
     const limit = 13
     const pageCount = Math.ceil(list.length/limit)   
+    const socket:Socket = useSocket()
 
 
     useEffect(()=>{
@@ -28,6 +31,14 @@ function BookingHistory() {
             console.log(err.message)
         })
     },[reload])
+
+    useEffect(()=>{
+        socket.on("chat:started",()=>{
+            console.log("booking history");
+            
+            setReload(!reload)
+        })
+    },[socket])
 
     const handleCancel = async(_id:string | undefined,amount:number)=>{
         try {
