@@ -35,6 +35,8 @@ function VideoCall() {
 
     const handleCallAccepted = useCallback(async({from, ans}:{from:string, ans:any})=>{
         setRemoteSocketId(from)
+        console.log("call accepted");
+        
         peer.setLocalDescription(ans)
         sendStreams()
            
@@ -43,26 +45,28 @@ function VideoCall() {
     const handleNegotiationneeded = useCallback(async()=>{
         const offer = await peer.getOffer()
         socket.emit("peer:negotiationneeded",{offer,to:remoteSocketId})
-    },[])
-
-    const handleNegotiationIncoming = useCallback(async({from,offer}:{from:string,offer:string})=>{
-        const ans =await peer.getAnswer(offer)
-        socket.emit("peer:negotiationDone",{to:from,ans})
-    },[socket])
-
-    const handleNegotiationFinal = useCallback(async({ans}:{from:string,ans:string})=>{
-        await peer.setLocalDescription(ans)
-    },[])
+    },[remoteSocketId,socket])
 
     useEffect(()=>{
         peer.peer?.addEventListener("negotiationneeded",handleNegotiationneeded)
         return ()=>{
             peer.peer?.removeEventListener("negotiationneeded",handleNegotiationneeded)
         }
+    },[handleNegotiationneeded])
+
+    const handleNegotiationIncoming = useCallback(async({from,offer}:{from:string,offer:any})=>{
+        const ans = await peer.getAnswer(offer)
+        socket.emit("peer:negotiationDone",{to:from,ans})
+    },[socket])
+
+    const handleNegotiationFinal = useCallback(async({ans}:{ans:any})=>{
+        await peer.setLocalDescription(ans)
     },[])
 
+   
+
     useEffect(()=>{
-        peer.peer?.addEventListener("track",async ev=>{
+        peer.peer?.addEventListener("track",async (ev)=>{
             const remoteStream = ev.streams
             setRemoteStream(remoteStream[0])
         })
@@ -80,6 +84,8 @@ function VideoCall() {
             socket.off("incoming:call")
             socket.off("call:accepted")
             socket.off("peer:negotiationneeded")
+            socket.off("peer:negotiationFinal")
+
         }
     },[socket,startMyStream,handleIncomingCall,handleCallAccepted,handleNegotiationIncoming,handleNegotiationFinal])
 
