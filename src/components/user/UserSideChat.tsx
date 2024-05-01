@@ -11,11 +11,14 @@ import UserChatHeader from './UserChatHeader';
 import { DoctorData, initialDoctorData } from '../../types/doctorTypes';
 import { getDoctorDataApi } from '../../api/user/doctorApi';
 import { useSocket } from '../../store/context/socketContext';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
     
 function UserSideChat() {
     const [messages, setMessages] = useState<MessageType[]>([])
     const [messageText, setMessageText] = useState('');
     const [doctorData,setDoctorData] = useState<DoctorData>(initialDoctorData)
+    const userId = useSelector((state:RootState)=>state.user._id)
     const {chatId,patId} = useParams()
     const navigate = useNavigate()
     const socket:Socket = useSocket()
@@ -46,7 +49,17 @@ function UserSideChat() {
         socket.on("exit_from_chat",()=>[
             navigate(-1)
         ])
-      }, [messages]);
+
+        socket.on("call:start",()=>{
+            navigate(`/call/${userId}`)
+        })
+
+        return () => {
+            socket.off('message');
+            socket.off("exit_from_chat")
+            socket.off("call:start")
+        }
+      }, [messages,socket,navigate]);
     
       const sendMessage = async() => {
 

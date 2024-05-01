@@ -45,7 +45,7 @@ function UserRoutes() {
 
           <Route path='/sample' element={<Sample/>}/>
           <Route path='/chat/:chatId/:patId' element={<UserSideChat/>}/>
-          <Route path='/call' element={<VideoCall/>}/>
+          <Route path='/call/:_id' element={<VideoCall/>}/>
 
           <Route path='*' element={<Error404/>} />
 

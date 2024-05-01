@@ -70,7 +70,7 @@ function DoctorSideChat() {
 
     const handleCall = async() => {
         socket.emit("call:start",{sender:doctorId,receiver:patId})
-        navigate("/doctor/call")
+        navigate(`/doctor/call/${doctorId}`)
     }
 
   return (
