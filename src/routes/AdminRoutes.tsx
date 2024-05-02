@@ -22,6 +22,7 @@ import ListPatientsPage from '../pages/admin/ListPatientsPage'
 import ViewPatientPage from '../pages/admin/ViewPatientPage'
 import PatientPrescriptionPage from '../pages/doctor/PatientPrescriptionPage'
 import ListAdmitHistoryPage from '../pages/admin/ListAdmitHistoryPage'
+import ViewAdmitHistoryPage from '../pages/admin/ViewAdmitHistoryPage'
 
 
 
@@ -59,7 +60,7 @@ function AdminRoutes() {
           <Route path='/bed/assign' element={<AssignPatientPage/>} />
 
           <Route path='/admit_history' element={<ListAdmitHistoryPage/>} />
-          <Route path='/admit_history/view/:_id' element={<ListAdmitHistoryPage/>} />
+          <Route path='/admit_history/view/:_id' element={<ViewAdmitHistoryPage/>} />
 
           <Route path='/patient' element={<ListPatientsPage/>} />
           <Route path='/patients/view/:_id' element={<ViewPatientPage/>} />
