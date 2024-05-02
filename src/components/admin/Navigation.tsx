@@ -4,7 +4,7 @@ import { dashboard,doctor,department,users,bed, patient } from "../../constants/
 
 function Navigation() {
   return (
-    <div className="neumorphic  w-64 h-screen py-2 px-2 flex flex-col justify-between">
+    <div className="neumorphic  w-64 min-h-screen py-2 px-2 flex flex-col justify-between">
       <div className="p-2">
         <h1 className="text-xl font-bold text-adminBlue">Navigation</h1>
         <ul className="mt-4 ">

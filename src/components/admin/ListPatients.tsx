@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { PatientData } from "../../types/userTypes"
 import { useLocation, useNavigate } from "react-router-dom"
-import { eye } from "../../constants/icons"
+import { document, eye } from "../../constants/icons"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
 import { getPatients } from "../../api/admin/patientManagementApit"
 import { getDoctorPatients } from "../../api/doctor/doctorPatient"
@@ -47,6 +47,15 @@ function ListPatients() {
         }
     }
 
+    const handleShowPrescriptions = (_id :string | undefined)=>{
+        if(!_id) notifyError("Something wrong")
+        if(location.pathname.split("/").includes("admin")){
+            navigate(`/admin/prescription/patient/${_id}`)
+        }else{
+            navigate(`/doctor/prescription/patient/${_id}`)
+        }
+    }
+
     const handleClick = async (i:number)=>{
 
         if(i<4){
@@ -87,8 +96,11 @@ function ListPatients() {
                                     <td className="px-4 py-2">{obj.gender}</td>
                                     <td className="px-4 py-2">{new Date(obj.dob).toLocaleDateString()}</td>
                                     <td className="px-4 py-2">
-                                    <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleNavigation(obj._id)}>
+                                    <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleNavigation(obj._id)}>
                                         <img className="w-full" src={eye} alt="Button Icon"  />
+                                    </button>
+                                    <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleShowPrescriptions(obj._id)}>
+                                        <img className="w-full" src={document} alt="Button Icon"  />
                                     </button>
                                     </td>
                                 </tr> 

@@ -11,6 +11,7 @@ import ViewSchedulePage from '../pages/doctor/ViewSchedulePage'
 import AddPrescriptionPage from '../pages/doctor/AddPrescriptionPage'
 import DoctorSideChat from '../components/doctor/DoctorSideChat'
 import VideoCall from '../components/common/VideoCall'
+import PatientPrescriptionPage from '../pages/doctor/PatientPrescriptionPage'
 
 function DoctorRoutes() {
   return (
@@ -27,6 +28,7 @@ function DoctorRoutes() {
 
         <Route path='/appointments' element={<ListAppointmentsPage/>} />
         <Route path='/appointments/prescription/add/:patId/:_id' element={<AddPrescriptionPage/>} />
+        <Route path='/prescription/patient/:_id' element={<PatientPrescriptionPage/>} />
 
         <Route path='/profile/:_id' element={<ViewDoctorProfilePage/>}/>
         <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>

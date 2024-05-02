@@ -20,6 +20,7 @@ import ViewBedPage from '../pages/admin/ViewBedPage'
 import EditBedPage from '../pages/admin/EditBedPage'
 import ListPatientsPage from '../pages/admin/ListPatientsPage'
 import ViewPatientPage from '../pages/admin/ViewPatientPage'
+import PatientPrescriptionPage from '../pages/doctor/PatientPrescriptionPage'
 
 
 
@@ -58,6 +59,7 @@ function AdminRoutes() {
 
           <Route path='/patient' element={<ListPatientsPage/>} />
           <Route path='/patients/view/:_id' element={<ViewPatientPage/>} />
+          <Route path='/prescription/patient/:_id' element={<PatientPrescriptionPage/>} />
 
           <Route path='*' element={<Error404/>} />
 

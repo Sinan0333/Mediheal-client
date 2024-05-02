@@ -46,7 +46,8 @@ function DoctorDetails() {
   const handleSubmit = async (type:"Online"|"Offline") => {
     try {
 
-      if(!selectedSlot._id) return notifyError("Id is missing")
+
+      if(!selectedSlot._id) return notifyError("Pleas select the time slot")
       const result:string = bookNowValidation({slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),userId,chat:false})
       if(result != "Success") return notifyError(result)
 

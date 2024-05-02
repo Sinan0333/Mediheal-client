@@ -46,7 +46,7 @@ function ViewSchedule() {
     }
 
   return (
-    <div className="neumorphic py-2 px-2 ml-6 w-screen ">
+  <div className="neumorphic py-2 px-2 ml-6 w-screen ">
     <div className="flex justify-center">
       <h1 className="text-2xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Schedule Management</h1>
     </div>

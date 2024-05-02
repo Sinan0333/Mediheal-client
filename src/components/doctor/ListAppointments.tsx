@@ -4,7 +4,7 @@ import { changeAChatStatus, getDoctorAppointments } from "../../api/doctor/docto
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { AppointmentPopulateData, ResponseData } from "../../types/commonTypes"
-import { cancel,chat,eye, plus} from "../../constants/icons"
+import { cancel,chat,eye, plus,document} from "../../constants/icons"
 import { cancelBooking } from "../../api/user/appointment"
 import { useNavigate } from "react-router-dom"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
@@ -106,6 +106,9 @@ function ListAppointments() {
                                     <td className="px-4 py-2">{obj.status}</td>
                                     <td className="px-4 py-2">
                                         <div className="flex ">
+                                            <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/prescription/patient/${obj.patient._id}`)}>
+                                                <img className="w-full" src={document} alt="Button Icon"  />
+                                            </button>
                                             <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/patients/view/${obj.patient._id}`)}>
                                                 <img className="w-full" src={eye} alt="Button Icon"  />
                                             </button>

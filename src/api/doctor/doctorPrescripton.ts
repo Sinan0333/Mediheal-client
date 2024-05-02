@@ -24,9 +24,9 @@ doctorPrescriptionApi.interceptors.request.use(
     }
 )
 
-export const getPatientPrescription = async ()=>{
+export const getPatientPrescription = async (_id:string)=>{
     try { 
-        const result =  await doctorPrescriptionApi.get('/') 
+        const result =  await doctorPrescriptionApi.get(`/patient/${_id}`) 
         return result.data 
     } catch (error) {
         console.log(error);
@@ -42,4 +42,3 @@ export const addPrescription = async (data:PrescriptionData)=>{
         console.log(error);
     }
 }
-
