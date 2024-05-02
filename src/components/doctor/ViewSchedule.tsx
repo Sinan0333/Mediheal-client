@@ -18,8 +18,6 @@ function ViewSchedule() {
 
 
     useEffect(()=>{
-      console.log('hello');
-      
         getDoctorDataApi(doctorId).then((res)=>{
           setData(res.data)
         }).catch((err)=>{
@@ -42,7 +40,6 @@ function ViewSchedule() {
         await cancelBookingWhenBreak(response.data)        
         notifySuccess("Successful")
         setReload(!reload)
-
     }
 
   return (
@@ -67,7 +64,8 @@ function ViewSchedule() {
     
     <ScheduleTable slots={data.slots} state={selectedSlot} setState={setSelectedSlot} selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
     <div className="flex justify-center mt-8 mb-8 gap-6">
-        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={handleTakeBreak}>Take A Break</button>      </div>
+        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={handleTakeBreak}>Take A Break</button> 
+    </div>
   </div>
   )
 }

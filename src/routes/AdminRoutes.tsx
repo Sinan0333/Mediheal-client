@@ -21,6 +21,7 @@ import EditBedPage from '../pages/admin/EditBedPage'
 import ListPatientsPage from '../pages/admin/ListPatientsPage'
 import ViewPatientPage from '../pages/admin/ViewPatientPage'
 import PatientPrescriptionPage from '../pages/doctor/PatientPrescriptionPage'
+import ListAdmitHistoryPage from '../pages/admin/ListAdmitHistoryPage'
 
 
 
@@ -56,6 +57,9 @@ function AdminRoutes() {
           <Route path='/bed/edit/:_id' element={<EditBedPage/>} />
           <Route path='/bed/view/:_id' element={<ViewBedPage/>} />
           <Route path='/bed/assign' element={<AssignPatientPage/>} />
+
+          <Route path='/admit_history' element={<ListAdmitHistoryPage/>} />
+          <Route path='/admit_history/view/:_id' element={<ListAdmitHistoryPage/>} />
 
           <Route path='/patient' element={<ListPatientsPage/>} />
           <Route path='/patients/view/:_id' element={<ViewPatientPage/>} />

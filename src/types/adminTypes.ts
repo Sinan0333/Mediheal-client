@@ -76,3 +76,16 @@ export type BedEditData = {
     description:string
     available?:boolean
 }
+
+export interface AdmitHistoryData {
+    _id?:string
+    bedId:string
+    type:string
+    charge:number
+    assignDate:Date
+    dischargeDate:Date
+    assignBy:DoctorData
+    patient:PatientData
+    description:string
+    total:number
+}
