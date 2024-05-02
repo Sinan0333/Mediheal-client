@@ -76,7 +76,7 @@ function AddDoctorForm() {
   return (
     <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
     <h1 className="text-xl sm:text-2xl md:text-3xl mb-6 font-bold text-adminGold">Add Doctor</h1>
-    <div className=" flex flex-wrap">
+    <div className="flex flex-wrap">
         <Inputs name="First Name" type="text" setState={setFirstName} state={firstName}/>
         <Inputs name="Second Name" type="text"  setState={setSecondName} state={secondName}/>
         <OldDateInput name="Date of Birth" setState={setDob} state={dob}/>

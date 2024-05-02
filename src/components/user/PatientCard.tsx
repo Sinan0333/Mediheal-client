@@ -1,6 +1,8 @@
 import { PatientCardProps } from "../../types/userTypes";
 import { document, edit, schedule } from "../../constants/icons";
-function PatientCard({firstName,secondName,image,dob,age,gender}:PatientCardProps) {
+import { useNavigate } from "react-router-dom";
+function PatientCard({_id,firstName,secondName,image,dob,age,gender}:PatientCardProps) {
+    const navigate = useNavigate()
     const imageUrl =image ? `https://res.cloudinary.com/dw2cscitl/${image}`: "/src/assets/images/default_patient.png"
   
     return (
@@ -28,7 +30,7 @@ function PatientCard({firstName,secondName,image,dob,age,gender}:PatientCardProp
         </div>
         <div className="p-6 pt-0 flex justify-center">
           <img className="h-5 mr-2 cursor-pointer" src={edit}  alt="" />
-          <img className="h-5 mr-2 cursor-pointer" src={document}  alt="" />
+          <img className="h-5 mr-2 cursor-pointer" src={document}  alt="" onClick={()=>navigate(`/account/prescription/${_id}`)}/>
           <img className="h-5 mr-2 cursor-pointer" src={schedule}  alt="" />
         </div>
       </div>

@@ -42,7 +42,7 @@ function AddPrescription() {
   }
 
   const handleSubmit = async()=>{
-    const result = addPrescriptionValidation({weight,height,bloodPressure,bodyTemperature})
+    const result:string = addPrescriptionValidation({weight,height,bloodPressure,bodyTemperature})
     if(result !== 'Success') return notifyError(result)
 
     if(!_id || !patId) return notifyError("Id is missing")

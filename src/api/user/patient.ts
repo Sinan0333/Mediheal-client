@@ -43,3 +43,12 @@ export const getUserPatientsApi = async (userId:string)=>{
     }
 }
 
+export const getPatientPrescriptions = async (_id:string)=>{
+    try { 
+        const result =  await patientApi.get(`/prescription/${_id}`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
