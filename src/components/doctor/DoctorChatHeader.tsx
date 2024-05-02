@@ -3,19 +3,19 @@ import { end, video } from "../../constants/icons"
 type DoctorChatHeaderProps = {
     name:string
     image?:string | File
-    id:string | undefined
+    id:string 
     endSession:() => void
     handleCall:() => void
 }
 
 function DoctorChatHeader({image,name,id,endSession,handleCall}:DoctorChatHeaderProps) {
     const imageUrl = `https://res.cloudinary.com/dw2cscitl/${image}`
-
+    const defaultProfile:string = '/src/assets/images/default_profile.jpg'
   return (
     <div className="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center">
         <div className="flex items-center">
             <div className="w-10 h-10">
-                <img className="w-full h-full object-cover rounded-full" src={imageUrl}/>
+                <img className="w-full h-full object-cover rounded-full" src={image ? imageUrl : defaultProfile}/>
             </div>
             <div className="ml-4">
                 <p className="text-grey-darkest">

@@ -49,7 +49,7 @@ function AddPrescription() {
     const response:ResponseData = await addPrescription({patient:patId,appointment:_id,doctor:doctorId,bloodPressure,height,weight,bodyTemperature,medicines:listMedicines,diagnosis:listDiagnosis})
   
     if(!response.status) notifyError(response.message)
-    navigate("/doctor/patients")
+    navigate("/doctor/appointments")
   }
     
   return (

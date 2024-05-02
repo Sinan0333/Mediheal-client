@@ -30,7 +30,6 @@ function ViewAdmitHistory() {
           <h1 className="text-3xl sm:text-3xl md:text-4xl mb-4 font-bold text-adminGold">{patientID ? patientName : admitHistory?.type }</h1>
         </div>
         <div className="flex flex-wrap mt-10">
-
             <div className="flex w-1/2">
                 <Label labelName="PatientID" value={patientID}/>
                 <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/admin/patients/view/${admitHistory?.patient._id}`)}>
@@ -46,7 +45,6 @@ function ViewAdmitHistory() {
             <Label labelName="Total" value={admitHistory?.total || ""}/>
             <Label labelName="Assign By" value={assignBy}/>
             <Label labelName="Description" value={admitHistory?.description}/>
-             
         </div>
       </div>
     )
