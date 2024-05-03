@@ -66,6 +66,7 @@ function ListBeds() {
                         <th className="px-4 py-2 text-left w-auto">No</th>
                         <th className="px-4 py-2 text-left w-auto">PatientID</th>
                         <th className="px-4 py-2 text-left w-auto">Bed Type</th>
+                        <th className="px-4 py-2 text-left w-auto">Charge</th>
                         <th className="px-4 py-2 text-left w-auto">Assign Date</th>
                         <th className="px-4 py-2 text-left w-auto">Discharge Date</th>
                         <th className="px-4 py-2 text-left w-auto">Assign By</th>
@@ -80,6 +81,7 @@ function ListBeds() {
                                     <td className="px-4 py-2">{(currentPage-1)*limit+(i+1)}</td>
                                     {isObject(obj.patient) ? <td className="px-4 py-2">{obj.patient.id  }</td> : <td className="px-4 py-2">{obj.patient || ''}</td>}
                                     <td className="px-4 py-2">{obj.type}</td>
+                                    <td className="px-4 py-2">{obj.charge}</td>
                                     {obj.assignDate ? <td className="px-4 py-2">{new Date(obj.assignDate).toDateString()}</td> : <td className="px-4 py-2"></td>}
                                     {obj.dischargeDate ? <td className="px-4 py-2">{new Date(obj.dischargeDate).toDateString()}</td> : <td className="px-4 py-2"></td>}
                                     {obj.assignBy ? <td className="px-4 py-2">{typeof(obj?.assignBy) === 'object' ? obj.assignBy.firstName+obj.assignBy.secondName : ""}</td> : <td className="px-4 py-2"></td>}

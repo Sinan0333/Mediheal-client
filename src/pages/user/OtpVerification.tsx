@@ -2,8 +2,6 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { getOtp, resendOtp, verifyOtp } from "../../api/user/auth"
-import { useDispatch } from "react-redux"
-import { setUserDetails } from "../../store/slice/userSlice"
 import { ResponseData } from "../../types/commonTypes"
 
 function OtpVerification() {
@@ -14,7 +12,6 @@ function OtpVerification() {
     const [fourth,setFourth] = useState<string>("")
     const [otp,setOtp] = useState<string>("")
     const [email,setEmail]=useState("")
-    const dispatch = useDispatch()
     const navigate = useNavigate()
     const{_id} = useParams()
 
@@ -43,12 +40,6 @@ function OtpVerification() {
 
         const response = await verifyOtp(_id,inputOtp)
         if(response.status){
-            dispatch(setUserDetails({
-                _id:response.userData?._id,
-                name:response.userData?.name,
-                phone:response.userData?.phone,
-                email:response.userData?.email
-            }))
             notifySuccess(response.message)
             navigate('/login')
         }else{

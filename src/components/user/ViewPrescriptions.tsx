@@ -14,19 +14,19 @@ function ViewPrescriptions({prescription}:ViewPrescriptionsProps) {
             <div>
                 <div className="flex  pr-2 ">
                     <p className="font-semibold text-lg  mr-4 ">Weight:</p>
-                    <p className="text-lg font-semibold">{prescription.weight}</p>
+                    <p className="text-lg font-semibold">{prescription.weight} Kg</p>
                 </div>
                 <div className="flex  pr-2 ">
                     <p className="font-semibold text-lg  mr-4 ">Height:</p>
-                    <p className="text-lg font-semibold">{prescription.height}</p>
+                    <p className="text-lg font-semibold">{prescription.height} Cm</p>
                 </div>
                 <div className="flex pr-2 w-full">
                     <p className="font-semibold text-lg  mr-4 ">Blood pressure:</p>
-                    <p className="text-lg font-semibold">{prescription.bloodPressure}</p>
+                    <p className="text-lg font-semibold">{prescription.bloodPressure} mmHg</p>
                 </div>
                 <div className="flex pr-2 ">
                     <p className="font-semibold text-lg  mr-4 ">Body temperature:</p>
-                    <p className="text-lg font-semibold">{prescription.bodyTemperature}</p>
+                    <p className="text-lg font-semibold">{prescription.bodyTemperature} °C</p>
                 </div>
             </div>
             <div className="">
