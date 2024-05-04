@@ -29,7 +29,7 @@ function PatientCard({_id,firstName,secondName,image,dob,age,gender}:PatientCard
           </p>
         </div>
         <div className="p-6 pt-0 flex justify-center">
-          <img className="h-5 mr-2 cursor-pointer" src={edit}  alt="" />
+          <img className="h-5 mr-2 cursor-pointer" src={edit}  alt="" onClick={()=>navigate(`/account/patients/edit/${_id}`)}/>
           <img className="h-5 mr-2 cursor-pointer" src={document}  alt="" onClick={()=>navigate(`/account/prescription/${_id}`)}/>
           <img className="h-5 mr-2 cursor-pointer" src={schedule}  alt="" />
         </div>

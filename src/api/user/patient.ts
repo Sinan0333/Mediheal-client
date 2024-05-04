@@ -43,6 +43,24 @@ export const getUserPatientsApi = async (userId:string)=>{
     }
 }
 
+export const getPatientData = async (_id:string)=>{
+    try { 
+        const result =  await patientApi.get(`/view/${_id}`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const editPatientData = async (_id:string,data:PatientData)=>{
+    try { 
+        const result =  await patientApi.post(`/edit/${_id}`,data) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getPatientPrescriptions = async (_id:string)=>{
     try { 
         const result =  await patientApi.get(`/prescription/${_id}`) 

@@ -17,6 +17,7 @@ import PatientsPage from '../pages/user/PatientsPage.tsx'
 import UserSideChat from '../components/user/UserSideChat.tsx'
 import VideoCall from '../components/common/VideoCall.tsx'
 import ViewPrescriptionPage from '../pages/user/ViewPrescriptionPage.tsx'
+import EditPatientPage from '../pages/user/EditPatientPage.tsx'
 
 function UserRoutes() {
   return (
@@ -36,6 +37,7 @@ function UserRoutes() {
           <Route path='/account/profile' element={<Profile/>} />
           <Route path='/account/booking_history' element={<BookingHistoryPage/>} />
           <Route path='/account/patients' element={<PatientsPage/>} />
+          <Route path='/account/patients/edit/:_id' element={<EditPatientPage/>} />
           <Route path='/account/wallet' element={<TransactionHistoryPage/>} />
           <Route path='/account/prescription/:_id' element={<ViewPrescriptionPage/>} />
 
