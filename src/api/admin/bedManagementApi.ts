@@ -95,3 +95,21 @@ export const dischargePatientApi = async (_id:string | undefined)=>{
         console.log(error);
     }
 }
+
+export const totalBeds = async ()=>{
+    try { 
+        const result =  await bedManagementApi.get("/count")  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const totalFreeBeds = async ()=>{
+    try { 
+        const result =  await bedManagementApi.get("/vacant_beds_count")  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}

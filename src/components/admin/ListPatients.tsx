@@ -3,7 +3,7 @@ import { PatientData } from "../../types/userTypes"
 import { useLocation, useNavigate } from "react-router-dom"
 import { document, eye } from "../../constants/icons"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
-import { getPatients } from "../../api/admin/patientManagementApit"
+import { getPatients } from "../../api/admin/patientManagementApi"
 import { getDoctorPatients } from "../../api/doctor/doctorPatient"
 import { notifyError } from "../../constants/toast"
 

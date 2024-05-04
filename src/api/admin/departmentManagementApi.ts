@@ -79,3 +79,4 @@ export const updateDepartment = async (_id:string,data:DepartmentApiType)=>{
         console.log(error);
     }
 }
+

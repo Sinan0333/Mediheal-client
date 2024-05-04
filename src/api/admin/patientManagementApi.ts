@@ -42,3 +42,12 @@ export const getPatient = async (_id:string | undefined)=>{
     }
 }
 
+
+export const totalPatients = async ()=>{
+    try { 
+        const result =  await patientManagementApi.get("/count") 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}

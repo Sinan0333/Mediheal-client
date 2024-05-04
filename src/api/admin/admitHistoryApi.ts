@@ -41,3 +41,12 @@ export const getAllAdmitHistory = async ()=>{
         console.log(error);
     }
 }
+
+export const totalAdmits = async ()=>{
+    try { 
+        const result =  await admitBedHistoryApi.get('/count')  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}

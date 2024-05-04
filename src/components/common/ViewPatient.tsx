@@ -2,7 +2,7 @@ import { useLocation, useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
 import { PatientData } from "../../types/userTypes"
-import { getPatient } from "../../api/admin/patientManagementApit"
+import { getPatient } from "../../api/admin/patientManagementApi"
 import { getPatientApi } from "../../api/doctor/doctorPatient"
 
 

@@ -1,6 +1,5 @@
 import {Routes,Route} from 'react-router-dom'
 import AdminLogin from '../pages/admin/AdminLogin'
-import AdminDashboard from '../pages/admin/AdminDashboard'
 import ListDoctorsPage from '../pages/admin/ListDoctorsPage'
 import ViewDoctorPage from '../pages/admin/ViewDoctorPage'
 import EditDoctorPage from '../pages/admin/EditDoctorPage'
@@ -23,6 +22,7 @@ import ViewPatientPage from '../pages/admin/ViewPatientPage'
 import PatientPrescriptionPage from '../pages/doctor/PatientPrescriptionPage'
 import ListAdmitHistoryPage from '../pages/admin/ListAdmitHistoryPage'
 import ViewAdmitHistoryPage from '../pages/admin/ViewAdmitHistoryPage'
+import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
 
 
 
@@ -37,8 +37,8 @@ function AdminRoutes() {
 
         <Route path='/' element={<AdminIsLoggedIn/>}>
 
-          <Route path='/' element={<AdminDashboard/>} />
-          <Route path='/dashboard' element={<AdminDashboard/>} />
+          <Route path='/' element={<AdminDashboardPage/>} />
+          <Route path='/dashboard' element={<AdminDashboardPage/>} />
 
           <Route path='/doctors' element={<ListDoctorsPage/>} />
           <Route path='/doctors/add' element={<AddDoctorPage/>} />

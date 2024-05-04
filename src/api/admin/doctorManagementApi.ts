@@ -89,7 +89,14 @@ export const changeBlockStatus = async (_id:string | undefined,is_blocked:boolea
     }
 }
 
-
+export const totalDoctors = async ()=>{    
+    try {           
+        const result =  await doctorManagementApi.get("/count") 
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export const cancelRequest = () => {
     cancelTokenSource.cancel('Request canceled by user'); 
