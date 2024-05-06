@@ -71,3 +71,57 @@ export const changeStatus = async (_id:string)=>{
     }
 }
 
+export const getDoctorPatients = async (_id:string)=>{
+    try { 
+        const result =  await doctorAppointmentApi.get(`/my_patients/${_id}`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const totalDoctorPatients = async (_id:string)=>{
+    try { 
+        const result =  await doctorAppointmentApi.get(`/my_patients/count/${_id}`) 
+        return result.data 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const totalDoctorAppointments = async (_id:string)=>{
+    try { 
+        const result =  await doctorAppointmentApi.get(`/count/${_id}`)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getDoctorAppointmentRevenue = async (_id:string)=>{
+    try { 
+        const result =  await doctorAppointmentApi.get(`/revenue/${_id}`)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+export const getStatusWiseDoctorAppointmentCountApi = async (_id:string)=>{
+    try { 
+        const result =  await doctorAppointmentApi.get(`/status_wise_count/${_id}`)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getTypeWiseDoctorAppointmentCountApi = async (_id:string)=>{
+    try { 
+        const result =  await doctorAppointmentApi.get(`/status_type_count/${_id}`)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}

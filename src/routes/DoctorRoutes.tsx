@@ -12,6 +12,7 @@ import AddPrescriptionPage from '../pages/doctor/AddPrescriptionPage'
 import DoctorSideChat from '../components/doctor/DoctorSideChat'
 import VideoCall from '../components/common/VideoCall'
 import PatientPrescriptionPage from '../pages/doctor/PatientPrescriptionPage'
+import DoctorDashboardPage from '../pages/doctor/DoctorDashboardPage'
 
 function DoctorRoutes() {
   return (
@@ -22,6 +23,9 @@ function DoctorRoutes() {
       </Route>
     
       <Route path='' element={<DoctorIsLoggedIn/>}>
+
+        <Route path='/' element={<DoctorDashboardPage/>} />
+        <Route path='/dashboard' element={<DoctorDashboardPage/>} />
         
         <Route path='/patients' element={<ListPatientsPage/>} />
         <Route path='/patients/view/:_id' element={<ViewPatientPage/>} />
@@ -36,7 +40,6 @@ function DoctorRoutes() {
         <Route path='/schedule' element={<ViewSchedulePage/>}/>
         <Route path='/chat/:patId/:_id' element={<DoctorSideChat/>}/>
         <Route path='/call/:_id' element={<VideoCall/>}/>
-
 
         <Route path='*' element={<Error404/>} />
 

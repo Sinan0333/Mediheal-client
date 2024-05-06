@@ -4,10 +4,13 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { document, eye } from "../../constants/icons"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
 import { getPatients } from "../../api/admin/patientManagementApi"
-import { getDoctorPatients } from "../../api/doctor/doctorPatient"
 import { notifyError } from "../../constants/toast"
+import { getDoctorPatients } from "../../api/doctor/doctorAppointmentApi"
+import { RootState } from "../../store/store"
+import { useSelector } from "react-redux"
 
 function ListPatients() {
+    const doctorId:string = useSelector((state:RootState)=>state.doctor._id)
     const [list,setList] = useState<PatientData[] >([])
     const [pageData,setPageData] = useState<PatientData[]>([])
     const [pages,setPages] = useState<number[]>([])
@@ -27,7 +30,7 @@ function ListPatients() {
                 console.log(err.message);
             })
         }else{
-            getDoctorPatients().then((res)=>{
+            getDoctorPatients(doctorId).then((res)=>{
                 setList(res.data)
                 setPageData(res.data.slice(0,limit))
                 setPages(createInitialPages(res.data.length/limit))

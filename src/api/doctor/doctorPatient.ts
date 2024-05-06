@@ -23,16 +23,6 @@ doctorPatientApi.interceptors.request.use(
     }
 )
 
-export const getDoctorPatients = async ()=>{
-    try { 
-        const result =  await doctorPatientApi.get('/') 
-        return result.data 
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
 export const getPatientApi = async (_id:string | undefined)=>{
     try { 
         const result =  await doctorPatientApi.get(`/view/${_id}`) 

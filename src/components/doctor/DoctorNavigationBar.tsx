@@ -8,7 +8,7 @@ function DoctorNavigationBar() {
         <h1 className="text-xl font-bold text-adminBlue">Navigation</h1>
         <ul className="mt-4 ">
           <li className="mb-4">
-            <NavButton icon={dashboard} name="Dashboard" navigation=""/>
+            <NavButton icon={dashboard} name="Dashboard" navigation="/doctor/dashboard"/>
           </li>
           <li className="mb-4">
             <NavButton icon={patient} name="Patients" navigation="/doctor/patients"/>
