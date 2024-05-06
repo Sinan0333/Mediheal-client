@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { Gauge } from '@mui/x-charts/Gauge';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { getAppointmentRevenue, getStatusWiseAppointmentCountApi } from "../../api/admin/adminAppointmentsApi"
+import { getAppointmentRevenue, getStatusWiseAppointmentCountApi, getTypeWiseAppointmentCountApi } from "../../api/admin/adminAppointmentsApi"
 import { StatusWiseAppointmentCount } from "../../types/adminTypes"
 
 
@@ -25,6 +25,7 @@ function AdminDashboard() {
     const [appointmentRevenue,setAppointmentRevenue] = useState<number[]>([])
     const [admitRevenue,setAdmitRevenue] = useState<number[]>([])
     const [statusCount,setStatusCount] = useState<StatusWiseAppointmentCount[]>([])
+    const [onlineAppointmentCount,setOnlineAppointmentCount] = useState<number>(0)
 
     useEffect(() => {
         const getData = async ()=>{
@@ -38,6 +39,7 @@ function AdminDashboard() {
             const appointmentRevenue:ResponseData = await getAppointmentRevenue()
             const admitRevenue:ResponseData = await getAdmitRevenue()
             const statusWiseAppointmentCount:ResponseData = await getStatusWiseAppointmentCountApi()
+            const typeWiseAppointmentCount:ResponseData = await getTypeWiseAppointmentCountApi()
             
             setDoctors(doctorsCount.data)
             setPatients(patientsCount.data)
@@ -50,6 +52,9 @@ function AdminDashboard() {
             setAppointmentRevenue(Object.values(appointmentRevenue.data))
             setAdmitRevenue(Object.values(admitRevenue.data))
             setStatusCount(statusWiseAppointmentCount.data)
+            const totalAppointments:number = typeWiseAppointmentCount.data[0].count + typeWiseAppointmentCount.data[1].count || 0
+            const onlineAppointments:number = typeWiseAppointmentCount.data[0].type === "Online" ? typeWiseAppointmentCount.data[0].count :  typeWiseAppointmentCount.data[1].count
+            setOnlineAppointmentCount((onlineAppointments/totalAppointments)*100)
         }
         getData()
     },[])
@@ -86,7 +91,7 @@ function AdminDashboard() {
             />
         </div>
         <div className="flex justify-between">
-            <div >
+            <div className="w-1/3">
                 <PieChart
                     series={[
                         {
@@ -98,18 +103,18 @@ function AdminDashboard() {
                     height={150}
                 />
             </div>
-            <div className=" flex ml-10 items-center">    
+            <div className="flex ml-10 items-center">    
                 <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
-                    <Gauge width={100} height={150} value={60} />
+                    <Gauge width={150} height={150} value={onlineAppointmentCount} />
                 </Stack>
             <div className="ml-6">
                 <div className="flex items-center mr-4 w-full">
-                        <div className="rounded-full w-2 h-2 bg-[#3398fe] mr-2"></div>
-                        <p>Revenue From Admits</p>
+                        <div className="rounded-full w-2 h-2 bg-[#1976d2] mr-2"></div>
+                        <p>Online Appointments</p>
                 </div>
                 <div className="flex items-center mr-4 w-full">
-                        <div className="rounded-full w-2 h-2 bg-[#03b2af] mr-2"></div>
-                        <p>Revenue From Appointments</p>
+                        <div className="rounded-full w-2 h-2 bg-[#c5c5c5] mr-2"></div>
+                        <p>Offline Appointments</p>
                 </div>
             </div>
             </div>

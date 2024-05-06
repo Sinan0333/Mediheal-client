@@ -42,3 +42,12 @@ export const getStatusWiseAppointmentCountApi = async ()=>{
         console.log(error);
     }
 }
+
+export const getTypeWiseAppointmentCountApi = async ()=>{
+    try { 
+        const result =  await adminAppointmentApi.get('/status_type_count')  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
