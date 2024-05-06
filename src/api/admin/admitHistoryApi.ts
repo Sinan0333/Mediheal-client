@@ -50,3 +50,12 @@ export const totalAdmits = async ()=>{
         console.log(error);
     }
 }
+
+export const getAdmitRevenue = async ()=>{
+    try { 
+        const result =  await admitBedHistoryApi.get('/revenue')  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}

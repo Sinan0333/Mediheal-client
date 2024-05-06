@@ -48,7 +48,7 @@ function DoctorDetails() {
 
 
       if(!selectedSlot._id) return notifyError("Pleas select the time slot")
-      const result:string = bookNowValidation({slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),userId,chat:false})
+      const result:string = bookNowValidation({slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),fees:data.fees,userId,chat:false})
       if(result != "Success") return notifyError(result)
 
       
@@ -58,7 +58,7 @@ function DoctorDetails() {
         sessionId:response2.data
       }) 
 
-      const response3:ResponseData = await confirmBooking(data.slots._id,{slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type,bookedDate:new Date(),userId,chat:false})
+      const response3:ResponseData = await confirmBooking(data.slots._id,{slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type,bookedDate:new Date(),fees:data.fees,userId,chat:false})
       if(!response3.status) notifyError(response3.message)
 
     } catch (error) {
