@@ -89,3 +89,10 @@ export interface AdmitHistoryData {
     description:string
     total:number
 }
+
+export interface StatusWiseAppointmentCount{
+    id:number
+    value:number
+    label:string
+    color:string
+}

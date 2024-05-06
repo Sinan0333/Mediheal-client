@@ -11,13 +11,9 @@ import Stack from '@mui/material/Stack';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { Gauge } from '@mui/x-charts/Gauge';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { getAppointmentRevenue } from "../../api/admin/adminAppointmentsApi"
+import { getAppointmentRevenue, getStatusWiseAppointmentCountApi } from "../../api/admin/adminAppointmentsApi"
+import { StatusWiseAppointmentCount } from "../../types/adminTypes"
 
-const data = [
-    { id: 0, value: 10},
-    { id: 1, value: 15},
-    { id: 2, value: 20},
-  ];
 
 function AdminDashboard() {
     const [doctors,setDoctors] = useState<number>(0)
@@ -28,6 +24,7 @@ function AdminDashboard() {
     const [user,setUser] = useState<number>(0)
     const [appointmentRevenue,setAppointmentRevenue] = useState<number[]>([])
     const [admitRevenue,setAdmitRevenue] = useState<number[]>([])
+    const [statusCount,setStatusCount] = useState<StatusWiseAppointmentCount[]>([])
 
     useEffect(() => {
         const getData = async ()=>{
@@ -40,6 +37,7 @@ function AdminDashboard() {
 
             const appointmentRevenue:ResponseData = await getAppointmentRevenue()
             const admitRevenue:ResponseData = await getAdmitRevenue()
+            const statusWiseAppointmentCount:ResponseData = await getStatusWiseAppointmentCountApi()
             
             setDoctors(doctorsCount.data)
             setPatients(patientsCount.data)
@@ -51,6 +49,7 @@ function AdminDashboard() {
 
             setAppointmentRevenue(Object.values(appointmentRevenue.data))
             setAdmitRevenue(Object.values(admitRevenue.data))
+            setStatusCount(statusWiseAppointmentCount.data)
         }
         getData()
     },[])
@@ -86,12 +85,12 @@ function AdminDashboard() {
                 ]}
             />
         </div>
-        <div className="flex ">
-            <div className="w-1/3">
+        <div className="flex justify-between">
+            <div >
                 <PieChart
                     series={[
                         {
-                            data,
+                            data:statusCount,
                             highlightScope: { faded: 'global', highlighted: 'item' },
                             faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
                         },
@@ -99,12 +98,11 @@ function AdminDashboard() {
                     height={150}
                 />
             </div>
-            <div className="w-1/3">    
+            <div className=" flex ml-10 items-center">    
                 <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
                     <Gauge width={100} height={150} value={60} />
                 </Stack>
-            </div>
-            <div className="w-1/3">
+            <div className="ml-6">
                 <div className="flex items-center mr-4 w-full">
                         <div className="rounded-full w-2 h-2 bg-[#3398fe] mr-2"></div>
                         <p>Revenue From Admits</p>
@@ -113,6 +111,7 @@ function AdminDashboard() {
                         <div className="rounded-full w-2 h-2 bg-[#03b2af] mr-2"></div>
                         <p>Revenue From Appointments</p>
                 </div>
+            </div>
             </div>
         </div>
     </div>

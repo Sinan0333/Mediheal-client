@@ -32,3 +32,13 @@ export const getAppointmentRevenue = async ()=>{
         console.log(error);
     }
 }
+
+
+export const getStatusWiseAppointmentCountApi = async ()=>{
+    try { 
+        const result =  await adminAppointmentApi.get('/status_wise_count')  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
