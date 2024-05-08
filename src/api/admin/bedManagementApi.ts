@@ -42,9 +42,10 @@ export const getBedDetailsApi = async (_id:string | undefined)=>{
     }
 }
 
-export const getAllBeds = async ()=>{
+export const getAllBeds = async (query:string)=>{
+    
     try { 
-        const result =  await bedManagementApi.get('/')  
+        const result =  await bedManagementApi.get(`?${query}`)  
         return result.data
     } catch (error) {
         console.log(error);
@@ -96,9 +97,9 @@ export const dischargePatientApi = async (_id:string | undefined)=>{
     }
 }
 
-export const totalBeds = async ()=>{
+export const totalBeds = async (query?:string)=>{
     try { 
-        const result =  await bedManagementApi.get("/count")  
+        const result =  await bedManagementApi.get(`/count?${query}`)  
         return result.data
     } catch (error) {
         console.log(error);

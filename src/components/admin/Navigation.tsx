@@ -9,7 +9,7 @@ function Navigation() {
         <h1 className="text-xl font-bold text-adminBlue">Navigation</h1>
         <ul className="mt-4 ">
           <li className="mb-4">
-            <NavButton icon={dashboard} name="Dashboard" navigation=""/>
+            <NavButton icon={dashboard} name="Dashboard" navigation="/admin/dashboard"/>
           </li>
           <li className="mb-4">
           <NavButton icon={doctor} name="Doctors" navigation="/admin/doctors"/>
@@ -21,7 +21,7 @@ function Navigation() {
           <NavButton icon={department} name="Department" navigation="/admin/departments"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={bed} name="Bed Space" navigation="/admin/bed"/>
+          <NavButton icon={bed} name="Bed Space" navigation="/admin/bed" />
           </li>
           <li className="mb-4">
           <NavButton icon={history} name="Admit History" navigation="/admin/admit_history"/>
