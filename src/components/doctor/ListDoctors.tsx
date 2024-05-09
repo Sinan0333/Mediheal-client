@@ -24,7 +24,7 @@ function ListDoctors() {
     const [isFilterOpen,setIsFilterOpen] = useState<boolean>(false)
 
     const limit = 13
-    const pageCount = Math.ceil(list.length/limit)   
+    const pageCount = pages.length
 
     const search = searchParams.get('search') || "default"
     const charge = searchParams.get('charge') || "default"
@@ -68,7 +68,7 @@ function ListDoctors() {
     const handleClick = async (i:number)=>{
 
         if(i<4){
-            setPages(createInitialPages(list.length/limit))
+            setPages(createInitialPages(pages.length/limit))
         }else{
             handlePagination(i,currentPage,pages,pageCount)
         }

@@ -23,9 +23,9 @@ userManagementApi.interceptors.request.use(
     }
 )
 
-export const listUsers = async ()=>{
+export const listUsers = async (query?:string)=>{
     try { 
-        const result =  await userManagementApi.get('/') 
+        const result =  await userManagementApi.get(`/?${query}`) 
         return result.data 
     } catch (error) {
         console.log(error);
@@ -52,10 +52,10 @@ export const changeUserBlock = async (_id:string | undefined,is_blocked:boolean 
     }
 }
 
-export const totalUsers = async ()=>{
+export const totalUsers = async (query?:string)=>{
     
     try {           
-        const result =  await userManagementApi.get("/count")         
+        const result =  await userManagementApi.get(`/count?${query}`)         
         return result.data
     } catch (error) {
         console.log(error);
