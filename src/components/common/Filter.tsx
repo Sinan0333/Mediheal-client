@@ -58,7 +58,7 @@ function Filter({baseUrl,searchInput,chargeInput,filterData,filterInputName,sort
                                 <circle cx="11" cy="11" r="8" className=""></circle>
                                 <line x1="21" y1="21" x2="16.65" y2="16.65" className=""></line>
                             </svg>
-                            <input type="name" name="search" className="h-12 w-full cursor-text rounded-md border border-gray-100 bg-gray-100 py-4 pr-40 pl-12 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Search by name, type, manufacturer, etc" onChange={(e)=>setSearchText(e.target.value)}/>
+                            <input type="name" name="search" className="h-12 w-full cursor-text rounded-md border border-gray-100 bg-gray-100 py-4 pr-40 pl-12 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Search..." onChange={(e)=>setSearchText(e.target.value)}/>
                         </div>
                     }
 
@@ -74,9 +74,10 @@ function Filter({baseUrl,searchInput,chargeInput,filterData,filterInputName,sort
                             <div className="flex flex-col">
                                 <label htmlFor="Type" className="text-sm font-medium text-stone-600">{filterInputName}</label>
                                 <select id="manufacturer" className="mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" onChange={(e)=>setSelectedFilter(e.target.value)}>
+                                    <option value="">All</option>
                                     {
                                         filterData.map((data:any,i:number)=>{
-                                            return <option key={i} value={data.value}>{data.name}</option>
+                                            return <option key={i} value={data._id}>{data.name}</option>
                                         })
                                     }
                                 </select>
@@ -86,6 +87,7 @@ function Filter({baseUrl,searchInput,chargeInput,filterData,filterInputName,sort
                             <div className="flex flex-col">
                                 <label htmlFor="Sort By" className="text-sm font-medium text-stone-600">{sortInputName}</label>
                                 <select id="manufacturer" className="mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" onChange={(e)=>setSelectedSortBy(e.target.value)}>
+                                    <option value="">Non</option>
                                     {
                                         sortData.map((data:any,i:number)=>{
                                             return <option key={i} value={data.value}>{data.name}</option>

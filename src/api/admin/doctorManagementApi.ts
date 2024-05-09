@@ -36,9 +36,9 @@ export const addDoctor = async (data:AddDoctorApi)=>{
     }
 }
 
-export const listDoctorsApi = async ()=>{
+export const listDoctorsApi = async (query:string)=>{
     try {         
-        const result =  await doctorManagementApi.get('/list',{  cancelToken: cancelTokenSource.token })  
+        const result =  await doctorManagementApi.get(`/list?${query}`,{  cancelToken: cancelTokenSource.token })  
         return result.data
     } catch (error:any) {
 
@@ -89,9 +89,9 @@ export const changeBlockStatus = async (_id:string | undefined,is_blocked:boolea
     }
 }
 
-export const totalDoctors = async ()=>{    
+export const totalDoctors = async (query?:string)=>{    
     try {           
-        const result =  await doctorManagementApi.get("/count") 
+        const result =  await doctorManagementApi.get(`/count?${query}`) 
         return result.data
     } catch (error) {
         console.log(error);

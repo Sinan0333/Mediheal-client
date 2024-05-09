@@ -1,57 +1,73 @@
 export const BedTYpes = [
     {
-        name: "All",
-        value: ""
-    },
-    {
         name: "General",
-        value: "General"
+        _id: "General"
     },
     {
         name: "ICU",
-        value: "ICU"
+        _id: "ICU"
     },
     {
         name: "Covid 19",
-        value: "Covid 19"
+        _id: "Covid 19"
     },
     {
         name: "Ventilator",
-        value: "Ventilator"
+        _id: "Ventilator"
     },
     {
         name:"Ward",
-        value:"Ward"
+        _id:"Ward"
     },
     {
         name:"Ac",
-        value:"Ac"
+        _id:"Ac"
     },
     {
         name:"Non Ac",
-        value:"Non Ac"
+        _id:"Non Ac"
     },
     {
         name:"Cabin",
-        value:"Cabin"
+        _id:"Cabin"
     }
 ]
 
 export const BedSortByData = [
     {
         name: "Non",
-        value: ""
+        _id: ""
     },
     {
         name: "Assign Date",
-        value:'assignDate'
+        _id:'assignDate'
     },
     {
         name: "Discharge Date",
-        value:'dischargeDate'
+        _id:'dischargeDate'
     },
     {
         name:"Charge",
-        value:"charge"
+        _id:"charge"
     }
 ]
+
+export const DoctorSortByData = [
+    {
+        name: "Non",
+        _id: ""
+    },
+    {
+        name: "Age",
+        _id:'age'
+    },
+    {
+        name:"Experience",
+        _id:"experience"
+    },
+    {
+        name:"Fees",
+        _id:"fees"
+    }
+]
+

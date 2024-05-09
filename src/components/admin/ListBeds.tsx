@@ -9,6 +9,7 @@ import { createInitialPages, handlePagination } from "../../constants/constFunct
 import { ResponseData } from "../../types/commonTypes"
 import Filter from "../common/Filter"
 import { BedSortByData, BedTYpes } from "../../constants/constValues"
+import Pagination from "../common/Pagination"
 
 function ListBeds() {
     const navigate = useNavigate()
@@ -28,7 +29,7 @@ function ListBeds() {
     const filterData = searchParams.get('filterData') || "default"
     const sortBy = searchParams.get('sortBy') || "default"
     const sortIn = searchParams.get('sortIn') || "default"
-    const page = searchParams.get('page') || 1
+    const page:string | null | number = searchParams.get('page') || 1
     const query = `search=${search}&charge=${charge}&filterData=${filterData}&sortBy=${sortBy}&sortIn=${sortIn}&page=${page}`
 
     useEffect(()=>{
@@ -92,7 +93,7 @@ function ListBeds() {
                         list.map((obj:BedDataType,i)=>{
                             return(
                                 <tr key={i}>
-                                    <td className="px-4 py-2">{(currentPage-1)*limit+(i+1)}</td>
+                                    <td className="px-4 py-2">{(typeof(page) === 'number')?(page-1)*limit+(i+1):(i-1)*limit+(i+1)}</td>
                                     {isObject(obj.patient) ? <td className="px-4 py-2">{obj.patient.id  }</td> : <td className="px-4 py-2">{obj.patient || ''}</td>}
                                     <td className="px-4 py-2">{obj.type}</td>
                                     <td className="px-4 py-2">{obj.charge}</td>
@@ -108,33 +109,9 @@ function ListBeds() {
             </table>
         </div>
         <div className="flex justify-center items-center mt-8">
-            <nav className="flex">
-                {
-                    currentPage === 1 ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 rounded-lg hover:bg-gray-300"onClick={()=>handleClick(currentPage-1)}>Previous</p>
-                }
-                {
-                    pages.map((page)=>{
-                        return(
-                            <p key={page} className={`${currentPage === page ?"neumorphic-pagination-clicked":"neumorphic-pagination"} flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300`} onClick={()=>handleClick(page)}>{page}</p>
-
-                        )
-                    })
-                }    
-                    
-                {
-                    pageCount > 4 && pageCount-1 > currentPage? (
-                        <>
-                            <span className="px-3 py-1">...</span>
-                            <p className="neumorphic-pagination flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300" onClick={()=>handleClick(pageCount)}>{pageCount}</p>
-                        </>
-                    ) : null
-                }
-                
-                {
-                    currentPage === pageCount ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 ml-2  rounded-lg hover:bg-gray-300" onClick={()=>handleClick(currentPage+1)}>Next</p>
-                }
-                
-            </nav>
+            {
+                pageCount > 1 ? <Pagination pages={pages} currentPage={currentPage} handleClick={handleClick} pageCount={pageCount}/> : null
+            }
         </div>
     </div>
   )

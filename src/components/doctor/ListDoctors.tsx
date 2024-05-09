@@ -1,29 +1,57 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import  Actions from '../admin/Actions'
 import { DoctorData } from "../../types/doctorTypes"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
 import { ResponseData } from "../../types/commonTypes"
-import { changeBlockStatus, listDoctorsApi } from "../../api/admin/doctorManagementApi"
+import { changeBlockStatus, listDoctorsApi, totalDoctors } from "../../api/admin/doctorManagementApi"
+import { DepartmentDataType } from "../../types/adminTypes"
+import { listDepartmentApi } from "../../api/admin/departmentManagementApi"
+import { DoctorSortByData } from "../../constants/constValues"
+import Filter from "../common/Filter"
+import Pagination from "../common/Pagination"
 
 function ListDoctors() {
     const navigate = useNavigate()
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+
     const [list,setList] = useState<DoctorData[] >([])
-    const [pageData,setPageData] = useState<DoctorData[]>([])
     const [pages,setPages] = useState<number[]>([])
     const [currentPage,setCurrentPage] = useState<number>(1)
+    const [departments,setDepartments] = useState<DepartmentDataType[]>([])
+    const [isFilterOpen,setIsFilterOpen] = useState<boolean>(false)
+
     const limit = 13
     const pageCount = Math.ceil(list.length/limit)   
 
+    const search = searchParams.get('search') || "default"
+    const charge = searchParams.get('charge') || "default"
+    const filterData = searchParams.get('filterData') || "default"
+    const sortBy = searchParams.get('sortBy') || "default"
+    const sortIn = searchParams.get('sortIn') || "default"
+    const page:string | null | number = searchParams.get('page') || 1
+    const query = `search=${search}&charge=${charge}&filterData=${filterData}&sortBy=${sortBy}&sortIn=${sortIn}&page=${page}`
+
 
     useEffect(()=>{
-        listDoctorsApi().then((res)=>{
+        listDoctorsApi(query).then((res)=>{
             setList(res.data)
-            setPageData(res.data.slice(0,limit))
-            setPages(createInitialPages(res.data.length/limit))  
-        }).catch((err)=>{
+        })
+        totalDoctors(query).then((res)=>{
+            setPages(createInitialPages(res.data/limit))
+        })
+        .catch((err)=>{
             console.log(err.message);
+        })
+    },[query])
+
+    useEffect(()=>{
+        listDepartmentApi().then((res)=>{
+            setDepartments(res.data)
+            console.log(res);
+            
         })
     },[])
 
@@ -32,29 +60,30 @@ function ListDoctors() {
         const response = await changeBlockStatus(_id,is_blocked) 
         if(!response.status) notifyError(response.message) 
         
-        const response2:ResponseData = await listDoctorsApi()
+        const response2:ResponseData = await listDoctorsApi(query)
         setList(response2.data)
-        setPageData(response2.data.slice((currentPage-1)*limit,currentPage*limit))
-
         notifySuccess(response.message)
     }
 
     const handleClick = async (i:number)=>{
 
         if(i<4){
-            setPageData(list.slice((i-1)*limit,i*limit))
             setPages(createInitialPages(list.length/limit))
         }else{
             handlePagination(i,currentPage,pages,pageCount)
-            setPageData(list.slice((i-1)*limit,i*limit))
         }
         setCurrentPage(i)
+        navigate("/admin/doctors"+`?search=${search}&charge=${charge}&filterData=${filterData}&sortBy=${sortBy}&sortIn=${sortIn}&page=${i}`)
     }
 
   return (
     <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
         <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Doctors</h1>
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/doctors/add')}>Add</button>
+        <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>
+        {
+            isFilterOpen?<Filter baseUrl="/admin/doctors" searchInput={true}  chargeInput={false} filterData={departments} filterInputName="Department" sortData={DoctorSortByData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
+        }
         <div className="overflow-x-auto">
             <table className="table-auto min-w-full border-collapse ">
                 <thead>
@@ -69,7 +98,7 @@ function ListDoctors() {
                 </thead>
                 <tbody>
                     {
-                        pageData.map((doc,i)=>{
+                        list.map((doc,i)=>{
                             return(
                                 <tr key={i}>
                                     <td className="px-4 py-2">{(currentPage-1)*limit+(i+1)}</td>
@@ -86,33 +115,9 @@ function ListDoctors() {
             </table>
         </div>
         <div className="flex justify-center items-center mt-8">
-            <nav className="flex">
-                {
-                    currentPage === 1 ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 rounded-lg hover:bg-gray-300"onClick={()=>handleClick(currentPage-1)}>Previous</p>
-                }
-                {
-                    pages.map((page)=>{
-                        return(
-                            <p key={page} className={`${currentPage === page ?"neumorphic-pagination-clicked":"neumorphic-pagination"} flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300`} onClick={()=>handleClick(page)}>{page}</p>
-
-                        )
-                    })
-                }    
-                    
-                {
-                    pageCount > 4 && pageCount-1 > currentPage? (
-                        <>
-                            <span className="px-3 py-1">...</span>
-                            <p className="neumorphic-pagination flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300" onClick={()=>handleClick(pageCount)}>{pageCount}</p>
-                        </>
-                    ) : null
-                }
-                
-                {
-                    currentPage === pageCount ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 ml-2  rounded-lg hover:bg-gray-300" onClick={()=>handleClick(currentPage+1)}>Next</p>
-                }
-                
-            </nav>
+            {
+                pageCount > 1 ? <Pagination pages={pages} currentPage={currentPage} handleClick={handleClick} pageCount={pageCount}/> : null
+            }
         </div>
     </div>
   )
