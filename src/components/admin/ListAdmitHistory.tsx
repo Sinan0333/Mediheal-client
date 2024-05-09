@@ -1,47 +1,63 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { AdmitHistoryData} from "../../types/adminTypes"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
-import { getAllAdmitHistory } from "../../api/admin/admitHistoryApi"
+import { getAllAdmitHistory, totalAdmits } from "../../api/admin/admitHistoryApi"
 import { eye } from "../../constants/icons"
+import Pagination from "../common/Pagination"
+import Filter from "../common/Filter"
+import { BedSortByData, BedTYpes } from "../../constants/constValues"
 
 function ListAdmitHistory() {
     const navigate = useNavigate()
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+
     const [list,setList] = useState<AdmitHistoryData[] >([])
-    const [pageData,setPageData] = useState<AdmitHistoryData[]>([])
     const [pages,setPages] = useState<number[]>([])
     const [currentPage,setCurrentPage] = useState<number>(1)
-    const limit = 13
-    const pageCount = Math.ceil(list.length/limit)   
-    
+    const [isFilterOpen,setIsFilterOpen] = useState<boolean>(false)
 
+    const limit = 13
+    const pageCount =  pages.length
+
+    const search = searchParams.get('search') || "default"
+    const charge = searchParams.get('charge') || "default"
+    const filterData = searchParams.get('filterData') || "default"
+    const sortBy = searchParams.get('sortBy') || "default"
+    const sortIn = searchParams.get('sortIn') || "default"
+    const page:string | null | number = searchParams.get('page') || 1
+    const query = `search=${search}&charge=${charge}&filterData=${filterData}&sortBy=${sortBy}&sortIn=${sortIn}&page=${page}`
+    
     useEffect(()=>{
-        getAllAdmitHistory().then((res)=>{
-            
+        getAllAdmitHistory(query).then((res)=>{  
             setList(res.data)
-            setPageData(res.data.slice(0,limit))
-            setPages(createInitialPages(res.data.length/limit))
-            
+        })
+        totalAdmits(query).then((res)=>{
+            setPages(createInitialPages(res.data/limit))
         }).catch((err)=>{
             console.log(err.message);
         })
-    },[])
+    },[query])
 
     const handleClick = async (i:number)=>{
 
         if(i<4){
-            setPageData(list.slice((i-1)*limit,i*limit))
-            setPages(createInitialPages(list.length/limit))
+            setPages(createInitialPages(pages.length/limit))
         }else{
             handlePagination(i,currentPage,pages,pageCount)
-            setPageData(list.slice((i-1)*limit,i*limit))
         }
         setCurrentPage(i)
+        navigate("/admin/admit_history"+`?search=${search}&charge=${charge}&filterData=${filterData}&sortBy=${sortBy}&sortIn=${sortIn}&page=${i}`)
     }
 
   return (
     <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
         <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Admit History</h1>
+        <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>
+        {
+            isFilterOpen?<Filter baseUrl="/admin/admit_history" searchInput={false}  chargeInput={true} filterData={BedTYpes} filterInputName="Type" sortData={BedSortByData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
+        }
         <div className="overflow-x-auto">
             <table className="table-auto min-w-full border-collapse ">
                 <thead>
@@ -58,7 +74,7 @@ function ListAdmitHistory() {
                 </thead>
                 <tbody>
                     {
-                        pageData.map((obj,i)=>{
+                        list.map((obj,i)=>{
                             return(
                                 <tr key={i}>
                                     <td className="px-4 py-2">{(currentPage-1)*limit+(i+1)}</td>
@@ -81,33 +97,9 @@ function ListAdmitHistory() {
             </table>
         </div>
         <div className="flex justify-center items-center mt-8">
-            <nav className="flex">
-                {
-                    currentPage === 1 ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 rounded-lg hover:bg-gray-300"onClick={()=>handleClick(currentPage-1)}>Previous</p>
-                }
-                {
-                    pages.map((page)=>{
-                        return(
-                            <p key={page} className={`${currentPage === page ?"neumorphic-pagination-clicked":"neumorphic-pagination"} flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300`} onClick={()=>handleClick(page)}>{page}</p>
-
-                        )
-                    })
-                }    
-                    
-                {
-                    pageCount > 4 && pageCount-1 > currentPage? (
-                        <>
-                            <span className="px-3 py-1">...</span>
-                            <p className="neumorphic-pagination flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300" onClick={()=>handleClick(pageCount)}>{pageCount}</p>
-                        </>
-                    ) : null
-                }
-                
-                {
-                    currentPage === pageCount ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 ml-2  rounded-lg hover:bg-gray-300" onClick={()=>handleClick(currentPage+1)}>Next</p>
-                }
-                
-            </nav>
+            {
+                pageCount > 1 ? <Pagination pages={pages} currentPage={currentPage} handleClick={handleClick} pageCount={pageCount}/> : null
+            }
         </div>
     </div>
   )

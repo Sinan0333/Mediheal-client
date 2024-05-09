@@ -33,18 +33,18 @@ export const getAdmitHistoryDetailsApi = async (_id:string | undefined)=>{
     }
 }
 
-export const getAllAdmitHistory = async ()=>{
+export const getAllAdmitHistory = async (query?:string)=>{
     try { 
-        const result =  await admitBedHistoryApi.get('/')  
+        const result =  await admitBedHistoryApi.get(`/?${query}`)  
         return result.data
     } catch (error) {
         console.log(error);
     }
 }
 
-export const totalAdmits = async ()=>{
+export const totalAdmits = async (query?:string)=>{
     try { 
-        const result =  await admitBedHistoryApi.get('/count')  
+        const result =  await admitBedHistoryApi.get(`/count?${query}`)  
         return result.data
     } catch (error) {
         console.log(error);

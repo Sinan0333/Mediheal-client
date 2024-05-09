@@ -35,10 +35,6 @@ export const BedTYpes = [
 
 export const BedSortByData = [
     {
-        name: "Non",
-        _id: ""
-    },
-    {
         name: "Assign Date",
         _id:'assignDate'
     },
