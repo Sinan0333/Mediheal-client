@@ -23,9 +23,9 @@ patientManagementApi.interceptors.request.use(
     }
 )
 
-export const getPatients = async ()=>{
+export const getPatients = async (query?:string)=>{
     try { 
-        const result =  await patientManagementApi.get('/') 
+        const result =  await patientManagementApi.get(`/?${query}`) 
         return result.data 
     } catch (error) {
         console.log(error);
@@ -43,9 +43,9 @@ export const getPatient = async (_id:string | undefined)=>{
 }
 
 
-export const totalPatients = async ()=>{
+export const totalPatients = async (query?:string)=>{
     try { 
-        const result =  await patientManagementApi.get("/count") 
+        const result =  await patientManagementApi.get(`/count?${query}`) 
         return result.data 
     } catch (error) {
         console.log(error);

@@ -67,3 +67,28 @@ export const DoctorSortByData = [
     }
 ]
 
+export const BloodGroups = [
+    {
+        name:'A',
+        _id:"A"
+    },
+    {
+        name:'B',
+        _id:"B"
+    },
+]
+
+export const PatientsSortByData = [
+    {
+        name:"Age",
+        _id:'age'
+    },
+    {
+        name:"ID",
+        _id:'id'
+    },
+    {
+        name:"Gender",
+        _id:'gender'
+    }
+]
