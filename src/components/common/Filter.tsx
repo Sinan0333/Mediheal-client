@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 type filterProps = {
     baseUrl:string
     searchInput:boolean
-    chargeInput:boolean
+    chargeInput?:boolean
     filterData?:any
     filterInputName?:string
     sortData?:any

@@ -33,9 +33,9 @@ export const addDepartment = async (data:DepartmentApiType)=>{
     }
 }
 
-export const listDepartmentApi = async ()=>{
+export const listDepartmentApi = async (query?:string)=>{
     try {         
-        const result =  await departmentManagementApi.get(`/`)          
+        const result =  await departmentManagementApi.get(`/?${query}`)          
         return result.data 
     } catch (error) {
         console.log(error);
@@ -80,3 +80,12 @@ export const updateDepartment = async (_id:string,data:DepartmentApiType)=>{
     }
 }
 
+
+export const totalDepartments = async (query?:string)=>{
+    try {           
+        const result =  await departmentManagementApi.get(`/count?${query}`)         
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}

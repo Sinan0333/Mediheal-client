@@ -79,7 +79,7 @@ function ListDoctors() {
   return (
     <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
         <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Doctors</h1>
-        <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/doctors/add')}>Add</button>
+        <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue ml-2 float-right" onClick={()=>navigate('/admin/doctors/add')}>Add</button>
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>
         {
             isFilterOpen?<Filter baseUrl="/admin/doctors" searchInput={true}  chargeInput={false} filterData={departments} filterInputName="Department" sortData={DoctorSortByData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
