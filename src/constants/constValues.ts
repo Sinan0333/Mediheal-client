@@ -116,3 +116,49 @@ export const PatientsSortByData = [
         _id:'gender'
     }
 ]
+
+export const AppointmentSortData = [
+    // {
+    //     name:"Start Time",
+    //     _id:"startTime"
+    // },
+    // {
+    //     name:"End Time",
+    //     _id:"endTime"
+    // },
+    {
+        name:"Status",
+        _id:"status"
+    }
+]
+
+export const AppointmentFilterDays = [
+    {
+        name:"Sunday",
+        _id:"sunday"
+    },
+    {
+        name:"Monday",
+        _id:"monday"
+    },
+    {
+        name:"Tuesday",
+        _id:"tuesday"
+    },
+    {
+        name:"Wednesday",
+        _id:"wednesday"
+    },
+    {
+        name:"Thursday",
+        _id:"thursday"
+    },
+    {
+        name:"Friday",
+        _id:"friday"
+    },
+    {
+        name:"Saturday",
+        _id:"saturday"
+    }
+]

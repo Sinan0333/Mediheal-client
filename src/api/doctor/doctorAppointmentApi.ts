@@ -26,9 +26,9 @@ doctorAppointmentApi.interceptors.request.use(
 )
 
 
-export const getDoctorAppointments = async (_id:string)=>{
+export const getDoctorAppointments = async (_id:string,query?:string)=>{
     try {         
-        const result =  await doctorAppointmentApi.get(`/list/${_id}`)  
+        const result =  await doctorAppointmentApi.get(`/list/${_id}?${query}`)  
         return result.data
     } catch (error) {
         console.log(error);
@@ -89,9 +89,9 @@ export const totalDoctorPatients = async (_id:string,query?:string)=>{
     }
 }
 
-export const totalDoctorAppointments = async (_id:string)=>{
+export const totalDoctorAppointments = async (_id:string,query:string)=>{
     try { 
-        const result =  await doctorAppointmentApi.get(`/count/${_id}`)  
+        const result =  await doctorAppointmentApi.get(`/count/${_id}?${query}`)  
         return result.data
     } catch (error) {
         console.log(error);
