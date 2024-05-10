@@ -24,9 +24,9 @@ doctorApi.interceptors.request.use(
 )
 
 
-export const unblockedDoctors = async ()=>{
+export const unblockedDoctors = async (query:string)=>{
     try {         
-        const result =  await doctorApi.get('/list/unblocked')          
+        const result =  await doctorApi.get(`/list/unblocked?${query}`)          
         return result.data 
     } catch (error) {
         console.log(error);
