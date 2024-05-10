@@ -8,6 +8,7 @@ import { createInitialPages, handlePagination } from "../../constants/constFunct
 import { useNavigate } from "react-router-dom"
 import { Socket } from "socket.io-client"
 import { useSocket } from "../../store/context/socketContext"
+import InputModal from "../common/InputModal"
 
 function BookingHistory() {
     const [list,setList] =useState<AppointmentPopulateData[]>([])
@@ -16,6 +17,10 @@ function BookingHistory() {
     const [pageData,setPageData] = useState<AppointmentPopulateData[]>([])
     const [pages,setPages] = useState<number[]>([])
     const [currentPage,setCurrentPage] = useState<number>(1)
+    const [isCancelReasonModalOpen,setIsCancelReasonModalOpen] = useState<boolean>(false)
+    const [cancelReason,setCancelReason] = useState<string>("")
+    const [_id,set_id] = useState<string | undefined>("")
+    const [fees,setFees] = useState<number>(0)
     const navigate = useNavigate()
     const limit = 13
     const pageCount = Math.ceil(list.length/limit)   
@@ -43,12 +48,14 @@ function BookingHistory() {
     const handleCancel = async(_id:string | undefined,amount:number)=>{
         try {
 
-            if(!_id) return notifyError("Something wrong")
+            if(!_id) return notifyError("Something wrong")    
+            if(!cancelReason) return notifyError("Please provide reason for cancellation")      
 
-            let response:ResponseData = await cancelBooking(_id,{date:new Date(),description:"Cancelled Booking",amount})
+            let response:ResponseData = await cancelBooking(_id,{date:new Date(),description:"Cancelled Booking",cancelReason,amount})
             if(!response.status) return notifyError(response.message)
 
             setReload(!reload)
+            setIsCancelReasonModalOpen(false)
         } catch (error) {
             
         }
@@ -67,7 +74,8 @@ function BookingHistory() {
     }
 
   return (
-    <div className="relative  mt-10 ">
+    <div className="  mt-10 ">
+        <InputModal state={cancelReason} setState={setCancelReason} handleSubmit={handleCancel} _id={_id} fees={fees} setIsModalOpen={setIsCancelReasonModalOpen} isModalOpen={isCancelReasonModalOpen} title="Reason for Cancellation"/> 
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -139,7 +147,7 @@ function BookingHistory() {
                                         <button
                                             type="button"
                                             className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-                                            onClick={() => handleCancel(obj._id, obj.doctor.fees)}
+                                            onClick={() =>{ setIsCancelReasonModalOpen(!isCancelReasonModalOpen),set_id(obj._id),setFees(obj.doctor.fees)}}
                                         >
                                             Cancel
                                         </button>

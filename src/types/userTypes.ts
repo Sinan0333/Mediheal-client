@@ -91,6 +91,7 @@ export type PaymentFormProps = {
 export type WalletHistoryData={
     date:Date
     description:string
+    cancelReason?:string
     amount:number
 }
 
