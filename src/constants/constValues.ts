@@ -69,12 +69,36 @@ export const DoctorSortByData = [
 
 export const BloodGroups = [
     {
-        name:'A',
-        _id:"A"
+        name:'A+',
+        _id:"A+"
     },
     {
-        name:'B',
-        _id:"B"
+        name:'B+',
+        _id:"B+"
+    },
+    {
+        name:'O+',
+        _id:"O+"
+    },
+    {
+        name:'AB+',
+        _id:"AB+"
+    },
+    {
+        name:'A-',
+        _id:"A-"
+    },
+    {
+        name:'B-',
+        _id:"B-"
+    },
+    {
+        name:'O-',
+        _id:"O-"
+    },
+    {
+        name:'AB-',
+        _id:"AB-"
     },
 ]
 

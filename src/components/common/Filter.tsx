@@ -90,7 +90,7 @@ function Filter({baseUrl,searchInput,chargeInput,filterData,filterInputName,sort
                                     <option value="">Non</option>
                                     {
                                         sortData.map((data:any,i:number)=>{
-                                            return <option key={i} value={data.value}>{data.name}</option>
+                                            return <option key={i} value={data._id}>{data.name}</option>
                                         })
                                     }
                                 </select>
