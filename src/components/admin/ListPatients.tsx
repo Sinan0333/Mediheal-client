@@ -85,7 +85,7 @@ function ListPatients() {
             handlePagination(i,currentPage,pages,pageCount)
         }
         setCurrentPage(i)
-        const baseUrl = location.pathname.split("/").includes("admin") ? "/admin/patient?" : "/doctor/patient?"
+        const baseUrl = location.pathname.split("/").includes("admin") ? "/admin/patient?" : "/doctor/patients?"
         navigate(baseUrl+`search=${search}&charge=${charge}&filterData=${filterData}&sortBy=${sortBy}&sortIn=${sortIn}&page=${i}`)
     }
 
@@ -94,7 +94,7 @@ function ListPatients() {
         <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Patients</h1>
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>
         {
-            isFilterOpen?<Filter baseUrl={location.pathname.split("/").includes("admin") ? "/admin/patient" : "/doctor/patient"} searchInput={true}  chargeInput={false} filterData={BloodGroups} filterInputName="Blood Groups" sortData={PatientsSortByData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
+            isFilterOpen?<Filter baseUrl={location.pathname.split("/").includes("admin") ? "/admin/patient" : "/doctor/patients"} searchInput={true}  chargeInput={false} filterData={BloodGroups} filterInputName="Blood Groups" sortData={PatientsSortByData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
         }
         <div className="overflow-x-auto">
             <table className="table-auto min-w-full border-collapse ">

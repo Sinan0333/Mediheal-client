@@ -73,7 +73,7 @@ export const changeStatus = async (_id:string)=>{
 
 export const getDoctorPatients = async (_id:string,query?:string)=>{
     try { 
-        const result =  await doctorAppointmentApi.get(`/my_patients?${query}/${_id}`) 
+        const result =  await doctorAppointmentApi.get(`/my_patients/${_id}?${query}`) 
         return result.data 
     } catch (error) {
         console.log(error);
@@ -82,7 +82,7 @@ export const getDoctorPatients = async (_id:string,query?:string)=>{
 
 export const totalDoctorPatients = async (_id:string,query?:string)=>{
     try { 
-        const result =  await doctorAppointmentApi.get(`/my_patients/count?${query}/${_id}`) 
+        const result =  await doctorAppointmentApi.get(`/my_patients/count/${_id}?${query}`) 
         return result.data 
     } catch (error) {
         console.log(error);
