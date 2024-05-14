@@ -49,7 +49,7 @@ function Filter({baseUrl,searchInput,chargeInput,filterData,filterInputName,sort
     }
   return (
     <div className="w-full flex justify-evenly">
-        <div className="m-10 w-screen max-w-screen-md absolute">
+        <div className="m-10 w-screen max-w-screen-md absolute ">
             <div className="flex flex-col ">
                 <div className="rounded-xl border border-gray-200 neumorphic p-6 shadow-lg">
                     {searchInput &&

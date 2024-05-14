@@ -49,9 +49,9 @@ function ListDoctors() {
 
     useEffect(()=>{
         listDepartmentApi().then((res)=>{
-            setDepartments(res.data)
-            console.log(res);
-            
+            setDepartments(res.data)            
+        }).catch((err)=>{
+            console.log(err.message);
         })
     },[])
 
@@ -77,15 +77,15 @@ function ListDoctors() {
     }
 
   return (
-    <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
+    <div className="neumorphic py-2 px-2  w-full min-h-screen pl-4 pt-4 lg:ml-64 ">
         <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Doctors</h1>
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue ml-2 float-right" onClick={()=>navigate('/admin/doctors/add')}>Add</button>
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>
         {
             isFilterOpen?<Filter baseUrl="/admin/doctors" searchInput={true}  chargeInput={false} filterData={departments} filterInputName="Department" sortData={DoctorSortByData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
         }
-        <div className="overflow-x-auto">
-            <table className="table-auto min-w-full border-collapse ">
+        <div className="  overflow-x-auto w-full ">
+            <table className="table-auto w-full border  border-collapse ">
                 <thead>
                     <tr >
                         <th className="px-4 py-2 text-left w-auto">No</th>

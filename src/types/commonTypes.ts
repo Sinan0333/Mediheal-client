@@ -53,6 +53,8 @@ export type LabelProps={
 export type AdminHeaderNavigation={
     navigation:string
     _id?:string
+    isNavigationOpen:boolean
+    setIsNavigationOpen:(state:boolean)=>void
 }
 
 export type AppointmentData ={

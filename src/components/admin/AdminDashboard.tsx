@@ -60,11 +60,11 @@ function AdminDashboard() {
     },[])
     
     return (
-    <div className="neumorphic py-2  ml-6 w-screen px-4 pt-4 h-screen ">
+    <div className="neumorphic py-2 w-screen px-4 pt-4 min-h-screen lg:ml-64">
         <div className="flex justify-center">
             <h1 className="text-xl sm:text-2xl md:text-4xl mb-4 font-bold text-adminGold">Dashboard</h1>
         </div>
-        <div className="grid grid-cols-6 grid-rows-1 gap-4 mt-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6  gap-4 mt-6">
             <DashboardCard image={doctor} title="Doctors" value={doctors}/>
             <DashboardCard image={users} title="Users" value={user}/>
             <DashboardCard image={patient} title="Patients" value={patients}/>
@@ -90,8 +90,8 @@ function AdminDashboard() {
                 ]}
             />
         </div>
-        <div className="flex justify-between">
-            <div className="w-1/3">
+        <div className="lg:flex justify-between">
+            <div className="lg:w-1/3">
                 <PieChart
                     series={[
                         {
@@ -103,20 +103,20 @@ function AdminDashboard() {
                     height={150}
                 />
             </div>
-            <div className="flex ml-10 items-center">    
-                <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
+            <div className="flex ml-10 items-center justify-center">    
+                <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md:3 }}>
                     <Gauge width={150} height={150} value={onlineAppointmentCount} />
                 </Stack>
-            <div className="ml-6">
-                <div className="flex items-center mr-4 w-full">
-                        <div className="rounded-full w-2 h-2 bg-[#1976d2] mr-2"></div>
-                        <p>Online Appointments</p>
+                <div className="ml-6">
+                    <div className="flex items-center mr-4 w-full">
+                            <div className="rounded-full w-2 h-2 bg-[#1976d2] mr-2"></div>
+                            <p>Online Appointments</p>
+                    </div>
+                    <div className="flex items-center mr-4 w-full">
+                            <div className="rounded-full w-2 h-2 bg-[#c5c5c5] mr-2"></div>
+                            <p>Offline Appointments</p>
+                    </div>
                 </div>
-                <div className="flex items-center mr-4 w-full">
-                        <div className="rounded-full w-2 h-2 bg-[#c5c5c5] mr-2"></div>
-                        <p>Offline Appointments</p>
-                </div>
-            </div>
             </div>
         </div>
     </div>

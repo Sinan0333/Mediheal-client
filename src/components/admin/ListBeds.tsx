@@ -66,11 +66,11 @@ function ListBeds() {
     }
 
   return (
-    <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
+    <div className="neumorphic py-2 px-2 w-screen min-h-screen pl-4 pt-4 lg:ml-64">
         <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Bed Space</h1>
-        <button className="neumorphic-navBtn w-36 h-8 ml-4 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/bed/assign')}>Assign Patient</button>
-        <button className="neumorphic-navBtn w-20 h-8 ml-4 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/bed/add')}>Add</button>
-        <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>
+        <button className="neumorphic-navBtn px-4 h-8 ml-2 sm:ml-4 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/bed/assign')}>Assign Patient</button>
+        <button className="neumorphic-navBtn px-4 h-8 ml-2 sm:ml-4 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/bed/add')}>Add</button>
+        <button className="neumorphic-navBtn px-4 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>
         {
             isFilterOpen?<Filter baseUrl="/admin/bed" searchInput={false}  chargeInput={true} filterData={BedTYpes} filterInputName="Type" sortData={BedSortByData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
         }
