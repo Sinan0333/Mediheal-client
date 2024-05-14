@@ -7,6 +7,7 @@ import { base64 } from "../../constants/convert"
 import { getDepartmentDataById, updateDepartment } from "../../api/admin/departmentManagementApi"
 import { ResponseData } from "../../types/commonTypes"
 import { useNavigate, useParams } from "react-router-dom"
+import TextArea from "../common/TextArea"
 
 function EditDepartmentForm() {
   const [name ,setName] = useState<string>("")
@@ -66,12 +67,12 @@ function EditDepartmentForm() {
   }
   
   return (
-    <div className="neumorphic py-2 px-2 ml-6 w-screen pl-4 pt-4">
+    <div className="neumorphic py-2 px-2 w-screen min-h-screen pl-4 pt-4 lg:ml-64">
       <h1 className="text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Edit Department</h1>
       <div className="mb-6 ">
        <Inputs name="Name" type="text" setState={setName} state={name}/>
-       <Inputs name="Title" type="text" setState={setTitle} state={title}/>
-       <Inputs name="Description" type="text" setState={setDescription} state={description}/>
+       <TextArea name="Title"  setState={setTitle} height="10" state={title}/>
+       <TextArea name="Description"  setState={setDescription} height="32" state={description}/>
        <RoundedImageInput state={logoFile} setState={setLogoFile} name="logo"/>
        <RoundedImageInput state={imageFile} setState={setImageFile} name="image"/>
       </div>

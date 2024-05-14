@@ -25,12 +25,12 @@ function ViewAdmitHistory() {
     
     
     return (
-      <div className="neumorphic py-2 px-2 ml-6 w-screen ">
+      <div className="neumorphic py-2 px-2 min-h-screen w-screen lg:ml-64">
         <div className="flex justify-center">
           <h1 className="text-3xl sm:text-3xl md:text-4xl mb-4 font-bold text-adminGold">{patientID ? patientName : admitHistory?.type }</h1>
         </div>
         <div className="flex flex-wrap mt-10">
-            <div className="flex w-1/2">
+            <div className="md:flex  w-full md:w-1/2">
                 <Label labelName="PatientID" value={patientID}/>
                 <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/admin/patients/view/${admitHistory?.patient._id}`)}>
                     <img src={eye} alt="Button Icon"  />

@@ -25,7 +25,7 @@ function ViewBed() {
     
     
     return (
-      <div className="neumorphic py-2 px-2 ml-6 w-screen ">
+      <div className="neumorphic py-2 px-2 w-screen min-h-screen lg:ml-64">
         <div className="flex justify-center">
           <h1 className="text-3xl sm:text-3xl md:text-4xl mb-4 font-bold text-adminGold">{patientID ? patientName : bedData?.type }</h1>
         </div>

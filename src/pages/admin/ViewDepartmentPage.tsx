@@ -1,16 +1,18 @@
+import { useState } from "react"
 import Header from "../../components/admin/Header"
 import Navigation from "../../components/admin/Navigation"
 import VIewDepartment from "../../components/admin/VIewDepartment"
 
 function ViewDepartmentPage() {
+  const [isNavigationOpen, setIsNavigationOpen] = useState(false)
   return (
     <>
-    <Header navigation='/profile'/>
-    <div className="flex mt-6 bg-transparent">
-        <Navigation/>
+    <Header navigation='/profile' setIsNavigationOpen={setIsNavigationOpen} isNavigationOpen={isNavigationOpen}/>
+      <div className="flex mt-6 bg-transparent">
+        <Navigation isNavigationOpen={isNavigationOpen} />
         <VIewDepartment/>
-    </div>
-</>
+      </div>
+    </>
   )
 }
 
