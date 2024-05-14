@@ -69,10 +69,10 @@ function DoctorDetails() {
   
   return (
     <div className="px-1 sm:px-12 md:px-22 lg:px-32">
-      <div >
+      <div className="flex justify-center">
         <h1 className="text-4xl  font-semibold text-adminBlue">{data.firstName} {data.secondName}</h1>
       </div>
-      <div className="flex">
+      <div className="md:flex">
         <div className="mt-8 w- h-98 flex  justify-center overflow-hidden   ">
           <img src={imageUrl} alt="Your Image" className="object-cover" />
         </div>

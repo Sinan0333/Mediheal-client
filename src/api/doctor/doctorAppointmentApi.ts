@@ -89,7 +89,7 @@ export const totalDoctorPatients = async (_id:string,query?:string)=>{
     }
 }
 
-export const totalDoctorAppointments = async (_id:string,query:string)=>{
+export const totalDoctorAppointments = async (_id:string,query?:string)=>{
     try { 
         const result =  await doctorAppointmentApi.get(`/count/${_id}?${query}`)  
         return result.data

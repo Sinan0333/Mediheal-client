@@ -20,7 +20,7 @@ function RoundedImageInput({state,setState,name}:RoundedImageInputProps) {
   return (
     <div className="flex items-center mb-4">
          <label className="font-semibold text-lg w-32 mr-4 text-adminBlue">{name}</label>
-      <div className="relative rounded-full overflow-hidden w-20 h-20 bg-gray-200">
+      <div className="relative rounded-full overflow-hidden w-14 h-14 md:w-20 md:h-20 bg-gray-200">
         {state && (
           <img
             src={typeof(state) ==='string' ? `https://res.cloudinary.com/dw2cscitl/${state}` : URL.createObjectURL(state)}
@@ -40,7 +40,7 @@ function RoundedImageInput({state,setState,name}:RoundedImageInputProps) {
       
       <button
         onClick={handleChooseImageClick}
-        className="neumorphic-navBtn ml-4 px-4 py-2  text-adminBlue  hover:font-bold focus:outline-none "
+        className="neumorphic-navBtn ml-4 px-2 py-1 md:px-4 md:py-2  text-adminBlue  hover:font-bold focus:outline-none "
       >
         Choose Image
       </button>

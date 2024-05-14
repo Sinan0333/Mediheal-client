@@ -21,6 +21,7 @@ function DoctorDashboard() {
     const [admitRevenue,setAdmitRevenue] = useState<number[]>([])
     const [statusCount,setStatusCount] = useState<StatusWiseAppointmentCount[]>([])
     const [onlineAppointmentCount,setOnlineAppointmentCount] = useState<number>(0)
+console.log(appointments);
 
     useEffect(() => {
         const getData = async ()=>{

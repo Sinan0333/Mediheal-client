@@ -24,7 +24,7 @@ function SlotsTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTable
       <div className="p-4">
         <div>
             <h1 className="text-lg  font-semibold mb-4">Choose Day</h1>
-            <div className="grid grid-cols-3  grid-rows-1 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 md:gap-6 lg:grid-cols-7 lg:gap-8 xl:grid-cols-6 xl:gap-10 2xl:grid-cols-7 2xl:gap-12">
+            <div className="grid grid-cols-3  grid-rows-1 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 md:gap-6 lg:grid-cols-6 lg:gap-7 xl:grid-cols-7 xl:gap-8 2xl:grid-cols-7 2xl:gap-8">
                 {
                     slotsArray?.map((day,i)=>{
                         return(

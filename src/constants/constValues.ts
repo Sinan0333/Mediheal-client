@@ -1,19 +1,11 @@
 export const BedTYpes = [
     {
-        name: "General",
-        _id: "General"
-    },
-    {
         name: "ICU",
         _id: "ICU"
     },
     {
         name: "Covid 19",
         _id: "Covid 19"
-    },
-    {
-        name: "Ventilator",
-        _id: "Ventilator"
     },
     {
         name:"Ward",
@@ -49,10 +41,6 @@ export const BedSortByData = [
 ]
 
 export const DoctorSortByData = [
-    {
-        name: "Non",
-        _id: ""
-    },
     {
         name: "Age",
         _id:'age'

@@ -25,7 +25,7 @@ function ExistingPatient({state,setState,reload}:ExistingPatientProps) {
       <h1 className="text-2xl text-white font-semibold">Choose Patient</h1>
       <h3 className="text-white">Choose Existing Or Added Patient</h3>
     </div>
-    <div className="flex flex-wrap  justify-evenly pt-8 pl-4">  
+    <div className="flex flex-wrap justify-evenly pt-8 pl-4">  
     {
         list?.map((patient)=>{
             
