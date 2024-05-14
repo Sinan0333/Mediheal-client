@@ -8,7 +8,7 @@ function BookingHistoryPage() {
     <>
         <Nav/>
         <div className="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-            <aside className="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
+            <aside className="hidden py-4 md:w-1/3 lg:w-1/4 lg:block">
                 <div className="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
 
                     <h2 className="pl-3 mb-4 text-2xl font-semibold">Settings</h2>
@@ -30,7 +30,7 @@ function BookingHistoryPage() {
                     </p>
                 </div>
             </aside>
-            <main className="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
+            <main className="w-full min-h-screen py-1 lg:w-3/4 overflow-x-auto ">
                 <div className="p-2 md:p-4">
                     <h1 className="text-2xl font-semibold text-adminBlue">Booking History</h1>
                     <BookingHistory/>
