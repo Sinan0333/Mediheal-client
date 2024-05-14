@@ -10,9 +10,19 @@ function PatientPrescription({prescription}:PatientPrescriptionProps) {
         <div className="flex justify-center pt-4 text-adminBlue">
             <h1 className="text-xl font-bold ">{prescription.doctor.firstName} {prescription.doctor.secondName}</h1>
         </div>
-        <div className="p-4 mt-2 flex justify-between">
+        <div className="p-4 mt-2 md:flex md:flex-row-reverse md:justify-between">
+            <div className="">
+                <div className="flex">
+                    <p className="font-semibold text-lg w-20">Date:</p>
+                    <p className="text-lg font-semibold w-full">{new Date(prescription.appointment.bookedDate).toDateString()}</p>
+                </div>
+                <div className="flex">
+                    <p className="font-semibold text-lg w-20">Time:</p>
+                    <p className="text-lg font-semibold w-full">{prescription.appointment.startTime} - {prescription.appointment.endTime}</p>
+                </div>
+            </div>
             <div>
-                <div className="flex  pr-2 ">
+                <div className="flex mt-4 md:mt-0  pr-2 ">
                     <p className="font-semibold text-lg  mr-4 ">Weight:</p>
                     <p className="text-lg font-semibold">{prescription.weight} Kg</p>
                 </div>
@@ -27,16 +37,6 @@ function PatientPrescription({prescription}:PatientPrescriptionProps) {
                 <div className="flex pr-2 ">
                     <p className="font-semibold text-lg  mr-4 ">Body temperature:</p>
                     <p className="text-lg font-semibold">{prescription.bodyTemperature} °C</p>
-                </div>
-            </div>
-            <div className="">
-                <div className="flex">
-                    <p className="font-semibold text-lg w-20">Date:</p>
-                    <p className="text-lg font-semibold w-full">{new Date(prescription.appointment.bookedDate).toDateString()}</p>
-                </div>
-                <div className="flex">
-                    <p className="font-semibold text-lg w-20">Time:</p>
-                    <p className="text-lg font-semibold w-full">{prescription.appointment.startTime} - {prescription.appointment.endTime}</p>
                 </div>
             </div>
         </div>
@@ -71,9 +71,9 @@ function PatientPrescription({prescription}:PatientPrescriptionProps) {
                                 <p className="font-semibold text-lg mr-2">Days:</p>
                                 <p className="text-lg font-semibold w-full">{medicine.days}</p>
                             </div>
-                            <div className="flex">
+                            <div className="flexbg-white w-full">
                                 <p className="font-semibold text-lg mr-2 ">Instructions:</p>
-                                <p className="text-lg font-semibold  w-[100%] break-words">{medicine.instruction}</p>
+                                <p className="text-lg font-semibold  break-words w-full">{medicine.instruction}</p>
                             </div>
                         </div>
                         

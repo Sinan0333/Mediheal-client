@@ -15,22 +15,22 @@ function Navigation({isNavigationOpen}:NavigationProps) {
             <NavButton icon={dashboard} name="Dashboard" navigation="/admin/dashboard"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={doctor} name="Doctors" navigation="/admin/doctors"/>
+            <NavButton icon={doctor} name="Doctors" navigation="/admin/doctors"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={users} name="Users" navigation="/admin/users"/>
+            <NavButton icon={users} name="Users" navigation="/admin/users"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={department} name="Department" navigation="/admin/departments"/>
+            <NavButton icon={department} name="Department" navigation="/admin/departments"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={bed} name="Bed Space" navigation="/admin/bed" />
+            <NavButton icon={bed} name="Bed Space" navigation="/admin/bed" />
           </li>
           <li className="mb-4">
-          <NavButton icon={history} name="Admit History" navigation="/admin/admit_history"/>
+            <NavButton icon={history} name="Admit History" navigation="/admin/admit_history"/>
           </li>
           <li className="mb-4">
-          <NavButton icon={patient} name="Patients" navigation="/admin/patient"/>
+            <NavButton icon={patient} name="Patients" navigation="/admin/patient"/>
           </li>
         </ul>
       </div>

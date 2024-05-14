@@ -8,6 +8,7 @@ import { PrescriptionPopulateData } from "../../types/doctorTypes"
 import { getPatientPrescription } from "../../api/doctor/doctorPrescripton"
 import PatientPrescription from "../../components/common/PatientPrescription"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
+import Pagination from "../../components/common/Pagination"
 
 function PatientPrescriptionPage() {
     const doctorId = useSelector((state:RootState)=> state.doctor._id)
@@ -15,6 +16,7 @@ function PatientPrescriptionPage() {
     const [pageData,setPageData] = useState<PrescriptionPopulateData[]>([])
     const [pages,setPages] = useState<number[]>([])
     const [currentPage,setCurrentPage] = useState<number>(1)
+    const [isNavigationOpen, setIsNavigationOpen] = useState(false)
     const limit = 1
     const pageCount = Math.ceil(list.length/limit)   
     const {_id} = useParams()
@@ -42,10 +44,10 @@ function PatientPrescriptionPage() {
   }
   return (
     <>
-    <Header navigation='/doctor/profile' _id={doctorId} />
+    <Header navigation='/doctor/profile' _id={doctorId} setIsNavigationOpen={setIsNavigationOpen} isNavigationOpen={isNavigationOpen}/>
       <div className="flex mt-6 bg-transparent">
-        <DoctorNavigationBar/>
-        <div className="neumorphic py-2 px-2 ml-6 w-screen ">
+        <DoctorNavigationBar isNavigationOpen={isNavigationOpen}/>
+        <div className="neumorphic py-2 px-2 w-screen min-h-screen lg:ml-64">
           <div className="flex justify-center">
             <h1 className="text-2xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Patient Prescriptions</h1>
           </div>
@@ -59,34 +61,10 @@ function PatientPrescriptionPage() {
             }  
           </div>
           <div className="flex justify-center items-center mt-8">
-            <nav className="flex">
-                {
-                    currentPage === 1 ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 rounded-lg hover:bg-gray-300"onClick={()=>handleClick(currentPage-1)}>Previous</p>
-                }
-                {
-                    pages.map((page)=>{
-                        return(
-                            <p key={page} className={`${currentPage === page ?"neumorphic-pagination-clicked":"neumorphic-pagination"} flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300`} onClick={()=>handleClick(page)}>{page}</p>
-
-                        )
-                    })
-                }    
-                    
-                {
-                    pageCount > 4 && pageCount-1 > currentPage? (
-                        <>
-                            <span className="px-3 py-1">...</span>
-                            <p className="neumorphic-pagination flex justify-center items-center cursor-pointer py-2 px-2 w-8 h-8 ml-2 rounded-lg hover:bg-gray-300" onClick={()=>handleClick(pageCount)}>{pageCount}</p>
-                        </>
-                    ) : null
-                }
-                
-                {
-                    currentPage === pageCount ? "" : <p  className="neumorphic-pagination flex justify-center items-center cursor-pointer py-4 px-4 h-8 ml-2  rounded-lg hover:bg-gray-300" onClick={()=>handleClick(currentPage+1)}>Next</p>
-                }
-                
-            </nav>
-        </div>
+            {
+                pageCount > 1 ? <Pagination pages={pages} currentPage={currentPage} handleClick={handleClick} pageCount={pageCount}/> : null
+            }
+          </div>
         </div>
       </div>
   </>

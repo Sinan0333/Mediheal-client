@@ -1,9 +1,13 @@
 import NavButton from "../common/NavButton"
 import { dashboard,patient,appointment,schedule } from "../../constants/icons"
 
-function DoctorNavigationBar() {
+type DoctorNavigationBarProps = {
+  isNavigationOpen: boolean
+}
+
+function DoctorNavigationBar({isNavigationOpen}:DoctorNavigationBarProps) {
   return (
-    <div className="neumorphic  w-64 min-h-screen py-2 px-2 flex flex-col justify-between">
+    <div className={`neumorphic py-2 px-2 fixed top-0 left-0 z-40 w-60 h-screen transition-transform -translate-x-full ${isNavigationOpen ? "translate-x-0" : ""} lg:translate-x-0`}>
       <div className="p-2">
         <h1 className="text-xl font-bold text-adminBlue">Navigation</h1>
         <ul className="mt-4 ">

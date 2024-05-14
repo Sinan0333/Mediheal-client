@@ -49,11 +49,11 @@ console.log(appointments);
     },[])
     
     return (
-    <div className="neumorphic py-2  ml-6 w-screen px-4 pt-4 h-screen ">
+    <div className="neumorphic py-2   min-h-screen w-screen px-4 pt-4 lg:ml-64">
         <div className="flex justify-center">
             <h1 className="text-xl sm:text-2xl md:text-4xl mb-4 font-bold text-adminGold">Dashboard</h1>
         </div>
-        <div className="grid grid-cols-3 grid-rows-1 gap-4 mt-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4 mt-6">
             <DashboardCard image={history} title="Admits" value={admits}/>
             <DashboardCard image={appointment} title="My Appointments" value={appointments}/>
             <DashboardCard image={patient} title="My Patients" value={patients}/>
@@ -76,8 +76,8 @@ console.log(appointments);
                 ]}
             />
         </div>
-        <div className="flex justify-between">
-            <div className="w-1/3">
+        <div className="lg:flex justify-between">
+            <div className="lg:w-1/3">
                 <PieChart
                     series={[
                         {

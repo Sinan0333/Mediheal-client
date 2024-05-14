@@ -16,36 +16,38 @@ import DoctorDashboardPage from '../pages/doctor/DoctorDashboardPage'
 
 function DoctorRoutes() {
   return (
-    <Routes>
+    <div className='adminLayout'>
+      <Routes>
 
-      <Route path='' element={<DoctorIsLoggedOut/>}>
-        <Route path='/login' element={<DoctorLogin/>} />
-      </Route>
-    
-      <Route path='' element={<DoctorIsLoggedIn/>}>
+        <Route path='' element={<DoctorIsLoggedOut/>}>
+          <Route path='/login' element={<DoctorLogin/>} />
+        </Route>
+      
+        <Route path='' element={<DoctorIsLoggedIn/>}>
 
-        <Route path='/' element={<DoctorDashboardPage/>} />
-        <Route path='/dashboard' element={<DoctorDashboardPage/>} />
-        
-        <Route path='/patients' element={<ListPatientsPage/>} />
-        <Route path='/patients/view/:_id' element={<ViewPatientPage/>} />
+          <Route path='/' element={<DoctorDashboardPage/>} />
+          <Route path='/dashboard' element={<DoctorDashboardPage/>} />
+          
+          <Route path='/patients' element={<ListPatientsPage/>} />
+          <Route path='/patients/view/:_id' element={<ViewPatientPage/>} />
 
-        <Route path='/appointments' element={<ListAppointmentsPage/>} />
-        <Route path='/appointments/prescription/add/:patId/:_id' element={<AddPrescriptionPage/>} />
-        <Route path='/prescription/patient/:_id' element={<PatientPrescriptionPage/>} />
+          <Route path='/appointments' element={<ListAppointmentsPage/>} />
+          <Route path='/appointments/prescription/add/:patId/:_id' element={<AddPrescriptionPage/>} />
+          <Route path='/prescription/patient/:_id' element={<PatientPrescriptionPage/>} />
 
-        <Route path='/profile/:_id' element={<ViewDoctorProfilePage/>}/>
-        <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>
-        
-        <Route path='/schedule' element={<ViewSchedulePage/>}/>
-        <Route path='/chat/:patId/:_id' element={<DoctorSideChat/>}/>
-        <Route path='/call/:_id' element={<VideoCall/>}/>
+          <Route path='/profile/:_id' element={<ViewDoctorProfilePage/>}/>
+          <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage/>}/>
+          
+          <Route path='/schedule' element={<ViewSchedulePage/>}/>
+          <Route path='/chat/:patId/:_id' element={<DoctorSideChat/>}/>
+          <Route path='/call/:_id' element={<VideoCall/>}/>
 
-        <Route path='*' element={<Error404/>} />
+          <Route path='*' element={<Error404/>} />
 
-      </Route>
+        </Route>
 
-    </Routes>
+      </Routes>
+    </div>
   )
 }
 
