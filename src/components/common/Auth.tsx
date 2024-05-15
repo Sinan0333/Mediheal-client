@@ -99,7 +99,7 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                         notifyError(response.message)
                     }
                 }else{
-                    notifyError("Please select your role")
+                    notifyError("Please select your role")                   
                 }
             }else{
                 notifyError(result)
@@ -108,7 +108,7 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
     }
 
   return (
-    <div className="flex justify-center items-center  h-screen w-screen">
+    <div className="flex justify-center items-center  h-screen ">
     <div className="neumorphic-auth md:absolute  top-8 sm:top-16 left-4 sm:left-11 mx-auto sm:mx-0 p-11 items-center flex flex-col max-w-[500px] w-[90%] " >
         <p className='text-4xl mb-6 font-bold'>{pageName}</p>
         <input className={`neumorphic-input-auth mb-4 m-2 outline-none border-none w-full ${signupInputs}`} placeholder="Name" type="text"  onChange={(e)=>setName(e.target.value)} value={name}/>

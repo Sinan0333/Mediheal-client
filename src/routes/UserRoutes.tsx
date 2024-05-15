@@ -10,7 +10,6 @@ import Error404 from '../pages/common/Error404.tsx'
 import DoctorDetailsPage from '../pages/user/DoctorDetailsPage.tsx'
 import PaymentSuccess from '../components/user/PaymentSuccess.tsx'
 import CancelPage from '../components/user/CancelPage.tsx'
-import Sample from '../components/common/Sample.tsx'
 import BookingHistoryPage from '../pages/user/BookingHistoryPage.tsx'
 import TransactionHistoryPage from '../pages/user/TransactionHistoryPage.tsx'
 import PatientsPage from '../pages/user/PatientsPage.tsx'
@@ -47,7 +46,6 @@ function UserRoutes() {
           <Route path='/payment_success' element={<PaymentSuccess/>}/>
           <Route path='/payment_cancel' element={<CancelPage/>}/>
 
-          <Route path='/sample' element={<Sample/>}/>
           <Route path='/chat/:chatId/:patId' element={<UserSideChat/>}/>
           <Route path='/call/:_id' element={<VideoCall/>}/>
 

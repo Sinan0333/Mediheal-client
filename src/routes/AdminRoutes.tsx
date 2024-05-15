@@ -25,7 +25,6 @@ import ViewAdmitHistoryPage from '../pages/admin/ViewAdmitHistoryPage'
 import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
 
 
-
 function AdminRoutes() {
   return (
   
