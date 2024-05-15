@@ -6,7 +6,7 @@ import { DoctorCardProps } from "../../types/doctorTypes";
 function DoctorCard({_id,firstName,secondName,department,image,experience,age,gender,fees}:DoctorCardProps) {
 
   const navigate = useNavigate()
-  const imageUrl = `https://res.cloudinary.com/dw2cscitl/${image}`;
+  const imageUrl = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${image}`;
 
   return (
     <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72 ml-2 mb-6">

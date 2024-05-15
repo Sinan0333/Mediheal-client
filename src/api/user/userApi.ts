@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { EditUserDataProps} from '../../types/userTypes'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/user/profile`
 
 const userApi = axios.create({
-    baseURL:'http://localhost:3000'
+    baseURL
 })
 
 userApi.interceptors.request.use(
@@ -39,7 +40,7 @@ export const editUserData = async (data:EditUserDataProps)=>{
 export const getUserData = async (_id:string)=>{
     try { 
         
-        const result =  await userApi.post('/profile',{_id}) 
+        const result =  await userApi.post('/',{_id}) 
         return result.data 
         
     } catch (error) {

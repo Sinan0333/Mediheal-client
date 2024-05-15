@@ -1,7 +1,8 @@
 import axios from 'axios'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/patient`
 
 const patientManagementApi = axios.create({
-    baseURL:'http://localhost:3000/admin/patient'
+    baseURL
 })
 
 patientManagementApi.interceptors.request.use(

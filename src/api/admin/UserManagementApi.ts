@@ -1,7 +1,8 @@
 import axios from 'axios'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/user`
 
 const userManagementApi = axios.create({
-    baseURL:'http://localhost:3000/admin/user'
+    baseURL
 })
 
 userManagementApi.interceptors.request.use(

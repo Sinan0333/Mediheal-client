@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { PrescriptionData } from '../../types/doctorTypes';
+const baseURL = `${import.meta.env.VITE_BASE_URL}/doctor/prescription`
 
 const doctorPrescriptionApi = axios.create({
-    baseURL:'http://localhost:3000/doctor/prescription'
+    baseURL
 })
 
 doctorPrescriptionApi.interceptors.request.use(

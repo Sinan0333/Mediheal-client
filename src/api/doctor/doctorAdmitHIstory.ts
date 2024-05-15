@@ -1,7 +1,8 @@
 import axios from 'axios'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/doctor/admit_history`
 
 const doctorAdmitHistoryApi = axios.create({
-    baseURL:'http://localhost:3000/doctor/admit_history'
+    baseURL
 })
 
 doctorAdmitHistoryApi.interceptors.request.use(

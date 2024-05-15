@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { GetChatDataApiType, MessageType } from '../../types/commonTypes'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/doctor/chat`
 
 const doctorChatApi = axios.create({
-    baseURL:'http://localhost:3000/doctor/chat'
+    baseURL
 })
 
 doctorChatApi.interceptors.request.use(

@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { PatientData } from '../../types/userTypes'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/user/patient`
 
 const patientApi = axios.create({
-    baseURL:'http://localhost:3000/patient'
+    baseURL
 })
 
 patientApi.interceptors.request.use(

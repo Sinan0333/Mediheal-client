@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { AddBedValidation, AssignPatientType, BedEditData} from '../../types/adminTypes'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/bed`
 
 const bedManagementApi = axios.create({
-    baseURL:'http://localhost:3000/admin/bed'
+    baseURL
 })
 
 bedManagementApi.interceptors.request.use(

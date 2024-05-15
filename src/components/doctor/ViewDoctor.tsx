@@ -6,7 +6,7 @@ import { getDoctorDataApi } from "../../api/admin/doctorManagementApi"
 
 function ViewDoctor({upBtn}:ViewDoctorProps) {
   const [doctorData,setDoctorData] = useState<DoctorData>()
-  const imageUrl = `https://res.cloudinary.com/dw2cscitl/${doctorData?.image}`
+  const imageUrl = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${doctorData?.image}`
   const [dob,setDob] = useState("")
   const navigate = useNavigate()
 

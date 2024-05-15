@@ -23,7 +23,7 @@ function RoundedImageInput({state,setState,name}:RoundedImageInputProps) {
       <div className="relative rounded-full overflow-hidden w-14 h-14 md:w-20 md:h-20 bg-gray-200">
         {state && (
           <img
-            src={typeof(state) ==='string' ? `https://res.cloudinary.com/dw2cscitl/${state}` : URL.createObjectURL(state)}
+            src={typeof(state) ==='string' ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${state}` : URL.createObjectURL(state)}
             alt="Selected"
             className="w-full h-full object-cover"
           />

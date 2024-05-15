@@ -9,7 +9,7 @@ import { getPatientApi } from "../../api/doctor/doctorPatient"
 function ViewPatient() {
 
     const [patientData,setPatientData] = useState<PatientData>()
-    const imageUrl =patientData?.image ? `https://res.cloudinary.com/dw2cscitl/${patientData?.image}` : "/src/assets/images/default_profile.jpg"
+    const imageUrl =patientData?.image ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${patientData?.image}` : "/src/assets/images/default_profile.jpg"
     const dob = patientData?.dob ? new Date(patientData.dob).toLocaleDateString() : ""
     const location = useLocation()
     

@@ -3,7 +3,7 @@ import { document, edit, schedule } from "../../constants/icons";
 import { useNavigate } from "react-router-dom";
 function PatientCard({_id,firstName,secondName,image,dob,age,gender}:PatientCardProps) {
     const navigate = useNavigate()
-    const imageUrl =image ? `https://res.cloudinary.com/dw2cscitl/${image}`: "/src/assets/images/default_patient.png"
+    const imageUrl =image ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${image}`: "/src/assets/images/default_patient.png"
   
     return (
       <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72 ml-2 mb-6">

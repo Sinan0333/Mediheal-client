@@ -7,7 +7,7 @@ import { UserData } from "../../types/userTypes"
 
 function ViewUser() {
     const [userData,setUserData] = useState<UserData>()
-    const imageUrl:string = `https://res.cloudinary.com/dw2cscitl/${userData?.image}`
+    const imageUrl:string = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${userData?.image}`
     const defaultProfile:string = '/src/assets/images/default_profile.jpg'
     const {_id} = useParams()
     

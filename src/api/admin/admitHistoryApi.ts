@@ -1,7 +1,8 @@
 import axios from 'axios'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/admit_history`
 
 const admitBedHistoryApi = axios.create({
-    baseURL:'http://localhost:3000/admin/admit_history'
+    baseURL
 })
 
 admitBedHistoryApi.interceptors.request.use(

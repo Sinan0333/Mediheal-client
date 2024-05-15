@@ -5,8 +5,8 @@ import { DepartmentDataType } from "../../types/adminTypes"
 
 function VIewDepartment() {
     const [departmentData,setDepartmentData] = useState<DepartmentDataType>()
-    const imageUrl = `https://res.cloudinary.com/dw2cscitl/${departmentData?.image}`
-    const logoUrl = `https://res.cloudinary.com/dw2cscitl/${departmentData?.logo}`
+    const imageUrl = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${departmentData?.image}`
+    const logoUrl = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${departmentData?.logo}`
   
     
   

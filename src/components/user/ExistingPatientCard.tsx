@@ -2,7 +2,7 @@ import { ExistingPatientCardProps } from "../../types/userTypes"
 
 function ExistingPatientCard({data,state,setState}:ExistingPatientCardProps) {
 
-    const imageUrl = `https://res.cloudinary.com/dw2cscitl/${data.image}`;
+    const imageUrl = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${data.image}`;
 
   return (
     <div className={`${state == data._id ? "bg-slate-200" : "bg-white"} flex flex-col mb-6 mr-4  items-center  border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700`} onClick={()=>setState(data._id)}>

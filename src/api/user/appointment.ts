@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { AppointmentData } from '../../types/commonTypes'
 import { WalletHistoryData } from '../../types/userTypes'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/user/appointment`
+
 const appointmentApi = axios.create({
-    baseURL:'http://localhost:3000/appointment'
+    baseURL
 })
 
 appointmentApi.interceptors.request.use(

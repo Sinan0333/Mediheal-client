@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { AddDoctorApi,  } from '../../types/doctorTypes'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/doctor`
+
 
 const doctorManagementApi= axios.create({
-    baseURL:'http://localhost:3000/admin/doctor'
+    baseURL
 })
 
 const cancelTokenSource = axios.CancelToken.source();

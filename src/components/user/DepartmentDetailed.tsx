@@ -2,8 +2,8 @@ import { DepartmentDetailedProps } from "../../types/userTypes"
 
 function DepartmentDetailed({data}:DepartmentDetailedProps) {
 
-  const imageUrl = `https://res.cloudinary.com/dw2cscitl/${data?.image}`
-  const logoUrl =  `https://res.cloudinary.com/dw2cscitl/${data?.logo}`
+  const imageUrl = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${data?.image}`
+  const logoUrl =  `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${data?.logo}`
 
   return (
   <div className="max-w-sm w-full h-full md:max-w-full md:flex mb-20">

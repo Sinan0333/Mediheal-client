@@ -27,7 +27,7 @@ function EditProfile() {
         setEmail(userData.email)
         setPhone(userData.phone)
         setUserId(userData._id)
-        if(userData.image) setImageFile(`https://res.cloudinary.com/dw2cscitl/${userData.image}`)
+        if(userData.image) setImageFile(`${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${userData.image}`)
         else setImageFile('/src/assets/images/default_profile.jpg') 
     },[])
 
@@ -37,7 +37,9 @@ function EditProfile() {
         if(result !== "Success") return notifyError(result)
 
         let image :string | undefined ;
-        if(typeof(imageFile) ==='string'){
+        if(imageFile === '/src/assets/images/default_profile.jpg'){
+            image = ""
+        }else if(typeof(imageFile) ==='string'){
             image = imageFile
         }else{
             image = await base64(imageFile)

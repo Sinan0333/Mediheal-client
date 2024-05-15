@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { LoginType } from '../../types/userTypes'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/auth/admin`
 
 const adminApi= axios.create({
-    baseURL:'http://localhost:3000/auth/admin'
+    baseURL
 })
 
 

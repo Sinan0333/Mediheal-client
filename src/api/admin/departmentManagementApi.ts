@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { DepartmentApiType } from '../../types/adminTypes'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/department`
+
 
 const departmentManagementApi= axios.create({
-    baseURL:'http://localhost:3000/admin/department'
+    baseURL
 })
 
 departmentManagementApi.interceptors.request.use(

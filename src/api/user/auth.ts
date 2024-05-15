@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { LoginType, SignupData } from '../../types/userTypes'
+const baseURL = `${import.meta.env.VITE_BASE_URL}/auth/user`
 
 const userApi = axios.create({
-    baseURL:'http://localhost:3000/auth/user'
+    baseURL
 })
 
 export const userSignup = async (data:SignupData)=>{

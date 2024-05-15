@@ -9,7 +9,7 @@ type DoctorChatHeaderProps = {
 }
 
 function DoctorChatHeader({image,name,id,endSession,handleCall}:DoctorChatHeaderProps) {
-    const imageUrl = `https://res.cloudinary.com/dw2cscitl/${image}`
+    const imageUrl = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${image}`
     const defaultProfile:string = '/src/assets/images/default_profile.jpg'
   return (
     <div className="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center ">

@@ -37,7 +37,7 @@ function DoctorDetails() {
   useEffect(()=>{
     getDoctorDataApi(_id).then((res)=>{
       setData(res.data)
-      setImageUrl(`https://res.cloudinary.com/dw2cscitl/${res.data.image}`)
+      setImageUrl(`${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${res.data.image}`)
     }).catch((err)=>{
       console.log(err.message)
     })
@@ -52,7 +52,7 @@ function DoctorDetails() {
       if(result != "Success") return notifyError(result)
 
       
-      const stripe = await loadStripe("pk_test_51P3GiN06Grjj2WCt0UFIaIMjxEDOFxFeJJxHj4hLeSoYA7ODIxKjlx27FDy6hVivVvsSknYrusPJ97L2il09JMaH00Z9QI9GJt")
+      const stripe = await loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY)
       const response2:ResponseData = await createCheckoutSession(data.fees)
       stripe?.redirectToCheckout({
         sessionId:response2.data

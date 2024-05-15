@@ -2,7 +2,7 @@ import { DepartmentLogoProps } from "../../types/userTypes"
 
 function DepartmentLogo({data,setState}:DepartmentLogoProps) {
 
-    const imageUrl = `https://res.cloudinary.com/dw2cscitl/${data.logo}`
+    const imageUrl = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${data.logo}`
 
   return (
     <div className="flex w-1/5 flex-wrap ml-2" onClick={()=>setState(data)}>
