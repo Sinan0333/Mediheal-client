@@ -45,13 +45,12 @@ function PatientPrescriptionPage() {
   return (
     <>
     <Header navigation='/doctor/profile' _id={doctorId} setIsNavigationOpen={setIsNavigationOpen} isNavigationOpen={isNavigationOpen}/>
-      <div className="flex mt-6 bg-transparent">
+      <div className="mt-6">
         <DoctorNavigationBar isNavigationOpen={isNavigationOpen}/>
-        <div className="neumorphic py-2 px-2 w-screen min-h-screen lg:ml-64">
+        <div className="neumorphic py-2 px-2 min-w-screen min-h-screen lg:ml-64">
           <div className="flex justify-center">
             <h1 className="text-2xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Patient Prescriptions</h1>
           </div>
-          <div className="p-2">
             {
               pageData.map((prescription,i)=>{
                 return(
@@ -59,7 +58,6 @@ function PatientPrescriptionPage() {
                 )
               })
             }  
-          </div>
           <div className="flex justify-center items-center mt-8">
             {
                 pageCount > 1 ? <Pagination pages={pages} currentPage={currentPage} handleClick={handleClick} pageCount={pageCount}/> : null

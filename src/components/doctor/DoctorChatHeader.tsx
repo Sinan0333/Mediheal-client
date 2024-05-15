@@ -12,7 +12,7 @@ function DoctorChatHeader({image,name,id,endSession,handleCall}:DoctorChatHeader
     const imageUrl = `https://res.cloudinary.com/dw2cscitl/${image}`
     const defaultProfile:string = '/src/assets/images/default_profile.jpg'
   return (
-    <div className="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center">
+    <div className="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center ">
         <div className="flex items-center">
             <div className="w-10 h-10">
                 <img className="w-full h-full object-cover rounded-full" src={image ? imageUrl : defaultProfile}/>

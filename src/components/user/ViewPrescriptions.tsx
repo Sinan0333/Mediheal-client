@@ -10,9 +10,19 @@ function ViewPrescriptions({prescription}:ViewPrescriptionsProps) {
         <div className="flex justify-center mt-2">
             <h1 className="text-xl font-bold ">{prescription.doctor.firstName} {prescription.doctor.secondName}</h1>
         </div>
-        <div className="p-4 mt-2 flex justify-between">
+        <div className="p-4 mt-2 md:flex md:flex-row-reverse md:justify-between">
+            <div >
+                <div className="flex">
+                    <p className="font-semibold text-lg w-20">Date:</p>
+                    <p className="text-lg font-semibold w-full">{new Date(prescription.appointment.bookedDate).toDateString()}</p>
+                </div>
+                <div className="flex">
+                    <p className="font-semibold text-lg w-20">Time:</p>
+                    <p className="text-lg font-semibold w-full">{prescription.appointment.startTime} - {prescription.appointment.endTime}</p>
+                </div>
+            </div>
             <div>
-                <div className="flex  pr-2 ">
+                <div className="flex mt-4 md:mt-0    pr-2 ">
                     <p className="font-semibold text-lg  mr-4 ">Weight:</p>
                     <p className="text-lg font-semibold">{prescription.weight} Kg</p>
                 </div>
@@ -27,16 +37,6 @@ function ViewPrescriptions({prescription}:ViewPrescriptionsProps) {
                 <div className="flex pr-2 ">
                     <p className="font-semibold text-lg  mr-4 ">Body temperature:</p>
                     <p className="text-lg font-semibold">{prescription.bodyTemperature} °C</p>
-                </div>
-            </div>
-            <div className="">
-                <div className="flex">
-                    <p className="font-semibold text-lg w-20">Date:</p>
-                    <p className="text-lg font-semibold w-full">{new Date(prescription.appointment.bookedDate).toDateString()}</p>
-                </div>
-                <div className="flex">
-                    <p className="font-semibold text-lg w-20">Time:</p>
-                    <p className="text-lg font-semibold w-full">{prescription.appointment.startTime} - {prescription.appointment.endTime}</p>
                 </div>
             </div>
         </div>
@@ -59,21 +59,21 @@ function ViewPrescriptions({prescription}:ViewPrescriptionsProps) {
                 {
                     prescription.medicines.map((medicine)=>(
                         <div className="mb-6">
-                            <div className="flex">
+                            <div className="">
                                 <p className="font-semibold text-lg mr-2">Name:</p>
-                                <p className="text-lg font-semibold w-[90%] break-words">{medicine.name}</p>
+                                <p className="text-md font-semibold w-full break-words">{medicine.name}</p>
                             </div>
                             <div className="flex">
                                 <p className="font-semibold text-lg mr-2">Type:</p>
-                                <p className="text-lg font-semibold  w-[90%] break-words">{medicine.type}</p>
+                                <p className="text-md font-semibold  w-[90%] break-words">{medicine.type}</p>
                             </div>
                             <div className="flex">
                                 <p className="font-semibold text-lg mr-2">Days:</p>
-                                <p className="text-lg font-semibold w-full">{medicine.days}</p>
+                                <p className="text-md font-semibold w-full">{medicine.days}</p>
                             </div>
-                            <div className="flex ">
+                            <div className=" ">
                                 <p className="font-semibold text-lg mr-2 ">Instructions:</p>
-                                <p className="text-lg font-semibold  w-[90%] break-words">{medicine.instruction}</p>
+                                <p className="text-md font-semibold  w-full break-words">{medicine.instruction}</p>
                             </div>
                         </div>
                         

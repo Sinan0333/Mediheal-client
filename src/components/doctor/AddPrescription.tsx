@@ -56,25 +56,25 @@ function AddPrescription() {
     <div className="neumorphic py-2 px-2 w-screen min-h-screen pl-4 pt-4 lg:ml-64">
     <h1 className="text-xl sm:text-2xl md:text-3xl mb-6 font-bold text-adminGold">Add Prescription</h1>
     <div className="flex flex-wrap">
-        <div className="mb-6 flex w-1/2 xl:w-1/4 pr-4">
+        <div className="mb-6 flex w-full sm:w-1/2 xl:w-1/4 pr-4">
           <label className="font-semibold text-lg w-16 mr-4 text-adminBlue">Weight:</label>
           <input className="flex-grow h-8 py-2 px-4 w-32 bg-transparent border-transparent focus:outline-none" type="number" value={weight}  placeholder="In Kg" onChange={(e)=>setWeight(parseInt(e.target.value))}/>
         </div>
-        <div className="mb-6 flex w-1/2 xl:w-1/4 pr-4">
+        <div className="mb-6 flex w-full sm:w-1/2 xl:w-1/4 pr-4">
           <label className="font-semibold text-lg w-16 mr-4 text-adminBlue">Height:</label>
           <input className="flex-grow h-8 py-2 px-4 w-32 bg-transparent border-transparent focus:outline-none" type="number" value={height}  placeholder="in Cm" onChange={(e)=>setHeight(parseInt(e.target.value))}/>
         </div>
-        <div className="mb-6 flex w-1/2 xl:w-1/4 pr-4">
+        <div className="mb-6 flex w-full sm:w-1/2 xl:w-1/4 pr-4">
           <label className="font-semibold text-lg w-32 mr-4 text-adminBlue">Blood Pressure:</label>
           <input className="flex-grow h-8 py-2 px-4 w-32 bg-transparent border-transparent focus:outline-none" type="number" value={bloodPressure }  placeholder="in mmHg" onChange={(e)=>setBloodPressure(parseInt(e.target.value))}/>
         </div>
-        <div className="mb-6 flex w-1/2 xl:w-1/4 pr-4">
+        <div className="mb-6 flex w-full sm:w-1/2 xl:w-1/4 pr-4">
           <label className="font-semibold text-lg w-52 mr-4 text-adminBlue">Body Temperature</label>
           <input className="flex-grow h-8 py-2 px-4 w-32 bg-transparent border-transparent focus:outline-none" type="number" value={bodyTemperature}  placeholder="in Celsius" onChange={(e)=>setBodyTemperature(parseInt(e.target.value))}/>
         </div > 
         
-        <table className="w-full mt-4 ">
-            <thead className="neumorphic-navBtn text-left w-full h-10 mt-3">
+        <table className="w-full mt-4 overflow-x-auto">
+            <thead className="neumorphic-navBtn text-left w-full h-10 mt-3 overflow-auto">
                 <tr >
                     <th className="text-adminBlue font-semibold text-lg w-[25%] rounded-l-3xl pl-4">Medicine Name</th>
                     <th className="text-adminBlue font-semibold text-lg w-[25%">Type</th>
@@ -96,7 +96,7 @@ function AddPrescription() {
                         <input className="flex-grow h-8 py-2  w-full bg-transparent border-transparent focus:outline-none" type="text" value={medicine.instruction}  placeholder="Instruction" onChange={(e)=>setMedicine({type:'SET_INSTRUCTION',payload:e.target.value})}/>
                     </td>
                     <td>
-                        <input className="flex-grow h-8 py-2  bg-transparent border-transparent focus:outline-none" type="number" value={medicine.days}  placeholder="Days" onChange={(e)=>setMedicine({type:'SET_DAYS',payload:parseInt(e.target.value)})}/>
+                        <input className="flex-grow h-8 py-2  w-full  bg-transparent border-transparent focus:outline-none" type="number" value={medicine.days}  placeholder="Days" onChange={(e)=>setMedicine({type:'SET_DAYS',payload:parseInt(e.target.value)})}/>
                     </td>
                     <td>
                       <button className="neumorphic-navBtn  py-1 px-1 w-7 h-7 rounded-lg" onClick={addMedicine}>

@@ -5,7 +5,7 @@ type UserChatInputProps = {
 }
 function UserChatInput({message, setMessage, sendMessage}:UserChatInputProps) {
   return (
-    <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+    <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4 ">
         <div>
             <button
             className="flex items-center justify-center text-gray-400 hover:text-gray-600"

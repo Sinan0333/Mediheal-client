@@ -1,13 +1,13 @@
 import  { Socket } from 'socket.io-client';
-import DoctorResponse from "./DoctorResponse"
-import UserChatInput from "./UserChatInput"
-import UserMessage from "./UserMessage"
+import DoctorResponse from "../../components/user/DoctorResponse"
+import UserChatInput from "../../components/user/UserChatInput"
+import UserMessage from "../../components/user/UserMessage"
 import { useEffect, useState } from 'react';
 import { MessageType } from '../../types/commonTypes';
 import { useNavigate, useParams } from 'react-router-dom';
 import { notifyError } from '../../constants/toast';
 import { createMessage, getChatData } from '../../api/user/userChat';
-import UserChatHeader from './UserChatHeader';
+import UserChatHeader from '../../components/user/UserChatHeader';
 import { DoctorData, initialDoctorData } from '../../types/doctorTypes';
 import { getDoctorDataApi } from '../../api/user/doctorApi';
 import { useSocket } from '../../store/context/socketContext';
@@ -72,12 +72,12 @@ function UserSideChat() {
       };
       
   return (
-    <div className="flex h-screen antialiased text-gray-800">
+    <div className="flex h-screen antialiased text-gray-800 ">
         <div className="flex flex-row h-full w-full overflow-x-hidden">
-            <div className="flex flex-col flex-auto h-full p-2">
-                <UserChatHeader name={doctorData.firstName + doctorData.secondName} department={doctorData.department.name} image={doctorData.image}/>
-                <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
-                    <div className="flex flex-col h-full overflow-x-auto mb-4">
+            <div className="flex flex-col flex-auto h-full p-2 ">
+                <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl h-full p-2">
+                    <UserChatHeader name={doctorData.firstName + doctorData.secondName} department={doctorData.department.name} image={doctorData.image}/>
+                    <div className="hide_scrollbar flex flex-col h-full overflow-x-auto mb-4">
                         <div className="flex flex-col h-full">
                             <div className="grid grid-cols-12 gap-y-2">
                                 {

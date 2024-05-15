@@ -16,7 +16,7 @@ import DoctorDashboardPage from '../pages/doctor/DoctorDashboardPage'
 
 function DoctorRoutes() {
   return (
-    <div className='adminLayout'>
+    <div className='p-3 bg-[#e0e0e0]'>
       <Routes>
 
         <Route path='' element={<DoctorIsLoggedOut/>}>

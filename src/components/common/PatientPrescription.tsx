@@ -6,12 +6,12 @@ type PatientPrescriptionProps = {
 
 function PatientPrescription({prescription}:PatientPrescriptionProps) {
   return (
-    <div className="neumorphic-navBtn mt-4">
+    <div className="neumorphic-navBtn mt-4 mx-4 ">
         <div className="flex justify-center pt-4 text-adminBlue">
             <h1 className="text-xl font-bold ">{prescription.doctor.firstName} {prescription.doctor.secondName}</h1>
         </div>
         <div className="p-4 mt-2 md:flex md:flex-row-reverse md:justify-between">
-            <div className="">
+            <div >
                 <div className="flex">
                     <p className="font-semibold text-lg w-20">Date:</p>
                     <p className="text-lg font-semibold w-full">{new Date(prescription.appointment.bookedDate).toDateString()}</p>
@@ -47,7 +47,7 @@ function PatientPrescription({prescription}:PatientPrescriptionProps) {
                     prescription.diagnosis.map((diagnosis)=>(
                         <div className="flex">
                             <p className="font-semibold text-lg mr-2">{diagnosis.name}:</p>
-                            <p className="text-lg font-semibold w-full">{diagnosis.instruction}</p>
+                            <p className="text-md font-semibold w-full">{diagnosis.instruction}</p>
                         </div>
                     ))
                 }
@@ -61,22 +61,21 @@ function PatientPrescription({prescription}:PatientPrescriptionProps) {
                         <div className="mb-6">
                             <div className="flex">
                                 <p className="font-semibold text-lg mr-2">Name:</p>
-                                <p className="text-lg font-semibold w-[90%] break-words">{medicine.name}</p>
+                                <p className="text-md font-semibold w-[90%] break-words">{medicine.name}</p>
                             </div>
                             <div className="flex">
                                 <p className="font-semibold text-lg mr-2">Type:</p>
-                                <p className="text-lg font-semibold  w-[90%] break-words">{medicine.type}</p>
+                                <p className="text-md font-semibold  w-[90%] break-words">{medicine.type}</p>
                             </div>
                             <div className="flex">
                                 <p className="font-semibold text-lg mr-2">Days:</p>
-                                <p className="text-lg font-semibold w-full">{medicine.days}</p>
+                                <p className="text-md font-semibold w-full">{medicine.days}</p>
                             </div>
-                            <div className="flexbg-white w-full">
+                            <div className="">
                                 <p className="font-semibold text-lg mr-2 ">Instructions:</p>
-                                <p className="text-lg font-semibold  break-words w-full">{medicine.instruction}</p>
+                                <p className="text-md font-semibold  break-words w-full ">{medicine.instruction}</p>
                             </div>
                         </div>
-                        
                     ))
                 }
             </div>

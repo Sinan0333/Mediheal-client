@@ -12,7 +12,7 @@ function AddPrescriptionPage() {
     return (
       <>
         <Header navigation='/doctor/profile' _id={_id} setIsNavigationOpen={setIsNavigationOpen} isNavigationOpen={isNavigationOpen}/>
-          <div className="flex mt-6 bg-transparent">
+          <div className="flex mt-6 bg-transparent justify-center items-center">
             <DoctorNavigationBar isNavigationOpen={isNavigationOpen}/>
             <AddPrescription/>
           </div>

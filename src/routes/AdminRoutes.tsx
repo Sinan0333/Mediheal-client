@@ -28,7 +28,7 @@ import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
 
 function AdminRoutes() {
   return (
-    <div className='adminLayout'>
+    <div className='p-3 bg-[#e0e0e0]'>
       <Routes>
 
         <Route path='' element={<AdminIsLoggedOut/>}>

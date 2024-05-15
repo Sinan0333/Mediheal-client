@@ -47,10 +47,17 @@
 }
 
 .neumorphic-navBtn{
-  border-radius: 50px;
+  border-radius: 48px;
   background: #e0e0e0;
-  box-shadow:  -5px 5px 8px #afafaf,
-               5px -5px 8px #ffffff;
+  box-shadow:  -5px 5px 10px #bababa,
+               5px -5px 10px #ffffff;
+}
+
+.neumorphic-navBtn-clicked{
+  border-radius: 48px;
+  background: #e0e0e0;
+  box-shadow: inset -5px 5px 10px #bababa,
+            inset 5px -5px 10px #ffffff;
 }
 
 .neumorphic-form-input{
@@ -81,13 +88,13 @@
               inset -5px -5px 8px #ffffff;
 }
 
-.adminLayout{
-  padding: 15px;
-}
-
 .sample{
   border-radius: 50%;
   background: #e0e0e0;
   box-shadow:  -5px 5px 11px #b5b5b5,
                5px -5px 11px #ffffff;
+}
+
+.hide_scrollbar::-webkit-scrollbar{
+display: none;
 }
