@@ -43,29 +43,29 @@ function PatientPrescriptionPage() {
       setCurrentPage(i)
   }
   return (
-    <>
-    <Header navigation='/doctor/profile' _id={doctorId} setIsNavigationOpen={setIsNavigationOpen} isNavigationOpen={isNavigationOpen}/>
-      <div className="mt-6">
-        <DoctorNavigationBar isNavigationOpen={isNavigationOpen}/>
-        <div className="neumorphic py-2 px-2 min-w-screen min-h-screen lg:ml-64">
-          <div className="flex justify-center">
-            <h1 className="text-2xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Patient Prescriptions</h1>
-          </div>
-            {
-              pageData.map((prescription,i)=>{
-                return(
-                  <PatientPrescription key={i} prescription={prescription}/>
-                )
-              })
-            }  
-          <div className="flex justify-center items-center mt-8">
-            {
-                pageCount > 1 ? <Pagination pages={pages} currentPage={currentPage} handleClick={handleClick} pageCount={pageCount}/> : null
-            }
+    <div className="p-3 bg-[#e0e0e0] ">
+      <Header navigation='/doctor/profile' _id={doctorId} setIsNavigationOpen={setIsNavigationOpen} isNavigationOpen={isNavigationOpen}/>
+        <div className="mt-6">
+          <DoctorNavigationBar isNavigationOpen={isNavigationOpen}/>
+          <div className="neumorphic py-2 px-2 min-w-screen min-h-screen lg:ml-64">
+            <div className="flex justify-center">
+              <h1 className="text-2xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Patient Prescriptions</h1>
+            </div>
+              {
+                pageData.map((prescription,i)=>{
+                  return(
+                    <PatientPrescription key={i} prescription={prescription}/>
+                  )
+                })
+              }  
+            <div className="flex justify-center items-center mt-8">
+              {
+                  pageCount > 1 ? <Pagination pages={pages} currentPage={currentPage} handleClick={handleClick} pageCount={pageCount}/> : null
+              }
+            </div>
           </div>
         </div>
-      </div>
-  </>
+    </div>
   )
 }
 

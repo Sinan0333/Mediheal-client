@@ -6,13 +6,13 @@ import ListDoctors from '../../components/doctor/ListDoctors'
 function ListDoctorsPage() {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false)
   return (
-    <>
-    <Header navigation='/profile' setIsNavigationOpen={setIsNavigationOpen} isNavigationOpen={isNavigationOpen}/>
+    <div className="p-3 bg-[#e0e0e0] ">
+      <Header navigation='/profile' setIsNavigationOpen={setIsNavigationOpen} isNavigationOpen={isNavigationOpen}/>
       <div className="flex mt-6 bg-transparent">
         <Navigation isNavigationOpen={isNavigationOpen} />
         <ListDoctors/>
       </div>
-    </>
+    </div>
   )
 }
 

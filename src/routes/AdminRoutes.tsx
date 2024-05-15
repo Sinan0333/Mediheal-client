@@ -28,12 +28,12 @@ import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
 
 function AdminRoutes() {
   return (
-    <div className='p-3 bg-[#e0e0e0]'>
-      <Routes>
+  
+    <Routes>
 
-        <Route path='' element={<AdminIsLoggedOut/>}>
-          <Route path='/login' element={<AdminLogin/>} />
-        </Route>
+      <Route path='' element={<AdminIsLoggedOut/>}>
+        <Route path='/login' element={<AdminLogin/>} />
+      </Route>
 
         <Route path='/' element={<AdminIsLoggedIn/>}>
 
@@ -69,9 +69,8 @@ function AdminRoutes() {
           <Route path='*' element={<Error404/>} />
 
         </Route>
-
-      </Routes>
-    </div>
+    </Routes>
+  
   )
 }
 

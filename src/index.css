@@ -13,9 +13,6 @@
   background: #cddaea;
   box-shadow: inset 10px 10px 20px #b4c0ce,
               inset -10px -10px 20px #e6f4ff;
-  width: 450px;
-  height: 50px;
-  padding-left: 10px;
 }
 
 .neumorphic-auth{

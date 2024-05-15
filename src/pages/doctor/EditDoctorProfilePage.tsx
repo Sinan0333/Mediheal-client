@@ -11,13 +11,13 @@ function EditDoctorProfilePage() {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false)
 
   return (
-    <>
+    <div className="p-3 bg-[#e0e0e0] ">
       <Header navigation='/doctor/profile' _id={_id} setIsNavigationOpen={setIsNavigationOpen} isNavigationOpen={isNavigationOpen}/>
         <div className="flex mt-6 bg-transparent">
           <DoctorNavigationBar isNavigationOpen={isNavigationOpen}/>
           <EditDoctor/>
         </div>
-    </>
+    </div>
   )
 }
 
