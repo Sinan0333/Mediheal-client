@@ -10,6 +10,7 @@ import { ResponseData } from "../../types/commonTypes"
 import Filter from "../common/Filter"
 import { BedSortByData, BedTYpes } from "../../constants/constValues"
 import Pagination from "../common/Pagination"
+import ConfirmationModal from "./ConfirmationModal"
 
 function ListBeds() {
     const navigate = useNavigate()
@@ -20,6 +21,8 @@ function ListBeds() {
     const [pages,setPages] = useState<number[]>([])
     const [currentPage,setCurrentPage] = useState<number>(1)
     const [isFilterOpen,setIsFilterOpen] = useState<boolean>(false)
+    const [isConfirmationOpen,setIsConfirmationOpen] = useState<boolean>(false)
+    const [selectedData,setSelectedData] = useState<{_id:string | undefined , is_blocked:boolean } >({_id:undefined,is_blocked:false})
 
     const limit = 13
     const pageCount = pages.length  
@@ -44,9 +47,9 @@ function ListBeds() {
         })
     },[query])
 
-    const handleBlocking = async(is_blocked:boolean,_id:string)=>{
+    const handleBlocking = async()=>{
 
-        const response = await changeBedBlock(_id,is_blocked) 
+        const response = await changeBedBlock(selectedData._id,selectedData.is_blocked) 
         if(!response.status) notifyError(response.message) 
         
         const response2:ResponseData = await getAllBeds(query)
@@ -71,6 +74,9 @@ function ListBeds() {
         <button className="neumorphic-navBtn px-4 h-8 ml-2 sm:ml-4 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/bed/assign')}>Assign Patient</button>
         <button className="neumorphic-navBtn px-4 h-8 ml-2 sm:ml-4 font-semibold text-adminBlue float-right" onClick={()=>navigate('/admin/bed/add')}>Add</button>
         <button className="neumorphic-navBtn px-4 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>
+        {
+            isConfirmationOpen ? <ConfirmationModal isConfirmationModalOpen={isConfirmationOpen} setIsConfirmationModalOpen={setIsConfirmationOpen} onConfirm={handleBlocking} message={"Are you sure you want to block this Bed?"}/> : null
+        }
         {
             isFilterOpen?<Filter baseUrl="/admin/bed" searchInput={false}  chargeInput={true} filterData={BedTYpes} filterInputName="Type" sortData={BedSortByData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
         }
@@ -100,7 +106,7 @@ function ListBeds() {
                                     {obj.assignDate ? <td className="px-4 py-2">{new Date(obj.assignDate).toDateString()}</td> : <td className="px-4 py-2"></td>}
                                     {obj.dischargeDate ? <td className="px-4 py-2">{new Date(obj.dischargeDate).toDateString()}</td> : <td className="px-4 py-2"></td>}
                                     {obj.assignBy ? <td className="px-4 py-2">{typeof(obj?.assignBy) === 'object' ? obj.assignBy.firstName+obj.assignBy.secondName : ""}</td> : <td className="px-4 py-2"></td>}
-                                    <td className="px-4 py-2"><Actions viewNav={`/admin/bed/view/${obj._id}`} editNav={`/admin/bed/edit/${obj._id}`}  _id={obj._id} handleBlock={handleBlocking} is_blocked={obj.is_blocked}/></td>
+                                    <td className="px-4 py-2"><Actions viewNav={`/admin/bed/view/${obj._id}`} editNav={`/admin/bed/edit/${obj._id}`}  _id={obj._id} setIsConfirmationModalOpen={setIsConfirmationOpen} setSelectedData={setSelectedData} is_blocked={obj.is_blocked}/></td>
                                 </tr>
                             )
                         })

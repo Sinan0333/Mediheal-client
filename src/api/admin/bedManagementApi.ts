@@ -53,7 +53,7 @@ export const getAllBeds = async (query:string)=>{
     }
 }
 
-export const changeBedBlock = async (_id:string ,is_blocked:boolean)=>{
+export const changeBedBlock = async (_id:string|undefined ,is_blocked:boolean)=>{
     try { 
         const result =  await bedManagementApi.post(`/block/${_id}`,{is_blocked})  
         return result.data

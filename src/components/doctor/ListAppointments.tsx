@@ -13,6 +13,7 @@ import { Socket } from "socket.io-client"
 import Filter from "../common/Filter"
 import { AppointmentFilterDays, AppointmentSortData } from "../../constants/constValues"
 import Pagination from "../common/Pagination"
+import ConfirmationModal from "../admin/ConfirmationModal"
 
 function ListAppointments() {
 
@@ -28,6 +29,7 @@ function ListAppointments() {
     const [currentPage,setCurrentPage] = useState<number>(1)
     const [isFilterOpen,setIsFilterOpen] = useState<boolean>(false)
     const [selectedAppointment,setSelectedAppointment] = useState<AppointmentPopulateData | null>(null)
+    const [isConfirmationModalOpen,setIsConfirmationModalOpen] = useState<boolean>(false)
 
     const limit = 13
     const pageCount = pages.length  
@@ -64,12 +66,12 @@ function ListAppointments() {
         navigate(`/doctor/appointments?`+`search=${search}&charge=${charge}&filterData=${filterData}&sortBy=${sortBy}&sortIn=${sortIn}&page=${i}`)
     }
 
-    const handleCancel = async(_id:string | undefined,amount:number | undefined)=>{
+    const handleCancel = async()=>{
         try {
 
-            if(!_id || !amount) return notifyError("Something wrong")
+            if(!selectedAppointment?._id || !selectedAppointment?.doctor.fees) return notifyError("Something wrong")
 
-            let response:ResponseData = await cancelBooking(_id,{date:new Date(),description:"Doctor Cancelled Booking",amount})
+            let response:ResponseData = await cancelBooking(selectedAppointment?._id,{date:new Date(),description:"Doctor Cancelled Booking",amount:selectedAppointment?.doctor.fees})
             if(!response.status) return notifyError(response.message)
             
             notifySuccess("Appointment Cancelled Successfully")
@@ -95,6 +97,9 @@ function ListAppointments() {
     <div className="neumorphic py-2 px-2 w-screen min-h-screen pl-4 pt-4 lg:ml-64">
         <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Appointments</h1>
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>
+        {
+            isConfirmationModalOpen ? <ConfirmationModal isConfirmationModalOpen={isConfirmationModalOpen} setIsConfirmationModalOpen={setIsConfirmationModalOpen} onConfirm={handleCancel} message={"Are you sure you want to cancel this appointment?"}/> : null
+        }
         {
             isFilterOpen?<Filter baseUrl="/doctor/appointments" searchInput={false}  chargeInput={false} filterData={AppointmentFilterDays} filterInputName="Days" sortData={AppointmentSortData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
         }
@@ -146,7 +151,7 @@ function ListAppointments() {
                                         {
                                             obj.status === "Pending" 
                                             ?<li>
-                                                <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>handleCancel(selectedAppointment?._id,selectedAppointment?.doctor.fees)}>Cancel</p>
+                                                <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>setIsConfirmationModalOpen(true)}>Cancel</p>
                                             </li>
                                             :""
                                         }

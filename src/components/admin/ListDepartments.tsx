@@ -8,6 +8,7 @@ import { createInitialPages, handlePagination } from "../../constants/constFunct
 import { ResponseData } from "../../types/commonTypes"
 import Filter from "../common/Filter"
 import Pagination from "../common/Pagination"
+import ConfirmationModal from "./ConfirmationModal"
 
 function ListDepartments() {
     const navigate = useNavigate()
@@ -18,6 +19,8 @@ function ListDepartments() {
     const [pages,setPages] = useState<number[]>([])
     const [currentPage,setCurrentPage] = useState<number>(1)
     const [isFilterOpen,setIsFilterOpen] = useState<boolean>(false)
+    const [isConfirmationOpen,setIsConfirmationOpen] = useState<boolean>(false)
+    const [selectedData,setSelectedData] = useState<{_id:string | undefined , is_blocked:boolean } >({_id:undefined,is_blocked:false})
 
     const limit = 13
     const pageCount = pages.length
@@ -42,9 +45,9 @@ function ListDepartments() {
         })
     },[query])
 
-    const handleBlocking = async(is_blocked:boolean,_id:string)=>{
+    const handleBlocking = async()=>{
 
-        const response = await changeDepartmentBlock(_id,is_blocked) 
+        const response = await changeDepartmentBlock(selectedData._id,selectedData.is_blocked) 
         if(!response.status) notifyError(response.message) 
 
         const response2:ResponseData = await listDepartmentApi()
@@ -70,6 +73,9 @@ function ListDepartments() {
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue ml-2 float-right" onClick={()=>navigate('/admin/departments/add')}>Add</button>
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Search</button>
         {
+            isConfirmationOpen ? <ConfirmationModal isConfirmationModalOpen={isConfirmationOpen} setIsConfirmationModalOpen={setIsConfirmationOpen} onConfirm={handleBlocking} message={"Are you sure you want to block this Department?"}/> : null
+        }
+        {
             isFilterOpen?<Filter baseUrl="/admin/departments" searchInput={true}  isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
         }
         <div className="overflow-x-auto ">
@@ -92,7 +98,7 @@ function ListDepartments() {
                                     <td className="px-4 py-2">{obj.name}</td>
                                     <td className="px-4 py-2 max-w-60 overflow-hidden whitespace-nowrap text-overflow-ellipsis">{obj.title}</td>
                                     <td className="px-4 py-2 max-w-60 overflow-hidden whitespace-nowrap text-overflow-ellipsis">{obj.description}</td>
-                                    <td className="px-4 py-2"><Actions viewNav={`/admin/departments/view/${obj._id}`} editNav={`/admin/departments/edit/${obj._id}`}  _id={obj._id} handleBlock={handleBlocking} is_blocked={obj.is_blocked}/></td>
+                                    <td className="px-4 py-2"><Actions viewNav={`/admin/departments/view/${obj._id}`} editNav={`/admin/departments/edit/${obj._id}`}  _id={obj._id} setIsConfirmationModalOpen={setIsConfirmationOpen} setSelectedData={setSelectedData} is_blocked={obj.is_blocked}/></td>
                                 </tr>
                             )
                         })

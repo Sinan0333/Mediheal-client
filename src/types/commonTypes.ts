@@ -42,7 +42,13 @@ export type ActionProps={
     editNav:string
     _id:string 
     is_blocked:boolean
-    handleBlock: (is_blocked: boolean,_id:string) => void
+    setSelectedData:(data:BlockData) => void
+    setIsConfirmationModalOpen:(value: boolean) => void
+}
+
+type BlockData = {
+    _id:string | undefined
+    is_blocked:boolean
 }
 
 export type LabelProps={
