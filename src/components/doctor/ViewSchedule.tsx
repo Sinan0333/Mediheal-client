@@ -3,7 +3,7 @@ import ScheduleTable from "./ScheduleTable"
 import { DoctorData, OneSlotType, initialDoctorData, initialOneSlotsType } from "../../types/doctorTypes"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
-import {  takeABreakApi } from "../../api/doctor/doctorApi"
+import {  removeBreakApi, takeABreakApi } from "../../api/doctor/doctorApi"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { ResponseData } from "../../types/commonTypes"
 import { getDoctorDataApi } from "../../api/admin/doctorManagementApi"
@@ -16,7 +16,6 @@ function ViewSchedule() {
     const doctorId = useSelector((state:RootState)=>state.doctor._id)
     const [reload,setReload] = useState(false)
 
-
     useEffect(()=>{
         getDoctorDataApi(doctorId).then((res)=>{
           setData(res.data)
@@ -28,7 +27,7 @@ function ViewSchedule() {
     const handleTakeBreak = async()=>{
 
         if(!selectedDay){
-            return notifyError("Please select a day")
+            return notifyError("Please select a day and time")
         }else if(!selectedSlot.startTime || !selectedSlot.endTime){
             return notifyError("Please select a time")
         }
@@ -41,6 +40,22 @@ function ViewSchedule() {
         notifySuccess("Successful")
         setReload(!reload)
     }
+
+    const handleRemoveBreak = async()=>{
+
+      if(!selectedDay){
+          return notifyError("Please select a day and time")
+      }else if(!selectedSlot.startTime || !selectedSlot.endTime){
+          return notifyError("Please select a time")
+      }
+
+      if(!data.slots._id || !selectedSlot._id) return notifyError("Missing Required fields")
+      const response:ResponseData = await removeBreakApi(data.slots._id,selectedDay,selectedSlot._id)
+      if(!response.status) notifyError(response.message)
+     
+      notifySuccess("Successful")
+      setReload(!reload)
+  }
 
   return (
   <div className="neumorphic py-2 px-2 w-screen min-h-screen lg:ml-64">
@@ -64,7 +79,11 @@ function ViewSchedule() {
     
     <ScheduleTable slots={data.slots} state={selectedSlot} setState={setSelectedSlot} selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
     <div className="flex justify-center mt-8 mb-8 gap-6">
-        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={handleTakeBreak}>Take A Break</button> 
+      {
+        selectedSlot.break 
+        ? <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={handleRemoveBreak}>Remove Break</button> 
+        : <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={handleTakeBreak}>Take A Break</button>
+      }
     </div>
   </div>
   )

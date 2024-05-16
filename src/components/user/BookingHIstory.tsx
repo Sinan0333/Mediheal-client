@@ -129,7 +129,7 @@ function BookingHistory() {
                             <td className="px-6 py-4">
                                 {obj.type}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className={`px-6 py-4 ${obj.status === 'Pending' ? 'text-yellow-700' : obj.status === 'Checked' ? 'text-green-700' : 'text-red-700'}`}>
                                 {obj.status}
                             </td>
                             <td className="px-6 py-4">

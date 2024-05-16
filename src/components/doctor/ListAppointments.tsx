@@ -4,7 +4,7 @@ import { changeAChatStatus, getDoctorAppointments, totalDoctorAppointments } fro
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { AppointmentPopulateData, ResponseData } from "../../types/commonTypes"
-import { cancel,chat,eye, plus,document} from "../../constants/icons"
+import {three_dots} from "../../constants/icons"
 import { cancelBooking } from "../../api/user/appointment"
 import { useLocation, useNavigate } from "react-router-dom"
 import { createInitialPages, handlePagination } from "../../constants/constFunctions"
@@ -27,6 +27,7 @@ function ListAppointments() {
     const [pages,setPages] = useState<number[]>([])
     const [currentPage,setCurrentPage] = useState<number>(1)
     const [isFilterOpen,setIsFilterOpen] = useState<boolean>(false)
+    const [selectedAppointment,setSelectedAppointment] = useState<AppointmentPopulateData | null>(null)
 
     const limit = 13
     const pageCount = pages.length  
@@ -63,10 +64,10 @@ function ListAppointments() {
         navigate(`/doctor/appointments?`+`search=${search}&charge=${charge}&filterData=${filterData}&sortBy=${sortBy}&sortIn=${sortIn}&page=${i}`)
     }
 
-    const handleCancel = async(_id:string | undefined,amount:number)=>{
+    const handleCancel = async(_id:string | undefined,amount:number | undefined)=>{
         try {
 
-            if(!_id) return notifyError("Something wrong")
+            if(!_id || !amount) return notifyError("Something wrong")
 
             let response:ResponseData = await cancelBooking(_id,{date:new Date(),description:"Doctor Cancelled Booking",amount})
             if(!response.status) return notifyError(response.message)
@@ -97,7 +98,7 @@ function ListAppointments() {
         {
             isFilterOpen?<Filter baseUrl="/doctor/appointments" searchInput={false}  chargeInput={false} filterData={AppointmentFilterDays} filterInputName="Days" sortData={AppointmentSortData} sortInputName="Sort By" isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>:null
         }
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full">
             <table className="table-auto min-w-full border-collapse ">
                 <thead>
                     <tr >
@@ -123,30 +124,34 @@ function ListAppointments() {
                                     <td className="px-4 py-2">{obj.startTime} - {obj.endTime}</td>
                                     <td className="px-4 py-2">{obj.type}</td>
                                     <td className="px-4 py-2">{obj.status}</td>
-                                    <td className="px-4 py-2">
-                                        <div className="flex ">
-                                            <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/prescription/patient/${obj.patient._id}`)}>
-                                                <img className="w-full" src={document} alt="Button Icon"  />
-                                            </button>
-                                            <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/patients/view/${obj.patient._id}`)}>
-                                                <img className="w-full" src={eye} alt="Button Icon"  />
-                                            </button>
-                                           {
-                                               obj.status === "Pending" && obj.type === "Online" ? <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleChatClick(obj._id)}>
-                                            <img className="w-full" src={chat} alt="Button Icon"  />
-                                            </button> : ""
-                                           }
-                                           {
-                                               obj.status === "Pending" ?  <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/doctor/appointments/prescription/add/${obj.patient._id}/${obj._id}`)}>
-                                            <img className="w-full" src={plus} alt="Button Icon"  />
-                                            </button> : ""
-                                           }
-                                           {
-                                           obj.status ==="Pending" ?<button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>handleCancel(obj._id,obj.doctor.fees)}>
-                                               <img className="w-full" src={cancel} alt="Button Icon"  />
-                                           </button> : ""
-                                           }
-                                        </div>
+                                    <td className="px-4 py-2 ">
+                                    <button className="neumorphic-navBtn mr-2 py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>{if(selectedAppointment) setSelectedAppointment(null) ;else setSelectedAppointment(obj)}} >
+                                        <img className="w-full" src={three_dots} alt="Button Icon"  />
+                                    </button>
+                                    <div id="dropdownDelay" className={`z-10 ${ selectedAppointment && selectedAppointment._id === obj._id ? "block" : "hidden"}  mt-3 absolute right-0 bg-[#e0e0e0] divide-y divide-gray-100 rounded-lg shadow-xl mr-3 dark:bg-gray-700`}>
+                                        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
+                                        <li>
+                                            <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>navigate(`/doctor/prescription/patient/${selectedAppointment?.patient._id}`)}>Prescriptions</p>
+                                        </li>
+                                        <li>
+                                            <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>navigate(`/doctor/patients/view/${selectedAppointment?.patient._id}`)}>Show Patient Details</p>
+                                        </li>
+                                        {
+                                            obj.status === "Pending" && obj.type === "Online" 
+                                            ?<li>
+                                                <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>handleChatClick(selectedAppointment?._id)}>Start Chat</p>
+                                            </li>
+                                            :""
+                                        }
+                                        {
+                                            obj.status === "Pending" 
+                                            ?<li>
+                                                <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>handleCancel(selectedAppointment?._id,selectedAppointment?.doctor.fees)}>Cancel</p>
+                                            </li>
+                                            :""
+                                        }
+                                        </ul>
+                                    </div>
                                     </td>
                                 </tr>
                             )

@@ -33,5 +33,13 @@ export const takeABreakApi = async (scheduleId:string,day:string,_id:string)=>{
     }
 }
 
+export const removeBreakApi = async (scheduleId:string,day:string,_id:string)=>{
+    try {          
+        const result =  await doctorApi.post(`/remove_break/${scheduleId}`,{day,_id})         
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 

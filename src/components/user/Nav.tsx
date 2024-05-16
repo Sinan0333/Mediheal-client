@@ -17,6 +17,11 @@ function Nav() {
     }
   }
 
+  const handleLogOut = ()=>{
+    dispatch(logoutUser())
+    localStorage.removeItem("userToken")
+  }
+
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 w-full fixed z-50">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -77,7 +82,7 @@ function Nav() {
           <li className='md:hidden' onClick={()=>navigate('/account/wallet')}>
             <p className="block py-2 px-3 cursor-pointer text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Wallet</p>
           </li>
-          <li onClick={()=>dispatch(logoutUser())}>
+          <li onClick={handleLogOut}>
             <p className="block py-2 px-3 cursor-pointer text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Logout</p>
           </li>
         </ul>

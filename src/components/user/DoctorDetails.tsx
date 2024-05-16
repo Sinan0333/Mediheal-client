@@ -7,7 +7,7 @@ import AddPatientForm from "./AddPatientForm"
 import ExistingPatient from "./ExistingPatient"
 import { loadStripe } from '@stripe/stripe-js';
 import { bookNowValidation } from "../../validations/user/appointmentValidation"
-import { notifyError } from "../../constants/toast"
+import { notifyError, notifySuccess } from "../../constants/toast"
 import { confirmBooking, createCheckoutSession } from "../../api/user/appointment"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
@@ -74,18 +74,24 @@ function DoctorDetails() {
 
   const walletPayment = async ()=>{
 
-      if(!selectedSlot._id) return notifyError("Pleas select the time slot")
-      if(!type) return notifyError("Pleas select the payment option")
-
-      const result:string = bookNowValidation({slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),fees:data.fees,userId,chat:false})
-      if(result != "Success") return notifyError(result)
-
-      const response:ResponseData = await walletPaymentApi(userId,data.fees)
-      if(!response.status) return notifyError(response.message)
-
-      const response3:ResponseData = await confirmBooking(data.slots._id,{slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type,bookedDate:new Date(),fees:data.fees,userId,chat:false})
-      if(!response3.status) return notifyError(response3.message)
-      navigate('/home')
+    try {
+        if(!selectedSlot._id) return notifyError("Pleas select the time slot")
+        if(!type) return notifyError("Pleas select the payment option")
+    
+        const result:string = bookNowValidation({slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),fees:data.fees,userId,chat:false})
+        if(result != "Success") return notifyError(result)
+    
+        const response:ResponseData = await walletPaymentApi(userId,data.fees)
+        if(!response.status) return notifyError(response.message)
+    
+        const response3:ResponseData = await confirmBooking(data.slots._id,{slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type,bookedDate:new Date(),fees:data.fees,userId,chat:false})
+        if(!response3.status) return notifyError(response3.message)
+    
+        notifySuccess("Booking Successful")
+        navigate('/home')
+    } catch (error:any) {
+      console.log(error.message);
+    }
   }
 
   

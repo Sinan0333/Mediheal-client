@@ -48,7 +48,7 @@ function ScheduleTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTa
                     if(days[currentDay] === selectedDay){
                         if (currentHour < slotStartHour || (currentHour === slotStartHour && currentMinute < slotStartMinute)) {
                             return slot.break ? (
-                                <div key={slot._id} className=" border-2 border-yellow-400 text-yellow-400 flex justify-center items-center p-2 cursor-pointer font-medium">
+                                <div key={slot._id} style={state._id === slot._id ? { backgroundColor: '#164B55', color: 'white', borderColor: 'white' } : {}}  className=" border-2 border-yellow-400 text-yellow-400 flex justify-center items-center p-2 cursor-pointer font-medium" onClick={() => setState(slot)}>
                                     {slot.startTime} - {slot.endTime}
                                 </div>
                                 ) : slot.isReserved ? (
@@ -65,7 +65,7 @@ function ScheduleTable({slots,state,setState,selectedDay,setSelectedDay}:SlotsTa
                         }
                     }else{
                         return slot.break ? (
-                            <div key={slot._id} className=" border-2 border-yellow-400 text-yellow-400 flex justify-center items-center p-2 cursor-pointer font-medium">
+                            <div key={slot._id} style={state._id === slot._id ? { backgroundColor: '#164B55', color: 'white', borderColor: 'white' } : {}}  className=" border-2 border-yellow-400 text-yellow-400 flex justify-center items-center p-2 cursor-pointer font-medium" onClick={() => setState(slot)}>
                                 {slot.startTime} - {slot.endTime}
                             </div>
                             ) : slot.isReserved ? (

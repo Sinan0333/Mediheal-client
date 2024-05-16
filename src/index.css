@@ -85,12 +85,6 @@
               inset -5px -5px 8px #ffffff;
 }
 
-.sample{
-  border-radius: 50%;
-  background: #e0e0e0;
-  box-shadow:  -5px 5px 11px #b5b5b5,
-               5px -5px 11px #ffffff;
-}
 
 .hide_scrollbar::-webkit-scrollbar{
 display: none;

@@ -13,9 +13,13 @@ function Header({navigation,_id,isNavigationOpen,setIsNavigationOpen}:AdminHeade
   
   const handleLogout = ()=>{
 
-    if(path.split('/').includes('admin')) dispatch(logoutAdmin())
-    else dispatch(logoutDoctor())
-
+    if(path.split('/').includes('admin')){
+      dispatch(logoutAdmin())
+      localStorage.removeItem("adminToken")
+    } else{
+      dispatch(logoutDoctor())
+      localStorage.removeItem('doctorToken')
+    } 
   }
 
   return (
