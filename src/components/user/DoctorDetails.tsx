@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { DoctorData, OneSlotType, initialDoctorData, initialOneSlotsType,} from "../../types/doctorTypes"
 import { ResponseData, days } from "../../types/commonTypes"
 import SlotsTable from "./SlotsTable"
@@ -12,6 +12,8 @@ import { confirmBooking, createCheckoutSession } from "../../api/user/appointmen
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { getDoctorDataApi } from "../../api/user/doctorApi"
+import PaymentOptionModal from "./PaymentOptionModal"
+import { walletPaymentApi } from "../../api/user/userApi"
 
 function DoctorDetails() {
   const [data,setData] = useState<DoctorData>(initialDoctorData)
@@ -20,12 +22,15 @@ function DoctorDetails() {
   const [selectedDay,setSelectedDay] = useState<string>("")
   const [imageUrl,setImageUrl] = useState<string>("")
   const [reload,setReload] = useState(false)
+  const [isChooseModalOpen,setIsChooseModalOpen] = useState(false)
+  const [type,setType] = useState<"Online"|"Offline"| "">("")
+  const userId = useSelector((state:RootState)=>state.user._id)
+  const navigate = useNavigate()
 
   const {_id}= useParams()
   let selectedDays: string[] = []
   const currentDate = new Date()
   const currentDayOfWeek = currentDate.getDay()
-  const userId = useSelector((state:RootState)=>state.user._id)
   
   for (let i = 0; i < data?.workingDays.length; i++) {
     const index = data.workingDays[i];
@@ -43,11 +48,12 @@ function DoctorDetails() {
     })
   },[])
 
-  const handleSubmit = async (type:"Online"|"Offline") => {
+  const stripePayment = async () => {
     try {
 
 
       if(!selectedSlot._id) return notifyError("Pleas select the time slot")
+      if(!type) return notifyError("Pleas select the payment option")
       const result:string = bookNowValidation({slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),fees:data.fees,userId,chat:false})
       if(result != "Success") return notifyError(result)
 
@@ -66,9 +72,28 @@ function DoctorDetails() {
     }
   };
 
+  const walletPayment = async ()=>{
+
+      if(!selectedSlot._id) return notifyError("Pleas select the time slot")
+      if(!type) return notifyError("Pleas select the payment option")
+
+      const result:string = bookNowValidation({slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,patient:selectedPatient,day:selectedDay,doctor:"",status:"Pending",type,bookedDate:new Date(),fees:data.fees,userId,chat:false})
+      if(result != "Success") return notifyError(result)
+
+      const response:ResponseData = await walletPaymentApi(userId,data.fees)
+      if(!response.status) return notifyError(response.message)
+
+      const response3:ResponseData = await confirmBooking(data.slots._id,{slotId:selectedSlot._id,startTime:selectedSlot.startTime,endTime:selectedSlot.endTime,day:selectedDay,status:"Pending",doctor:_id,patient:selectedPatient,type,bookedDate:new Date(),fees:data.fees,userId,chat:false})
+      if(!response3.status) return notifyError(response3.message)
+      navigate('/home')
+  }
+
   
   return (
     <div className="px-1 sm:px-12 md:px-22 lg:px-32">
+      {
+        isChooseModalOpen ? <PaymentOptionModal isChooseModalOpen={isChooseModalOpen}  setIsChooseModalOpen={setIsChooseModalOpen} stripePayment={stripePayment} walletPayment={walletPayment}/> :""
+      }
       <div className="flex justify-center">
         <h1 className="text-4xl  font-semibold text-adminBlue">{data.firstName} {data.secondName}</h1>
       </div>
@@ -124,8 +149,8 @@ function DoctorDetails() {
         <ExistingPatient state={selectedPatient} setState={setSelectedPatient} reload={reload}/>
       </div>
       <div className="flex justify-center mt-8 mb-8 gap-6">
-        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={()=>handleSubmit("Online")}>Book For Online</button>
-        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={()=>handleSubmit("Offline")}>Book For Offline</button>
+        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={()=>{{setIsChooseModalOpen(true),setType("Online")}}}>Book For Online</button>
+        <button className="bg-adminBlue w-36 h-8 font-semibold text-white rounded-lg hover:bg-adminGreen" onClick={()=>{setIsChooseModalOpen(true),setType("Offline")}}>Book For Offline</button>
       </div>
     </div>
   )

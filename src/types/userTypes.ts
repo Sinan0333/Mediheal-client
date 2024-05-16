@@ -103,4 +103,5 @@ export type PatientCardProps = {
     age:number
     gender:string
     dob:Date | string
+    bloodGroup:string
 }

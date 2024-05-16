@@ -31,7 +31,7 @@ function PatientsPage() {
             </div>
         </aside>
         <main className="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
-            <div className="p-2 md:p-4">
+            <div className="p-2 mt-14 md:p-4">
                 <LIstUserPatients/>
             </div>
         </main>

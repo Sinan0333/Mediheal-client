@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { EditUserDataProps} from '../../types/userTypes'
-const baseURL = `${import.meta.env.VITE_BASE_URL}/user/profile`
+const baseURL = `${import.meta.env.VITE_BASE_URL}/user`
 
 const userApi = axios.create({
     baseURL
@@ -29,7 +29,7 @@ userApi.interceptors.request.use(
 export const editUserData = async (data:EditUserDataProps)=>{
     try { 
         
-        const result =  await userApi.post('/edit_profile',data) 
+        const result =  await userApi.post('/profile/edit_profile',data) 
         return result.data 
         
     } catch (error) {
@@ -40,7 +40,18 @@ export const editUserData = async (data:EditUserDataProps)=>{
 export const getUserData = async (_id:string)=>{
     try { 
         
-        const result =  await userApi.post('/',{_id}) 
+        const result =  await userApi.post('/profile',{_id}) 
+        return result.data 
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const walletPaymentApi = async (_id:string,amount:number)=>{
+    try { 
+        
+        const result =  await userApi.post('/wallet_payment',{_id,amount}) 
         return result.data 
         
     } catch (error) {

@@ -1,7 +1,7 @@
 import { PatientCardProps } from "../../types/userTypes";
 import { document, edit, schedule } from "../../constants/icons";
 import { useNavigate } from "react-router-dom";
-function PatientCard({_id,firstName,secondName,image,dob,age,gender}:PatientCardProps) {
+function PatientCard({_id,firstName,secondName,image,dob,age,gender,bloodGroup}:PatientCardProps) {
     const navigate = useNavigate()
     const imageUrl =image ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${image}`: "/src/assets/images/default_patient.png"
   
@@ -25,7 +25,10 @@ function PatientCard({_id,firstName,secondName,image,dob,age,gender}:PatientCard
             <span className="text-adminGold font-bold">Dob: </span>{new Date(dob).toLocaleDateString()}
           </p>
           <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 ">
-          <span className="text-adminGold font-bold">Gender: </span>{gender} year
+            <span className="text-adminGold font-bold">Gender: </span>{gender} 
+          </p>
+          <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 ">
+            <span className="text-adminGold font-bold">Blood Group: </span>{bloodGroup} 
           </p>
         </div>
         <div className="p-6 pt-0 flex justify-center">

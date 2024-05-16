@@ -40,13 +40,12 @@ function LIstUserPatients() {
   
     return (
      <>
-     <div className="">
         <div className="ml-20 mr-20 flex flex-wrap overflow-x-auto justify-evenly">
                 
           {
             pageData.map((pat)=>{ 
               return(
-                <PatientCard _id={pat._id} firstName={pat.firstName} secondName={pat.secondName} image={pat.image} dob={pat.dob} age={pat.age} gender={pat.gender} />
+                <PatientCard _id={pat._id} firstName={pat.firstName} secondName={pat.secondName} image={pat.image} dob={pat.dob} age={pat.age} gender={pat.gender} bloodGroup={pat.bloodGroup}/>
               )
             })
           }
@@ -56,7 +55,6 @@ function LIstUserPatients() {
             pageCount > 1 ? <Pagination pages={pages} currentPage={currentPage} handleClick={handleClick} pageCount={pageCount}/> : null
         }
         </div>
-     </div>
      </>
     )
 }

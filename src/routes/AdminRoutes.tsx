@@ -19,10 +19,10 @@ import ViewBedPage from '../pages/admin/ViewBedPage'
 import EditBedPage from '../pages/admin/EditBedPage'
 import ListPatientsPage from '../pages/admin/ListPatientsPage'
 import ViewPatientPage from '../pages/admin/ViewPatientPage'
-import PatientPrescriptionPage from '../pages/doctor/PatientPrescriptionPage'
 import ListAdmitHistoryPage from '../pages/admin/ListAdmitHistoryPage'
 import ViewAdmitHistoryPage from '../pages/admin/ViewAdmitHistoryPage'
 import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
+import PatientPrescriptionPage from '../pages/admin/PatientPrescriptionPage'
 
 
 function AdminRoutes() {
