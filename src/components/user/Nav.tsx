@@ -20,6 +20,7 @@ function Nav() {
   const handleLogOut = ()=>{
     dispatch(logoutUser())
     localStorage.removeItem("userToken")
+    localStorage.removeItem("userRefreshToken")
   }
 
   return (

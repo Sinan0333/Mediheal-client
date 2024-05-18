@@ -44,8 +44,8 @@ function PatientPrescription({prescription}:PatientPrescriptionProps) {
             <h1 className="text-xl font-bold">Diagnosis</h1>
             <div>
                 {
-                    prescription.diagnosis.map((diagnosis)=>(
-                        <div className="flex">
+                    prescription.diagnosis.map((diagnosis,i)=>(
+                        <div key={i} className="flex">
                             <p className="font-semibold text-lg mr-2">{diagnosis.name}:</p>
                             <p className="text-md font-semibold w-full">{diagnosis.instruction}</p>
                         </div>
@@ -57,8 +57,8 @@ function PatientPrescription({prescription}:PatientPrescriptionProps) {
             <h1 className="text-xl font-bold">Medicines</h1>
             <div >
                 {
-                    prescription.medicines.map((medicine)=>(
-                        <div className="mb-6">
+                    prescription.medicines.map((medicine,i)=>(
+                        <div key={i} className="mb-6">
                             <div className="flex">
                                 <p className="font-semibold text-lg mr-2">Name:</p>
                                 <p className="text-md font-semibold w-[90%] break-words">{medicine.name}</p>

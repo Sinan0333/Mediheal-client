@@ -52,8 +52,8 @@ function AdminDashboard() {
             setAppointmentRevenue(Object.values(appointmentRevenue.data))
             setAdmitRevenue(Object.values(admitRevenue.data))
             setStatusCount(statusWiseAppointmentCount.data)
-            const totalAppointments:number = typeWiseAppointmentCount.data[0].count + typeWiseAppointmentCount.data[1].count || 0
-            const onlineAppointments:number = typeWiseAppointmentCount.data[0].type === "Online" ? typeWiseAppointmentCount.data[0].count :  typeWiseAppointmentCount.data[1].count
+            const totalAppointments:number = typeWiseAppointmentCount.data[0].value + typeWiseAppointmentCount.data[1].value || 0
+            const onlineAppointments:number = typeWiseAppointmentCount.data[0].type === "Online" ? typeWiseAppointmentCount.data[0].value :  typeWiseAppointmentCount.data[1].value
             setOnlineAppointmentCount((onlineAppointments/totalAppointments)*100)
         }
         getData()

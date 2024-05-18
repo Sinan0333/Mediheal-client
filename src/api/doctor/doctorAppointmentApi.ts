@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { WalletHistoryData } from '../../types/userTypes'
+import { handleApiResponse, handleDoctorApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/doctor/appointment`
 
 const doctorAppointmentApi= axios.create({
@@ -24,6 +25,8 @@ doctorAppointmentApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+doctorAppointmentApi.interceptors.response.use(handleApiResponse,handleDoctorApiError);
 
 
 export const getDoctorAppointments = async (_id:string,query?:string)=>{

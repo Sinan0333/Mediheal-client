@@ -1,3 +1,8 @@
+import axios, { AxiosResponse, AxiosError, AxiosHeaders, AxiosRequestConfig } from 'axios';
+const baseURL = `${import.meta.env.VITE_BASE_URL}`
+import store from '../store/store';
+import { logoutDoctor } from '../store/slice/doctorSlice';
+
 export const handlePagination = (i:number,currentPage:number,pages:number[],pageCount:number) => {
     
     if(currentPage === pageCount -3 || currentPage === pageCount -1){
@@ -43,3 +48,68 @@ export const createInitialPages = (pageCount: number): number[] => {
     
     return array
 }
+
+export function handleApiResponse(response: AxiosResponse): AxiosResponse {
+    return response;
+}
+
+export async function handleDoctorApiError(error: AxiosError): Promise<never> {
+    
+    if (error.response) {
+        if (error.response.status === 401) {
+            
+            try {
+                const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
+                
+                if (!originalRequest._retry) {
+                    originalRequest._retry = true;
+
+                    const refreshToken = localStorage.getItem('doctorRefreshToken');
+                    
+                    if (!refreshToken) {
+                        window.location.href = '/doctor/login';
+                        return Promise.reject(error);
+                    }
+
+                    const response = await axios.post(baseURL + '/auth/doctor/refresh', { refreshToken });                    
+
+                    localStorage.setItem('doctorToken', response.data.data.accessToken);
+                    localStorage.setItem('doctorRefreshToken', response.data.data.refreshToken);
+
+                    if (originalRequest.headers instanceof AxiosHeaders) {
+                        originalRequest.headers.set('Authorization', `Bearer ${response.data.data.accessToken}`);
+                    } else {
+                        const headers = new AxiosHeaders();
+                        headers.set('Authorization', `Bearer ${response.data.data.accessToken}`);
+                        originalRequest.headers = headers;
+                    }
+
+                    return axios(originalRequest);
+                }
+            } catch (refreshError: any) {
+                if (refreshError.response?.status === 401) {
+                    localStorage.removeItem('doctorToken');
+                    localStorage.removeItem('doctorRefreshToken');
+                    window.location.href = '/doctor/login';
+                    store.dispatch(logoutDoctor())
+                } else {
+                    window.location.href = `/error/${refreshError.response?.status || 500}`;
+                }
+                console.error('Refresh token error:', refreshError.response?.data || refreshError.message);
+                return Promise.reject(refreshError);
+            }
+        } else {
+            window.location.href = `/error/${error.response.status}`;
+            console.error('Response error:', error.response.data);
+        }
+    } else if (error.request) {
+        window.location.href = `/error/${error.request.status}`;
+        console.error('Request error:', error.request);
+    } else {
+        window.location.href = "/error/500";
+        console.error('Error:', error.message);
+    }
+    return Promise.reject(error);
+}
+
+

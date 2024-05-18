@@ -1,10 +1,9 @@
 import  { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { UserIsLoggedIn, UserIsLoggedOut } from '../components/common/ProductRoutes.tsx';
-import Error404 from '../pages/common/Error404.tsx';
+import ErrorPage from '../pages/common/ErrorPage.tsx';
 import UserSideLoading from '../components/user/UserSideLoading.tsx';
 
-// Lazy load the components
 const UserSignup = lazy(() => import('../pages/user/UserSignup'));
 const UserLogin = lazy(() => import('../pages/user/UserLogin.tsx'));
 const DoctorsList = lazy(() => import('../pages/user/DoctorsList.tsx'));
@@ -52,7 +51,7 @@ function UserRoutes() {
           <Route path='/chat/:chatId/:patId' element={<UserSideChat />} />
           <Route path='/call/:_id' element={<VideoCall />} />
 
-          <Route path='*' element={<Error404 />} />
+          <Route path='*' element={<ErrorPage/>} />
         </Route>
       </Routes>
     </Suspense>

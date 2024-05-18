@@ -27,6 +27,7 @@ export type UserData = {
 export type SignupResponse = {
     userData?:UserData
     token?:string
+    refreshToken?:string
     otp_id:string
     status:true | false
     message:string

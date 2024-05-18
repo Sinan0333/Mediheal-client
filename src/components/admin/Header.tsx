@@ -16,9 +16,11 @@ function Header({navigation,_id,isNavigationOpen,setIsNavigationOpen}:AdminHeade
     if(path.split('/').includes('admin')){
       dispatch(logoutAdmin())
       localStorage.removeItem("adminToken")
+      localStorage.removeItem("adminRefreshToken")
     } else{
       dispatch(logoutDoctor())
       localStorage.removeItem('doctorToken')
+      localStorage.removeItem('doctorRefreshToken')
     } 
   }
 

@@ -1,7 +1,7 @@
 import  { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import CloudinaryProvider from './store/context/cloudinaryContext';
-import Error404 from './pages/common/Error404';
+import ErrorPage from './pages/common/ErrorPage';
 import UserSideLoading from './components/user/UserSideLoading';
 
 const UserRoutes = lazy(() => import('./routes/UserRoutes'));
@@ -17,7 +17,7 @@ const App = () => {
             <Route path='/*' element={<UserRoutes />} />
             <Route path='/admin/*' element={<AdminRoutes />} />
             <Route path='/doctor/*' element={<DoctorRoutes />} />
-            <Route path='/error' element={<Error404 />} />
+            <Route path='/error/:code' element={<ErrorPage/>} />
           </Routes>
         </Suspense>
       </CloudinaryProvider>

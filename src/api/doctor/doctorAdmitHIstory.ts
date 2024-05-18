@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { handleApiResponse, handleDoctorApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/doctor/admit_history`
 
 const doctorAdmitHistoryApi = axios.create({
@@ -9,7 +10,7 @@ doctorAdmitHistoryApi.interceptors.request.use(
 
     (config)=>{
         
-    const adminToken = localStorage.getItem('adminToken')
+    const adminToken = localStorage.getItem('doctorToken')
 
     if(adminToken){
         config.headers['Authorization'] = `Bearer ${adminToken}`;
@@ -24,6 +25,7 @@ doctorAdmitHistoryApi.interceptors.request.use(
     }
 )
 
+doctorAdmitHistoryApi.interceptors.response.use(handleApiResponse,handleDoctorApiError);
 
 
 export const totalDoctorAdmits = async (_id:string)=>{

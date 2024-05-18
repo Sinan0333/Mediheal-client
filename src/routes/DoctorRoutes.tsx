@@ -1,8 +1,8 @@
 import  { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { DoctorIsLoggedIn, DoctorIsLoggedOut } from '../components/common/ProductRoutes';
-import Error404 from '../pages/common/Error404';
 import AdminSideLoading from '../components/admin/AdminSideLoading';
+import ErrorPage from '../pages/common/ErrorPage';
 
 const DoctorLogin = lazy(() => import('../pages/doctor/DoctorLogin'));
 const ViewDoctorProfilePage = lazy(() => import('../pages/doctor/ViewDoctorProfilePage'));
@@ -21,24 +21,34 @@ function DoctorRoutes() {
   return (
     <Suspense fallback={<AdminSideLoading/>}>
       <Routes>
+
         <Route path='' element={<DoctorIsLoggedOut />}>
           <Route path='/login' element={<DoctorLogin />} />
         </Route>
+
         <Route path='' element={<DoctorIsLoggedIn />}>
           <Route path='/' element={<DoctorDashboardPage />} />
           <Route path='/dashboard' element={<DoctorDashboardPage />} />
+
           <Route path='/patients' element={<ListPatientsPage />} />
           <Route path='/patients/view/:_id' element={<ViewPatientPage />} />
+
           <Route path='/appointments' element={<ListAppointmentsPage />} />
           <Route path='/appointments/prescription/add/:patId/:_id' element={<AddPrescriptionPage />} />
+
           <Route path='/prescription/patient/:_id' element={<PatientPrescriptionPage />} />
-          <Route path='/profile/:_id' element={<ViewDoctorProfilePage />} />
+
+          <Route path='/profile/:_id' element={<ViewDoctorProfilePage />} /> 
           <Route path='/profile/edit/:_id' element={<EditDoctorProfilePage />} />
+
           <Route path='/schedule' element={<ViewSchedulePage />} />
+
           <Route path='/chat/:patId/:_id' element={<DoctorSideChat />} />
           <Route path='/call/:_id' element={<VideoCall />} />
-          <Route path='*' element={<Error404 />} />
+          
+          <Route path='*' element={<ErrorPage/>} />
         </Route>
+
       </Routes>
     </Suspense>
   );

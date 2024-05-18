@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { GetChatDataApiType, MessageType } from '../../types/commonTypes'
+import { handleApiResponse, handleDoctorApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/doctor/chat`
 
 const doctorChatApi = axios.create({
@@ -24,6 +25,9 @@ doctorChatApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+doctorChatApi.interceptors.response.use(handleApiResponse,handleDoctorApiError);
+
 export const createMessage = async (data:MessageType)=>{
     try { 
         const result =  await doctorChatApi.post('/create',data)  

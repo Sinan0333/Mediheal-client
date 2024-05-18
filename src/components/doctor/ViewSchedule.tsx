@@ -3,10 +3,9 @@ import ScheduleTable from "./ScheduleTable"
 import { DoctorData, OneSlotType, initialDoctorData, initialOneSlotsType } from "../../types/doctorTypes"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
-import {  removeBreakApi, takeABreakApi } from "../../api/doctor/doctorApi"
+import {  getProfileData, removeBreakApi, takeABreakApi } from "../../api/doctor/doctorApi"
 import { notifyError, notifySuccess } from "../../constants/toast"
 import { ResponseData } from "../../types/commonTypes"
-import { getDoctorDataApi } from "../../api/admin/doctorManagementApi"
 import { cancelBookingWhenBreak } from "../../api/doctor/doctorAppointmentApi"
 
 function ViewSchedule() {
@@ -17,7 +16,7 @@ function ViewSchedule() {
     const [reload,setReload] = useState(false)
 
     useEffect(()=>{
-        getDoctorDataApi(doctorId).then((res)=>{
+        getProfileData(doctorId).then((res)=>{
           setData(res.data)
         }).catch((err)=>{
           console.log(err.message)

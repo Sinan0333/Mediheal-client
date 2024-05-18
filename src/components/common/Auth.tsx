@@ -50,8 +50,9 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             image:response.userData?.image,
                             is_blocked:response.userData?.is_blocked
                         }))
-                        if(response.token){
+                        if(response.token && response.refreshToken){
                             localStorage.setItem("userToken",response.token)
+                            localStorage.setItem("userRefreshToken",response.refreshToken)
                         }
                         notifySuccess(response.message)
                         navigate('/')
@@ -69,8 +70,9 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             image:response.userData?.image,
                             is_blocked:response.userData?.is_blocked
                         }))
-                        if(response.token){
+                        if(response.token && response.refreshToken){
                             localStorage.setItem("adminToken",response.token)
+                            localStorage.setItem("adminRefreshToken",response.refreshToken)
                         }
                         notifySuccess(result)
                         navigate('/admin')
@@ -81,7 +83,6 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                     
                     const response:DoctorAuthResponse = await doctorLogin({email,password})
                     if(response.status){
-                        console.log(response.userData);
                         
                         dispatch(setDoctorDetails({
                             _id:response.userData?._id,
@@ -90,11 +91,12 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                             email:response.userData?.email,
                             is_blocked:response.userData?.is_blocked
                         }))
-                        if(response.token){
+                        if(response.token && response.refreshToken){
                             localStorage.setItem("doctorToken",response.token)
+                            localStorage.setItem("doctorRefreshToken",response.refreshToken)
                         }
                         notifySuccess(result)
-                        navigate('/doctor')
+                        navigate('/doctor/dashboard')
                     }else{
                         notifyError(response.message)
                     }

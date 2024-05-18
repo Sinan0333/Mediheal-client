@@ -161,6 +161,7 @@ export type DoctorCardProps ={
 export type DoctorAuthResponse = {
     userData?:DoctorData
     token?:string
+    refreshToken?:string
     status:true | false
     message:string
 }

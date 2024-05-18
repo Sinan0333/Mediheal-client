@@ -1,7 +1,7 @@
 import  { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AdminIsLoggedIn, AdminIsLoggedOut } from '../components/common/ProductRoutes';
-import Error404 from '../pages/common/Error404';
+import ErrorPage from '../pages/common/ErrorPage';
 import AdminSideLoading from '../components/admin/AdminSideLoading';
 
 
@@ -66,7 +66,7 @@ function AdminRoutes() {
           <Route path='/patients/view/:_id' element={<ViewPatientPage />} />
           <Route path='/prescription/patient/:_id' element={<PatientPrescriptionPage />} />
 
-          <Route path='*' element={<Error404 />} />
+          <Route path='*' element={<ErrorPage/>} />
         </Route>
       </Routes>
     </Suspense>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { PrescriptionData } from '../../types/doctorTypes';
+import { handleApiResponse, handleDoctorApiError } from '../../constants/constFunctions';
 const baseURL = `${import.meta.env.VITE_BASE_URL}/doctor/prescription`
 
 const doctorPrescriptionApi = axios.create({
@@ -24,6 +25,8 @@ doctorPrescriptionApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+doctorPrescriptionApi.interceptors.response.use(handleApiResponse,handleDoctorApiError);
 
 export const getPatientPrescription = async (_id:string)=>{
     try { 

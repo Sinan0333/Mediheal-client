@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { handleApiResponse, handleDoctorApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/doctor/patient`
 
 const doctorPatientApi = axios.create({
@@ -23,6 +24,8 @@ doctorPatientApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+doctorPatientApi.interceptors.response.use(handleApiResponse,handleDoctorApiError);
 
 export const getPatientApi = async (_id:string | undefined)=>{
     try { 

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { handleApiResponse, handleDoctorApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/doctor`
 
 const doctorApi= axios.create({
@@ -24,6 +25,8 @@ doctorApi.interceptors.request.use(
     }
 )
 
+doctorApi.interceptors.response.use(handleApiResponse,handleDoctorApiError);
+
 export const takeABreakApi = async (scheduleId:string,day:string,_id:string)=>{
     try {          
         const result =  await doctorApi.post(`/take_break/${scheduleId}`,{day,_id})         
@@ -42,4 +45,13 @@ export const removeBreakApi = async (scheduleId:string,day:string,_id:string)=>{
     }
 }
 
+
+export const getProfileData = async (_id:string)=>{
+    try {         
+        const result =  await doctorApi.get(`/profile/${_id}`)  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
 
