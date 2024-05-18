@@ -81,7 +81,6 @@ function ListDoctors() {
 
   return (
     <div className="neumorphic py-2 px-2  w-full min-h-screen pl-4 pt-4 lg:ml-64 ">
-        <button onClick={()=>setIsConfirmationOpen(!isConfirmationOpen)}>hejef</button>
         <h1 className="inline-block text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Doctors</h1>
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue ml-2 float-right" onClick={()=>navigate('/admin/doctors/add')}>Add</button>
         <button className="neumorphic-navBtn w-20 h-8 font-semibold text-adminBlue float-right" onClick={()=>setIsFilterOpen(!isFilterOpen)}>Filter</button>

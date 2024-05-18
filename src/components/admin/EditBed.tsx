@@ -9,6 +9,7 @@ import { DoctorCardProps } from "../../types/doctorTypes"
 import { convertDateToHumanReadable, convertHumanReadableToDate } from "../../constants/convert"
 import NewDateInput from "../common/NewDateInput"
 import { unblockedDoctors } from "../../api/admin/doctorManagementApi"
+import ConfirmationModal from "./ConfirmationModal"
 
 function EditBed() {
     const [type ,setType] = useState<string>("")
@@ -22,6 +23,7 @@ function EditBed() {
     const [available,setAvailable] = useState<boolean>(true)
     const [doctors,setDoctors] = useState<DoctorCardProps[]>()
     const [doctorName,setDoctorName] = useState<string>("")
+    const [isConfirmationOpen,setIsConfirmationOpen] = useState<boolean>(false)
 
     const navigate = useNavigate()
     const {_id} = useParams()
@@ -95,6 +97,9 @@ function EditBed() {
   
     return (
       <div className="neumorphic py-2 px-2 w-screen min-h-screen pl-4 pt-4 lg:ml-64">
+        {
+            isConfirmationOpen ? <ConfirmationModal isConfirmationModalOpen={isConfirmationOpen} setIsConfirmationModalOpen={setIsConfirmationOpen} onConfirm={handleDischarge} message={"Are you sure you want to discharge this patient?"}/> : null
+        }
         <h1 className="text-xl sm:text-2xl md:text-3xl mb-4 font-bold text-adminGold">Edit Bed</h1>
         <div className="mb-6 flex flex-wrap">
             {patient && <Inputs name="PatientId" type="text" setState={setPatient} state={patient}/>}
@@ -128,7 +133,7 @@ function EditBed() {
             </div>
             <Inputs name="Charge" type="number" setState={setCharge} state={charge}/>
             {
-                available ? "" :<button type="button" className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onClick={handleDischarge}>Discharge</button>
+                available ? "" :<button type="button" className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onClick={()=>setIsConfirmationOpen(!isConfirmationOpen)}>Discharge</button>
             }
         </div>
         <div className="flex justify-center">
