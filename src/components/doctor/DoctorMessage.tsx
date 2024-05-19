@@ -1,7 +1,8 @@
-type DoctorMessagePrps = {
+type DoctorMessageProps = {
   message: string
+  createdAt:string
 }
-function DoctorMessage({message}:DoctorMessagePrps) {
+function DoctorMessage({message,createdAt}:DoctorMessageProps) {
   return (
     <div className="col-start-6 col-end-13 p-3 rounded-lg">
         <div className="flex items-center justify-start flex-row-reverse">
@@ -10,6 +11,7 @@ function DoctorMessage({message}:DoctorMessagePrps) {
             </div>
             <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl max-w-60 md:max-w-98 break-words">
                 <div>{message}</div>
+                <p className="text-gray-600 text-xs">{new Date(createdAt).toLocaleTimeString()}</p>
             </div>
         </div>
     </div>

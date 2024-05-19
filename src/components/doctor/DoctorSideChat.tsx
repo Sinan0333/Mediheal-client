@@ -40,16 +40,18 @@ function DoctorSideChat() {
 
     useEffect(() => {
         socket.on('message', (message:MessageType) => {
-          setMessages([...messages, {sender: message.sender,receiver:message.receiver, text: message.text}]);
+          setMessages([...messages, {sender: message.sender,receiver:message.receiver, text: message.text,createdAt:message.createdAt }]);
         });
     }, [messages]);
     
     const sendMessage =async () => {
-
+        
         if(!_id || !patId) return notifyError("Something wrong please try again later") 
-        socket.emit('sendMessage', {sender:doctorId,receiver:patId, text: messageText });
+        
+        const time:string = new Date().toISOString();
+        socket.emit('sendMessage', {sender:doctorId,receiver:patId, text: messageText,createdAt:time });
 
-        await createMessage({sender:doctorId,receiver:patId, text: messageText })
+        await createMessage({sender:doctorId,receiver:patId, text: messageText,createdAt:time })
         setMessageText('');
     };
 
@@ -76,7 +78,7 @@ function DoctorSideChat() {
                             <div className="grid grid-cols-12 gap-y-2">
                                 {
                                     messages.map((message, i) => (
-                                        message.sender === doctorId ? <DoctorMessage key={i} message={message.text}/> : <UserResponse key={i} message={message.text}/>
+                                        message.sender === doctorId ? <DoctorMessage key={i} message={message.text} createdAt={message.createdAt}/> : <UserResponse key={i} message={message.text} createdAt={message.createdAt}/>
                                     ))
                                 }
                                 

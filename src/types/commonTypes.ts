@@ -99,6 +99,7 @@ export type MessageType = {
     sender:string
     receiver:string
     text:string
+    createdAt:string
 }
 
 export type GetChatDataApiType = {
