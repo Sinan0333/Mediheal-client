@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { handleAdminApiError, handleApiResponse } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/patient`
 
 const patientManagementApi = axios.create({
@@ -23,6 +24,8 @@ patientManagementApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+patientManagementApi.interceptors.response.use(handleApiResponse,handleAdminApiError);
 
 export const getPatients = async (query?:string)=>{
     try { 

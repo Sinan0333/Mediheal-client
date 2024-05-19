@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { GetChatDataApiType, MessageType } from '../../types/commonTypes';
+import { handleApiResponse, handleUserApiError } from '../../constants/constFunctions';
 const baseURL = `${import.meta.env.VITE_BASE_URL}/user/chat`
 
 const userChatApi = axios.create({
@@ -25,6 +26,7 @@ userChatApi.interceptors.request.use(
     }
 )
 
+userChatApi.interceptors.response.use(handleApiResponse,handleUserApiError);
 
 export const createMessage = async (data:MessageType)=>{
     try { 

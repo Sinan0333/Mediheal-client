@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { EditUserDataProps} from '../../types/userTypes'
+import { handleApiResponse, handleUserApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/user`
 
 const userApi = axios.create({
@@ -24,6 +25,8 @@ userApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+userApi.interceptors.response.use(handleApiResponse,handleUserApiError);
 
 
 export const editUserData = async (data:EditUserDataProps)=>{

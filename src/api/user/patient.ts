@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { PatientData } from '../../types/userTypes'
+import { handleApiResponse, handleUserApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/user/patient`
 
 const patientApi = axios.create({
@@ -24,6 +25,9 @@ patientApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+patientApi.interceptors.response.use(handleApiResponse,handleUserApiError);
+
 
 
 export const addPatient = async (data:PatientData)=>{

@@ -2,6 +2,9 @@ import axios, { AxiosResponse, AxiosError, AxiosHeaders, AxiosRequestConfig } fr
 const baseURL = `${import.meta.env.VITE_BASE_URL}`
 import store from '../store/store';
 import { logoutDoctor } from '../store/slice/doctorSlice';
+import { logoutAdmin } from '../store/slice/adminSlice';
+import { logoutUser } from '../store/slice/userSlice';
+
 
 export const handlePagination = (i:number,currentPage:number,pages:number[],pageCount:number) => {
     
@@ -113,3 +116,122 @@ export async function handleDoctorApiError(error: AxiosError): Promise<never> {
 }
 
 
+export async function handleAdminApiError(error: AxiosError): Promise<never> {
+    
+    if (error.response) {
+        if (error.response.status === 401) {
+            console.log('in admin handleAdminApiError');
+            
+            try {
+                const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
+                
+                if (!originalRequest._retry) {
+                    originalRequest._retry = true;
+
+                    const refreshToken = localStorage.getItem('adminRefreshToken');
+    
+                    if (!refreshToken) {
+                        window.location.href = '/admin/login';
+                        return Promise.reject(error);
+                    }
+
+                    const response = await axios.post(baseURL + '/auth/admin/refresh', { refreshToken });                    
+
+                    localStorage.setItem('adminToken', response.data.data.accessToken);
+                    localStorage.setItem('adminRefreshToken', response.data.data.refreshToken);
+
+                    if (originalRequest.headers instanceof AxiosHeaders) {
+                        originalRequest.headers.set('Authorization', `Bearer ${response.data.data.accessToken}`);
+                    } else {
+                        const headers = new AxiosHeaders();
+                        headers.set('Authorization', `Bearer ${response.data.data.accessToken}`);
+                        originalRequest.headers = headers;
+                    }
+
+                    return axios(originalRequest);
+                }
+            } catch (refreshError: any) {
+                if (refreshError.response?.status === 401) {
+                    localStorage.removeItem('adminToken');
+                    localStorage.removeItem('adminRefreshToken');
+                    window.location.href = '/admin/login';
+                    store.dispatch(logoutAdmin())
+                } else {
+                    window.location.href = `/error/${refreshError.response?.status || 500}`;
+                }
+                console.error('Refresh token error:', refreshError.response?.data || refreshError.message);
+                return Promise.reject(refreshError);
+            }
+        } else {
+            window.location.href = `/error/${error.response.status}`;
+            console.error('Response error:', error.response.data);
+        }
+    } else if (error.request) {
+        window.location.href = `/error/${error.request.status}`;
+        console.error('Request error:', error.request);
+    } else {
+        window.location.href = "/error/500";
+        console.error('Error:', error.message);
+    }
+    return Promise.reject(error);
+}
+
+export async function handleUserApiError(error: AxiosError): Promise<never> {
+    
+    if (error.response) {
+        if (error.response.status === 401) {
+            console.log('in user handleUserApiError');
+            
+            try {
+                const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
+                
+                if (!originalRequest._retry) {
+                    originalRequest._retry = true;
+
+                    const refreshToken = localStorage.getItem('userRefreshToken');
+    
+                    if (!refreshToken) {
+                        window.location.href = '/login';
+                        return Promise.reject(error);
+                    }
+
+                    const response = await axios.post(baseURL + '/auth/user/refresh', { refreshToken });                    
+
+                    localStorage.setItem('userToken', response.data.data.accessToken);
+                    localStorage.setItem('userRefreshToken', response.data.data.refreshToken);
+
+                    if (originalRequest.headers instanceof AxiosHeaders) {
+                        originalRequest.headers.set('Authorization', `Bearer ${response.data.data.accessToken}`);
+                    } else {
+                        const headers = new AxiosHeaders();
+                        headers.set('Authorization', `Bearer ${response.data.data.accessToken}`);
+                        originalRequest.headers = headers;
+                    }
+
+                    return axios(originalRequest);
+                }
+            } catch (refreshError: any) {
+                if (refreshError.response?.status === 401) {
+                    localStorage.removeItem('userToken');
+                    localStorage.removeItem('userRefreshToken');
+                    window.location.href = '/login';
+                    store.dispatch(logoutUser())
+                } else {
+                    window.location.href = `/error/${refreshError.response?.status || 500}`;
+                }
+                console.error('Refresh token error:', refreshError.response?.data || refreshError.message);
+                return Promise.reject(refreshError);
+            }
+        } else {
+            window.location.href = `/error/${error.response.status}`;
+            console.error('Response error:', error.response.data);
+        }
+    } else if (error.request) {
+        window.location.href = `/error/${error.request.status}`;
+        console.error('Request error:', error.request);
+    } else {
+        window.location.href = "/error/500";
+        console.error('Error:', error.message);
+    }
+    return Promise.reject(error);
+}

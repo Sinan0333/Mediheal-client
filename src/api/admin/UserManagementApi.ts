@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { handleAdminApiError, handleApiResponse } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/user`
 
 const userManagementApi = axios.create({
@@ -23,6 +24,8 @@ userManagementApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+userManagementApi.interceptors.response.use(handleApiResponse,handleAdminApiError);
 
 export const listUsers = async (query?:string)=>{
     try { 

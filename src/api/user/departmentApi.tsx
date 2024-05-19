@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { handleApiResponse, handleUserApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/user/department`
 
 const departmentApi= axios.create({
@@ -23,6 +24,8 @@ departmentApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+departmentApi.interceptors.response.use(handleApiResponse,handleUserApiError);
 
 
 export const unblockedDepartments = async ()=>{

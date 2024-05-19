@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { AppointmentData } from '../../types/commonTypes'
 import { WalletHistoryData } from '../../types/userTypes'
+import { handleApiResponse, handleUserApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/user/appointment`
 
 const appointmentApi = axios.create({
@@ -25,6 +26,8 @@ appointmentApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+appointmentApi.interceptors.response.use(handleApiResponse,handleUserApiError);
 
 export const createCheckoutSession = async (amount:number)=>{
     try { 

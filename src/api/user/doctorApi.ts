@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { handleApiResponse, handleUserApiError } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/user/doctor`
 
 const doctorApi= axios.create({
@@ -23,6 +24,8 @@ doctorApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+doctorApi.interceptors.response.use(handleApiResponse,handleUserApiError);
 
 
 export const unblockedDoctors = async (query:string)=>{

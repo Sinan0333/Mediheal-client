@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { AddDoctorApi,  } from '../../types/doctorTypes'
+import { handleAdminApiError, handleApiResponse } from '../../constants/constFunctions';
 const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/doctor`
 
 
@@ -27,6 +28,8 @@ doctorManagementApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+doctorManagementApi.interceptors.response.use(handleApiResponse,handleAdminApiError);
 
 
 export const addDoctor = async (data:AddDoctorApi)=>{

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { handleAdminApiError, handleApiResponse } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/admit_history`
 
 const admitBedHistoryApi = axios.create({
@@ -24,6 +25,7 @@ admitBedHistoryApi.interceptors.request.use(
     }
 )
 
+admitBedHistoryApi.interceptors.response.use(handleApiResponse,handleAdminApiError);
 
 export const getAdmitHistoryDetailsApi = async (_id:string | undefined)=>{
     try { 

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { DepartmentApiType } from '../../types/adminTypes'
+import { handleAdminApiError, handleApiResponse } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/department`
 
 
@@ -25,6 +26,8 @@ departmentManagementApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+departmentManagementApi.interceptors.response.use(handleApiResponse,handleAdminApiError);
 
 export const addDepartment = async (data:DepartmentApiType)=>{
     try {         

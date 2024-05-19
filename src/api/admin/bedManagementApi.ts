@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { AddBedValidation, AssignPatientType, BedEditData} from '../../types/adminTypes'
+import { handleAdminApiError, handleApiResponse } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/bed`
 
 const bedManagementApi = axios.create({
@@ -24,6 +25,8 @@ bedManagementApi.interceptors.request.use(
         return Promise.reject(error)
     }
 )
+
+bedManagementApi.interceptors.response.use(handleApiResponse,handleAdminApiError);
 
 export const addBedApi = async (data:AddBedValidation)=>{
     try { 

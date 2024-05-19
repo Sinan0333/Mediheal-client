@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { handleAdminApiError, handleApiResponse } from '../../constants/constFunctions'
 const baseURL = `${import.meta.env.VITE_BASE_URL}/admin/appointment`
 
 const adminAppointmentApi = axios.create({
@@ -24,33 +25,7 @@ adminAppointmentApi.interceptors.request.use(
     }
 )
 
-adminAppointmentApi.interceptors.response.use(
-    (response) => {
-        return response;
-    },
-    (error) => {
-        if (error.response) {
-            console.log("in first error");
-            
-            console.log('Response status:', error.response.status);
-            // Server responded with a status other than 200 range
-            console.error('Response error:', error.response.data);
-        } else if (error.request) {
-            console.log("in second error");
-            
-            console.log('Request was made but no response was received');
-            // Request was made but no response was received
-            console.error('Request error:', error.request);
-        } else {
-            console.log("in third error");
-            
-            console.log('Error', error.message);
-            // Something happened in setting up the request
-            console.error('Error', error.message);
-        }
-        return Promise.reject(error);
-    }
-);
+adminAppointmentApi.interceptors.response.use(handleApiResponse,handleAdminApiError);
 
 
 export const getAppointmentRevenue = async ()=>{

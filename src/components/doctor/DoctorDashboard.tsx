@@ -41,7 +41,7 @@ function DoctorDashboard() {
             setAppointmentRevenue(Object.values(appointmentRevenue.data))
             setAdmitRevenue(Object.values(admitRevenue.data))
             setStatusCount(statusWiseAppointmentCount.data)
-            const totalAppointments:number = typeWiseAppointmentCount.data[0].count +( typeWiseAppointmentCount.data.length > 1 ? typeWiseAppointmentCount.data[1].count : 0)
+            const totalAppointments:number = typeWiseAppointmentCount.data[0].count + ( typeWiseAppointmentCount.data.length > 1 ? typeWiseAppointmentCount.data[1].count : 0)
             const onlineAppointments:number = typeWiseAppointmentCount.data[0].type === "Online" ? typeWiseAppointmentCount.data[0].count :  typeWiseAppointmentCount.data[1].count
             setOnlineAppointmentCount((onlineAppointments/totalAppointments)*100)
         }
