@@ -50,8 +50,8 @@ function UserSideChat() {
             navigate(-1)
         ])
 
-        socket.on("call:start",()=>{
-            navigate(`/call/${userId}`)
+        socket.on("call:start",(sender)=>{
+            navigate(`/vide_call/${sender}/${userId}`)
         })
 
         return () => {

@@ -86,7 +86,7 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
                         
                         dispatch(setDoctorDetails({
                             _id:response.userData?._id,
-                            name:response.userData?.firstName,
+                            name:response.userData?.firstName + (response.userData?.secondName ? response.userData?.secondName : ""),
                             phone:response.userData?.phone,
                             email:response.userData?.email,
                             is_blocked:response.userData?.is_blocked

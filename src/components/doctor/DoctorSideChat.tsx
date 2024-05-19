@@ -19,13 +19,13 @@ function DoctorSideChat() {
     const [messageText, setMessageText] = useState('');
     const [patientData ,setPatientData] = useState<PatientData>({} as PatientData)  
     const doctorId = useSelector((state:RootState)=>state.doctor._id)
-    const {_id,patId} = useParams()
+    const {patId,userId} = useParams()
     const navigate = useNavigate()
     const socket:Socket = useSocket()
 
     useEffect(()=>{
 
-        if(!_id || !patId)return notifyError("something wrong pleas try again later") 
+        if(!patId)return notifyError("something wrong pleas try again later") 
         socket.emit('add_user',doctorId);
 
         getChatData({sender:doctorId,receiver:patId}).then((res)=>{
@@ -46,7 +46,7 @@ function DoctorSideChat() {
     
     const sendMessage =async () => {
         
-        if(!_id || !patId) return notifyError("Something wrong please try again later") 
+        if(!patId) return notifyError("Something wrong please try again later") 
         
         const time:string = new Date().toISOString();
         socket.emit('sendMessage', {sender:doctorId,receiver:patId, text: messageText,createdAt:time });
@@ -57,14 +57,14 @@ function DoctorSideChat() {
 
     const endSession = async() => {
 
-        if(!_id || !patId) return notifyError("Something wrong please try again later")
+        if( !patId) return notifyError("Something wrong please try again later")
         socket.emit('end_session',patId)
         navigate(-1)
     }
 
     const handleCall = async() => {
-        socket.emit("call:start",{sender:doctorId,receiver:patId})
-        navigate(`/doctor/call/${doctorId}`)
+        socket.emit("call:start",{sender:doctorId,receiver:userId})
+        navigate(`/doctor/vide_call/${doctorId}/${userId}`)
     }
 
   return (

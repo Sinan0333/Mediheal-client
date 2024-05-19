@@ -89,7 +89,7 @@ function ListAppointments() {
         if(!response.status) return notifyError(response.message)
             
         socket.emit("chat:started",{to:response.data.userId})
-        navigate(`/doctor/chat/${response.data.patient._id}/${response.data._id}`)
+        navigate(`/doctor/chat/${response.data.patient._id}/${response.data.userId}`)
     }
 
 

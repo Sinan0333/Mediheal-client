@@ -43,8 +43,9 @@ function DoctorRoutes() {
 
           <Route path='/schedule' element={<ViewSchedulePage />} />
 
-          <Route path='/chat/:patId/:_id' element={<DoctorSideChat />} />
-          <Route path='/call/:_id' element={<VideoCall />} />
+          <Route path='/chat/:patId/:userId' element={<DoctorSideChat />} />
+          <Route path='/vide_call/:doctorId/:userId' element={<VideoCall/>} />
+
           
           <Route path='*' element={<ErrorPage/>} />
         </Route>
