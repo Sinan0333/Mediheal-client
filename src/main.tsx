@@ -9,6 +9,7 @@ import {Provider} from "react-redux"
 import store,{persistor} from './store/store.ts'
 import { PersistGate } from 'redux-persist/integration/react'
 import { SocketProvider } from './store/context/socketContext.tsx'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -16,10 +17,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Router>
       <Provider store={store}>
         <SocketProvider>
-          <PersistGate loading={null} persistor={persistor}>
-          <ToastContainer />
-          <App />
-          </PersistGate>
+          <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID}>
+            <PersistGate loading={null} persistor={persistor}>
+            <ToastContainer />
+            <App />
+            </PersistGate>
+          </GoogleOAuthProvider>
         </SocketProvider>
       </Provider>
     </Router>

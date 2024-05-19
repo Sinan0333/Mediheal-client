@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { notifySuccess,notifyError} from "../../constants/toast"
 import {AuthProps} from "../../types/commonTypes"
-import { userLogin, userSignup } from "../../api/user/auth"
+import { googleAuth, userLogin, userSignup } from "../../api/user/auth"
 import { adminLogin } from "../../api/admin/auth"
 import { doctorLogin } from "../../api/doctor/auth"
 import { SignupResponse } from "../../types/userTypes"
@@ -11,7 +11,8 @@ import { setUserDetails } from "../../store/slice/userSlice"
 import { useDispatch } from "react-redux"
 import { setAdminDetails } from "../../store/slice/adminSlice"
 import { setDoctorDetails } from "../../store/slice/doctorSlice"
-import { DoctorAuthResponse } from "../../types/doctorTypes"                             
+import { DoctorAuthResponse } from "../../types/doctorTypes"     
+import { GoogleLogin } from '@react-oauth/google';                      
 
 
 function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
@@ -23,7 +24,7 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
     const dispatch = useDispatch()
 
     const  handleSubmit =async ()=>{
-        
+
         if(pageName == 'Signup'){
             const result:string = authValidation({name,phone,email,password})
             if(result === 'Success'){
@@ -109,6 +110,27 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
         }   
     }
 
+    const handleGoogleAuth = async (credentialResponse:any)=>{
+        const response:SignupResponse = await googleAuth(credentialResponse.credential)
+        if(!response.status)return notifyError(response.message)
+        
+            dispatch(setUserDetails({
+                _id:response.userData?._id,
+                name:response.userData?.name,
+                phone:response.userData?.phone,
+                email:response.userData?.email,
+                image:response.userData?.image,
+                is_blocked:response.userData?.is_blocked
+            }))
+            if(response.token && response.refreshToken){
+                localStorage.setItem("userToken",response.token)
+                localStorage.setItem("userRefreshToken",response.refreshToken)
+            }
+            notifySuccess(response.message)
+            navigate('/')
+        
+    }
+
   return (
     <div className="flex justify-center items-center  h-screen ">
     <div className="neumorphic-auth md:absolute  top-8 sm:top-16 left-4 sm:left-11 mx-auto sm:mx-0 p-11 items-center flex flex-col max-w-[500px] w-[90%] " >
@@ -122,6 +144,16 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
             <p className='text-xl font-bold'>{pageName}</p>
         </div>
         <br />
+        {
+            role === 'user'?( 
+                <GoogleLogin
+                onSuccess={handleGoogleAuth}
+                onError={() => {
+                  console.log('Login Failed');
+                }}
+              />
+            ):""
+        }
         {/* or
         <div className='flex items-center justify-center cursor-pointer'>
             <img style={{width:'40px', paddingTop:'5px'}} src="/src/assets/icons/icons8-google-48.png" alt="Google" />

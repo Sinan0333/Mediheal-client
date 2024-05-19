@@ -54,3 +54,13 @@ export const userLogin = async (data:LoginType)=>{
 }
 
 
+export const googleAuth = async (credential:string)=>{
+    try { 
+        const result =  await userApi.post('/google_auth',{credential})  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
