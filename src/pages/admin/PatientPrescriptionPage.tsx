@@ -10,6 +10,7 @@ import { createInitialPages, handlePagination } from "../../constants/constFunct
 import Pagination from "../../components/common/Pagination"
 import Navigation from "../../components/admin/Navigation"
 
+
 function PatientPrescriptionPage() {
     const doctorId = useSelector((state:RootState)=> state.doctor._id)
     const [list,setList] = useState<PrescriptionPopulateData[]>([])

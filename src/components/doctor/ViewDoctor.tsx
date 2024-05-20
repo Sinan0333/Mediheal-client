@@ -2,7 +2,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
 import { DoctorData, ViewDoctorProps,  } from "../../types/doctorTypes"
-import { getDoctorDataApi } from "../../api/admin/doctorManagementApi"
+import { getProfileData } from "../../api/doctor/doctorApi"
+import { notifyError } from "../../constants/toast"
 
 function ViewDoctor({upBtn}:ViewDoctorProps) {
   const [doctorData,setDoctorData] = useState<DoctorData>()
@@ -20,7 +21,8 @@ function ViewDoctor({upBtn}:ViewDoctorProps) {
 
   const {_id} = useParams()
   useEffect(()=>{
-    getDoctorDataApi(_id).then((data)=>{
+    if(!_id) return notifyError("Something wrong please try again later")
+    getProfileData(_id).then((data)=>{
       setDoctorData(data.data)
     }).catch((err)=>{
       console.error(err);

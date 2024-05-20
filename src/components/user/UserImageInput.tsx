@@ -38,10 +38,10 @@ function UserImageInput({state,setState,name}:RoundedImageInputProps) {
                 className="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 " onClick={handleChooseImageClick}>
                 Change picture
             </button >
-            <button type="button"
+            {/* <button type="button"
                 className="py-3.5 px-7 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
                 Delete picture
-            </button>
+            </button> */}
         </div>
     </div>
   )

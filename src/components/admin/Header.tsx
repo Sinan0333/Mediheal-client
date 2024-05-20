@@ -25,13 +25,13 @@ function Header({navigation,_id,isNavigationOpen,setIsNavigationOpen}:AdminHeade
   }
 
   return (
-    <header className="flex justify-between items-center py-4 px-6 bg-gray-200 neumorphic lg:ml-64">
+  <header className="flex justify-between items-center py-4 px-6 bg-gray-200 neumorphic lg:ml-64">
     <div className="flex items-center">
         <img src="/assets/images/Mediheal.png" alt="Logo" className="h-8 w-40 mr-2" />
     </div>
     <div className="flex">
       <button className="neumorphic-rounded py-2 px-2 rounded-lg" onClick={handleLogout}>
-          <img src="/assets/icons/LOGOUT.png" alt="Button Icon" className="h-5 w-5" />
+          <img src="/assets/icons/logout.png" alt="Button Icon" className="h-5 w-5" />
       </button>
       <button className="neumorphic-rounded py-2 px-2 rounded-lg ml-2" onClick={() => navigate(`${navigation}/${_id}`)}>
           <img src="/assets/icons/user.png" alt="Button Icon" className="h-5 w-5" />
@@ -42,7 +42,7 @@ function Header({navigation,_id,isNavigationOpen,setIsNavigationOpen}:AdminHeade
         </svg>
       </button>
     </div>
-</header>
+  </header>
   )
 }
 

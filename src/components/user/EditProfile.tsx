@@ -28,7 +28,7 @@ function EditProfile() {
         setPhone(userData.phone)
         setUserId(userData._id)
         if(userData.image) setImageFile(`${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${userData.image}`)
-        else setImageFile('/src/assets/images/default_profile.jpg') 
+        else setImageFile('/assets/images/default_profile.jpg') 
     },[])
 
     const handleSubmit = async() =>{
@@ -37,7 +37,7 @@ function EditProfile() {
         if(result !== "Success") return notifyError(result)
 
         let image :string | undefined ;
-        if(imageFile === '/src/assets/images/default_profile.jpg'){
+        if(imageFile === '/assets/images/default_profile.jpg'){
             image = ""
         }else if(typeof(imageFile) ==='string'){
             image = imageFile

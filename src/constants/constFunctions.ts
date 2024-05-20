@@ -102,11 +102,11 @@ export async function handleDoctorApiError(error: AxiosError): Promise<never> {
                 return Promise.reject(refreshError);
             }
         } else {
-            window.location.href = `/error/${error.response.status}`;
+            window.location.href = `/error/${error.response.status || 500}`;
             console.error('Response error:', error.response.data);
         }
     } else if (error.request) {
-        window.location.href = `/error/${error.request.status}`;
+        window.location.href = `/error/${error.request.status || 500}`;
         console.error('Request error:', error.request);
     } else {
         window.location.href = "/error/500";
@@ -163,11 +163,11 @@ export async function handleAdminApiError(error: AxiosError): Promise<never> {
                 return Promise.reject(refreshError);
             }
         } else {
-            window.location.href = `/error/${error.response.status}`;
+            window.location.href = `/error/${error.response.status || 500}`;
             console.error('Response error:', error.response.data);
         }
     } else if (error.request) {
-        window.location.href = `/error/${error.request.status}`;
+        window.location.href = `/error/${error.request.status || 500}`;
         console.error('Request error:', error.request);
     } else {
         window.location.href = "/error/500";
@@ -223,11 +223,11 @@ export async function handleUserApiError(error: AxiosError): Promise<never> {
                 return Promise.reject(refreshError);
             }
         } else {
-            window.location.href = `/error/${error.response.status}`;
+            window.location.href = `/error/${error.response.status || 500}`;
             console.error('Response error:', error.response.data);
         }
     } else if (error.request) {
-        window.location.href = `/error/${error.request.status}`;
+        window.location.href = `/error/${error.request.status || 500}`;
         console.error('Request error:', error.request);
     } else {
         window.location.href = "/error/500";

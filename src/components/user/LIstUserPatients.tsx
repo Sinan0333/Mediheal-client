@@ -40,7 +40,7 @@ function LIstUserPatients() {
   
     return (
      <>
-        <div className="ml-20 mr-20 flex flex-wrap overflow-x-auto justify-evenly">
+        <div className="ml-20 mr-20 flex flex-wrap overflow-x-auto justify-evenly ">
                 
           {
             pageData.map((pat)=>{ 
