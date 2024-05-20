@@ -15,7 +15,7 @@ export const useSocket = () => {
 }
 
 export const SocketProvider = ({children}:SocketProviderProps) => {
-    const socket = useMemo(()=>io('http://localhost:3000'),[])
+    const socket = useMemo(()=>io(import.meta.env.VITE_BASE_URL),[])
     const userId = useSelector((state:RootState)=>state.user._id)
     const doctorId = useSelector((state:RootState)=>state.doctor._id)
     useEffect(() => {
