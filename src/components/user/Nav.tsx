@@ -26,9 +26,9 @@ function Nav() {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 w-full fixed z-50">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="/src/assets/images/Mediheal.png" className="h-8" alt="Mediheal Logo"/>
-    </a>
+    <p className="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="/assets/images/Mediheal.png" className="h-8" alt="Mediheal Logo"/>
+    </p>
     <div className="flex md:order-2">
       <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" className="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1" onClick={()=>setIsSearchOpen((prevState) => !prevState)}>
         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">

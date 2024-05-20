@@ -136,11 +136,18 @@ function ListAppointments() {
                                     <div id="dropdownDelay" className={`z-10 ${ selectedAppointment && selectedAppointment._id === obj._id ? "block" : "hidden"}  mt-3 absolute right-0 bg-[#e0e0e0] divide-y divide-gray-100 rounded-lg shadow-xl mr-3 dark:bg-gray-700`}>
                                         <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
                                         <li>
-                                            <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>navigate(`/doctor/prescription/patient/${selectedAppointment?.patient._id}`)}>Prescriptions</p>
-                                        </li>
-                                        <li>
                                             <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>navigate(`/doctor/patients/view/${selectedAppointment?.patient._id}`)}>Show Patient Details</p>
                                         </li>
+                                        <li>
+                                            <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>navigate(`/doctor/prescription/patient/${selectedAppointment?.patient._id}`)}>Prescriptions</p>
+                                        </li>
+                                        {
+                                            obj.status === "Pending" 
+                                            ?<li>
+                                                <p className="block px-4 py-2 cursor-pointer dark:hover:text-white" onClick={()=>navigate(`/doctor/appointments/prescription/add/${selectedAppointment?._id}/${selectedAppointment?._id}`)}>Add Prescription</p>
+                                            </li>
+                                            :""
+                                        }
                                         {
                                             obj.status === "Pending" && obj.type === "Online" 
                                             ?<li>
