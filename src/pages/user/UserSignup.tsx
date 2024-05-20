@@ -3,7 +3,7 @@ import Auth from "../../components/common/Auth"
 
 function UserSignup() {
     const changePage ='Already have an account? '
-    console.log("changePage", import.meta.env.VITE_BASE_UR);
+    console.log("changePage", import.meta.env.VITE_BASE_URL);
     
   return (
     <div className="relative">
