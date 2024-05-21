@@ -99,7 +99,7 @@ function ListBeds() {
                         list.map((obj:BedDataType,i)=>{
                             return(
                                 <tr key={i}>
-                                    <td className="px-4 py-2">{(typeof(page) === 'number')?(page-1)*limit+(i+1):(i-1)*limit+(i+1)}</td>
+                                    <td className="px-4 py-2">{(typeof(page) === 'number')?(page-1)*(limit+(i+1)):(i-1)*limit+(i+1)}</td>
                                     {isObject(obj.patient) ? <td className="px-4 py-2">{obj.patient.id  }</td> : <td className="px-4 py-2">{obj.patient || ''}</td>}
                                     <td className="px-4 py-2">{obj.type}</td>
                                     <td className="px-4 py-2">{obj.charge}</td>

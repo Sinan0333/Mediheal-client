@@ -99,7 +99,7 @@ function ListUsers() {
                                     <td className="px-4 py-2">
                                         <div className="flex">
                                             <button className="neumorphic-navBtn  py-2 px-2 w-8 h-8 rounded-lg" onClick={()=>navigate(`/admin/users/view/${obj._id}`)}>
-                                                <img src="/src/assets/icons/eye.png" alt="Button Icon"  />
+                                                <img src="/assets/icons/eye.png" alt="Button Icon"  />
                                             </button>
                                            <button className={`${obj.is_blocked ? "neumorphic-clicked bg-red-950" : "neumorphic-navBtn"}  py-2 px-2 ml-1 w-8 h-8 rounded-lg`} onClick={() =>{setSelectedData({is_blocked:!obj.is_blocked,_id:obj._id}),setIsConfirmationOpen(true)}}>
                                                 <img  src={obj.is_blocked ? blockRed : blockGreen} alt="" />

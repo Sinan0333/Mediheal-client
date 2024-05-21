@@ -6,7 +6,7 @@ type DoctorChatInputProps = {
 function DoctorChatInput({message,setMessage,sendMessage}:DoctorChatInputProps) {
   return (
     <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
-        <div>
+        {/* <div>
             <button
             className="flex items-center justify-center text-gray-400 hover:text-gray-600"
             >
@@ -25,7 +25,7 @@ function DoctorChatInput({message,setMessage,sendMessage}:DoctorChatInputProps) 
                 ></path>
             </svg>
             </button>
-        </div>
+        </div> */}
         <div className="flex-grow ml-4">
             <div className="relative w-full">
             <input

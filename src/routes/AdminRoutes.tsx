@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { AdminIsLoggedIn, AdminIsLoggedOut } from '../components/common/ProductRoutes';
 import ErrorPage from '../pages/common/ErrorPage';
 import AdminSideLoading from '../components/admin/AdminSideLoading';
+import AdminProfilePage from '../pages/admin/AdminProfilePage';
 
 
 const AdminLogin = lazy(() => import('../pages/admin/AdminLogin'));
@@ -38,6 +39,7 @@ function AdminRoutes() {
 
         <Route path='/' element={<AdminIsLoggedIn />}>
           <Route path='/' element={<AdminDashboardPage />} />
+          <Route path='/dashboard/profile/:_id' element={<AdminProfilePage/>} />
           <Route path='/dashboard' element={<AdminDashboardPage />} />
 
           <Route path='/doctors' element={<ListDoctorsPage />} />

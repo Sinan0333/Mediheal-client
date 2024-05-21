@@ -8,7 +8,7 @@ import { UserData } from "../../types/userTypes"
 function ViewUser() {
     const [userData,setUserData] = useState<UserData>()
     const imageUrl:string = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${userData?.image}`
-    const defaultProfile:string = '/src/assets/images/default_profile.jpg'
+    const defaultProfile:string = '/assets/images/default_profile.jpg'
     const {_id} = useParams()
     
     useEffect(()=>{

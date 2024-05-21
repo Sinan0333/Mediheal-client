@@ -46,6 +46,7 @@ function DoctorSideChat() {
     
     const sendMessage =async () => {
         
+        if(!messageText) return
         if(!patId) return notifyError("Something wrong please try again later") 
         
         const time:string = new Date().toISOString();
