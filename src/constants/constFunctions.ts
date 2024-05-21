@@ -157,20 +157,22 @@ export async function handleAdminApiError(error: AxiosError): Promise<never> {
                     window.location.href = '/admin/login';
                     store.dispatch(logoutAdmin())
                 } else {
-                    window.location.href = `/error/${refreshError.response?.status || 500}`;
+                    // window.location.href = `/error/${refreshError.response?.status || 500}`;
+                    console.log('refreshError.response?.status',refreshError.response?.status,refreshError);
+                    
                 }
                 console.error('Refresh token error:', refreshError.response?.data || refreshError.message);
                 return Promise.reject(refreshError);
             }
         } else {
-            window.location.href = `/error/${error.response.status || 500}`;
+            // window.location.href = `/error/${error.response.status || 500}`;
             console.error('Response error:', error.response.data);
         }
     } else if (error.request) {
-        window.location.href = `/error/${error.request.status || 500}`;
+        // window.location.href = `/error/${error.request.status || 500}`;
         console.error('Request error:', error.request);
     } else {
-        window.location.href = "/error/500";
+        // window.location.href = "/error/500";
         console.error('Error:', error.message);
     }
     return Promise.reject(error);

@@ -39,7 +39,7 @@ function AdminRoutes() {
 
         <Route path='/' element={<AdminIsLoggedIn />}>
           <Route path='/' element={<AdminDashboardPage />} />
-          <Route path='/dashboard/profile/:_id' element={<AdminProfilePage/>} />
+          <Route path='/profile/:_id' element={<AdminProfilePage/>} />
           <Route path='/dashboard' element={<AdminDashboardPage />} />
 
           <Route path='/doctors' element={<ListDoctorsPage />} />
