@@ -1,15 +1,17 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Label from "../common/Label"
 import { useEffect, useState } from "react"
 import { DoctorData, ViewDoctorProps,  } from "../../types/doctorTypes"
 import { getProfileData } from "../../api/doctor/doctorApi"
 import { notifyError } from "../../constants/toast"
+import { getDoctorDataApi } from "../../api/admin/doctorManagementApi"
 
 function ViewDoctor({upBtn}:ViewDoctorProps) {
   const [doctorData,setDoctorData] = useState<DoctorData>()
   const imageUrl = `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${doctorData?.image}`
   const [dob,setDob] = useState("")
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     if (doctorData && typeof doctorData.dob === 'string') {
@@ -22,11 +24,16 @@ function ViewDoctor({upBtn}:ViewDoctorProps) {
   const {_id} = useParams()
   useEffect(()=>{
     if(!_id) return notifyError("Something wrong please try again later")
-    getProfileData(_id).then((data)=>{
-      setDoctorData(data.data)
-    }).catch((err)=>{
-      console.error(err);
-    })
+
+      if(location.pathname.split('/').includes('admin')){
+        getDoctorDataApi(_id).then((data)=>{
+          setDoctorData(data.data)
+        })
+      }else{
+        getProfileData(_id).then((data)=>{
+          setDoctorData(data.data)
+        })
+      }
   },[])
   
   
