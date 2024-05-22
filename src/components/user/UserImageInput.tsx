@@ -11,8 +11,6 @@ function UserImageInput({state,setState,name,_id}:RoundedImageInputProps) {
         if (file) {
           if (file.size > MAX_FILE_SIZE) {
            compressImage(file).then((compressedFile) => {
-            console.log(compressedFile);
-            
             setState(compressedFile);
            })
           } else {

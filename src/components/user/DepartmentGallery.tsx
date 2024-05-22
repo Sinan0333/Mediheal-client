@@ -26,8 +26,8 @@ function DepartmentGallery() {
         <div className="flex justify-center mt-8 mb-12">
             <h1 className="text-4xl font-semibold text-adminBlue">Our Medical Services</h1>
         </div>
-      <div className="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
-            <div className="-m-1 flex justify-center flex-wrap md:-m-2">
+      <div className="container mx-auto px-5 py-2  lg:pt-12 md:w-1/2">
+            <div className="flex">
                {
                 list.map((dep,i)=>{
                     return(

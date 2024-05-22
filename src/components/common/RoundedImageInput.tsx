@@ -10,8 +10,6 @@ function RoundedImageInput({state,setState,name}:RoundedImageInputProps) {
     if (file) {
       if (file.size > MAX_FILE_SIZE) {
            compressImage(file).then((compressedFile) => {
-            console.log(compressedFile);
-            
             setState(compressedFile);
            })
           } else {

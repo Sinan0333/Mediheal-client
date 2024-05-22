@@ -24,8 +24,8 @@ function AddDepartmentForm() {
     if (validation !== "Success") return notifyError(validation);
 
     try {
-
-      if(!(logoFile instanceof File) || !(imageFile instanceof File) ) return notifyError("Please Select the image")
+      
+      if(typeof(logoFile) ==='string' || typeof(imageFile) ==='string' ) return notifyError("Please Select the image")
       const logo = await base64(logoFile);
       const image = await base64(imageFile);
       
