@@ -1,12 +1,22 @@
+import { compressImage } from '../../constants/convert';
 import { RoundedImageInputProps } from '../../types/commonTypes';
 
 
 function RoundedImageInput({state,setState,name}:RoundedImageInputProps) {
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; 
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setState(file);
+      if (file.size > MAX_FILE_SIZE) {
+           compressImage(file).then((compressedFile) => {
+            console.log(compressedFile);
+            
+            setState(compressedFile);
+           })
+          } else {
+            setState(file);
+        }
     }
   };
 

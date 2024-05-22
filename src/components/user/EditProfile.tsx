@@ -70,7 +70,7 @@ function EditProfile() {
                 <h2 className="pl-6 text-2xl font-bold sm:text-xl">{userData.name}</h2>
 
                 <div className="grid max-w-2xl mx-auto mt-8">
-                    <UserImageInput state={imageFile} setState={setImageFile} name="image"/>
+                    <UserImageInput state={imageFile} setState={setImageFile} name="image" _id={userData._id}/>
                     <div className="items-center mt-8 sm:mt-14 text-[#202142]">
 
                         <div className="mb-2 sm:mb-6">

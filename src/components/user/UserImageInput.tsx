@@ -1,11 +1,23 @@
-import { RoundedImageInputProps } from "../../types/commonTypes"
+import { removeProfileDpApi } from "../../api/user/userApi";
+import { compressImage } from "../../constants/convert";
+import { notifyError, notifySuccess } from "../../constants/toast";
+import { ResponseData, RoundedImageInputProps } from "../../types/commonTypes"
 
-function UserImageInput({state,setState,name}:RoundedImageInputProps) {
+function UserImageInput({state,setState,name,_id}:RoundedImageInputProps) {
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; 
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-          setState(file);
+          if (file.size > MAX_FILE_SIZE) {
+           compressImage(file).then((compressedFile) => {
+            console.log(compressedFile);
+            
+            setState(compressedFile);
+           })
+          } else {
+            setState(file);
+          }
         }
       };
     
@@ -14,6 +26,14 @@ function UserImageInput({state,setState,name}:RoundedImageInputProps) {
         if (fileInput) {
           fileInput.click();
         }
+      };
+
+      const handleDpRemove = async() => {
+        if(!_id)return notifyError("Something wrong")
+        const response:ResponseData = await removeProfileDpApi(_id)
+        if(!response.status) return notifyError(response.message)
+        notifySuccess(response.message)
+        setState('/assets/images/default_profile.jpg')
       };
 
   return (
@@ -38,10 +58,10 @@ function UserImageInput({state,setState,name}:RoundedImageInputProps) {
                 className="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 " onClick={handleChooseImageClick}>
                 Change picture
             </button >
-            {/* <button type="button"
+           {state !== '/assets/images/default_profile.jpg' ? <button type="button" onClick={handleDpRemove}
                 className="py-3.5 px-7 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
                 Delete picture
-            </button> */}
+            </button> : null}
         </div>
     </div>
   )

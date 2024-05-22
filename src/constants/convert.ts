@@ -1,3 +1,5 @@
+import imageCompression from 'browser-image-compression';
+
 export function base64(file: File | undefined): Promise<string | undefined> {
   return new Promise((resolve) => {
     if (file) {
@@ -26,3 +28,11 @@ export const convertHumanReadableToDate = (dateString:string )=>{
   const date = new Date(dateString)
   return date.toISOString()
 }
+
+export const compressImage = async (file: File) => {
+  const options = {
+    maxSizeMB: 5, // Maximum size in MB
+    useWebWorker: true, // Use web worker for faster compression
+  };
+  return await imageCompression(file, options);
+};

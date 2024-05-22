@@ -21,6 +21,7 @@ export type RoundedImageInputProps={
     state:File | undefined | string
     setState:(state:any)=>void
     name:string
+    _id?:string
 }
 
 

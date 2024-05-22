@@ -40,6 +40,17 @@ export const editUserData = async (data:EditUserDataProps)=>{
     }
 }
 
+export const removeProfileDpApi = async (_id:string)=>{
+    try { 
+        
+        const result =  await userApi.patch(`/profile/remove_profile_dp/${_id}`) 
+        return result.data 
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getUserData = async (_id:string)=>{
     try { 
         
