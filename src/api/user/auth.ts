@@ -63,4 +63,22 @@ export const googleAuth = async (credential:string)=>{
     }
 }
 
+export const verifyEmail = async (email:string)=>{
+    try { 
+        const result =  await userApi.put('/verify_email',{email})  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const changeUserPassword = async (_id:string,password:string)=>{
+    try { 
+        const result =  await userApi.patch('/change_password',{_id,password})  
+        return result.data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 

@@ -104,7 +104,7 @@ function EditProfile() {
                             <label htmlFor="email"
                                 className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                 Old Password</label>
-                            <input type="email" id="email"
+                            <input type="password" id="email"
                                 className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                                 placeholder="you old password (optional)" onChange={(e)=>setPassword(e.target.value)} />
                         </div>
@@ -113,7 +113,7 @@ function EditProfile() {
                             <label htmlFor="email"
                                 className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                 New Password</label>
-                            <input type="email" id="email"
+                            <input type="password" id="email"
                                 className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                                 placeholder="your new password (optional)" onChange={(e)=>setNewPassword(e.target.value)} />
                         </div>

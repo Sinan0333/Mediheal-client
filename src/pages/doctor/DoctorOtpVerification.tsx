@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { notifyError, notifySuccess } from "../../constants/toast"
-import { getOtp, resendOtp, verifyOtp } from "../../api/user/auth"
 import { ResponseData } from "../../types/commonTypes"
+import { getOtp, resendOtp, verifyOtp } from "../../api/doctor/auth"
 
-function OtpVerification() {
-
+function DoctorOtpVerification() {
     const [first,setFirst] = useState<string>("")
     const [second,setSecond] = useState<string>("")
     const [third,setThird] = useState<string>("")
@@ -14,34 +13,65 @@ function OtpVerification() {
     const [email,setEmail]=useState("")
     const navigate = useNavigate()
     const{_id} = useParams()
-
-
+    const location = useLocation()
+    const path = location.pathname.split('/')
+    const [resendBtn,setResendBtn] = useState<boolean>(false)
+    const [seconds, setSeconds] = useState(60);
+    
     useEffect(()=>{
         getOtp(_id).then((res)=>{
-            setOtp(res.data.otp)
+            setOtp(res.data.otp)            
             setEmail(res.data.email)
         }).catch((err)=>{
             console.log(err.message);
         })
     },[])
 
+    
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setSeconds(prevSeconds => {
+          if (prevSeconds > 0) {
+            return prevSeconds - 1;
+          } else {
+            clearInterval(interval);
+            setResendBtn(true);
+            return prevSeconds; 
+          }
+        });
+      }, 1000);
+    
+      return () => clearInterval(interval);
+    }, [otp]);
+
     const handleResendOtp = async()=>{
       const response:ResponseData = await resendOtp(_id)
-
-      setOtp(response.data.otp)
-      setEmail(response.data.email)
+      if(response.status){
+        notifySuccess(response.message)
+        setOtp(response.data.otp)
+        setEmail(response.data.email)
+        setSeconds(60)
+        setResendBtn(false)
+      }else{
+        notifyError(response.message)
+      }
     }
 
     const handleSubmit = async( ) =>{
+        if(!_id) return notifyError("Something went wrong")
         if(!first || !second || !third || !fourth) return notifyError("Missing required fields")
 
         const inputOtp = first+second+third+fourth
         if(inputOtp !== otp) return notifyError("incorrect OTP")
 
         const response = await verifyOtp(_id,inputOtp)
-        if(response.status){
-            notifySuccess(response.message)
-            navigate('/login')
+        if(response.status){          
+          notifySuccess(response.message)
+            if(path.includes('doctor')){
+                navigate(`/doctor/change_password/${response.data._id}`)
+            }else{
+                notifyError("Something went wrong")
+            }
         }else{
             notifyError(response.message)
         }
@@ -79,15 +109,16 @@ function OtpVerification() {
 
             <div className="flex flex-col space-y-5">
               <div>
-                <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm" onClick={handleSubmit}>
-                  Verify Account
-                </button>
+              {
+                resendBtn ? <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm" onClick={handleResendOtp}>Resend Otp</button>
+                : <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm" onClick={handleSubmit}>Submit</button>
+              }
               </div>
-
-              <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                <p>Didn't recieve code?</p> <button className="flex flex-row items-center text-blue-600"  onClick={handleResendOtp}>Resend</button>
+              <div className="flex flex-row items-center justify-center text-center text-sm font-medium text-gray-400">
+                <p>Didn't receive the code? Please wait for a <span className="text-blue-700">{seconds}</span> seconds</p>
               </div>
             </div>
+
           </div>
       </div>
     </div>
@@ -96,4 +127,4 @@ function OtpVerification() {
   )
 }
 
-export default OtpVerification
+export default DoctorOtpVerification

@@ -3,6 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import { DoctorIsLoggedIn, DoctorIsLoggedOut } from '../components/common/ProductRoutes';
 import AdminSideLoading from '../components/admin/AdminSideLoading';
 import ErrorPage from '../pages/common/ErrorPage';
+import VerifyEmail from '../pages/common/VerifyEmail';
+import ChangePassword from '../pages/common/ChangePassword';
+import DoctorOtpVerification from '../pages/doctor/DoctorOtpVerification';
 
 const DoctorLogin = lazy(() => import('../pages/doctor/DoctorLogin'));
 const ViewDoctorProfilePage = lazy(() => import('../pages/doctor/ViewDoctorProfilePage'));
@@ -24,6 +27,9 @@ function DoctorRoutes() {
 
         <Route path='' element={<DoctorIsLoggedOut />}>
           <Route path='/login' element={<DoctorLogin />} />
+          <Route path='/verify_email' element={<VerifyEmail/>} />
+          <Route path='/otp/:_id' element={<DoctorOtpVerification/>} />
+          <Route path='/change_password/:_id' element={<ChangePassword/>} />
         </Route>
 
         <Route path='' element={<DoctorIsLoggedIn />}>

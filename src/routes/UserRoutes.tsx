@@ -3,11 +3,13 @@ import { Route, Routes } from 'react-router-dom';
 import { UserIsLoggedIn, UserIsLoggedOut } from '../components/common/ProductRoutes.tsx';
 import ErrorPage from '../pages/common/ErrorPage.tsx';
 import UserSideLoading from '../components/user/UserSideLoading.tsx';
+import VerifyEmail from '../pages/common/VerifyEmail.tsx';
+import ChangePassword from '../pages/common/ChangePassword.tsx';
 
 const UserSignup = lazy(() => import('../pages/user/UserSignup'));
 const UserLogin = lazy(() => import('../pages/user/UserLogin.tsx'));
 const DoctorsList = lazy(() => import('../pages/user/DoctorsList.tsx'));
-const OtpVerification = lazy(() => import('../pages/user/OtpVerification.tsx'));
+const UserOtpVerification = lazy(() => import('../pages/user/UserOtpVerification.tsx'));
 const Home = lazy(() => import('../pages/user/Home.tsx'));
 const Profile = lazy(() => import('../pages/user/Profile.tsx'));
 const DoctorDetailsPage = lazy(() => import('../pages/user/DoctorDetailsPage.tsx'));
@@ -28,7 +30,10 @@ function UserRoutes() {
         <Route path='' element={<UserIsLoggedOut />}>
           <Route path='/signup' element={<UserSignup />} />
           <Route path='/login' element={<UserLogin />} />
-          <Route path='/otp/:_id' element={<OtpVerification />} />
+          <Route path='/otp/:_id' element={<UserOtpVerification/>} />
+          <Route path='/user/verify_email' element={<VerifyEmail/>} />
+          <Route path='/user/otp/:_id' element={<UserOtpVerification/>} />
+          <Route path='/user/change_password/:_id' element={<ChangePassword/>} />
         </Route>
 
         <Route path='/' element={<UserIsLoggedIn />}>

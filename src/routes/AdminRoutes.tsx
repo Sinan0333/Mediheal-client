@@ -4,6 +4,9 @@ import { AdminIsLoggedIn, AdminIsLoggedOut } from '../components/common/ProductR
 import ErrorPage from '../pages/common/ErrorPage';
 import AdminSideLoading from '../components/admin/AdminSideLoading';
 import AdminProfilePage from '../pages/admin/AdminProfilePage';
+import AdminOtpVerification from '../pages/admin/AdminOtpVerification';
+import ChangePassword from '../pages/common/ChangePassword';
+import VerifyEmail from '../pages/common/VerifyEmail';
 
 
 const AdminLogin = lazy(() => import('../pages/admin/AdminLogin'));
@@ -35,6 +38,9 @@ function AdminRoutes() {
       <Routes>
         <Route path='' element={<AdminIsLoggedOut />}>
           <Route path='/login' element={<AdminLogin />} />
+          <Route path='/verify_email' element={<VerifyEmail/>} />
+          <Route path='/otp/:_id' element={<AdminOtpVerification/>} />
+          <Route path='/change_password/:_id' element={<ChangePassword/>} />
         </Route>
 
         <Route path='/' element={<AdminIsLoggedIn />}>

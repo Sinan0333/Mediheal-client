@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"
 import { setAdminDetails } from "../../store/slice/adminSlice"
 import { setDoctorDetails } from "../../store/slice/doctorSlice"
 import { DoctorAuthResponse } from "../../types/doctorTypes"     
-import { GoogleLogin } from '@react-oauth/google';                      
+import { GoogleLogin } from '@react-oauth/google';                  
 
 
 function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
@@ -139,7 +139,7 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
         <input className={`neumorphic-input-auth mb-4 m-2 outline-none border-none w-full ${signupInputs}`} placeholder="Phone" type="number" onChange={(e)=>setPhone(e.target.value)} value={phone}/>
         <input className={`neumorphic-input-auth mb-4 m-2 outline-none border-none w-full` } placeholder="Email" type="email" required onChange={(e)=>setEmail(e.target.value)} value={email}/>
         <input className={`neumorphic-input-auth mb-4 m-2 outline-none border-none w-full`} placeholder="Password" type="password" required onChange={(e)=>setPassword(e.target.value)} value={password}/>
-        {pageName === 'Login' ? <p className='text-blue-600 cursor-pointer'>Forgot Password</p> :""}
+        {pageName === 'Login' ? <p className='text-blue-600 cursor-pointer' onClick={()=>navigate(`/${role}/verify_email`)}>Forgot Password</p> :""}
         <div className='neumorphic-auth mt-4 cursor-pointer  top-8 sm:top-16 left-4 sm:left-11 mx-auto sm:mx-0 p-4 items-center flex flex-col hover:bg-blue-500 hover:text-white max-w-[500px] w-full' onClick={handleSubmit}>
             <p className='text-xl font-bold'>{pageName}</p>
         </div>
