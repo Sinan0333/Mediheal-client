@@ -143,7 +143,15 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
         <div className='neumorphic-auth mt-4 cursor-pointer  top-8 sm:top-16 left-4 sm:left-11 mx-auto sm:mx-0 p-4 items-center flex flex-col hover:bg-blue-500 hover:text-white max-w-[500px] w-full' onClick={handleSubmit}>
             <p className='text-xl font-bold'>{pageName}</p>
         </div>
-        <br />
+       {
+        role === 'doctor' ?
+          <div>
+            <br />
+            <p>Demo Doctor: demodoctor@gmail.com</p>
+            <p>Password: 12345678</p>
+          </div>
+         : ""
+       }
         {
             role === 'user'?( 
                 <GoogleLogin
