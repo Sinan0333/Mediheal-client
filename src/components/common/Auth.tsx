@@ -143,10 +143,10 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
         <div className='neumorphic-auth mt-4 cursor-pointer  top-8 sm:top-16 left-4 sm:left-11 mx-auto sm:mx-0 p-4 items-center flex flex-col hover:bg-blue-500 hover:text-white max-w-[500px] w-full' onClick={handleSubmit}>
             <p className='text-xl font-bold'>{pageName}</p>
         </div>
+        <br />
        {
         role === 'doctor' ?
           <div>
-            <br />
             <p>Demo Doctor: demodoctor@gmail.com</p>
             <p>Password: 12345678</p>
           </div>
@@ -169,6 +169,13 @@ function Auth({pageName,role,signupInputs,changePage}:AuthProps) {
         </div> */}
         <br /> 
         {changePage !=""?<p className='float-left'>{changePage}<span onClick={()=>pageName ==='Login'? navigate('/signup'):navigate('/login') } className='text-blue-700 cursor-pointer'>{pageName === 'Signup' ? 'login' : 'signup'}</span></p>:""}
+        {
+            role ==="user" ?
+            <div>
+                <p className='text-blue-600 cursor-pointer' onClick={()=>navigate('/doctor/login')}>Doctor Login</p>
+            </div>
+            :""
+        }
     </div>
     </div>
   )
